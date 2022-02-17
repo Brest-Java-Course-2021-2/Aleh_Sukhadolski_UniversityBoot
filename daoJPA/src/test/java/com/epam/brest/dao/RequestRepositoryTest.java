@@ -28,26 +28,8 @@ public class RequestRepositoryTest {
     @Autowired
     private UserDao userDao;
 
-/*
-
     @Test
-    public void testIsGet() {
-        logger.info("ReadRequests {}");
-        List<User> users = (List<User>) userDao.getUserByName("Mike Tyson");
-        logger.info("User for Requests {}" + users.get(0));
-        assertThat(users.size() > 0);
-        assertThat(users.get(0).getName().equals("Mike Tyson"));
-        logger.info("ReadRequests of {}" + users.get(0));
-        List<Request> requests = requestDao.getAllRequests(users.get(0));
-        assertThat(requests.size() > 0);
-        logger.info("Request {}" + requests.get(0));
-        assertThat(requests.get(0).getGroupe().equals("e1"));
-
-    }
-*/
-
-    @Test
-    public void testRequestsForNewUser() {
+    public void testRequestsForNewUserAndNewGroupe() {
         logger.info("Create new user {}");
         User user = new User("Joe Frasier", "joe", "1111", "mail@mail.com");
         userDao.saveAndUpdateUser(user);
