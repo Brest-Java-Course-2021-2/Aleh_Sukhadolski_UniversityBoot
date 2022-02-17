@@ -15,6 +15,7 @@
     <module>rest-application</module>
     <module>model</module>
     <module>daoJPA</module>
+    <module>daoAPI</module>
 	</modules>
 
 	<properties>
