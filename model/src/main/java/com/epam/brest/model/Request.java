@@ -6,40 +6,50 @@
  */
 package com.epam.brest.model;
 
+
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.io.Serializable;
+import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
-//@Entity
-public class Request implements Serializable {
+@Entity
+@Table(name = "request")
+public class Request {
 
     /** field idR - request identificator in database*/
+
+    @Column(name = "idR", unique=true, nullable=false)
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private int idR;
 
-    /** field id - foreign key (one-to-many with User)
-     * @see User
-     */
-    private int id;
-
     /** field groupe - groupe request*/
-   /* @NotEmpty(message = "Groupe should be not empty")
-    @Size(min = 1, max = 10, message = "Size of groupe should not be 1-10 characters")*/
+    @Column(name = "groupe", nullable = false, length = 10)
+    @NotEmpty(message = "Groupe should be not empty")
+    @Size(min = 1, max = 10, message = "Size of groupe should not be 1-10 characters")
     private String groupe;
 
     /** field pairs - pairs request*/
-   /* @NotEmpty(message = "Pairs should be not empty")
-    @Size(min = 1, max = 2, message = "Size of pairs should not be 1-2 characters")*/
+    @Column(name = "pairs", nullable = false, length = 2)
+    @NotEmpty(message = "Pairs should be not empty")
+    @Size(min = 1, max = 2, message = "Size of pairs should not be 1-2 characters")
     private String pairs;
 
     /** field subject - subject request*/
-   /* @NotEmpty(message = "Subject should be not empty")
-    @Size(min = 3, max = 100, message = "Size of subject should not be 3-100 characters")*/
+    @Column(name = "subject", nullable = false, length = 100)
+    @NotEmpty(message = "Subject should be not empty")
+    @Size(min = 3, max = 100, message = "Size of subject should not be 3-100 characters")
     private String subject;
 
     /** field date - date when request was create or update*/
+    @Column(name="date")
     @DateTimeFormat(pattern = "yyyy/MM/dd")
     private Date date;
+
+    private int id;
 
     /**
      * Constructor - create new object
@@ -47,7 +57,7 @@ public class Request implements Serializable {
      * @see Request#Request(int, String, String, String, Date)
      * @see Request#Request(int, String, String, String)
      * @param idR - identificator
-     * @param id - identificator of User
+     * @param id- identificator of User -> one to many
      * @param groupe - groupe name
      * @param pairs - number pairs
      * @param subject - subject of user
@@ -66,8 +76,8 @@ public class Request implements Serializable {
      * Constructor - create new object
      * @see Request#Request()
      * @see Request#Request(int, String, String, String, Date)
-     * @see Request#Request(int, int, String, String, String, Date)
-     * @param id - identificator of User
+     * @see Request#Request(int,int, String, String, String, Date)
+     * @param id - identificator of User -> one to many
      * @param groupe - groupe name
      * @param pairs - number pairs
      * @param subject - subject of user
@@ -87,7 +97,7 @@ public class Request implements Serializable {
      * @see Request#Request()
      * @see Request#Request(int, int, String, String, String, Date)
      * @see Request#Request(int, String, String, String)
-     * @param id - identificator of User
+     * @param id - identificator of User -> one to many
      * @param groupe - groupe name
      * @param pairs - number pairs
      * @param subject - subject of user
@@ -110,6 +120,8 @@ public class Request implements Serializable {
     public Request() {
     }
 
+
+
     /**
      * Getter - get field date {@link Request#date}
      * @return - return date of request
@@ -130,6 +142,7 @@ public class Request implements Serializable {
      * Getter - get field idR {@link Request#idR}
      * @return - return identificator of request in database
      */
+
     public int getIdR() {
         return idR;
     }
@@ -143,25 +156,10 @@ public class Request implements Serializable {
     }
 
     /**
-     * Getter - get field id {@link Request#id}
-     * @return - return id (foreign key id - User.id)
-     */
-    public int getId() {
-        return id;
-    }
-
-    /**
-     * Setter - set id field to Request {@link Request#id}
-     * @param id - foreign key id (linking with User.id)
-     */
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    /**
      * Getter - get field groupe {@link Request#groupe}
      * @return - return groupe of request
      */
+
     public String getGroupe() {
         return groupe;
     }
@@ -178,6 +176,7 @@ public class Request implements Serializable {
      * Getter - get field pairs {@link Request#pairs}
      * @return - return pairs of request
      */
+
     public String getPairs() {
         return pairs;
     }
@@ -194,6 +193,7 @@ public class Request implements Serializable {
      * Getter - get field subject {@link Request#subject}
      * @return - return subject of request
      */
+
     public String getSubject() {
         return subject;
     }
@@ -207,15 +207,24 @@ public class Request implements Serializable {
     }
 
 
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return "Request{" +
                 "idR=" + idR +
-                ", id=" + id +
                 ", groupe='" + groupe + '\'' +
                 ", pairs='" + pairs + '\'' +
                 ", subject='" + subject + '\'' +
                 ", date=" + date +
+                ", id=" + id +
                 '}';
     }
 }

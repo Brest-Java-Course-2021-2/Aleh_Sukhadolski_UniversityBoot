@@ -1,11 +1,13 @@
 package com.epam.brest.dao.model;
 
+import com.epam.brest.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
 
 
 // This will be AUTO IMPLEMENTED by Spring into a Bean called userRepository

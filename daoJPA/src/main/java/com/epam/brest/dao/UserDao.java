@@ -1,7 +1,7 @@
 package com.epam.brest.dao;
 
-import com.epam.brest.dao.model.User;
 import com.epam.brest.dao.model.UserRepository;
+import com.epam.brest.model.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

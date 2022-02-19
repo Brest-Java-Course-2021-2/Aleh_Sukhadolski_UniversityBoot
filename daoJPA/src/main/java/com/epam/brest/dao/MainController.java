@@ -1,17 +1,12 @@
 package com.epam.brest.dao;
 
-import com.epam.brest.dao.model.User;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Arrays;
-import java.util.List;
 
 @Controller
 @RequestMapping(path = "/demo")
 public class MainController {
-
+/*
     @Autowired
     private UserDao userDao;
 
@@ -74,5 +69,5 @@ public class MainController {
         User user = new User(Integer.parseInt(id), name, login, password, email);
         userDao.deleteUser(user);
         return "Deleted User id = " + user.getId();
-    }
+    }*/
 }

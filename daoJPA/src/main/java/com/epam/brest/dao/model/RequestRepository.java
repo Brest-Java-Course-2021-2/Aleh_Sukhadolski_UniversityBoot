@@ -1,5 +1,6 @@
 package com.epam.brest.dao.model;
 
+import com.epam.brest.model.Request;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Date;

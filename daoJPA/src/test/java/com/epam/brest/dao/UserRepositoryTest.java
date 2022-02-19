@@ -1,11 +1,12 @@
 package com.epam.brest.dao;
 
 
-import com.epam.brest.dao.model.User;
+import com.epam.brest.model.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.transaction.Transactional;
@@ -15,6 +16,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
+@EntityScan("com.epam.brest.model")
 @Transactional()
 public class UserRepositoryTest {
 
