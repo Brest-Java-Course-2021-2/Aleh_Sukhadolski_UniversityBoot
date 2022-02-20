@@ -1,22 +1,30 @@
 package com.epam.brest.dao;
 
-import com.epam.brest.dao.model.RequestRepository;
+import com.epam.brest.dao.jparepositories.RequestRepository;
+//import com.epam.brest.daoAPI.DaoRequestApi;
+//import com.epam.brest.daoAPI.DaoRequestApi;
+import com.epam.brest.daoAPI.DaoRequestApi;
 import com.epam.brest.model.Request;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
 import java.util.List;
 
 @Component
-public class RequestDao {
+public class RequestDao implements DaoRequestApi {
 
     private final Logger logger = LogManager.getLogger(RequestDao.class);
 
     @Autowired
     private RequestRepository requestRepository;
+
+    public RequestDao(RequestRepository requestRepository) {
+        this.requestRepository = requestRepository;
+    }
 
     public List<Request> getAllRequests(Integer id) {
         logger.info("GET ALL REQUESTS OF USER {}" + id);

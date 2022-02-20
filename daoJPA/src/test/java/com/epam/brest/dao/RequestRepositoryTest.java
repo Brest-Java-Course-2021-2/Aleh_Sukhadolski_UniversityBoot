@@ -1,13 +1,18 @@
 package com.epam.brest.dao;
 
+import com.epam.brest.daoAPI.DaoRequestApi;
+import com.epam.brest.daoAPI.DaoUserApi;
 import com.epam.brest.model.Request;
 import com.epam.brest.model.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.AutoConfigurationPackage;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.ComponentScan;
 
 import javax.transaction.Transactional;
 import java.util.Arrays;
@@ -18,6 +23,7 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
+@ComponentScan("com.epam.brest.*")
 @EntityScan("com.epam.brest.model")
 @Transactional()
 public class RequestRepositoryTest {
@@ -25,10 +31,11 @@ public class RequestRepositoryTest {
     private final Logger logger = LogManager.getLogger(RequestRepositoryTest.class);
 
     @Autowired
-    private RequestDao requestDao;
+    private  DaoRequestApi requestDao;
 
     @Autowired
-    private UserDao userDao;
+    private  DaoUserApi userDao;
+
 
     @Test
     public void testRequestsForNewUserAndNewGroupe() {

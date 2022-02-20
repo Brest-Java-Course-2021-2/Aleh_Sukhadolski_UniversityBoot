@@ -1,4 +1,4 @@
-package com.epam.brest.dao.model;
+package com.epam.brest.dao.jparepositories;
 
 import com.epam.brest.model.Request;
 import org.springframework.data.jpa.repository.JpaRepository;

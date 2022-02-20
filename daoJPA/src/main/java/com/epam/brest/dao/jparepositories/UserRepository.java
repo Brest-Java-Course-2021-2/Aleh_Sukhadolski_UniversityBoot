@@ -1,11 +1,10 @@
-package com.epam.brest.dao.model;
+package com.epam.brest.dao.jparepositories;
 
 import com.epam.brest.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 

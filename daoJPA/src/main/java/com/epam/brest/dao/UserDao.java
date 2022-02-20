@@ -1,6 +1,7 @@
 package com.epam.brest.dao;
 
-import com.epam.brest.dao.model.UserRepository;
+import com.epam.brest.dao.jparepositories.UserRepository;
+import com.epam.brest.daoAPI.DaoUserApi;
 import com.epam.brest.model.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -11,12 +12,16 @@ import java.util.List;
 
 
 @Component
-public class UserDao {
+public class UserDao implements DaoUserApi {
 
     private final Logger logger = LogManager.getLogger(UserDao.class);
 
     @Autowired
     private UserRepository userRepository;
+
+    public UserDao(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     public List<User> getAllUsers() {
         logger.info("GET ALL USERS {}");
