@@ -13,11 +13,19 @@ CREATE TABLE request
 CREATE TABLE user
 (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    name  VARCHAR(55) NOT NULL,
+    name  VARCHAR(55) NOT NULL UNIQUE,
     login  VARCHAR(55) NOT NULL,
     password  VARCHAR(55) NOT NULL,
     email  VARCHAR(55) NOT NULL
 );
+
+
+CREATE TABLE groupe
+(
+    idG INT PRIMARY KEY AUTO_INCREMENT,
+    groupe  VARCHAR(10) NOT NULL UNIQUE
+);
+
 
 INSERT user(name, login, password, email) VALUES ('Mike Tyson', 'mike', '1111', 'oleg@mail.com');
 

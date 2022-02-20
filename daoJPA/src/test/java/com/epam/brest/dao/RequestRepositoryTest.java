@@ -113,8 +113,11 @@ public class RequestRepositoryTest {
         logger.info("Created all requests for new User {}" + ifChanged);
         assertThat(ifChanged);
 
+        logger.info("Flush all requests for new User {}" + user);
+        requestDao.deleteAllRequestsOfUser(user.getId());
+        requests = requestDao.getAllRequests(user.getId());
+        assertThat(requests.size() == 0);
+
     }
-
-
 
 }
