@@ -51,6 +51,12 @@ public class RequestDao implements DaoRequestApi {
         return requestRepository.saveAndFlush(request);
     }
 
+
+    public List<Request> updateAllRequestsForUser(List<Request> requests){
+        logger.info("Update All Requests for User after change {} ");
+        return requestRepository.saveAllAndFlush((Iterable<Request>) requests);
+    }
+
     public Request flushRequestInfo (Request request){
         logger.info("Flush Request to null position {} " + request);
         request.setPairs("0");

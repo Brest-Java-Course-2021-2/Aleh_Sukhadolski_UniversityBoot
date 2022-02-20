@@ -32,6 +32,14 @@ public class UserRepositoryTest {
 
 
     @Test
+    public void testGetAll() {
+        logger.info("GET ALL USERS {}");
+        List<User> users = (List<User>) userDao.getAllUsers();
+        assertThat(users.size() > 0);
+    }
+
+
+    @Test
     public void testSaveAndGet() {
         logger.info("SAVE USER {}");
         userDao.saveAndUpdateUser(new User("Monya", "monya", "1111", "email@mail.com"));
@@ -44,7 +52,7 @@ public class UserRepositoryTest {
     }
 
     @Test
-    public void testSaveUpdate() {
+    public void testSaveAndUpdate() {
         logger.info("SAVE USER {}");
         userDao.saveAndUpdateUser(new User("Monya", "monya", "1111", "email@mail.com"));
         List<User> users = (List<User>) userDao.getUserByName("Monya");

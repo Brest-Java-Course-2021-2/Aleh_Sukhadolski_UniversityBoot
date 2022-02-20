@@ -23,6 +23,8 @@ public interface DaoRequestApi {
 
     public Request updateRequest(Request request);
 
+    public List<Request> updateAllRequestsForUser(List<Request> requests);
+
     public Request flushRequestInfo (Request request);
 
     public void deleteAllRequestsOfUser(Integer id);

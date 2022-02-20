@@ -63,6 +63,57 @@ public class RequestRepositoryTest {
         }
     }
 
+    @Test
+    public void testCreateAndDeleteRequest() {
+        logger.info("Create new user {} + name = Joe Frasier");
+        User user = new User("Joe Frasier", "joe", "1111", "mail@mail.com");
+        userDao.saveAndUpdateUser(user);
+        user = userDao.getUserByName("Joe Frasier").get(0);
+        logger.info("New user created {} name = " + user.getName());
+        logger.info("Create request for new User {}" + user);
+        List <String> groupes = Arrays.asList(new String[]{"e1", "e2", "e3", "e4", "e5"});
+        user = userDao.getUserByName("Joe Frasier").get(0);
+        List<Request> requests = (List<Request>) requestDao.saveRequestsForNewUser(user.getId(), groupes);
+        Request request = requestDao.getAllRequests(user.getId()).get(0);
+        request.setPairs("2");
+        request.setSubject("fizo");
+        requestDao.updateRequest(request);
+        request = requestDao.getAllRequests(user.getId()).get(0);
+        assertThat(request.getPairs().equals("2") && request.getSubject().equals("fizo"));
+
+        logger.info("Flush request {}" + request);
+        requestDao.flushRequestInfo(request);
+        request = requestDao.getAllRequests(user.getId()).get(0);
+        assertThat(request.getPairs().equals("0") && request.getSubject().equals("0000"));
+
+    }
+
+    @Test
+    public void testDeleteAllRequestforUser() {
+        logger.info("Create new user {} + name = Joe Frasier");
+        User user = new User("Joe Frasier", "joe", "1111", "mail@mail.com");
+        userDao.saveAndUpdateUser(user);
+        user = userDao.getUserByName("Joe Frasier").get(0);
+        logger.info("New user created {} name = " + user.getName());
+        logger.info("Create request for new User {}" + user);
+        List <String> groupes = Arrays.asList(new String[]{"e1", "e2", "e3", "e4", "e5"});
+        user = userDao.getUserByName("Joe Frasier").get(0);
+        List<Request> requests = (List<Request>) requestDao.saveRequestsForNewUser(user.getId(), groupes);
+
+        List<Request> requests1 = (List<Request>) requests.stream()
+                .map(request  -> {request.setPairs("3");
+                                  return request;
+                                  }).collect(Collectors.toList());
+
+        requests = requestDao.updateAllRequestsForUser(requests1);
+        boolean ifChanged = true;
+        for (Request req : requests){
+            ifChanged = ifChanged && (req.getPairs().equals("3"));
+        }
+        logger.info("Created all requests for new User {}" + ifChanged);
+        assertThat(ifChanged);
+
+    }
 
 
 
