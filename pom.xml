@@ -16,6 +16,7 @@
     <module>model</module>
     <module>daoJPA</module>
     <module>daoAPI</module>
+    <module>db</module>
 	</modules>
 
 	<properties>

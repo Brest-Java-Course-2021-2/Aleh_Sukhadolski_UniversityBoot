@@ -67,6 +67,7 @@ public class UserRepositoryTest {
         assertThat(userNew.getName().equals("Tony") && userNew.getLogin().equals("monya"));
         logger.info("USER UPDATED AND READ SUCCESS{}");
     }
+/*
 
     @Test
     public void testDeleteByUser() {
@@ -97,5 +98,6 @@ public class UserRepositoryTest {
         logger.info("DELETE USER BY USER SUCCESS {}");
 
     }
+*/
 
 }
