@@ -1,6 +1,7 @@
 package com.epam.brest.dao;
 
 
+import com.epam.brest.daoAPI.DaoRequestApi;
 import com.epam.brest.daoAPI.DaoUserApi;
 import com.epam.brest.model.User;
 import org.apache.logging.log4j.LogManager;
@@ -30,6 +31,8 @@ public class UserRepositoryTest {
     @Autowired
     private DaoUserApi userDao;
 
+    @Autowired
+    private DaoRequestApi requestDao;
 
     @Test
     public void testGetAll() {
@@ -67,14 +70,16 @@ public class UserRepositoryTest {
         assertThat(userNew.getName().equals("Tony") && userNew.getLogin().equals("monya"));
         logger.info("USER UPDATED AND READ SUCCESS{}");
     }
-/*
+
 
     @Test
     public void testDeleteByUser() {
         logger.info("DELETE USER BY USER{}");
+        userDao.saveAndUpdateUser(new User("Monya", "monya", "1111", "email@mail.com"));
         List<User> users = (List<User>) userDao.getAllUsers();
         assertThat(users.size() > 0);
         User user = users.get(0);
+        requestDao.deleteAllRequestsOfUser(user.getId());
         userDao.deleteUser(user);
         users = (List<User>) userDao.getUserByName(user.getName());
         assertThat(users.size() == 0);
@@ -87,9 +92,11 @@ public class UserRepositoryTest {
     @Test
     public void testDeleteById() {
         logger.info("DELETE USER BY ID{}");
+        userDao.saveAndUpdateUser(new User("Monya", "monya", "1111", "email@mail.com"));
         List<User> users = (List<User>) userDao.getAllUsers();
         assertThat(users.size() > 0);
         User user = users.get(0);
+        requestDao.deleteAllRequestsOfUser(user.getId());
         userDao.deleteUserById(user.getId());
         users = (List<User>) userDao.getUserByName(user.getName());
         assertThat(users.size() == 0);
@@ -98,6 +105,6 @@ public class UserRepositoryTest {
         logger.info("DELETE USER BY USER SUCCESS {}");
 
     }
-*/
+
 
 }
