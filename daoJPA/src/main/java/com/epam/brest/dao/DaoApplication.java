@@ -9,9 +9,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
 @AutoConfigurationPackage
-@ComponentScan("com.epam.brest.daoAPI")
+@ComponentScan("com.epam.brest.*")
 @EntityScan("com.epam.brest.model")
-//@EnableJpaRepositories("com.epam.brest.dao.model")
 public class DaoApplication {
 
 	public static void main(String[] args) {

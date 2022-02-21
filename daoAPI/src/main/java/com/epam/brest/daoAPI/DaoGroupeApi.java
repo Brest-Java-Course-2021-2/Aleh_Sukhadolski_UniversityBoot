@@ -14,7 +14,11 @@ public interface DaoGroupeApi {
 
     List<Groupe> getAllGroupes();
 
-    String deleteGroupeByName();
+    String deleteGroupeByName(String name);
 
-    Groupe insertNewGroupe();
+    Groupe insertNewGroupe(String newName);
+
+    Groupe getGroupeByName(String name);
+
+    Groupe updateGroupeName(String newName, String oldName);
 }

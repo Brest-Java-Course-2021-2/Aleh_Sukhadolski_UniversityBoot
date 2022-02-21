@@ -19,9 +19,6 @@ public class UserDao implements DaoUserApi {
     @Autowired
     private UserRepository userRepository;
 
-    public UserDao(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
 
     public List<User> getAllUsers() {
         logger.info("GET ALL USERS {}");
