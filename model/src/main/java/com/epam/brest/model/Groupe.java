@@ -30,6 +30,7 @@ public class Groupe {
     }
 
     public Groupe() {
+        this.groupe = "";
     }
 
     public int getIdG() {

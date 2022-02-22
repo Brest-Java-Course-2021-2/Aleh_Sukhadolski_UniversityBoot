@@ -1,22 +1,31 @@
-DROP TABLE IF EXISTS employee;
+DROP TABLE IF EXISTS user;
+DROP TABLE IF EXISTS request;
+DROP TABLE IF EXISTS groupe;
 
-DROP TABLE IF EXISTS department;
-
-CREATE TABLE department
+CREATE TABLE request
 (
-    department_id   int         NOT NULL auto_increment,
-    department_name varchar(50) NOT NULL UNIQUE,
-    CONSTRAINT department_pk PRIMARY KEY (department_id)
+    idR INT PRIMARY KEY AUTO_INCREMENT,
+    id INT,
+    groupe  VARCHAR(10) NOT NULL,
+    pairs  VARCHAR(2) NOT NULL,
+    subject  VARCHAR(100) NOT NULL,
+    date Date,
+    CONSTRAINT request_user_fk
+    FOREIGN KEY (id)  REFERENCES user (id) ON DELETE CASCADE
 );
 
-CREATE TABLE employee
+CREATE TABLE user
 (
-    employee_id   int          NOT NULL auto_increment,
-    firstname     varchar(255) NOT NULL,
-    lastname      varchar(255) NOT NULL,
-    email         varchar(255) NOT NULL UNIQUE,
-    salary        int          NOT NULL,
-    department_id int          NOT NULL,
-    CONSTRAINT employee_pk PRIMARY KEY (employee_id),
-    CONSTRAINT employee_department_fk FOREIGN KEY (department_id) REFERENCES department (department_id)
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name  VARCHAR(55) NOT NULL UNIQUE,
+    login  VARCHAR(55) NOT NULL,
+    password  VARCHAR(55) NOT NULL,
+    email  VARCHAR(55) NOT NULL
+);
+
+
+CREATE TABLE groupe
+(
+    idG INT PRIMARY KEY AUTO_INCREMENT,
+    groupe  VARCHAR(10) NOT NULL UNIQUE
 );

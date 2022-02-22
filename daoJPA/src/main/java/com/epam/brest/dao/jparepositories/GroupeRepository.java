@@ -32,7 +32,7 @@ public interface GroupeRepository extends JpaRepository <Groupe, Integer> {
             delete(groupe.get());
             return (String) groupe.get().getGroupe();
         } else {
-         return "ERROR!!!";
+         return "ERROR";
         }
       }
 
@@ -44,11 +44,17 @@ public interface GroupeRepository extends JpaRepository <Groupe, Integer> {
       }
 
     default Groupe getGroupeByName(String name){
-           return (Groupe) findAll().stream()
-                                    .filter(gr -> name.equalsIgnoreCase(gr.getGroupe()))
-                                    .collect(Collectors.toList())
-                                    .stream()
-                                    .findFirst().get();
+
+        List<Groupe> groupes = (List<Groupe>) getAllGroupes();
+        int  index= (int) groupes.stream()
+                                    .filter(gr -> name.equals(gr.getGroupe()))
+                                    .collect(Collectors.toList()).stream().count();
+          if (index > 0) {
+              return groupes.get(index-1);
+          } else {
+              return new Groupe();
+          }
+
      }
 
 
@@ -56,6 +62,5 @@ public interface GroupeRepository extends JpaRepository <Groupe, Integer> {
           Groupe groupe = (Groupe) getGroupeByName(oldName);
           groupe.setGroupe(newName);
           return (Groupe) save(groupe);
-
       }
 }

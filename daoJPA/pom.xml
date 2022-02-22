@@ -34,9 +34,16 @@
       </dependency>
 
 
-      <dependency>
+ <dependency>
            <groupId>com.epam.brest</groupId>
            <artifactId>db-prod</artifactId>
+           <version>${project.version}</version>
+           </dependency>
+
+
+      <dependency>
+           <groupId>com.epam.brest</groupId>
+           <artifactId>db-test</artifactId>
            <version>${project.version}</version>
            <scope>test</scope>
            </dependency>

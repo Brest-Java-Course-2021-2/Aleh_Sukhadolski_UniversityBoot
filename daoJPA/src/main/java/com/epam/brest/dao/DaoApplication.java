@@ -8,7 +8,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-@AutoConfigurationPackage
+//@AutoConfigurationPackage
 @ComponentScan("com.epam.brest.*")
 @EntityScan("com.epam.brest.model")
 public class DaoApplication {
