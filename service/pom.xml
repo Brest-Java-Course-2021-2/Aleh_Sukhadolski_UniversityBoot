@@ -3,20 +3,55 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.6.3</version>
-		<relativePath/> <!-- lookup parent from repository -->
-	</parent>
+     		<groupId>com.epam.brest</groupId>
+       		<artifactId>university</artifactId>
+       		<version>0.0.1-SNAPSHOT</version>
+       		<relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
 	<groupId>com.epam.brest</groupId>
 	<artifactId>service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>service</name>
 	<description>project for Spring Boot</description>
+
 	<properties>
 		<java.version>11</java.version>
 	</properties>
+
 	<dependencies>
+
+	        <dependency>
+                <groupId>com.epam.brest</groupId>
+                <artifactId>model</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+             <dependency>
+                 <groupId>com.epam.brest</groupId>
+                 <artifactId>service-api</artifactId>
+                 <version>${project.version}</version>
+             </dependency>
+
+            <dependency>
+                <groupId>com.epam.brest</groupId>
+                <artifactId>daoJPA</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.epam.brest</groupId>
+                <artifactId>daoAPI</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+             <dependency>
+                <groupId>com.epam.brest</groupId>
+                <artifactId>db-test</artifactId>
+                <version>${project.version}</version>
+                <scope>test</scope>
+             </dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
@@ -27,7 +62,9 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
 	</dependencies>
+
 
  <build>
     <pluginManagement>

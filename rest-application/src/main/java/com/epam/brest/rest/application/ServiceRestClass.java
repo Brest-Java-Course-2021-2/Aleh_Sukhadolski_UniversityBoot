@@ -1,6 +1,5 @@
 package com.epam.brest.rest.application;
 
-import com.epam.brest.service.library.MyService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
