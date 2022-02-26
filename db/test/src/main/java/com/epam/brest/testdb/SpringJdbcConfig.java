@@ -6,10 +6,12 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
+import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
 
 @Configuration
+
 public class SpringJdbcConfig {
 
     @Bean
@@ -22,10 +24,12 @@ public class SpringJdbcConfig {
     }
 
 
+
     @Bean
     public NamedParameterJdbcTemplate namedParameterJdbcTemplate() {
         return new NamedParameterJdbcTemplate(dataSource());
     }
+
 
     @Bean
     public DataSourceTransactionManager transactionManager() {
