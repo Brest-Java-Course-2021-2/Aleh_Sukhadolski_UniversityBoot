@@ -23,14 +23,6 @@ public class SpringJdbcConfig {
                 .build();
     }
 
-
-
-    @Bean
-    public NamedParameterJdbcTemplate namedParameterJdbcTemplate() {
-        return new NamedParameterJdbcTemplate(dataSource());
-    }
-
-
     @Bean
     public DataSourceTransactionManager transactionManager() {
         return new DataSourceTransactionManager(dataSource());

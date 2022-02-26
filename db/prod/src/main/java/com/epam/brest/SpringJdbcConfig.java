@@ -17,13 +17,8 @@ public class SpringJdbcConfig {
         return new EmbeddedDatabaseBuilder()
                 .setType(EmbeddedDatabaseType.H2)
                 .addScript("create-db.sql")
-                .addScript("init-db.sql")
+                //.addScript("init-db.sql")
                 .build();
-    }
-
-    @Bean
-    public NamedParameterJdbcTemplate namedParameterJdbcTemplate() {
-        return new NamedParameterJdbcTemplate(dataSource());
     }
 
     @Bean
