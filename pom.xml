@@ -28,8 +28,8 @@
 
 	<properties>
 		<java.version>11</java.version>
-		<spring-boot.version>2.6.3</spring-boot.version>
-		 <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+		        <spring-boot.version>2.6.3</spring-boot.version>
+		        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
                 <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
                 <maven-failsafe-plugin.version>3.0.0-M5</maven-failsafe-plugin.version>
                 <build-helper-maven-plugin>3.3.0</build-helper-maven-plugin>
@@ -50,6 +50,11 @@
         <dependency>
 		    <groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
+			<version>${spring-boot.version}</version>
+		</dependency>
+        <dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
 			<version>${spring-boot.version}</version>
 		</dependency>
 
