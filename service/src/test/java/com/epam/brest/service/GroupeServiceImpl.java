@@ -22,31 +22,31 @@ public class GroupeServiceImpl implements GroupeServiceApi {
 
     @Override
     public List<String> getAllGroupeNamesService() {
-        return null;
+        return (List<String>) daoGroupe.getAllGroupeNames();
     }
 
     @Override
     public List<Groupe> getAllGroupesService() {
-        return null;
+        return (List<Groupe>) daoGroupe.getAllGroupes();
     }
 
     @Override
     public String deleteGroupeByNameService(String name) {
-        return null;
+        return (String) daoGroupe.deleteGroupeByName(name);
     }
 
     @Override
     public Groupe insertNewGroupeService(String newName) {
-        return null;
+        return (Groupe) daoGroupe.insertNewGroupe(newName);
     }
 
     @Override
     public Groupe getGroupeByNameService(String name) {
-        return null;
+        return (Groupe) daoGroupe.getGroupeByName(name);
     }
 
     @Override
     public Groupe updateGroupeNameService(String newName, String oldName) {
-        return null;
+        return (Groupe) daoGroupe.updateGroupeName(newName, oldName);
     }
 }
