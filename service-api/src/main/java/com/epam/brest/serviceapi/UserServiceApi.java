@@ -18,7 +18,9 @@ public interface UserServiceApi {
 
     User getUserByIdService(Integer id);
 
-    User saveAndUpdateUserService(User user);
+    User saveNewUserService(User user);
+
+    User updateUserService (User user);
 
     String deleteUserService(User user);
 
