@@ -15,9 +15,9 @@ public interface RequestServiceApi {
 
     Request getRequestByIdrService (Integer idR);
 
-    List<Request> saveRequestsForNewUserService(Integer id,  List<String> groupe);
+    List<Request> saveRequestsForNewUserService(Integer id);
 
-    List<Request> saveRequestsWhenNewGroupeService(String groupe, List<Integer> usersId );
+    List<Request> saveRequestsWhenNewGroupeService(String groupe);
 
     Request updateRequestService(Request request);
 
