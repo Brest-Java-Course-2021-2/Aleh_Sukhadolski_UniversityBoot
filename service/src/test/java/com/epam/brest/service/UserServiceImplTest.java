@@ -114,6 +114,9 @@ public class UserServiceImplTest {
             assertTrue(users.get(users.size() - 1).getName().equals("Mike")
                                             && users.get(users.size() - 1).getId() == user.getId());
         }
+
+        List<Request> requests = requestService.getAllRequestsService(user.getId());
+        assertTrue(requests.size() == 6);
     }
 
 
