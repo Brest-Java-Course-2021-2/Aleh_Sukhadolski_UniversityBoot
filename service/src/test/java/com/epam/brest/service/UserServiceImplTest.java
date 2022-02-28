@@ -14,7 +14,7 @@ import com.epam.brest.serviceapi.RequestServiceApi;
 import com.epam.brest.serviceapi.UserServiceApi;
 
 
-import org.junit.Before;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -23,7 +23,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Test;
-import static org.assertj.core.api.Assertions.assertThat;
+
 
 
 import javax.transaction.Transactional;
@@ -33,6 +33,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
@@ -64,7 +65,6 @@ public class UserServiceImplTest {
                                     .map(gr -> groupeService.insertNewGroupeService(gr))
                                     .collect(Collectors.toList());
         User user = userService.saveNewUserService(new User ("TOMMY", "tom", "1111", "iuy@aa.com"));
-        requestService.saveRequestsForNewUserService(user.getId());
     }
 
 
@@ -81,5 +81,38 @@ public class UserServiceImplTest {
         assertTrue(requests.size() == 6);
 
     }
+
+    @Test
+    public void isGetUserByNameServiceImpl(){
+        logger.info("GET USER BY Name {}");
+        List <User> users = (List<User>) userService.getUserByNameService("TOMMY");
+        assertTrue(users.size() == 1);
+        assertTrue(users.get(users.size()-1).getName().equals("TOMMY"));
+        User user = users.get(users.size()-1);
+        List<Request> requests = requestService.getAllRequestsService(user.getId());
+        assertTrue(requests.size() == 6);
+
+    }
+
+    @Test
+    public void isGetUserByEmailServiceAndIdImpl(){
+        logger.info("GET USER BY Email {}");
+        List <User> users = (List<User>) userService.getUserByEmailService("iuy@aa.com");
+        assertTrue(users.size() == 1);
+        assertTrue(users.get(users.size()-1).getEmail().equals("iuy@aa.com"));
+        User user = users.get(users.size()-1);
+        List<Request> requests = requestService.getAllRequestsService(user.getId());
+        assertTrue(requests.size() == 6);
+        List <User> users1 = (List<User>) userService.getUserByEmailService("qqiuy@aa.com");
+        assertFalse(users1.size() == 1);
+        if(!users1.isEmpty()){
+        assertFalse(users.get(users1.size()-1).getEmail().equals("qqiuy@aa.com"));
+        }
+        List<User> users2 = userService.getUserByNameService("TOMMY");
+        User users3 = (User) userService.getUserByIdService(users2.get(0).getId());
+        assertTrue(users3.getName().equals("TOMMY"));
+    }
+
+
 
 }
