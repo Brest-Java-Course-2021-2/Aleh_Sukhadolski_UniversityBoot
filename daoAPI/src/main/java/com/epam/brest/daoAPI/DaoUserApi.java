@@ -21,8 +21,8 @@ public interface DaoUserApi {
 
     public User saveAndUpdateUser(User user);
 
-    public String deleteUser(User user);
+    public void deleteUser(User user);
 
-    public String deleteUserById(Integer id);
+    public void deleteUserById(Integer id);
 
 }

@@ -1,7 +1,5 @@
 package com.epam.brest.service;
 
-
-
 import com.epam.brest.daoAPI.DaoGroupeApi;
 import com.epam.brest.daoAPI.DaoRequestApi;
 import com.epam.brest.daoAPI.DaoUserApi;
@@ -54,16 +52,16 @@ public class UserServiceImpl implements UserServiceApi {
     }
 
     @Override
-    public String deleteUserByIdService(Integer id) {
+    public void deleteUserByIdService(Integer id) {
         daoRequest.deleteAllRequestsOfUser(id);
-        return (String) daoUser.deleteUserById(id);
+        daoUser.deleteUserById(id);
     }
 
     @Override
-    public String deleteUserService(User user)
+    public void deleteUserService(User user)
     {
         daoRequest.deleteAllRequestsOfUser(user.getId());
-        return (String) daoUser.deleteUserById(user.getId());
+        daoUser.deleteUserById(user.getId());
     }
 
     @Override

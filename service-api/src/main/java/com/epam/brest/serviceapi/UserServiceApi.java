@@ -22,8 +22,8 @@ public interface UserServiceApi {
 
     User updateUserService (User user);
 
-    String deleteUserService(User user);
+    void deleteUserService(User user);
 
-    String deleteUserByIdService(Integer id);
+    void deleteUserByIdService(Integer id);
 
 }

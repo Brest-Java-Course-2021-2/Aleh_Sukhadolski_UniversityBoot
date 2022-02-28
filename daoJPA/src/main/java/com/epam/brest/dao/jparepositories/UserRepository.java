@@ -38,9 +38,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
         return (User) saveAndFlush(user);
     }
 
-    default void deleteUserById(Integer id) {
-        deleteById(id);
-    }
+    default void deleteUserById(Integer id) { deleteById(id); }
 
     default void deleteUser(User user) { deleteById(user.getId()); }
 }

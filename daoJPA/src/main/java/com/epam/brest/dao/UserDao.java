@@ -46,16 +46,14 @@ public class UserDao implements DaoUserApi {
         return (User) userRepository.saveAndFlushUser(user);
     }
 
-    public String deleteUser(User user) {
+    public void deleteUser(User user) {
         logger.info("DELETE USER {}" + user);
         userRepository.deleteUserById(user.getId());
-        return "Deleted user id = " + user.getId();
     }
 
-    public String deleteUserById(Integer id) {
+    public void deleteUserById(Integer id) {
         logger.info("DELETE USER id = " + id );
         userRepository.deleteUserById(id);
-        return "Deleted user id = " + id;
     }
 
 
