@@ -35,14 +35,14 @@ public class UserServiceImpl implements UserServiceApi {
     }
 
     @Override
-    public List<User> getUserByNameService(String name) {
-        return (List<User>) daoUser.getUserByName(name);
+    public User getUserByNameService(String name) {
+        return (User) daoUser.getUserByName(name);
     }
 
     @Override
-    public List<User> getUserByEmailService(String email)
+    public User getUserByEmailService(String email)
     {
-        return (List<User>) daoUser.getUserByEmail(email);
+        return (User) daoUser.getUserByEmail(email);
     }
 
     @Override
@@ -66,9 +66,8 @@ public class UserServiceImpl implements UserServiceApi {
 
     @Override
     public User saveNewUserService(User user) {
-        daoUser.saveAndUpdateUser(user);
+        user = daoUser.saveAndUpdateUser(user);
         List <String> groupes = daoGroupe.getAllGroupeNames();
-        user = daoUser.getUserByName(user.getName()).get(0);
         daoRequest.saveRequestsForNewUser(user.getId(), groupes);
         return (User) user;
     }

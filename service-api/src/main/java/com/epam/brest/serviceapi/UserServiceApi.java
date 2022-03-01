@@ -12,9 +12,9 @@ public interface UserServiceApi {
 
     List<User> getAllUsersService();
 
-    List<User> getUserByNameService(String name);
+    User getUserByNameService(String name);
 
-    List<User> getUserByEmailService(String email);
+    User getUserByEmailService(String email);
 
     User getUserByIdService(Integer id);
 

@@ -44,7 +44,7 @@ public class RequestRepositoryTest {
         logger.info("Create new user {}");
         User user = new User("Joe Frasier", "joe", "1111", "mail@mail.com");
         userDao.saveAndUpdateUser(user);
-        user = userDao.getUserByName("Joe Frasier").get(0);
+        user = userDao.getUserByName("Joe Frasier");
         logger.info("Requests for new User {}" + user);
         List <String> groupes = Arrays.asList(new String[]{"e1", "e2", "e3", "e4", "e5"});
         requestDao.saveRequestsForNewUser(user.getId(),groupes);
@@ -70,11 +70,11 @@ public class RequestRepositoryTest {
         logger.info("Create new user {} + name = Joe Frasier");
         User user = new User("Joe Frasier", "joe", "1111", "mail@mail.com");
         userDao.saveAndUpdateUser(user);
-        user = userDao.getUserByName("Joe Frasier").get(0);
+        user = userDao.getUserByName("Joe Frasier");
         logger.info("New user created {} name = " + user.getName());
         logger.info("Create request for new User {}" + user);
         List <String> groupes = Arrays.asList(new String[]{"e1", "e2", "e3", "e4", "e5"});
-        user = userDao.getUserByName("Joe Frasier").get(0);
+        user = userDao.getUserByName("Joe Frasier");
         List<Request> requests = (List<Request>) requestDao.saveRequestsForNewUser(user.getId(), groupes);
         Request request = requestDao.getAllRequests(user.getId()).get(0);
         request.setPairs("2");
@@ -95,11 +95,11 @@ public class RequestRepositoryTest {
         logger.info("Create new user {} + name = Joe Frasier");
         User user = new User("Joe Frasier", "joe", "1111", "mail@mail.com");
         userDao.saveAndUpdateUser(user);
-        user = userDao.getUserByName("Joe Frasier").get(0);
+        user = userDao.getUserByName("Joe Frasier");
         logger.info("New user created {} name = " + user.getName());
         logger.info("Create request for new User {}" + user);
         List <String> groupes = Arrays.asList(new String[]{"e1", "e2", "e3", "e4", "e5"});
-        user = userDao.getUserByName("Joe Frasier").get(0);
+        user = userDao.getUserByName("Joe Frasier");
         List<Request> requests = (List<Request>) requestDao.saveRequestsForNewUser(user.getId(), groupes);
 
         List<Request> requests1 = (List<Request>) requests.stream()

@@ -13,9 +13,9 @@ public interface DaoUserApi {
 
     public List<User> getAllUsers();
 
-    public List<User> getUserByName(String name);
+    public User getUserByName(String name);
 
-    public List<User> getUserByEmail(String email);
+    public User getUserByEmail(String email);
 
     public User getUserById(Integer id);
 

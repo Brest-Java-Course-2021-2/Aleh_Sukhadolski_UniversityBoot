@@ -12,6 +12,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -51,7 +52,9 @@ public class RequestServiceImpl implements RequestServiceApi {
     @Override
     public List<Request> saveRequestsWhenNewGroupeService(String groupe) {
         List<User> users = daoUser.getAllUsers();
-        List<Integer> ids = Stream.of(users.iterator().next().getId()).collect(Collectors.toList());
+        List<Integer> ids = new ArrayList<>();
+        for (User u : users) { ids.add(u.getId()); }
+        daoGroupe.insertNewGroupe(groupe);
         return (List<Request>) daoRequest.saveRequestsWhenNewGroupe(groupe, ids);
     }
 

@@ -75,10 +75,8 @@ public class UserServiceImplTest {
     @Test
     public void isGetUserByNameServiceImpl() {
         logger.info("GET USER BY Name {}");
-        List<User> users = (List<User>) userService.getUserByNameService("TOMMY");
-        assertTrue(users.size() == 1);
-        assertTrue(users.get(users.size() - 1).getName().equals("TOMMY"));
-        User user = users.get(users.size() - 1);
+        User user = (User) userService.getUserByNameService("TOMMY");
+        assertTrue(user.getName().equals("TOMMY"));
         List<Request> requests = requestService.getAllRequestsService(user.getId());
         assertTrue(requests.size() == 6);
 
@@ -87,19 +85,14 @@ public class UserServiceImplTest {
     @Test
     public void isGetUserByEmailServiceAndIdImpl() {
         logger.info("GET USER BY Email {}");
-        List<User> users = (List<User>) userService.getUserByEmailService("iuy@aa.com");
-        assertTrue(users.size() == 1);
-        assertTrue(users.get(users.size() - 1).getEmail().equals("iuy@aa.com"));
-        User user = users.get(users.size() - 1);
+        User user = (User) userService.getUserByEmailService("iuy@aa.com");
+        assertTrue(user.getEmail().equals("iuy@aa.com"));
         List<Request> requests = requestService.getAllRequestsService(user.getId());
         assertTrue(requests.size() == 6);
-        List<User> users1 = (List<User>) userService.getUserByEmailService("qqiuy@aa.com");
-        assertFalse(users1.size() == 1);
-        if (!users1.isEmpty()) {
-            assertFalse(users.get(users1.size() - 1).getEmail().equals("qqiuy@aa.com"));
-        }
-        List<User> users2 = userService.getUserByNameService("TOMMY");
-        User users3 = (User) userService.getUserByIdService(users2.get(0).getId());
+        user = (User) userService.getUserByEmailService("qqiuy@aa.com");
+        assertFalse(user.getEmail().equals("qqiuy@aa.com"));
+        User user2 = userService.getUserByNameService("TOMMY");
+        User users3 = (User) userService.getUserByIdService(user2.getId());
         assertTrue(users3.getName().equals("TOMMY"));
     }
 
@@ -109,14 +102,10 @@ public class UserServiceImplTest {
        User user = userService.saveNewUserService(new User("Mike", "mike", "1111", "isocrol@aa.com"));
        assertTrue(user.getEmail().equals("isocrol@aa.com"));
        assertTrue(user.getName().equals("Mike"));
-       List<User> users = userService.getUserByNameService("Mike");
-        if (!users.isEmpty()) {
-            assertTrue(users.get(users.size() - 1).getName().equals("Mike")
-                                            && users.get(users.size() - 1).getId() == user.getId());
-        }
-
-        List<Request> requests = requestService.getAllRequestsService(user.getId());
-        assertTrue(requests.size() == 6);
+       User user1 = userService.getUserByNameService("Mike");
+       assertTrue(user1.getName().equals("Mike") && user1.getId() == user.getId());
+       List<Request> requests = requestService.getAllRequestsService(user.getId());
+       assertTrue(requests.size() == 6);
     }
 
 
@@ -126,21 +115,13 @@ public class UserServiceImplTest {
         User user = userService.saveNewUserService(new User("Mike", "mike", "1111", "isocrol@aa.com"));
         assertTrue(user.getEmail().equals("isocrol@aa.com"));
         assertTrue(user.getName().equals("Mike"));
-        List<User> users = userService.getUserByNameService("Mike");
-        if (!users.isEmpty()) {
-            assertTrue(users.get(users.size() - 1).getName().equals("Mike")
-                    && users.get(users.size() - 1).getId() == user.getId());
-        }
-
+        User user1 = userService.getUserByNameService("Mike");
+        assertTrue(user1.getName().equals("Mike") && user1.getId() == user.getId());
         user.setName("Kim");
         user =  userService.updateUserService(user);
         assertTrue(user.getName().equals("Kim"));
-
-        users = userService.getUserByNameService("Kim");
-        if (!users.isEmpty()) {
-            assertTrue(users.get(users.size() - 1).getName().equals("Kim")
-                    && users.get(users.size() - 1).getId() == user.getId());
-        }
+        user1 = userService.getUserByNameService("Kim");
+        assertTrue(user1.getName().equals("Kim") && user1.getId() == user.getId());
     }
 
     @Test

@@ -1,8 +1,6 @@
 package com.epam.brest.service;
 
-
 import com.epam.brest.model.Groupe;
-import com.epam.brest.model.User;
 import com.epam.brest.serviceapi.GroupeServiceApi;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -19,8 +17,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
-
 @SpringBootTest
 @ComponentScan("com.epam.brest.*")
 @EntityScan("com.epam.brest.model")
@@ -31,7 +27,6 @@ public class GroupeServiceImplTest {
 
     @Autowired
     private GroupeServiceApi groupeService;
-
 
     @BeforeEach
     public void setUp() {

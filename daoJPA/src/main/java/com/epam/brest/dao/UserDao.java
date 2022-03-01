@@ -26,14 +26,14 @@ public class UserDao implements DaoUserApi {
     }
 
 
-    public List<User> getUserByName(String name) {
+    public User getUserByName(String name) {
         logger.info("GET USER BY NAME{} " + name);
-        return (List<User>) userRepository.findUserByName(name);
+        return userRepository.findUserByName(name);
     }
 
-    public List<User> getUserByEmail(String email) {
+    public User getUserByEmail(String email) {
         logger.info("GET USER BY EMAIL{} " + email);
-        return (List<User>) userRepository.findUserByEmail(email);
+        return userRepository.findUserByEmail(email);
     }
 
     public User getUserById(Integer id) {
@@ -43,7 +43,7 @@ public class UserDao implements DaoUserApi {
 
     public User saveAndUpdateUser(User user) {
         logger.info("SAVE USER {} " + user);
-        return (User) userRepository.saveAndFlushUser(user);
+        return (User) userRepository.save(user);
     }
 
     public void deleteUser(User user) {

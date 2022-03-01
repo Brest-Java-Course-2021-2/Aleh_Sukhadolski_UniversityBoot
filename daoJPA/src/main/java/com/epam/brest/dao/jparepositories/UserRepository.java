@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 
-
 // This will be AUTO IMPLEMENTED by Spring into a Bean called userRepository
 // CRUD refers Create, Read, Update, Delete
 
@@ -22,23 +21,42 @@ public interface UserRepository extends JpaRepository<User, Integer> {
         return (User) findById(id).get();
     }
 
-    default List<User> findUserByName(String name) {
-        return (List<User>) findAll().stream()
-                .filter(user -> user.getName().equals(name))
+    default User findUserByName(String name) {
+        List<User> users = findAll().stream()
+                .filter(us -> us.getName().equals(name))
                 .collect(Collectors.toList());
+        User user;
+          if (users.size() > 0){
+            user = users.get(0);
+        } else {
+            user = new User(0,"","","", "");
+        }
+        return (User) user;
     }
 
-    default List<User> findUserByEmail(String email) {
-        return (List<User>) findAll().stream()
-                .filter(user -> user.getEmail().equals(email))
+
+    default User findUserByEmail(String email) {
+        List<User> users = findAll().stream()
+                .filter(us -> us.getEmail().equals(email))
                 .collect(Collectors.toList());
+        User user;
+        if (users.size() > 0){
+            user = users.get(0);
+        } else {
+            user = new User(0,"","","", "");
+        }
+        return (User) user;
     }
 
     default User saveAndFlushUser(User user) {
         return (User) saveAndFlush(user);
     }
 
-    default void deleteUserById(Integer id) { deleteById(id); }
+    default void deleteUserById(Integer id) {
+        deleteById(id);
+    }
 
-    default void deleteUser(User user) { deleteById(user.getId()); }
+    default void deleteUser(User user) {
+        deleteById(user.getId());
+    }
 }

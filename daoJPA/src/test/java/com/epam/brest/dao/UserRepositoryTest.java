@@ -38,6 +38,7 @@ public class UserRepositoryTest {
     @Test
     public void testGetAll() {
         logger.info("GET ALL USERS {}");
+        userDao.saveAndUpdateUser(new User("Monya", "monya", "1111", "email@mail.com"));
         List<User> users = (List<User>) userDao.getAllUsers();
         assertThat(users.size() > 0);
     }
@@ -49,20 +50,19 @@ public class UserRepositoryTest {
         userDao.saveAndUpdateUser(new User("Monya", "monya", "1111", "email@mail.com"));
         logger.info("USER SAVED SUCCESS{}");
         logger.info("FIND USER BY NAME {}");
-        List<User> users = (List<User>) userDao.getUserByName("Monya");
-        assertThat(users.size() == 1);
+        User user = (User) userDao.getUserByName("Monya");
+        assertThat(user.getName().equals("Monya"));
         logger.info("FOUND USER BY NAME SUCCESS{}");
-        assertThat(users.get(0).getName().equals("Monya"));
     }
 
     @Test
     public void testSaveAndUpdate() {
         logger.info("SAVE USER {}");
         userDao.saveAndUpdateUser(new User("Monya", "monya", "1111", "email@mail.com"));
-        List<User> users = (List<User>) userDao.getUserByName("Monya");
-        assertThat(users.size() == 1);
+        User user = (User) userDao.getUserByName("Monya");
+        assertThat(user.getName().equals("Monya"));
         logger.info("USER SAVED AND READ BY NAME SUCCESS{}");
-        User userUpdated = users.get(0);
+        User userUpdated = user;
         assertThat(userUpdated.getName().equals("Monya") && userUpdated.getLogin().equals("monya"));
         userUpdated.setName("Tony");
         logger.info("USER UPDATE {}" + userUpdated);
@@ -78,14 +78,14 @@ public class UserRepositoryTest {
         logger.info("DELETE USER BY USER{}");
         userDao.saveAndUpdateUser(new User("Monya", "monya", "1111", "email@mail.com"));
         List<User> users = (List<User>) userDao.getAllUsers();
-        assertThat(users.size() > 0);
+        assertThat(users.size() == 1);
         User user = users.get(0);
         requestDao.deleteAllRequestsOfUser(user.getId());
         userDao.deleteUser(user);
-        users = (List<User>) userDao.getUserByName(user.getName());
-        assertThat(users.size() == 0);
-        users = (List<User>) userDao.getUserByEmail(user.getEmail());
-        assertThat(users.size() == 0);
+        user = (User) userDao.getUserByName(user.getName());
+        assertThat(user.getId() == 0);
+        user = (User) userDao.getUserByEmail(user.getEmail());
+        assertThat(user.getId() == 0);
         logger.info("DELETE USER BY USER SUCCESS {}");
     }
 
@@ -95,14 +95,14 @@ public class UserRepositoryTest {
         logger.info("DELETE USER BY ID{}");
         userDao.saveAndUpdateUser(new User("Monya", "monya", "1111", "email@mail.com"));
         List<User> users = (List<User>) userDao.getAllUsers();
-        assertThat(users.size() > 0);
+        assertThat(users.size() == 1);
         User user = users.get(0);
         requestDao.deleteAllRequestsOfUser(user.getId());
         userDao.deleteUserById(user.getId());
-        users = (List<User>) userDao.getUserByName(user.getName());
-        assertThat(users.size() == 0);
-        users = (List<User>) userDao.getUserByEmail(user.getEmail());
-        assertThat(users.size() == 0);
+        user = (User) userDao.getUserByName(user.getName());
+        assertThat(user.getId() == 0);
+        user = (User) userDao.getUserByEmail(user.getEmail());
+        assertThat(user.getId() == 0);
         logger.info("DELETE USER BY USER SUCCESS {}");
 
     }
