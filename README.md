@@ -1,6 +1,11 @@
 # UniversityBoot
 
-### Проверка подключена и заполнена ли база данных.
-### не работает
+#### _mvn clean install_
+#### _cd rest-application_
+#### _./mvnw spring-boot::run_
 
-##### localhost:8080/users
+
+
+##База не инициализируется:
+
+localhost:8080/users
