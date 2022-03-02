@@ -14,6 +14,10 @@ import java.util.stream.Collectors;
 public interface UserRepository extends JpaRepository<User, Integer> {
 
     default List<User> findAllUsers() {
+        List <User> users = findAll();
+        if (users.size() == 0){
+            users.add(new User("Noname","","",""));
+        }
         return findAll();
     }
 

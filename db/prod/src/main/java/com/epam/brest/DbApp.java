@@ -11,6 +11,7 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 //@AutoConfigurationPackage
 @ComponentScan("com.epam.brest.*")
+
 //@EntityScan("com.epam.brest.model")
 public class DbApp {
 

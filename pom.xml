@@ -20,6 +20,7 @@
 	<packaging>pom</packaging>
 
 	<modules>
+	<module>rest-application</module>
 	<module>service</module>
     <module>service-api</module>
     <module>daoJPA</module>
