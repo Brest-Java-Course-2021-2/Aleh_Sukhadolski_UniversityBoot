@@ -21,6 +21,7 @@ public class SpringJdbcConfig {
                 .build();
     }
 
+/*
 
     @Bean
     public NamedParameterJdbcTemplate namedParameterJdbcTemplate() {
@@ -32,6 +33,7 @@ public class SpringJdbcConfig {
         return new DataSourceTransactionManager(dataSource());
     }
 
+*/
 
 }
 

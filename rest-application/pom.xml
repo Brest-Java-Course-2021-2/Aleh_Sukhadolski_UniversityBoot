@@ -61,16 +61,10 @@
 
                 <dependency>
         			<groupId>com.epam.brest</groupId>
-        			<artifactId>db-test</artifactId>
+        			<artifactId>db-prod</artifactId>
         			<version>${project.version}</version>
                     <scope>runtime</scope>
         		</dependency>
-
-                <dependency>
-                    <groupId>com.h2database</groupId>
-                    <artifactId>h2</artifactId>
-                </dependency>
-
 
         		<dependency>
         			<groupId>org.springframework.boot</groupId>
