@@ -3,6 +3,7 @@ package com.epam.brest.dao.jparepositories;
 import com.epam.brest.model.Groupe;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -11,11 +12,10 @@ import java.util.stream.Stream;
 public interface GroupeRepository extends JpaRepository <Groupe, Integer> {
 
     default List<String> getAllGroupesByName (){
-          return (List<String>) findAll().stream()
-                                         .flatMap(groupes -> Stream.of(groupes.getGroupe()))
-                                         .collect(Collectors.toList());
-      }
-
+        return (List<String>) findAll().stream()
+                .flatMap(groupes -> Stream.of(groupes.getGroupe()))
+                .collect(Collectors.toList());
+    }
 
     default List <Groupe> getAllGroupes(){
           return (List<Groupe>) findAll();

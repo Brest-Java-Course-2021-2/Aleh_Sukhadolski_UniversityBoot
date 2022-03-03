@@ -17,6 +17,7 @@ import java.util.List;
 @EntityScan("com.epam.brest.model")
 @Service
 public class GroupeServiceImpl implements GroupeServiceApi {
+
     @Autowired
     private DaoGroupeApi daoGroupe;
 
