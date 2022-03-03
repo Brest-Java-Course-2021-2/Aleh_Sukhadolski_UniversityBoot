@@ -23,46 +23,46 @@ public class UserRestClass {
     }
 
 
-    @PostMapping("/user/name")
+    @GetMapping("/user/name")
     @Transactional(readOnly = true)
     public User userByName(@RequestParam String name)
     {
         return (User) userService.getUserByNameService(name);
     }
 
-    @PostMapping("/user/email")
+    @GetMapping("/user/email")
     @Transactional(readOnly = true)
     public User userByEmail(@RequestParam String email)
     {
         return (User) userService.getUserByEmailService(email);
     }
 
-    @PostMapping("/user/id")
+    @GetMapping("/user/id")
     @Transactional(readOnly = true)
     public User userById(@RequestParam String id)
     {
         return (User) userService.getUserByIdService(Integer.parseInt(id));
     }
 
-    @PostMapping("/user/save")
+    @GetMapping("/user/save")
     public User saveuser(@RequestParam String name, @RequestParam String login
                        , @RequestParam String password, @RequestParam String email ){
         return userService.saveNewUserService(new User(name, login, password, email));
     }
 
-    @PostMapping("/user/update")
+    @GetMapping("/user/update")
     public User updateuser(@RequestParam String id, @RequestParam String name, @RequestParam String login
             , @RequestParam String password, @RequestParam String email ){
         return userService.saveNewUserService(new User(Integer.parseInt(id), name, login, password, email));
     }
 
-    @PostMapping("/user/delete")
+    @GetMapping("/user/delete")
     public void deleteuser(@RequestParam String id, @RequestParam String name, @RequestParam String login
             , @RequestParam String password, @RequestParam String email ){
         userService.deleteUserService(new User(Integer.parseInt(id), name, login, password, email));
     }
 
-    @PostMapping("/user/delete/id")
+    @GetMapping("/user/delete/id")
     public void deleteuser(@RequestParam String id){
         userService.deleteUserByIdService(Integer.parseInt(id));
     }
