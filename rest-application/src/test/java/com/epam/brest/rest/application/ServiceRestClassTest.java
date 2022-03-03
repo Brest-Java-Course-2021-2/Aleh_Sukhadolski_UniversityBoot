@@ -15,11 +15,11 @@ class ServiceRestClassTest {
 
     @Autowired
     private ServiceRestClass serviceRestClass;
-
+/*
     @Test
     public void isRestClass (){
         User user = serviceRestClass.saveuser("Mik", "mik", "1111", "is@is.xc");
         assertTrue(user.getName().equals("Mik"));
-    }
+    }*/
 
 }

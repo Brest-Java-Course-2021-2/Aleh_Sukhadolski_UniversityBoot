@@ -29,16 +29,6 @@ public class ServiceRestClass {
         return "version-0.0.1-SNAPSHOT";
     }
 
-    @GetMapping("/users")
-    @Transactional(readOnly = true)
-    public List<User> users()
-    {
-        return (List<User>) userService.getAllUsersService();
-    }
 
-    @PostMapping ("/user/save")
-    public User saveuser(@RequestParam String name, @RequestParam String login
-                       , @RequestParam String password, @RequestParam String email ){
-        return userService.saveNewUserService(new User(name, login, password, email));
-    }
+
 }
