@@ -9,8 +9,8 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @AutoConfigurationPackage
-@ComponentScan("com.epam.brest.*")
-@EntityScan("com.epam.brest.model")
+@ComponentScan("com.epam.brest")
+@EntityScan("com.epam.brest")
 public class ServiceApp {
 
     public static void main(String[] args) {

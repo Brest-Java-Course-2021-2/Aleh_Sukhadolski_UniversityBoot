@@ -1,8 +1,7 @@
-package com.epam.brest.dao;
+package com.epam.brest;
 
-import com.epam.brest.dao.jparepositories.GroupeRepository;
+import com.epam.brest.jparepositories.GroupeRepository;
 import com.epam.brest.daoAPI.DaoGroupeApi;
-import com.epam.brest.model.Groupe;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

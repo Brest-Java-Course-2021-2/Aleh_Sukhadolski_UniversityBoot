@@ -1,8 +1,8 @@
 package com.epam.brest.service;
 
-import com.epam.brest.model.Groupe;
-import com.epam.brest.model.Request;
-import com.epam.brest.model.User;
+import com.epam.brest.Groupe;
+import com.epam.brest.Request;
+import com.epam.brest.User;
 
 import com.epam.brest.serviceapi.GroupeServiceApi;
 import com.epam.brest.serviceapi.RequestServiceApi;
@@ -20,7 +20,6 @@ import org.junit.jupiter.api.Test;
 
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,8 +28,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
-@ComponentScan("com.epam.brest.*")
-@EntityScan("com.epam.brest.model")
+@ComponentScan("com.epam.brest")
+@EntityScan("com.epam.brest")
 @Transactional()
 public class UserServiceImplTest {
 

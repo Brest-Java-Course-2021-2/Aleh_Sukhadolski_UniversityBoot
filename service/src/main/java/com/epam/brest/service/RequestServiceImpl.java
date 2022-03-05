@@ -3,8 +3,8 @@ package com.epam.brest.service;
 import com.epam.brest.daoAPI.DaoGroupeApi;
 import com.epam.brest.daoAPI.DaoRequestApi;
 import com.epam.brest.daoAPI.DaoUserApi;
-import com.epam.brest.model.Request;
-import com.epam.brest.model.User;
+import com.epam.brest.Request;
+import com.epam.brest.User;
 import com.epam.brest.serviceapi.RequestServiceApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -13,15 +13,12 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 
 @Component
-@ComponentScan("com.epam.brest.*")
-@EntityScan("com.epam.brest.model")
+@ComponentScan("com.epam.brest")
+@EntityScan("com.epam.brest")
 @Service
 public class RequestServiceImpl implements RequestServiceApi {
     @Autowired
@@ -76,5 +73,10 @@ public class RequestServiceImpl implements RequestServiceApi {
     @Override
     public void deleteAllRequestsOfUserService(Integer id) {
         daoRequest.deleteAllRequestsOfUser(id);
+    }
+
+    @Override
+    public Request deleteRequestService(Request request) {
+        return daoRequest.deleteRequest(request);
     }
 }

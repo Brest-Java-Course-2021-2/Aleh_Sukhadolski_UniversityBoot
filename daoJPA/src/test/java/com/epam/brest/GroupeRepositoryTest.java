@@ -1,8 +1,7 @@
-package com.epam.brest.dao;
+package com.epam.brest;
 
 
 import com.epam.brest.daoAPI.DaoGroupeApi;
-import com.epam.brest.model.Groupe;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,8 +20,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 
 @SpringBootTest
-@ComponentScan("com.epam.brest.*")
-@EntityScan("com.epam.brest.model")
+@ComponentScan
+@EntityScan("com.epam.brest")
 @Transactional()
 public class GroupeRepositoryTest {
 

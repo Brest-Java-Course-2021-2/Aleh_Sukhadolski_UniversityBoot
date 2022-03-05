@@ -1,16 +1,14 @@
-package com.epam.brest.dao;
+package com.epam.brest;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.AutoConfigurationPackage;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
 //@AutoConfigurationPackage
 @ComponentScan("com.epam.brest.*")
-@EntityScan("com.epam.brest.model")
+@EntityScan("com.epam.brest")
 public class DaoApplication {
 
 	public static void main(String[] args) {

@@ -1,14 +1,12 @@
-package com.epam.brest.dao;
+package com.epam.brest;
 
-import com.epam.brest.dao.jparepositories.RequestRepository;
+import com.epam.brest.jparepositories.RequestRepository;
 //import com.epam.brest.daoAPI.DaoRequestApi;
 //import com.epam.brest.daoAPI.DaoRequestApi;
 import com.epam.brest.daoAPI.DaoRequestApi;
-import com.epam.brest.model.Request;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -69,5 +67,10 @@ public class RequestDao implements DaoRequestApi {
         logger.info("Delete Requests when User deleted {User.id} =  " + id);
         List <Request> requests = requestRepository.findAllByForeignKey(id);
         requestRepository.deleteAll((Iterable<? extends Request>) requests);
+    }
+
+    @Override
+    public Request deleteRequest(Request request) {
+        return requestRepository.deleteRequest(request);
     }
 }

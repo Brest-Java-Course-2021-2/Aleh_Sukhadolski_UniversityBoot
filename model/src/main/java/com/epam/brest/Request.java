@@ -4,10 +4,9 @@
  * @autor Oleg Suhodolsky
  * @version 1.1
  */
-package com.epam.brest.model;
+package com.epam.brest;
 
 
-import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;

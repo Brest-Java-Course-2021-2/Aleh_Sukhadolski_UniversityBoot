@@ -1,6 +1,6 @@
-package com.epam.brest.dao.jparepositories;
+package com.epam.brest.jparepositories;
 
-import com.epam.brest.model.User;
+import com.epam.brest.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 

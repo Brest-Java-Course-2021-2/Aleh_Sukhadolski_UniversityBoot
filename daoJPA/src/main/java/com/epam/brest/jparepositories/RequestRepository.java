@@ -1,6 +1,6 @@
-package com.epam.brest.dao.jparepositories;
+package com.epam.brest.jparepositories;
 
-import com.epam.brest.model.Request;
+import com.epam.brest.Request;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Date;
@@ -32,6 +32,12 @@ public interface RequestRepository extends JpaRepository<Request, Integer> {
                     .flatMap(id -> Stream.of(new Request(id, groupe, "0", "0000", new Date())))
                     .collect(Collectors.toList());
        return saveAllAndFlush((List<Request>)requests);
+    }
+
+    default Request deleteRequest(Request request)
+    {
+        deleteById(request.getIdR());
+        return request;
     }
 
 }

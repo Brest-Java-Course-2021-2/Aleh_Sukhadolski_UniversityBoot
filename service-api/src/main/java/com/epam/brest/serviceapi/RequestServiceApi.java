@@ -1,7 +1,7 @@
 package com.epam.brest.serviceapi;
 
 
-import com.epam.brest.model.Request;
+import com.epam.brest.Request;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.stereotype.Component;
 
@@ -26,4 +26,6 @@ public interface RequestServiceApi {
     Request flushRequestInfoService (Request request);
 
     void deleteAllRequestsOfUserService (Integer id);
+
+    public Request deleteRequestService(Request request);
 }

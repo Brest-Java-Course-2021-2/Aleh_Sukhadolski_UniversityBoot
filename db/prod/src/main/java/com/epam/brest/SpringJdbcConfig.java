@@ -16,12 +16,12 @@ public class SpringJdbcConfig {
     public DataSource dataSource() {
         return new EmbeddedDatabaseBuilder()
                 .setType(EmbeddedDatabaseType.H2)
-                .addScript("create-db.sql")
-                .addScript("init-db.sql")
+                //.addScript("create-db.sql")
+                //.addScript("init-db.sql")
                 .build();
     }
 
-/*
+
 
     @Bean
     public NamedParameterJdbcTemplate namedParameterJdbcTemplate() {
@@ -33,7 +33,7 @@ public class SpringJdbcConfig {
         return new DataSourceTransactionManager(dataSource());
     }
 
-*/
+
 
 }
 

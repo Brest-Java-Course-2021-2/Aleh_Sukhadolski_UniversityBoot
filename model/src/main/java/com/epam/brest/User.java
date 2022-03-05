@@ -5,7 +5,7 @@
  * @autor Oleg Suhodolsky
  * @version 1.0
  */
-package com.epam.brest.model;
+package com.epam.brest;
 
 
 import javax.persistence.*;

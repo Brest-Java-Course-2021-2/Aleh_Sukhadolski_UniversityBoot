@@ -1,6 +1,6 @@
 package com.epam.brest.rest.application;
 
-import com.epam.brest.model.User;
+import com.epam.brest.User;
 import com.epam.brest.serviceapi.UserServiceApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;

@@ -1,4 +1,4 @@
-package com.epam.brest.model;
+package com.epam.brest;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;

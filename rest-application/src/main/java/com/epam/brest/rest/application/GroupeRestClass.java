@@ -1,6 +1,6 @@
 package com.epam.brest.rest.application;
 
-import com.epam.brest.model.Groupe;
+import com.epam.brest.Groupe;
 import com.epam.brest.serviceapi.GroupeServiceApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;

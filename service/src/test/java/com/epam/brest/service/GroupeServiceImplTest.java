@@ -1,7 +1,11 @@
 package com.epam.brest.service;
 
-import com.epam.brest.model.Groupe;
+import com.epam.brest.Groupe;
+import com.epam.brest.Request;
+import com.epam.brest.User;
 import com.epam.brest.serviceapi.GroupeServiceApi;
+import com.epam.brest.serviceapi.RequestServiceApi;
+import com.epam.brest.serviceapi.UserServiceApi;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Assertions;
@@ -18,8 +22,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @SpringBootTest
-@ComponentScan("com.epam.brest.*")
-@EntityScan("com.epam.brest.model")
+@ComponentScan("com.epam.brest")
+@EntityScan("com.epam.brest")
 @Transactional()
 public class GroupeServiceImplTest {
 
@@ -28,12 +32,20 @@ public class GroupeServiceImplTest {
     @Autowired
     private GroupeServiceApi groupeService;
 
+    @Autowired
+    private UserServiceApi userService;
+
+    @Autowired
+    private RequestServiceApi requestService;
+
+
     @BeforeEach
     public void setUp() {
         String[] groupes = new String[]{"e1", "e2", "e3", "e4", "e5", "e6"};
         List<Groupe> grup = Arrays.stream(groupes)
                 .map(gr -> groupeService.insertNewGroupeService(gr))
                 .collect(Collectors.toList());
+        User user = userService.saveNewUserService(new User("TOMMY", "tom", "1111", "iuy@aa.com"));
     }
 
     @Test
@@ -48,10 +60,17 @@ public class GroupeServiceImplTest {
     @Test
     public void isInsertNewGroupeTest() {
         logger.info("INSERT NEW GROUPE {}");
+        User user = userService.getUserByNameService("TOMMY");
+        List<Request> requests = requestService.getAllRequestsService(user.getId());
+        Assertions.assertTrue(requests.size() == 6);
         Groupe groupe = groupeService.insertNewGroupeService("e7");
         Assertions.assertTrue(groupe.getGroupe().equals("e7"));
         List<Groupe> group = groupeService.getAllGroupesService();
         Assertions.assertTrue(group.size() == 7);
+        user = userService.getUserByNameService("TOMMY");
+        requests = requestService.getAllRequestsService(user.getId());
+        Assertions.assertTrue(requests.size() == 7);
+
     }
 
 
@@ -65,12 +84,23 @@ public class GroupeServiceImplTest {
         Assertions.assertFalse(groupe.getGroupe().equals("e6"));
         List<Groupe> group = groupeService.getAllGroupesService();
         Assertions.assertTrue(group.size() == 6);
+        User user = userService.getUserByNameService("TOMMY");
+        List<Request> requests = requestService.getAllRequestsService(user.getId());
+        boolean ifExist = false;
+        boolean ifNotExist = true;
+        for (Request request : requests){
+            if (request.getGroupe().equals("w1")){ ifExist = true; }
+            if (request.getGroupe().equals("e6")){ ifNotExist = false; }
+        }
+        Assertions.assertTrue(ifExist);
+        Assertions.assertTrue(ifNotExist);
+        requests = requestService.getAllRequestsService(user.getId());
+        Assertions.assertTrue(requests.size() == 6);
     }
 
     @Test
     public void isDeleteGroupeTest() {
         logger.info("DELETE GROUPE {}");
-        //Groupe groupe = groupeService.getGroupeByNameService("e1");
         String result = groupeService.deleteGroupeByNameService("e1");
         Assertions.assertTrue(result.equals("e1"));
         Groupe groupe = groupeService.getGroupeByNameService("e1");

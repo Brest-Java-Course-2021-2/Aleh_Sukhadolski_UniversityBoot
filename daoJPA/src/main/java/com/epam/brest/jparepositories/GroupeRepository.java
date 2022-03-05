@@ -1,9 +1,8 @@
-package com.epam.brest.dao.jparepositories;
+package com.epam.brest.jparepositories;
 
-import com.epam.brest.model.Groupe;
+import com.epam.brest.Groupe;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;

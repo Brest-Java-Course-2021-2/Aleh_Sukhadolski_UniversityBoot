@@ -1,11 +1,10 @@
 package com.epam.brest.daoAPI;
 
 
-import com.epam.brest.model.Request;
+import com.epam.brest.Request;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.stereotype.Component;
 
-import java.util.Date;
 import java.util.List;
 
 @Component
@@ -28,4 +27,6 @@ public interface DaoRequestApi {
     public Request flushRequestInfo (Request request);
 
     public void deleteAllRequestsOfUser(Integer id);
+
+    public Request deleteRequest(Request request);
 }

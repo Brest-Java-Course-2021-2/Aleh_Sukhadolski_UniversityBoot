@@ -1,8 +1,8 @@
 package com.epam.brest.service;
 
-import com.epam.brest.model.Groupe;
-import com.epam.brest.model.Request;
-import com.epam.brest.model.User;
+import com.epam.brest.Groupe;
+import com.epam.brest.Request;
+import com.epam.brest.User;
 import com.epam.brest.serviceapi.GroupeServiceApi;
 import com.epam.brest.serviceapi.RequestServiceApi;
 import com.epam.brest.serviceapi.UserServiceApi;
@@ -19,13 +19,12 @@ import javax.transaction.Transactional;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
-@ComponentScan("com.epam.brest.*")
-@EntityScan("com.epam.brest.model")
+@ComponentScan("com.epam.brest")
+@EntityScan("com.epam.brest")
 @Transactional()
 public class RequestServiceImplTest {
 
@@ -91,6 +90,7 @@ public class RequestServiceImplTest {
                 "MIKE", "mike", "2222", "mike@tyson.com"));
         List<Request> requests = requestService.getAllRequestsService(user.getId());
         assertTrue(requests.size() == 6);
+        assertTrue(requests.get(0).getPairs().equals("0"));
         assertTrue(user.getName().equals("MIKE"));
         requests = requests.stream().peek(req -> req.setPairs("2")).collect(Collectors.toList());
         requests = requestService.updateAllRequestsForUserService(requests);
@@ -98,6 +98,7 @@ public class RequestServiceImplTest {
         assertTrue(requests.get(1).getPairs().equals("2"));
         Request request = requestService.flushRequestInfoService(requests.get(0));
         assertTrue(request.getPairs().equals("0"));
+        assertTrue(requests.get(1).getPairs().equals("2"));
     }
 
 
