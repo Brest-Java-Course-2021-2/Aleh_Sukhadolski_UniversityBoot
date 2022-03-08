@@ -1,19 +1,24 @@
 package com.epam.brest.rest.application;
 
 import com.epam.brest.Groupe;
+import com.epam.brest.RequestDao;
+import com.epam.brest.User;
 import com.epam.brest.serviceapi.GroupeServiceApi;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @CrossOrigin
 public class GroupeRestClass {
+
+    private final Logger logger = LogManager.getLogger(GroupeRestClass.class);
 
     @Autowired
     private GroupeServiceApi groupeService;
@@ -34,25 +39,35 @@ public class GroupeRestClass {
     }
 
 
-    @GetMapping("/groupe/new")
-    public Groupe insertNewGroupe(@RequestParam String newName) {
-        return (Groupe) groupeService.insertNewGroupeService(newName);
-    }
-
-    @GetMapping("/groupe/update")
-    public Groupe updateNameGroupe(@RequestParam String newName , @RequestParam String oldName) {
-        return (Groupe) groupeService.updateGroupeNameService(newName, oldName);
-    }
-
-
-    @GetMapping("/groupe/delete")
-    public String deleteGroupeByName(@RequestParam String name) {
-        return (String) groupeService.deleteGroupeByNameService(name);
-    }
-
     @GetMapping("/groupe/get/name")
     @Transactional(readOnly = true)
     public Groupe getGroupeByName(@RequestParam String name) {
         return (Groupe) groupeService.getGroupeByNameService(name);
     }
+
+    @PostMapping(path = "/groupe/create", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<Groupe> createGroupe(@RequestBody String newName) {
+        //logger.debug("createGroupe({})", newName);
+        Groupe groupe = groupeService.insertNewGroupeService(newName);
+        return new ResponseEntity<>(groupe, HttpStatus.OK);
+    }
+
+
+    @PutMapping(path = "/groupe/update", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<Groupe> updateGroupe(@RequestBody List <String> names) {
+        //logger.debug("updateGroupe({})", newName);
+        Groupe groupe = groupeService.updateGroupeNameService(names.get(0), names.get(1));
+        return new ResponseEntity<>(groupe, HttpStatus.OK);
+    }
+
+
+    @DeleteMapping(value = "/groupe/delete/{name}", produces = {"application/json"})
+    public ResponseEntity <String> deleteGroupe(@PathVariable String name) {
+        //logger.debug("deleteGroupe({})", name);
+        name = groupeService.deleteGroupeByNameService(name);
+        return new ResponseEntity(name, HttpStatus.OK);
+    }
+
+
+
 }

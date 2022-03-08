@@ -1,11 +1,14 @@
 package com.epam.brest.service;
 
+import com.epam.brest.RequestDao;
 import com.epam.brest.daoAPI.DaoGroupeApi;
 import com.epam.brest.daoAPI.DaoRequestApi;
 import com.epam.brest.daoAPI.DaoUserApi;
 import com.epam.brest.Request;
 import com.epam.brest.User;
 import com.epam.brest.serviceapi.RequestServiceApi;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
@@ -21,6 +24,9 @@ import java.util.List;
 @EntityScan("com.epam.brest")
 @Service
 public class RequestServiceImpl implements RequestServiceApi {
+
+    private final Logger logger = LogManager.getLogger(RequestServiceImpl.class);
+
     @Autowired
     private DaoRequestApi daoRequest;
 
@@ -57,7 +63,7 @@ public class RequestServiceImpl implements RequestServiceApi {
 
     @Override
     public Request updateRequestService(Request request) {
-        return (Request) daoRequest.flushRequestInfo(request);
+        return (Request) daoRequest.updateRequest(request);
     }
 
     @Override

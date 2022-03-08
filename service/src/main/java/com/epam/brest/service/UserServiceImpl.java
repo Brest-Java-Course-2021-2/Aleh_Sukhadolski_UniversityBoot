@@ -1,10 +1,13 @@
 package com.epam.brest.service;
 
+import com.epam.brest.RequestDao;
 import com.epam.brest.daoAPI.DaoGroupeApi;
 import com.epam.brest.daoAPI.DaoRequestApi;
 import com.epam.brest.daoAPI.DaoUserApi;
 import com.epam.brest.User;
 import com.epam.brest.serviceapi.UserServiceApi;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
@@ -18,6 +21,8 @@ import java.util.List;
 @EntityScan("com.epam.brest")
 @Service
 public class UserServiceImpl implements UserServiceApi {
+
+    private final Logger logger = LogManager.getLogger(UserServiceImpl.class);
 
     @Autowired
     private DaoUserApi daoUser;

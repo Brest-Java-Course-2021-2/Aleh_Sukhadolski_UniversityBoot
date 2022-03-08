@@ -1,45 +1,52 @@
 package com.epam.brest.rest.application;
 
 import com.epam.brest.Request;
+import com.epam.brest.RequestDao;
 import com.epam.brest.serviceapi.RequestServiceApi;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 @RestController
 @CrossOrigin
 public class RequestRestClass {
 
+    private final Logger logger = LogManager.getLogger(RequestRestClass.class);
+
     @Autowired
     RequestServiceApi requestService;
 
-    @GetMapping ("/request/id/all")
+    @GetMapping ("/request/all/{id}")
     @Transactional(readOnly = true)
-    public List<Request> getAllRequests(@RequestParam String id) {
-        return (List<Request>) requestService.getAllRequestsService(Integer.parseInt(id));
-    }
-    @GetMapping ("/request/idr")
-    @Transactional(readOnly = true)
-    public Request getRequestByIdr(@RequestParam String idR) {
-        return (Request) requestService.getRequestByIdrService(Integer.parseInt(idR));
+    public List<Request> getAllRequests(@PathVariable int id) {
+        return (List<Request>) requestService.getAllRequestsService(id);
     }
 
-    @GetMapping ("/request/update")
-    public Request updateRequest(@RequestParam String idR, @RequestParam String id
-                               , @RequestParam String groupe, @RequestParam String pairs
-                               , @RequestParam String subject) throws ParseException {
-        Request request = new Request(Integer.parseInt(idR), Integer.parseInt(id)
-                                    , groupe, pairs, subject, new Date());
-        return (Request) requestService.updateRequestService(request);
+    @GetMapping ("/request/{idr}")
+    @Transactional(readOnly = true)
+    public Request getRequestByIdr(@PathVariable int idr) {
+        return (Request) requestService.getRequestByIdrService(idr);
+    }
+
+    @PutMapping(path = "/request/update", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<Request> updateRequest(@RequestBody Request request) {
+        //logger.debug("updateGroupe({})", newName);
+        request= requestService.updateRequestService(request);
+        return new ResponseEntity<>(request, HttpStatus.OK);
+    }
+
+    @DeleteMapping(value = "/request/delete", consumes = "application/json", produces = "application/json")
+    public ResponseEntity <Request> deleteGroupe(@PathVariable Request request) {
+        //logger.debug("deleteGroupe({})", name);
+        requestService.flushRequestInfoService(request);
+        return new ResponseEntity(request, HttpStatus.OK);
     }
 
 

@@ -1,8 +1,13 @@
 package com.epam.brest.rest.application;
 
+import com.epam.brest.RequestDao;
 import com.epam.brest.User;
 import com.epam.brest.serviceapi.UserServiceApi;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,6 +16,8 @@ import java.util.List;
 @RestController
 @CrossOrigin
 public class UserRestClass {
+
+    private final Logger logger = LogManager.getLogger(UserRestClass.class);
 
     @Autowired
     private UserServiceApi userService;
@@ -44,26 +51,36 @@ public class UserRestClass {
         return (User) userService.getUserByIdService(Integer.parseInt(id));
     }
 
-    @GetMapping("/user/save")
-    public User saveuser(@RequestParam String name, @RequestParam String login
-                       , @RequestParam String password, @RequestParam String email ){
-        return userService.saveNewUserService(new User(name, login, password, email));
+
+    @PostMapping(path = "/user/create", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<Integer> createUser(@RequestBody User user) {
+        //logger.debug("createUser({})", user);
+        user = userService.saveNewUserService(user);
+        return new ResponseEntity<>(user.getId(), HttpStatus.OK);
     }
 
-    @GetMapping("/user/update")
-    public User updateuser(@RequestParam String id, @RequestParam String name, @RequestParam String login
-            , @RequestParam String password, @RequestParam String email ){
-        return userService.saveNewUserService(new User(Integer.parseInt(id), name, login, password, email));
+
+    @PutMapping(path = "/user/update", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<Integer> updateUser(@RequestBody User user) {
+        //logger.debug("updateUser({})", user);
+        user = userService.saveNewUserService(user);
+        return new ResponseEntity<>(user.getId(), HttpStatus.OK);
     }
 
-    @GetMapping("/user/delete")
-    public void deleteuser(@RequestParam String id, @RequestParam String name, @RequestParam String login
-            , @RequestParam String password, @RequestParam String email ){
-        userService.deleteUserService(new User(Integer.parseInt(id), name, login, password, email));
+    @DeleteMapping(value = "/user/delete/{id}", produces = {"application/json"})
+    public ResponseEntity <Integer> deleteUserById(@PathVariable Integer id) {
+        //logger.debug("deleteUser({})", id);
+        userService.deleteUserByIdService(id);
+        return new ResponseEntity(id, HttpStatus.OK);
     }
 
-    @GetMapping("/user/delete/id")
-    public void deleteuser(@RequestParam String id){
-        userService.deleteUserByIdService(Integer.parseInt(id));
+
+    @DeleteMapping(value = "/user/delete", consumes = "application/json", produces = "application/json")
+    public ResponseEntity <Integer> deleteUser(@RequestBody User user) {
+        //logger.debug("deleteUser({})", user);
+        userService.deleteUserService(user);
+        return new ResponseEntity(user.getId(), HttpStatus.OK);
     }
+
+
 }
