@@ -1,16 +1,17 @@
 package com.epam.brest;
 
-import com.epam.brest.jparepositories.UserRepository;
-import com.epam.brest.daoAPI.DaoUserApi;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
+import com.epam.brest.DaoUserApi;
 
 import java.util.List;
 
 
 @Component
+@ComponentScan("com.epam.brest")
 public class UserDao implements DaoUserApi {
 
     private final Logger logger = LogManager.getLogger(UserDao.class);
@@ -42,7 +43,7 @@ public class UserDao implements DaoUserApi {
 
     public User saveAndUpdateUser(User user) {
         logger.info("SAVE USER {} " + user);
-        return (User) userRepository.save(user);
+        return (User) userRepository.saveAndFlushUser(user);
     }
 
     public void deleteUser(User user) {

@@ -1,11 +1,5 @@
-package com.epam.brest.service;
+package com.epam.brest;
 
-import com.epam.brest.Request;
-import com.epam.brest.User;
-import com.epam.brest.daoAPI.DaoGroupeApi;
-import com.epam.brest.Groupe;
-import com.epam.brest.daoAPI.DaoRequestApi;
-import com.epam.brest.daoAPI.DaoUserApi;
 import com.epam.brest.serviceapi.GroupeServiceApi;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -20,7 +14,7 @@ import java.util.List;
 
 
 @Component
-@ComponentScan("com.epam.brest")
+@ComponentScan("com.epam.brest.*")
 @EntityScan("com.epam.brest")
 @Service
 public class GroupeServiceImpl implements GroupeServiceApi {

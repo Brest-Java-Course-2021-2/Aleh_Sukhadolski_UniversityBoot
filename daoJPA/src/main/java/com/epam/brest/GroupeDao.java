@@ -1,15 +1,15 @@
 package com.epam.brest;
 
-import com.epam.brest.jparepositories.GroupeRepository;
-import com.epam.brest.daoAPI.DaoGroupeApi;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
-
+import com.epam.brest.DaoGroupeApi;
 import java.util.List;
 
 @Component
+@ComponentScan("com.epam.brest")
 public class GroupeDao implements DaoGroupeApi {
 
     private final Logger logger = LogManager.getLogger(GroupeDao.class);

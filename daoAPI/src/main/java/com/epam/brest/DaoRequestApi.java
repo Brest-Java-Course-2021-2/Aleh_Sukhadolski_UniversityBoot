@@ -1,4 +1,4 @@
-package com.epam.brest.daoAPI;
+package com.epam.brest;
 
 
 import com.epam.brest.Request;

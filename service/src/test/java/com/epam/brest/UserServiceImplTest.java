@@ -1,8 +1,4 @@
-package com.epam.brest.service;
-
-import com.epam.brest.Groupe;
-import com.epam.brest.Request;
-import com.epam.brest.User;
+package com.epam.brest;
 
 import com.epam.brest.serviceapi.GroupeServiceApi;
 import com.epam.brest.serviceapi.RequestServiceApi;
@@ -11,6 +7,7 @@ import com.epam.brest.serviceapi.UserServiceApi;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.ComponentScan;
@@ -27,8 +24,10 @@ import java.util.stream.Collectors;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@SpringBootTest
-@ComponentScan("com.epam.brest")
+@SpringBootApplication
+@SpringBootTest (classes= { UserServiceImpl.class, RequestServiceImpl.class, GroupeServiceImpl.class
+        , UserDao.class, RequestDao.class, GroupeDao.class})
+@ComponentScan("com.epam.brest.*")
 @EntityScan("com.epam.brest")
 @Transactional()
 public class UserServiceImplTest {

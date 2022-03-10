@@ -1,10 +1,11 @@
-package com.epam.brest.service;
+package com.epam.brest;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.AutoConfigurationPackage;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
+/*
 
 
 @SpringBootApplication
@@ -17,4 +18,4 @@ public class ServiceApp {
         SpringApplication.run(ServiceApp.class, args);
     }
 
-}
+}*/

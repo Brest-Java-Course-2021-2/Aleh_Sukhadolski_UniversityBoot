@@ -1,18 +1,18 @@
 package com.epam.brest;
 
-import com.epam.brest.jparepositories.RequestRepository;
 //import com.epam.brest.daoAPI.DaoRequestApi;
-//import com.epam.brest.daoAPI.DaoRequestApi;
-import com.epam.brest.daoAPI.DaoRequestApi;
+import com.epam.brest.DaoRequestApi;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
 import java.util.List;
 
 @Component
+@ComponentScan("com.epam.brest")
 public class RequestDao implements DaoRequestApi {
 
     private final Logger logger = LogManager.getLogger(RequestDao.class);
@@ -20,9 +20,7 @@ public class RequestDao implements DaoRequestApi {
     @Autowired
     private RequestRepository requestRepository;
 
-    public RequestDao(RequestRepository requestRepository) {
-        this.requestRepository = requestRepository;
-    }
+
 
     public List<Request> getAllRequests(Integer id) {
         logger.info("GET ALL REQUESTS OF USER {}" + id);
@@ -46,13 +44,13 @@ public class RequestDao implements DaoRequestApi {
 
     public Request updateRequest(Request request){
         logger.info("Update Request after change {} " + request);
-        return requestRepository.saveAndFlush(request);
+        return (Request) requestRepository.saveAndFlush(request);
     }
 
 
     public List<Request> updateAllRequestsForUser(List<Request> requests){
         logger.info("Update All Requests for User after change {} ");
-        return requestRepository.saveAllAndFlush((Iterable<Request>) requests);
+        return (List<Request>) requestRepository.saveAllAndFlush((Iterable<Request>) requests);
     }
 
     public Request flushRequestInfo (Request request){

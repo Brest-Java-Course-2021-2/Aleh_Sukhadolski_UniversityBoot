@@ -1,7 +1,8 @@
-package com.epam.brest.jparepositories;
+package com.epam.brest;
 
 import com.epam.brest.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Component;
 
 
 import java.util.List;
@@ -11,12 +12,13 @@ import java.util.stream.Collectors;
 // This will be AUTO IMPLEMENTED by Spring into a Bean called userRepository
 // CRUD refers Create, Read, Update, Delete
 
+@Component
 public interface UserRepository extends JpaRepository<User, Integer> {
 
     default List<User> findAllUsers() {
         List <User> users = findAll();
         if (users.size() == 0){
-            users.add(new User("Noname","","",""));
+            users.add(new User("Is Empty","","",""));
         }
         return findAll();
     }
@@ -33,7 +35,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
           if (users.size() > 0){
             user = users.get(0);
         } else {
-            user = new User(0,"","","", "");
+            user = new User(0,"Is Empty","","", "");
         }
         return (User) user;
     }
@@ -47,7 +49,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
         if (users.size() > 0){
             user = users.get(0);
         } else {
-            user = new User(0,"","","", "");
+            user = new User(0,"Is Empty","","", "");
         }
         return (User) user;
     }

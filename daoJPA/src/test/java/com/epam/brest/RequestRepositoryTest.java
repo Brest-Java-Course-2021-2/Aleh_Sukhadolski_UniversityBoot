@@ -1,11 +1,10 @@
 package com.epam.brest;
 
-import com.epam.brest.daoAPI.DaoRequestApi;
-import com.epam.brest.daoAPI.DaoUserApi;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.ComponentScan;
@@ -17,10 +16,13 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
-@SpringBootTest
-@ComponentScan
+@SpringBootApplication
+@SpringBootTest (classes= { UserDao.class, RequestDao.class, GroupeDao.class})
+//@ContextConfiguration
+@ComponentScan("com.epam.brest.*")
 @EntityScan("com.epam.brest")
 @Transactional()
 public class RequestRepositoryTest {
@@ -44,19 +46,19 @@ public class RequestRepositoryTest {
         List <String> groupes = Arrays.asList(new String[]{"e1", "e2", "e3", "e4", "e5"});
         requestDao.saveRequestsForNewUser(user.getId(),groupes);
         List<Request> requests = requestDao.getAllRequests(user.getId());
-        assertThat(requests.size() == 5);
+        assertTrue(requests.size() == 5);
         List<Integer> usersId = (List<Integer>) userDao.getAllUsers()
                                                     .stream()
                                                     .flatMap(us -> Stream.of(us.getId()))
                                                     .collect(Collectors.toList());
         requestDao.saveRequestsWhenNewGroupe("e6", usersId);
         requests = requestDao.getAllRequests(user.getId());
-        assertThat(requests.size() == 6);
+        assertTrue(requests.size() == 6);
 
         List<User> users = userDao.getAllUsers();
         for (User us : users){
             requests = requestDao.getAllRequests(us.getId());
-            assertThat(requests.size() == 6);
+            assertTrue(requests.size() == 6);
         }
     }
 
@@ -76,12 +78,12 @@ public class RequestRepositoryTest {
         request.setSubject("fizo");
         requestDao.updateRequest(request);
         request = requestDao.getAllRequests(user.getId()).get(0);
-        assertThat(request.getPairs().equals("2") && request.getSubject().equals("fizo"));
+        assertTrue(request.getPairs().equals("2") && request.getSubject().equals("fizo"));
 
         logger.info("Flush request {}" + request);
         requestDao.flushRequestInfo(request);
         request = requestDao.getAllRequests(user.getId()).get(0);
-        assertThat(request.getPairs().equals("0") && request.getSubject().equals("0000"));
+        assertTrue(request.getPairs().equals("0") && request.getSubject().equals("0000"));
 
     }
 
@@ -108,12 +110,12 @@ public class RequestRepositoryTest {
             ifChanged = ifChanged && (req.getPairs().equals("3"));
         }
         logger.info("Created all requests for new User {}" + ifChanged);
-        assertThat(ifChanged);
+        assertTrue(ifChanged);
 
         logger.info("Flush all requests for new User {}" + user);
         requestDao.deleteAllRequestsOfUser(user.getId());
         requests = requestDao.getAllRequests(user.getId());
-        assertThat(requests.size() == 0);
+        assertTrue(requests.size() == 0);
 
     }
 

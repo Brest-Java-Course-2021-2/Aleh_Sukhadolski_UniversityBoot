@@ -1,13 +1,15 @@
-package com.epam.brest.jparepositories;
+package com.epam.brest;
 
 import com.epam.brest.Groupe;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+@Component
 public interface GroupeRepository extends JpaRepository <Groupe, Integer> {
 
     default List<String> getAllGroupesByName (){
@@ -23,15 +25,15 @@ public interface GroupeRepository extends JpaRepository <Groupe, Integer> {
 
     default String deleteGroupeByName(String nameGroupe){
           Optional<Groupe> groupe = (Optional<Groupe>) findAll().stream()
-                                                                .filter(gr -> nameGroupe.equalsIgnoreCase(gr.getGroupe()))
-                                                                .collect(Collectors.toList())
-                                                                .stream()
-                                                                .findFirst();
+                    .filter(gr -> nameGroupe.equalsIgnoreCase(gr.getGroupe()))
+                    .collect(Collectors.toList())
+                    .stream()
+                    .findFirst();
         if (groupe.isPresent()){
             delete(groupe.get());
             return (String) groupe.get().getGroupe();
         } else {
-         return "ERROR";
+         return "Is Empty";
         }
       }
 
@@ -43,7 +45,6 @@ public interface GroupeRepository extends JpaRepository <Groupe, Integer> {
       }
 
     default Groupe getGroupeByName(String name){
-
         List<Groupe> groupes = (List<Groupe>) getAllGroupes();
         int  index= (int) groupes.stream()
                                     .filter(gr -> name.equals(gr.getGroupe()))
