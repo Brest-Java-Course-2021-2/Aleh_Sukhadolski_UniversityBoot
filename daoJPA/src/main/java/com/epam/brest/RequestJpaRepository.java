@@ -1,6 +1,5 @@
 package com.epam.brest;
 
-import com.epam.brest.Request;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 
@@ -10,7 +9,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Component
-public interface RequestRepository extends JpaRepository<Request, Integer> {
+public interface RequestJpaRepository extends JpaRepository<Request, Integer> {
 
     default List<Request> findAllByForeignKey(Integer id) {
         return (List<Request>) findAll().stream()

@@ -5,7 +5,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
-import com.epam.brest.DaoGroupeApi;
+
 import java.util.List;
 
 @Component
@@ -15,7 +15,7 @@ public class GroupeDao implements DaoGroupeApi {
     private final Logger logger = LogManager.getLogger(GroupeDao.class);
 
     @Autowired
-    private GroupeRepository groupeRepository;
+    private GroupeJpaRepository groupeRepository;
 
     @Override
     public List<String> getAllGroupeNames() {

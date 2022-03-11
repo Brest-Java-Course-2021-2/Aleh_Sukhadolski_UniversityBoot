@@ -1,4 +1,4 @@
-package com.epam.brest.rest.application;
+package com.epam.brest;
 
 import com.epam.brest.serviceapi.UserServiceApi;
 import org.springframework.beans.factory.annotation.Autowired;

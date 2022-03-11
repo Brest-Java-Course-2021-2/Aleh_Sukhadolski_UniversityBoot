@@ -1,6 +1,5 @@
 package com.epam.brest;
 
-import com.epam.brest.Groupe;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 
@@ -10,7 +9,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Component
-public interface GroupeRepository extends JpaRepository <Groupe, Integer> {
+public interface GroupeJpaRepository extends JpaRepository <Groupe, Integer> {
 
     default List<String> getAllGroupesByName (){
         return (List<String>) findAll().stream()

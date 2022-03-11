@@ -1,7 +1,6 @@
 package com.epam.brest;
 
 //import com.epam.brest.daoAPI.DaoRequestApi;
-import com.epam.brest.DaoRequestApi;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +17,7 @@ public class RequestDao implements DaoRequestApi {
     private final Logger logger = LogManager.getLogger(RequestDao.class);
 
     @Autowired
-    private RequestRepository requestRepository;
+    private RequestJpaRepository requestRepository;
 
 
 

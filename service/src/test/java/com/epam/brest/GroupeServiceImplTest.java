@@ -20,7 +20,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @SpringBootApplication
-@SpringBootTest (classes= { UserServiceImpl.class, RequestServiceImpl.class, GroupeServiceImpl.class, UserDao.class, RequestDao.class, GroupeDao.class})
+@SpringBootTest (classes= { UserServiceImpl.class, RequestServiceImpl.class, GroupeServiceImpl.class
+                          , UserDao.class, RequestDao.class, GroupeDao.class})
 @ComponentScan("com.epam.brest.*")
 @EntityScan("com.epam.brest")
 @Transactional()

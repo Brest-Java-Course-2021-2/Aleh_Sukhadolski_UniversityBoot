@@ -1,7 +1,5 @@
-package com.epam.brest.rest.application;
+package com.epam.brest;
 
-import com.epam.brest.Request;
-import com.epam.brest.RequestDao;
 import com.epam.brest.serviceapi.RequestServiceApi;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

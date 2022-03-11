@@ -1,4 +1,4 @@
-package com.epam.brest.rest.application;
+package com.epam.brest;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

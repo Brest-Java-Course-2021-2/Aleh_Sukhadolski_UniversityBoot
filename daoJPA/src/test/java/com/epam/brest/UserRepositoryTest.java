@@ -30,7 +30,7 @@ public class UserRepositoryTest {
     private final Logger logger = LogManager.getLogger(UserRepositoryTest.class);
 
     @Autowired
-    private UserRepository userRepository;
+    private UserJpaRepository userRepository;
 
 
     @Autowired

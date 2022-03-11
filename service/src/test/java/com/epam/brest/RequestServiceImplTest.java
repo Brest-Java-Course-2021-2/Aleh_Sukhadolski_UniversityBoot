@@ -23,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootApplication
 @SpringBootTest (classes= { UserServiceImpl.class, RequestServiceImpl.class, GroupeServiceImpl.class
-        , UserDao.class, RequestDao.class, GroupeDao.class})
+                            , UserDao.class, RequestDao.class, GroupeDao.class})
 @ComponentScan("com.epam.brest.*")
 @EntityScan("com.epam.brest")
 @Transactional()

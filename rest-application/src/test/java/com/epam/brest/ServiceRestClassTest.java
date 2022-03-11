@@ -1,4 +1,4 @@
-package com.epam.brest.rest.application;
+package com.epam.brest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

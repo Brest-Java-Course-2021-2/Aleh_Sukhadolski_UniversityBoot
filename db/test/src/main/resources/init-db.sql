@@ -1,9 +1,9 @@
-INSERT user(name, login, password, email) VALUES ('Mike Tyson', 'mike', '1111', 'oleg@mail.com');
+INSERT user( id, name, login, password, email) VALUES (1, 'Mike Tyson', 'mike', '1111', 'oleg@mail.com');
 
-INSERT request(id, groupe, pairs, subject, date) VALUES (1, 'e1', '2', 'math', '2021-11-11');
-INSERT request(id, groupe, pairs, subject, date) VALUES (1, 'e2', '2', 'math', '2021-11-11');
-INSERT request(id, groupe, pairs, subject, date) VALUES (1, 'e3', '2', 'math', '2021-11-11');
+INSERT request(idR, id, groupe, pairs, subject, date) VALUES (1, 1, 'e1', '2', 'math', '2021-11-11');
+INSERT request(idR, id, groupe, pairs, subject, date) VALUES (2, 1, 'e2', '2', 'math', '2021-11-11');
+INSERT request(idR, id, groupe, pairs, subject, date) VALUES (3, 1, 'e3', '2', 'math', '2021-11-11');
 
-INSERT groupe(groupe) VALUES ('e1');
-INSERT groupe(groupe) VALUES ('e2');
-INSERT groupe(groupe) VALUES ('e3');
+INSERT groupe(idG, groupe) VALUES (1, 'e1');
+INSERT groupe(idG, groupe) VALUES (2, 'e2');
+INSERT groupe(idG, groupe) VALUES (3, 'e3');

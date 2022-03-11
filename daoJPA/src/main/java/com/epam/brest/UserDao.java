@@ -5,7 +5,6 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
-import com.epam.brest.DaoUserApi;
 
 import java.util.List;
 
@@ -17,7 +16,7 @@ public class UserDao implements DaoUserApi {
     private final Logger logger = LogManager.getLogger(UserDao.class);
 
     @Autowired
-    private UserRepository userRepository;
+    private UserJpaRepository userRepository;
 
 
     public List<User> getAllUsers() {
