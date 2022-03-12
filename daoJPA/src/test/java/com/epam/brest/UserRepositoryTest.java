@@ -20,17 +20,19 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 @SpringBootApplication
-@SpringBootTest (classes= { UserDao.class, RequestDao.class, GroupeDao.class})
+@SpringBootTest (classes= { UserDao.class, RequestDao.class, GroupeDao.class, LectorDao.class})
 //@ContextConfiguration
-@ComponentScan("com.epam.brest.*")
+@ComponentScan("com.epam.brest")
 @EntityScan("com.epam.brest")
 @Transactional()
 public class UserRepositoryTest {
 
     private final Logger logger = LogManager.getLogger(UserRepositoryTest.class);
+/*
 
     @Autowired
     private UserJpaRepository userRepository;
+*/
 
 
     @Autowired

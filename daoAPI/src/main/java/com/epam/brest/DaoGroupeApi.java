@@ -1,13 +1,13 @@
 package com.epam.brest;
 
-import com.epam.brest.Groupe;
+
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
-@EntityScan("com.epam.brest.model")
+@EntityScan("com.epam.brest")
 public interface DaoGroupeApi {
 
     List<String> getAllGroupeNames();

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-@EntityScan("com.epam.brest.model")
+@EntityScan("com.epam.brest")
 public interface DaoRequestApi {
 
 

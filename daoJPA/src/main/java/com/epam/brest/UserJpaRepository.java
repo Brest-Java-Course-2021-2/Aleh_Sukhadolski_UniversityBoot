@@ -4,6 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -67,7 +68,7 @@ public interface UserJpaRepository extends JpaRepository<User, Integer> {
     }
 
 
-    default void deleteUser(User user) {
+    default void deleteUser(@NotNull User user) {
         deleteById(user.getId());
     }
 }
