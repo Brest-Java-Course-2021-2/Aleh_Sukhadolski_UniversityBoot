@@ -17,11 +17,8 @@
 
     <properties>
       		<java.version>11</java.version>
-      		<spring.version>5.3.16</spring.version>
-    		<spring-boot.version>2.6.3</spring-boot.version>
-    		<h2.version>2.1.210</h2.version>
-    		<spring.jdbc.version>5.3.16</spring.jdbc.version>
-    	</properties>
+      		<h2.version>2.1.210</h2.version>
+    </properties>
 
     <modules>
         <module>prod</module>
@@ -30,24 +27,13 @@
 
     <dependencyManagement>
         <dependencies>
-    <!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
-    <dependency>
-        <groupId>org.springframework</groupId>
-        <artifactId>spring-context</artifactId>
-        <version>${spring.version}</version>
-    </dependency>
+
 
 	    <dependency>
              <groupId>com.h2database</groupId>
              <artifactId>h2</artifactId>
              <version>${h2.version}</version>
         </dependency>
-
-        <dependency>
-                 <groupId>org.springframework</groupId>
-                 <artifactId>spring-jdbc</artifactId>
-                 <version>${spring.jdbc.version}</version>
-             </dependency>
 
         </dependencies>
     </dependencyManagement>
