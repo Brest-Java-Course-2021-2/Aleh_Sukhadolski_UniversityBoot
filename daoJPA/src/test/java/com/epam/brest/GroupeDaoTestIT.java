@@ -25,9 +25,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ComponentScan("com.epam.brest")
 @EntityScan("com.epam.brest")
 @Transactional()
-public class GroupeRepositoryTest {
+public class GroupeDaoTestIT {
 
-    private final Logger logger = LogManager.getLogger(GroupeRepositoryTest.class);
+    private final Logger logger = LogManager.getLogger(GroupeDaoTestIT.class);
 
     @Autowired
     private DaoGroupeApi groupeDao;
