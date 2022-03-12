@@ -64,4 +64,23 @@ public class LectorDaoTestIT {
         assertFalse(lector.getEmailLector().equals("tony@tony.com"));
     }
 
+    @Test
+    public void isGetLectorByIdLector() {
+        logger.info("Get lector by idLector {}");
+        List <Lector> lectors = daoLector.findAllLectors();
+        Lector lector = daoLector.findLectorByIdLector(lectors.get(0).getIdLector());
+        assertTrue(lector.getIdLector() == lectors.get(0).getIdLector());
+    }
+
+    @Test
+    public void isCreateNewLector() {
+        logger.info("Create new lector {}");
+        Lector lector = daoLector.saveAndFlushLector(
+                new Lector("DennyDeVito", "denny", "3333", "den@den.com"));
+        assertTrue(lector.getNameLector().equals("DennyDeVito"));
+        List <Lector> lectors = daoLector.findAllLectors();
+        assertTrue(lectors.size() == 3);
+    }
+
+
 }
