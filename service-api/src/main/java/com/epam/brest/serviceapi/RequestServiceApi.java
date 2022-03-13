@@ -1,7 +1,7 @@
 package com.epam.brest.serviceapi;
 
 
-import com.epam.brest.Request;
+import com.epam.brest.RequestFromLector;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.stereotype.Component;
 
@@ -11,21 +11,21 @@ import java.util.List;
 @EntityScan("com.epam.brest.model")
 public interface RequestServiceApi {
 
-    List<Request> getAllRequestsService(Integer id);
+    List<RequestFromLector> getAllRequestsService(Integer id);
 
-    Request getRequestByIdrService (Integer idR);
+    RequestFromLector getRequestByIdrService (Integer idR);
 
-    List<Request> saveRequestsForNewUserService(Integer id);
+    List<RequestFromLector> saveRequestsForNewUserService(Integer id);
 
-    List<Request> saveRequestsWhenNewGroupeService(String groupe);
+    List<RequestFromLector> saveRequestsWhenNewGroupeService(String groupe);
 
-    Request updateRequestService(Request request);
+    RequestFromLector updateRequestService(RequestFromLector request);
 
-    List<Request> updateAllRequestsForUserService(List<Request> requests);
+    List<RequestFromLector> updateAllRequestsForUserService(List<RequestFromLector> requests);
 
-    Request flushRequestInfoService (Request request);
+    RequestFromLector flushRequestInfoService (RequestFromLector request);
 
     void deleteAllRequestsOfUserService (Integer id);
 
-    public Request deleteRequestService(Request request);
+    public RequestFromLector deleteRequestService(RequestFromLector request);
 }

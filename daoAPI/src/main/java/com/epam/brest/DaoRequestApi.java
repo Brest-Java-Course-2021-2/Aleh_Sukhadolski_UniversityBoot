@@ -1,7 +1,6 @@
 package com.epam.brest;
 
 
-import com.epam.brest.Request;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.stereotype.Component;
 
@@ -12,21 +11,21 @@ import java.util.List;
 public interface DaoRequestApi {
 
 
-    public List<Request> getAllRequests(Integer id);
+    public List<RequestFromLector> getAllRequests(Integer id);
 
-    public Request getRequestByIdr (Integer idR);
+    public RequestFromLector getRequestByIdr (Integer idR);
 
-    public List<Request> saveRequestsForNewUser(Integer id,  List<String> groupe);
+    public List<RequestFromLector> saveRequestsForNewUser(Integer id, List<String> groupe);
 
-    public List<Request> saveRequestsWhenNewGroupe(String groupe, List<Integer> usersId );
+    public List<RequestFromLector> saveRequestsWhenNewGroupe(String groupe, List<Integer> usersId );
 
-    public Request updateRequest(Request request);
+    public RequestFromLector updateRequest(RequestFromLector request);
 
-    public List<Request> updateAllRequestsForUser(List<Request> requests);
+    public List<RequestFromLector> updateAllRequestsForUser(List<RequestFromLector> requests);
 
-    public Request flushRequestInfo (Request request);
+    public RequestFromLector flushRequestInfo (RequestFromLector request);
 
     public void deleteAllRequestsOfUser(Integer id);
 
-    public Request deleteRequest(Request request);
+    public RequestFromLector deleteRequest(RequestFromLector request);
 }

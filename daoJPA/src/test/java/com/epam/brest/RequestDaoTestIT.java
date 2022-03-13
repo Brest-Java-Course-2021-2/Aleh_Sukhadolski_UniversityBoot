@@ -45,7 +45,7 @@ public class RequestDaoTestIT {
         logger.info("Requests for new User {}" + user);
         List <String> groupes = Arrays.asList(new String[]{"e1", "e2", "e3", "e4", "e5"});
         requestDao.saveRequestsForNewUser(user.getIdLector(),groupes);
-        List<Request> requests = requestDao.getAllRequests(user.getIdLector());
+        List<RequestFromLector> requests = requestDao.getAllRequests(user.getIdLector());
         assertTrue(requests.size() == 5);
         List<Integer> usersId = (List<Integer>) userDao.getAllUsers()
                                                     .stream()
@@ -72,18 +72,18 @@ public class RequestDaoTestIT {
         logger.info("Create request for new User {}" + user);
         List <String> groupes = Arrays.asList(new String[]{"e1", "e2", "e3", "e4", "e5"});
         user = userDao.getUserByName("Joe Frasier");
-        List<Request> requests = (List<Request>) requestDao.saveRequestsForNewUser(user.getIdLector(), groupes);
-        Request request = requestDao.getAllRequests(user.getIdLector()).get(0);
-        request.setPairs("2");
-        request.setSubject("fizo");
+        List<RequestFromLector> requests = (List<RequestFromLector>) requestDao.saveRequestsForNewUser(user.getIdLector(), groupes);
+        RequestFromLector request = requestDao.getAllRequests(user.getIdLector()).get(0);
+        request.setNumberOfPairs("2");
+        request.setSubjectOfLector("fizo");
         requestDao.updateRequest(request);
         request = requestDao.getAllRequests(user.getIdLector()).get(0);
-        assertTrue(request.getPairs().equals("2") && request.getSubject().equals("fizo"));
+        assertTrue(request.getNumberOfPairs().equals("2") && request.getSubjectOfLector().equals("fizo"));
 
         logger.info("Flush request {}" + request);
         requestDao.flushRequestInfo(request);
         request = requestDao.getAllRequests(user.getIdLector()).get(0);
-        assertTrue(request.getPairs().equals("0") && request.getSubject().equals("0000"));
+        assertTrue(request.getNumberOfPairs().equals("0") && request.getSubjectOfLector().equals("0000"));
 
     }
 
@@ -97,17 +97,17 @@ public class RequestDaoTestIT {
         logger.info("Create request for new User {}" + user);
         List <String> groupes = Arrays.asList(new String[]{"e1", "e2", "e3", "e4", "e5"});
         user = userDao.getUserByName("Joe Frasier");
-        List<Request> requests = (List<Request>) requestDao.saveRequestsForNewUser(user.getIdLector(), groupes);
+        List<RequestFromLector> requests = (List<RequestFromLector>) requestDao.saveRequestsForNewUser(user.getIdLector(), groupes);
 
-        List<Request> requests1 = (List<Request>) requests.stream()
-                .map(request  -> {request.setPairs("3");
+        List<RequestFromLector> requests1 = (List<RequestFromLector>) requests.stream()
+                .map(request  -> {request.setNumberOfPairs("3");
                                   return request;
                                   }).collect(Collectors.toList());
 
         requests = requestDao.updateAllRequestsForUser(requests1);
         boolean ifChanged = true;
-        for (Request req : requests){
-            ifChanged = ifChanged && (req.getPairs().equals("3"));
+        for (RequestFromLector req : requests){
+            ifChanged = ifChanged && (req.getNumberOfPairs().equals("3"));
         }
         logger.info("Created all requests for new User {}" + ifChanged);
         assertTrue(ifChanged);

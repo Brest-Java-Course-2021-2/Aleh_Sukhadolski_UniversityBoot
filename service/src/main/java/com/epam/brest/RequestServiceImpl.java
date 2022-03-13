@@ -31,43 +31,43 @@ public class RequestServiceImpl implements RequestServiceApi {
     private DaoUserApi daoUser;
 
     @Override
-    public List<Request> getAllRequestsService(Integer id) {
-        return (List<Request>) daoRequest.getAllRequests(id);
+    public List<RequestFromLector> getAllRequestsService(Integer id) {
+        return (List<RequestFromLector>) daoRequest.getAllRequests(id);
     }
 
     @Override
-    public Request getRequestByIdrService(Integer idR) {
-        return (Request) daoRequest.getRequestByIdr(idR);
+    public RequestFromLector getRequestByIdrService(Integer idR) {
+        return (RequestFromLector) daoRequest.getRequestByIdr(idR);
     }
 
     @Override
-    public List<Request> saveRequestsForNewUserService(Integer id) {
+    public List<RequestFromLector> saveRequestsForNewUserService(Integer id) {
         List<String> groupes = daoGroupe.getAllGroupeNames();
-        return (List<Request>) daoRequest.saveRequestsForNewUser(id, groupes);
+        return (List<RequestFromLector>) daoRequest.saveRequestsForNewUser(id, groupes);
     }
 
     @Override
-    public List<Request> saveRequestsWhenNewGroupeService(String groupe) {
+    public List<RequestFromLector> saveRequestsWhenNewGroupeService(String groupe) {
         List<Lector> users = daoUser.getAllUsers();
         List<Integer> ids = new ArrayList<>();
         for (Lector u : users) { ids.add(u.getIdLector()); }
         daoGroupe.insertNewGroupe(groupe);
-        return (List<Request>) daoRequest.saveRequestsWhenNewGroupe(groupe, ids);
+        return (List<RequestFromLector>) daoRequest.saveRequestsWhenNewGroupe(groupe, ids);
     }
 
     @Override
-    public Request updateRequestService(Request request) {
-        return (Request) daoRequest.updateRequest(request);
+    public RequestFromLector updateRequestService(RequestFromLector request) {
+        return (RequestFromLector) daoRequest.updateRequest(request);
     }
 
     @Override
-    public List<Request> updateAllRequestsForUserService(List<Request> requests) {
-        return (List<Request>) daoRequest.updateAllRequestsForUser(requests);
+    public List<RequestFromLector> updateAllRequestsForUserService(List<RequestFromLector> requests) {
+        return (List<RequestFromLector>) daoRequest.updateAllRequestsForUser(requests);
     }
 
     @Override
-    public Request flushRequestInfoService(Request request) {
-        return (Request) daoRequest.flushRequestInfo(request);
+    public RequestFromLector flushRequestInfoService(RequestFromLector request) {
+        return (RequestFromLector) daoRequest.flushRequestInfo(request);
     }
 
     @Override
@@ -76,7 +76,7 @@ public class RequestServiceImpl implements RequestServiceApi {
     }
 
     @Override
-    public Request deleteRequestService(Request request) {
+    public RequestFromLector deleteRequestService(RequestFromLector request) {
         return daoRequest.deleteRequest(request);
     }
 }

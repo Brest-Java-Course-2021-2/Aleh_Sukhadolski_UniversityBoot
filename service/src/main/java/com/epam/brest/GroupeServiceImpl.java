@@ -44,11 +44,11 @@ public class GroupeServiceImpl implements GroupeServiceApi {
     @Override
     public String deleteGroupeByNameService(String name) {
         List<Lector> users = daoUser.getAllUsers();
-        List <Request> requests;
+        List <RequestFromLector> requests;
         for (Lector user : users){
             requests = daoRequest.getAllRequests(user.getIdLector());
-            for (Request request : requests){
-                if (request.getGroupe().equals(name)){
+            for (RequestFromLector request : requests){
+                if (request.getGroup().equals(name)){
                     daoRequest.deleteRequest(request);
                 }
             }
@@ -74,12 +74,12 @@ public class GroupeServiceImpl implements GroupeServiceApi {
     public Group updateGroupeNameService(String newName, String oldName) {
         Group groupe = (Group) daoGroupe.updateGroupeName(newName, oldName);
         List<Lector> users = daoUser.getAllUsers();
-        List <Request> requests;
+        List <RequestFromLector> requests;
         for (Lector user : users){
             requests = daoRequest.getAllRequests(user.getIdLector());
-            for (Request request : requests){
-                if (request.getGroupe().equals(oldName)){
-                    request.setGroupe(newName);
+            for (RequestFromLector request : requests){
+                if (request.getGroup().equals(oldName)){
+                    request.setGroup(newName);
                     daoRequest.updateRequest(request);
                 }
             }

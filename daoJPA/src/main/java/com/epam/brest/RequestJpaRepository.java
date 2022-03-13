@@ -9,35 +9,35 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Component
-public interface RequestJpaRepository extends JpaRepository<Request, Integer> {
+public interface RequestJpaRepository extends JpaRepository<RequestFromLector, Integer> {
 
-    default List<Request> findAllByForeignKey(Integer id) {
-        return (List<Request>) findAll().stream()
+    default List<RequestFromLector> findAllByForeignKey(Integer id) {
+        return (List<RequestFromLector>) findAll().stream()
                                         .filter(req -> id == req.getId())
                                         .collect(Collectors.toList());
     }
 
-    default Request updateRequest(Request request){
+    default RequestFromLector updateRequest(RequestFromLector request){
        return saveAndFlush(request);
     }
 
-    default List<Request> createRequestsforUser(List<String> groupes, Integer id){
-        List<Request> requests = groupes.stream()
-            .flatMap(groupe -> Stream.of(new Request(id, groupe, "0", "0000", new Date())))
+    default List<RequestFromLector> createRequestsforUser(List<String> groupes, Integer id){
+        List<RequestFromLector> requests = groupes.stream()
+            .flatMap(groupe -> Stream.of(new RequestFromLector(id, groupe, "0", "0000", new Date())))
             .collect(Collectors.toList());
         return saveAllAndFlush(requests);
     }
 
-    default  List<Request> addGroupeInRequests(List <Integer> idUsers, String groupe){
-        List<Request> requests = idUsers.stream()
-            .flatMap(id -> Stream.of(new Request(id, groupe, "0", "0000", new Date())))
+    default  List<RequestFromLector> addGroupeInRequests(List <Integer> idUsers, String groupe){
+        List<RequestFromLector> requests = idUsers.stream()
+            .flatMap(id -> Stream.of(new RequestFromLector(id, groupe, "0", "0000", new Date())))
             .collect(Collectors.toList());
-       return saveAllAndFlush((List<Request>)requests);
+       return saveAllAndFlush((List<RequestFromLector>)requests);
     }
 
-    default Request deleteRequest(Request request)
+    default RequestFromLector deleteRequest(RequestFromLector request)
     {
-        deleteById(request.getIdR());
+        deleteById(request.getIdRequest());
         return request;
     }
 

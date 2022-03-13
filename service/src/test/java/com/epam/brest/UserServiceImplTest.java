@@ -65,7 +65,7 @@ public class UserServiceImplTest {
         assertTrue(users.size() == 1);
         assertTrue(users.get(users.size() - 1).getNameLector().equals("TOMMY"));
         Lector user = users.get(users.size() - 1);
-        List<Request> requests = requestService.getAllRequestsService(user.getIdLector());
+        List<RequestFromLector> requests = requestService.getAllRequestsService(user.getIdLector());
         assertTrue(requests.size() == 6);
 
     }
@@ -75,7 +75,7 @@ public class UserServiceImplTest {
         logger.info("GET USER BY Name {}");
         Lector user = (Lector) userService.getUserByNameService("TOMMY");
         assertTrue(user.getNameLector().equals("TOMMY"));
-        List<Request> requests = requestService.getAllRequestsService(user.getIdLector());
+        List<RequestFromLector> requests = requestService.getAllRequestsService(user.getIdLector());
         assertTrue(requests.size() == 6);
 
     }
@@ -85,7 +85,7 @@ public class UserServiceImplTest {
         logger.info("GET USER BY Email {}");
         Lector user = (Lector) userService.getUserByEmailService("iuy@aa.com");
         assertTrue(user.getEmailLector().equals("iuy@aa.com"));
-        List<Request> requests = requestService.getAllRequestsService(user.getIdLector());
+        List<RequestFromLector> requests = requestService.getAllRequestsService(user.getIdLector());
         assertTrue(requests.size() == 6);
         user = (Lector) userService.getUserByEmailService("qqiuy@aa.com");
         assertFalse(user.getEmailLector().equals("qqiuy@aa.com"));
@@ -102,7 +102,7 @@ public class UserServiceImplTest {
        assertTrue(user.getNameLector().equals("Mike"));
        Lector user1 = userService.getUserByNameService("Mike");
        assertTrue(user1.getNameLector().equals("Mike") && user1.getIdLector() == user.getIdLector());
-       List<Request> requests = requestService.getAllRequestsService(user.getIdLector());
+       List<RequestFromLector> requests = requestService.getAllRequestsService(user.getIdLector());
        assertTrue(requests.size() == 6);
     }
 

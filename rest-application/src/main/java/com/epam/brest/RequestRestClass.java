@@ -23,25 +23,25 @@ public class RequestRestClass {
 
     @GetMapping ("/request/all/{id}")
     @Transactional(readOnly = true)
-    public List<Request> getAllRequests(@PathVariable int id) {
-        return (List<Request>) requestService.getAllRequestsService(id);
+    public List<RequestFromLector> getAllRequests(@PathVariable int id) {
+        return (List<RequestFromLector>) requestService.getAllRequestsService(id);
     }
 
     @GetMapping ("/request/{idr}")
     @Transactional(readOnly = true)
-    public Request getRequestByIdr(@PathVariable int idr) {
-        return (Request) requestService.getRequestByIdrService(idr);
+    public RequestFromLector getRequestByIdr(@PathVariable int idr) {
+        return (RequestFromLector) requestService.getRequestByIdrService(idr);
     }
 
     @PutMapping(path = "/request/update", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Request> updateRequest(@RequestBody Request request) {
+    public ResponseEntity<RequestFromLector> updateRequest(@RequestBody RequestFromLector request) {
         //logger.debug("updateGroupe({})", newName);
         request= requestService.updateRequestService(request);
         return new ResponseEntity<>(request, HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/request/delete", consumes = "application/json", produces = "application/json")
-    public ResponseEntity <Request> deleteGroupe(@PathVariable Request request) {
+    public ResponseEntity <RequestFromLector> deleteGroupe(@PathVariable RequestFromLector request) {
         //logger.debug("deleteGroupe({})", name);
         requestService.flushRequestInfoService(request);
         return new ResponseEntity(request, HttpStatus.OK);

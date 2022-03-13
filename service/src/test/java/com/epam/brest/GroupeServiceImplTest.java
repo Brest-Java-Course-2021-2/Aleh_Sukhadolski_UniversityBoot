@@ -61,7 +61,7 @@ public class GroupeServiceImplTest {
     public void isInsertNewGroupeTest() {
         logger.info("INSERT NEW GROUPE {}");
         Lector user = userService.getUserByNameService("TOMMY");
-        List<Request> requests = requestService.getAllRequestsService(user.getIdLector());
+        List<RequestFromLector> requests = requestService.getAllRequestsService(user.getIdLector());
         Assertions.assertTrue(requests.size() == 6);
         Group groupe = groupeService.insertNewGroupeService("e7");
         Assertions.assertTrue(groupe.getGroupName().equals("e7"));
@@ -85,12 +85,12 @@ public class GroupeServiceImplTest {
         List<Group> group = groupeService.getAllGroupesService();
         Assertions.assertTrue(group.size() == 6);
         Lector user = userService.getUserByNameService("TOMMY");
-        List<Request> requests = requestService.getAllRequestsService(user.getIdLector());
+        List<RequestFromLector> requests = requestService.getAllRequestsService(user.getIdLector());
         boolean ifExist = false;
         boolean ifNotExist = true;
-        for (Request request : requests){
-            if (request.getGroupe().equals("w1")){ ifExist = true; }
-            if (request.getGroupe().equals("e6")){ ifNotExist = false; }
+        for (RequestFromLector request : requests){
+            if (request.getGroup().equals("w1")){ ifExist = true; }
+            if (request.getGroup().equals("e6")){ ifNotExist = false; }
         }
         Assertions.assertTrue(ifExist);
         Assertions.assertTrue(ifNotExist);

@@ -54,11 +54,11 @@ public class RequestServiceImplTest {
     public void isGetAllRequests() {
         logger.info("GET ALL REQUESTS BY USER {}");
         Lector user = userService.getUserByNameService("TOMMY");
-        List<Request> requests = requestService.getAllRequestsService(user.getIdLector());
+        List<RequestFromLector> requests = requestService.getAllRequestsService(user.getIdLector());
         assertTrue(requests.size() == 6);
 
-        Request request = requestService.getRequestByIdrService(requests.get(0).getIdR());
-        assertTrue(request.getGroupe().equals(requests.get(0).getGroupe()));
+        RequestFromLector request = requestService.getRequestByIdrService(requests.get(0).getIdRequest());
+        assertTrue(request.getGroup().equals(requests.get(0).getGroup()));
     }
 
     @Test
@@ -67,7 +67,7 @@ public class RequestServiceImplTest {
         Lector user = userService.saveNewUserService(new Lector(
                 "MIKE", "mike", "2222", "mike@tyson.com"));
 
-        List<Request> requests = requestService.getAllRequestsService(user.getIdLector());
+        List<RequestFromLector> requests = requestService.getAllRequestsService(user.getIdLector());
         assertTrue(requests.size() == 6);
         assertTrue(user.getNameLector().equals("MIKE"));
 
@@ -89,17 +89,17 @@ public class RequestServiceImplTest {
         logger.info("SAVE REQUESTS FOE NEW USER {}");
         Lector user = userService.saveNewUserService(new Lector(
                 "MIKE", "mike", "2222", "mike@tyson.com"));
-        List<Request> requests = requestService.getAllRequestsService(user.getIdLector());
+        List<RequestFromLector> requests = requestService.getAllRequestsService(user.getIdLector());
         assertTrue(requests.size() == 6);
-        assertTrue(requests.get(0).getPairs().equals("0"));
+        assertTrue(requests.get(0).getNumberOfPairs().equals("0"));
         assertTrue(user.getNameLector().equals("MIKE"));
-        requests = requests.stream().peek(req -> req.setPairs("2")).collect(Collectors.toList());
+        requests = requests.stream().peek(req -> req.setNumberOfPairs("2")).collect(Collectors.toList());
         requests = requestService.updateAllRequestsForUserService(requests);
-        assertTrue(requests.get(0).getPairs().equals("2"));
-        assertTrue(requests.get(1).getPairs().equals("2"));
-        Request request = requestService.flushRequestInfoService(requests.get(0));
-        assertTrue(request.getPairs().equals("0"));
-        assertTrue(requests.get(1).getPairs().equals("2"));
+        assertTrue(requests.get(0).getNumberOfPairs().equals("2"));
+        assertTrue(requests.get(1).getNumberOfPairs().equals("2"));
+        RequestFromLector request = requestService.flushRequestInfoService(requests.get(0));
+        assertTrue(request.getNumberOfPairs().equals("0"));
+        assertTrue(requests.get(1).getNumberOfPairs().equals("2"));
     }
 
 
@@ -108,7 +108,7 @@ public class RequestServiceImplTest {
         logger.info("DELETE REQUESTS FOR USER {}");
         Lector user = userService.saveNewUserService(new Lector(
                 "MIKE", "mike", "2222", "mike@tyson.com"));
-        List<Request> requests = requestService.getAllRequestsService(user.getIdLector());
+        List<RequestFromLector> requests = requestService.getAllRequestsService(user.getIdLector());
         assertTrue(requests.size() == 6);
         assertTrue(user.getNameLector().equals("MIKE"));
         userService.deleteUserByIdService(user.getIdLector());
