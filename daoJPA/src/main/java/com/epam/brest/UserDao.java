@@ -18,35 +18,35 @@ public class UserDao implements DaoUserApi {
     @Autowired
     private UserJpaRepository userRepository;
 
-    public List<User> getAllUsers() {
+    public List<Lector> getAllUsers() {
         logger.info("GET ALL USERS {}");
-        return (List<User>) userRepository.findAllUsers();
+        return (List<Lector>) userRepository.findAllUsers();
     }
 
 
-    public User getUserByName(String name) {
+    public Lector getUserByName(String name) {
         logger.info("GET USER BY NAME{} " + name);
         return userRepository.findUserByName(name);
     }
 
-    public User getUserByEmail(String email) {
+    public Lector getUserByEmail(String email) {
         logger.info("GET USER BY EMAIL{} " + email);
         return userRepository.findUserByEmail(email);
     }
 
-    public User getUserById(Integer id) {
+    public Lector getUserById(Integer id) {
         logger.info("GET USER BY ID{} " + id);
-        return (User) userRepository.findUserById(id);
+        return (Lector) userRepository.findUserById(id);
     }
 
-    public User saveAndUpdateUser(User user) {
+    public Lector saveAndUpdateUser(Lector user) {
         logger.info("SAVE USER {} " + user);
-        return (User) userRepository.saveAndFlushUser(user);
+        return (Lector) userRepository.saveAndFlushUser(user);
     }
 
-    public void deleteUser(User user) {
+    public void deleteUser(Lector user) {
         logger.info("DELETE USER {}" + user);
-        userRepository.deleteUserById(user.getId());
+        userRepository.deleteUserById(user.getIdLector());
     }
 
     public void deleteUserById(Integer id) {

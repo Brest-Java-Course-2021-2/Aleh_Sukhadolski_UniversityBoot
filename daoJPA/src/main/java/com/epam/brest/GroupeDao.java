@@ -24,7 +24,7 @@ public class GroupeDao implements DaoGroupeApi {
     }
 
     @Override
-    public List<Groupe> getAllGroupes() {
+    public List<Group> getAllGroupes() {
         logger.info("GET ALL GROUPES  {}");
         return groupeRepository.getAllGroupes();
     }
@@ -36,19 +36,19 @@ public class GroupeDao implements DaoGroupeApi {
     }
 
     @Override
-    public Groupe insertNewGroupe(String newNameOfGroupe) {
+    public Group insertNewGroupe(String newNameOfGroupe) {
         logger.info("CREATE NEW GROUPE {}");
         return groupeRepository.insertNewGroupe(newNameOfGroupe);
     }
 
     @Override
-    public Groupe getGroupeByName(String nameGroupe) {
+    public Group getGroupeByName(String nameGroupe) {
         logger.info("GET GROUPE BY NAME {}");
         return groupeRepository.getGroupeByName(nameGroupe);
     }
 
     @Override
-    public Groupe updateGroupeName(String newName, String oldName) {
+    public Group updateGroupeName(String newName, String oldName) {
         logger.info("UPDATE GROUPE.NAME BY NEW NAME {}");
         return groupeRepository.updateGroupeByName(newName, oldName);
     }

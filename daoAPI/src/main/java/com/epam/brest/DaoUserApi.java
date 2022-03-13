@@ -1,6 +1,5 @@
 package com.epam.brest;
 
-import com.epam.brest.User;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.stereotype.Component;
 
@@ -11,17 +10,17 @@ import java.util.List;
 public interface DaoUserApi {
 
 
-    public List<User> getAllUsers();
+    public List<Lector> getAllUsers();
 
-    public User getUserByName(String name);
+    public Lector getUserByName(String name);
 
-    public User getUserByEmail(String email);
+    public Lector getUserByEmail(String email);
 
-    public User getUserById(Integer id);
+    public Lector getUserById(Integer id);
 
-    public User saveAndUpdateUser(User user);
+    public Lector saveAndUpdateUser(Lector user);
 
-    public void deleteUser(User user);
+    public void deleteUser(Lector user);
 
     public void deleteUserById(Integer id);
 

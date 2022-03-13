@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 @SpringBootApplication
-@SpringBootTest (classes= { UserDao.class, RequestDao.class, GroupeDao.class, LectorDao.class})
+@SpringBootTest (classes= { UserDao.class, RequestDao.class, GroupeDao.class})
 //@ContextConfiguration
 @ComponentScan("com.epam.brest")
 @EntityScan("com.epam.brest")
@@ -39,25 +39,25 @@ public class RequestDaoTestIT {
     @Test
     public void testRequestsForNewUserAndNewGroupe() {
         logger.info("Create new user {}");
-        User user = new User("Joe Frasier", "joe", "1111", "mail@mail.com");
+        Lector user = new Lector("Joe Frasier", "joe", "1111", "mail@mail.com");
         userDao.saveAndUpdateUser(user);
         user = userDao.getUserByName("Joe Frasier");
         logger.info("Requests for new User {}" + user);
         List <String> groupes = Arrays.asList(new String[]{"e1", "e2", "e3", "e4", "e5"});
-        requestDao.saveRequestsForNewUser(user.getId(),groupes);
-        List<Request> requests = requestDao.getAllRequests(user.getId());
+        requestDao.saveRequestsForNewUser(user.getIdLector(),groupes);
+        List<Request> requests = requestDao.getAllRequests(user.getIdLector());
         assertTrue(requests.size() == 5);
         List<Integer> usersId = (List<Integer>) userDao.getAllUsers()
                                                     .stream()
-                                                    .flatMap(us -> Stream.of(us.getId()))
+                                                    .flatMap(us -> Stream.of(us.getIdLector()))
                                                     .collect(Collectors.toList());
         requestDao.saveRequestsWhenNewGroupe("e6", usersId);
-        requests = requestDao.getAllRequests(user.getId());
+        requests = requestDao.getAllRequests(user.getIdLector());
         assertTrue(requests.size() == 6);
 
-        List<User> users = userDao.getAllUsers();
-        for (User us : users){
-            requests = requestDao.getAllRequests(us.getId());
+        List<Lector> users = userDao.getAllUsers();
+        for (Lector us : users){
+            requests = requestDao.getAllRequests(us.getIdLector());
             assertTrue(requests.size() == 6);
         }
     }
@@ -65,24 +65,24 @@ public class RequestDaoTestIT {
     @Test
     public void testCreateAndDeleteRequest() {
         logger.info("Create new user {} + name = Joe Frasier");
-        User user = new User("Joe Frasier", "joe", "1111", "mail@mail.com");
+        Lector user = new Lector("Joe Frasier", "joe", "1111", "mail@mail.com");
         userDao.saveAndUpdateUser(user);
         user = userDao.getUserByName("Joe Frasier");
-        logger.info("New user created {} name = " + user.getName());
+        logger.info("New user created {} name = " + user.getNameLector());
         logger.info("Create request for new User {}" + user);
         List <String> groupes = Arrays.asList(new String[]{"e1", "e2", "e3", "e4", "e5"});
         user = userDao.getUserByName("Joe Frasier");
-        List<Request> requests = (List<Request>) requestDao.saveRequestsForNewUser(user.getId(), groupes);
-        Request request = requestDao.getAllRequests(user.getId()).get(0);
+        List<Request> requests = (List<Request>) requestDao.saveRequestsForNewUser(user.getIdLector(), groupes);
+        Request request = requestDao.getAllRequests(user.getIdLector()).get(0);
         request.setPairs("2");
         request.setSubject("fizo");
         requestDao.updateRequest(request);
-        request = requestDao.getAllRequests(user.getId()).get(0);
+        request = requestDao.getAllRequests(user.getIdLector()).get(0);
         assertTrue(request.getPairs().equals("2") && request.getSubject().equals("fizo"));
 
         logger.info("Flush request {}" + request);
         requestDao.flushRequestInfo(request);
-        request = requestDao.getAllRequests(user.getId()).get(0);
+        request = requestDao.getAllRequests(user.getIdLector()).get(0);
         assertTrue(request.getPairs().equals("0") && request.getSubject().equals("0000"));
 
     }
@@ -90,14 +90,14 @@ public class RequestDaoTestIT {
     @Test
     public void testDeleteAllRequestforUser() {
         logger.info("Create new user {} + name = Joe Frasier");
-        User user = new User("Joe Frasier", "joe", "1111", "mail@mail.com");
+        Lector user = new Lector("Joe Frasier", "joe", "1111", "mail@mail.com");
         userDao.saveAndUpdateUser(user);
         user = userDao.getUserByName("Joe Frasier");
-        logger.info("New user created {} name = " + user.getName());
+        logger.info("New user created {} name = " + user.getNameLector());
         logger.info("Create request for new User {}" + user);
         List <String> groupes = Arrays.asList(new String[]{"e1", "e2", "e3", "e4", "e5"});
         user = userDao.getUserByName("Joe Frasier");
-        List<Request> requests = (List<Request>) requestDao.saveRequestsForNewUser(user.getId(), groupes);
+        List<Request> requests = (List<Request>) requestDao.saveRequestsForNewUser(user.getIdLector(), groupes);
 
         List<Request> requests1 = (List<Request>) requests.stream()
                 .map(request  -> {request.setPairs("3");
@@ -113,8 +113,8 @@ public class RequestDaoTestIT {
         assertTrue(ifChanged);
 
         logger.info("Flush all requests for new User {}" + user);
-        requestDao.deleteAllRequestsOfUser(user.getId());
-        requests = requestDao.getAllRequests(user.getId());
+        requestDao.deleteAllRequestsOfUser(user.getIdLector());
+        requests = requestDao.getAllRequests(user.getIdLector());
         assertTrue(requests.size() == 0);
 
     }

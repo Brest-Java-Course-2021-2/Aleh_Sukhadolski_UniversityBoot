@@ -49,10 +49,10 @@ public class UserServiceImplTest {
     @BeforeEach
     public void setUp() {
         String[] groupes = new String[]{"e1", "e2", "e3", "e4", "e5", "e6"};
-        List<Groupe> grup = Arrays.stream(groupes)
+        List<Group> grup = Arrays.stream(groupes)
                 .map(gr -> groupeService.insertNewGroupeService(gr))
                 .collect(Collectors.toList());
-        User user = userService.saveNewUserService(new User("TOMMY", "tom", "1111", "iuy@aa.com"));
+        Lector user = userService.saveNewUserService(new Lector("TOMMY", "tom", "1111", "iuy@aa.com"));
     }
 
 
@@ -60,12 +60,12 @@ public class UserServiceImplTest {
     public void isNewUserServiceImpl() {
         logger.info("GET ALL USERS {}");
         //User user = userService.saveNewUserService(new User ("TOMMY", "tom", "1111", "iuy@aa.com"));
-        List<User> users = (List<User>) userService.getAllUsersService();
+        List<Lector> users = (List<Lector>) userService.getAllUsersService();
         logger.info("GET ALL USERS {} SIZE = " + users.size());
         assertTrue(users.size() == 1);
-        assertTrue(users.get(users.size() - 1).getName().equals("TOMMY"));
-        User user = users.get(users.size() - 1);
-        List<Request> requests = requestService.getAllRequestsService(user.getId());
+        assertTrue(users.get(users.size() - 1).getNameLector().equals("TOMMY"));
+        Lector user = users.get(users.size() - 1);
+        List<Request> requests = requestService.getAllRequestsService(user.getIdLector());
         assertTrue(requests.size() == 6);
 
     }
@@ -73,9 +73,9 @@ public class UserServiceImplTest {
     @Test
     public void isGetUserByNameServiceImpl() {
         logger.info("GET USER BY Name {}");
-        User user = (User) userService.getUserByNameService("TOMMY");
-        assertTrue(user.getName().equals("TOMMY"));
-        List<Request> requests = requestService.getAllRequestsService(user.getId());
+        Lector user = (Lector) userService.getUserByNameService("TOMMY");
+        assertTrue(user.getNameLector().equals("TOMMY"));
+        List<Request> requests = requestService.getAllRequestsService(user.getIdLector());
         assertTrue(requests.size() == 6);
 
     }
@@ -83,26 +83,26 @@ public class UserServiceImplTest {
     @Test
     public void isGetUserByEmailServiceAndIdImpl() {
         logger.info("GET USER BY Email {}");
-        User user = (User) userService.getUserByEmailService("iuy@aa.com");
-        assertTrue(user.getEmail().equals("iuy@aa.com"));
-        List<Request> requests = requestService.getAllRequestsService(user.getId());
+        Lector user = (Lector) userService.getUserByEmailService("iuy@aa.com");
+        assertTrue(user.getEmailLector().equals("iuy@aa.com"));
+        List<Request> requests = requestService.getAllRequestsService(user.getIdLector());
         assertTrue(requests.size() == 6);
-        user = (User) userService.getUserByEmailService("qqiuy@aa.com");
-        assertFalse(user.getEmail().equals("qqiuy@aa.com"));
-        User user2 = userService.getUserByNameService("TOMMY");
-        User users3 = (User) userService.getUserByIdService(user2.getId());
-        assertTrue(users3.getName().equals("TOMMY"));
+        user = (Lector) userService.getUserByEmailService("qqiuy@aa.com");
+        assertFalse(user.getEmailLector().equals("qqiuy@aa.com"));
+        Lector user2 = userService.getUserByNameService("TOMMY");
+        Lector users3 = (Lector) userService.getUserByIdService(user2.getIdLector());
+        assertTrue(users3.getNameLector().equals("TOMMY"));
     }
 
     @Test
     public void isCreateUserService() {
        logger.info("CREATE NEW USER {}");
-       User user = userService.saveNewUserService(new User("Mike", "mike", "1111", "isocrol@aa.com"));
-       assertTrue(user.getEmail().equals("isocrol@aa.com"));
-       assertTrue(user.getName().equals("Mike"));
-       User user1 = userService.getUserByNameService("Mike");
-       assertTrue(user1.getName().equals("Mike") && user1.getId() == user.getId());
-       List<Request> requests = requestService.getAllRequestsService(user.getId());
+       Lector user = userService.saveNewUserService(new Lector("Mike", "mike", "1111", "isocrol@aa.com"));
+       assertTrue(user.getEmailLector().equals("isocrol@aa.com"));
+       assertTrue(user.getNameLector().equals("Mike"));
+       Lector user1 = userService.getUserByNameService("Mike");
+       assertTrue(user1.getNameLector().equals("Mike") && user1.getIdLector() == user.getIdLector());
+       List<Request> requests = requestService.getAllRequestsService(user.getIdLector());
        assertTrue(requests.size() == 6);
     }
 
@@ -110,42 +110,42 @@ public class UserServiceImplTest {
     @Test
     public void isUpdateUserService() {
         logger.info("UPDATE USER {}");
-        User user = userService.saveNewUserService(new User("Mike", "mike", "1111", "isocrol@aa.com"));
-        assertTrue(user.getEmail().equals("isocrol@aa.com"));
-        assertTrue(user.getName().equals("Mike"));
-        User user1 = userService.getUserByNameService("Mike");
-        assertTrue(user1.getName().equals("Mike") && user1.getId() == user.getId());
-        user.setName("Kim");
+        Lector user = userService.saveNewUserService(new Lector("Mike", "mike", "1111", "isocrol@aa.com"));
+        assertTrue(user.getEmailLector().equals("isocrol@aa.com"));
+        assertTrue(user.getNameLector().equals("Mike"));
+        Lector user1 = userService.getUserByNameService("Mike");
+        assertTrue(user1.getNameLector().equals("Mike") && user1.getIdLector() == user.getIdLector());
+        user.setNameLector("Kim");
         user =  userService.updateUserService(user);
-        assertTrue(user.getName().equals("Kim"));
+        assertTrue(user.getNameLector().equals("Kim"));
         user1 = userService.getUserByNameService("Kim");
-        assertTrue(user1.getName().equals("Kim") && user1.getId() == user.getId());
+        assertTrue(user1.getNameLector().equals("Kim") && user1.getIdLector() == user.getIdLector());
     }
 
     @Test
     public void isDeleteUserService() {
         logger.info("DELETE USER {}");
-        User user = userService.saveNewUserService(new User("Mike", "mike", "1111", "isocrol@aa.com"));
-        assertTrue(user.getName().equals("Mike"));
+        Lector user = userService.saveNewUserService(new Lector("Mike", "mike", "1111", "isocrol@aa.com"));
+        assertTrue(user.getNameLector().equals("Mike"));
         assertTrue(userService.getAllUsersService().size() == 2);
         userService.deleteUserService(user);
         assertTrue(userService.getAllUsersService().size() == 1);
 
-        user = userService.saveNewUserService(new User("Mike", "mike", "1111", "isocrol@aa.com"));
+        user = userService.saveNewUserService(new Lector("Mike", "mike", "1111", "isocrol@aa.com"));
         assertTrue(userService.getAllUsersService().size() == 2);
-        userService.deleteUserByIdService(user.getId());
+        userService.deleteUserByIdService(user.getIdLector());
         assertTrue(userService.getAllUsersService().size() == 1);
     }
 
     @Test
     public void isGetUserByIdService() {
         logger.info("GET USER BY ID{}");
-        User user = userService.saveNewUserService(new User("Mike", "mike", "1111", "isocrol@aa.com"));
-        assertTrue(user.getName().equals("Mike"));
+        Lector user = userService.saveNewUserService(new Lector("Mike", "mike", "1111", "isocrol@aa.com"));
+        assertTrue(user.getNameLector().equals("Mike"));
         assertTrue(userService.getAllUsersService().size() == 2);
-        User user1 = userService.getUserByIdService(user.getId());
-        assertTrue(user1.getName().equals("Mike"));
-        assertTrue(user1.getName().equals(user.getName()));
+        Lector user1 = userService.getUserByIdService(user.getIdLector());
+        assertTrue(user1.getNameLector().equals("Mike"));
+        assertTrue(user1.getNameLector().equals(user.getNameLector()));
     }
 
 }

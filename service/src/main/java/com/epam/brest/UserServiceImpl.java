@@ -30,25 +30,25 @@ public class UserServiceImpl implements UserServiceApi {
 
 
     @Override
-    public List<User> getAllUsersService() {
-        return (List<User>) daoUser.getAllUsers();
+    public List<Lector> getAllUsersService() {
+        return (List<Lector>) daoUser.getAllUsers();
     }
 
     @Override
-    public User getUserByNameService(String name) {
-        return (User) daoUser.getUserByName(name);
+    public Lector getUserByNameService(String name) {
+        return (Lector) daoUser.getUserByName(name);
     }
 
     @Override
-    public User getUserByEmailService(String email)
+    public Lector getUserByEmailService(String email)
     {
-        return (User) daoUser.getUserByEmail(email);
+        return (Lector) daoUser.getUserByEmail(email);
     }
 
     @Override
-    public User getUserByIdService(Integer id)
+    public Lector getUserByIdService(Integer id)
     {
-        return (User) daoUser.getUserById(id);
+        return (Lector) daoUser.getUserById(id);
     }
 
     @Override
@@ -58,22 +58,22 @@ public class UserServiceImpl implements UserServiceApi {
     }
 
     @Override
-    public void deleteUserService(User user)
+    public void deleteUserService(Lector user)
     {
-        daoRequest.deleteAllRequestsOfUser(user.getId());
-        daoUser.deleteUserById(user.getId());
+        daoRequest.deleteAllRequestsOfUser(user.getIdLector());
+        daoUser.deleteUserById(user.getIdLector());
     }
 
     @Override
-    public User saveNewUserService(User user) {
+    public Lector saveNewUserService(Lector user) {
         user = daoUser.saveAndUpdateUser(user);
         List <String> groupes = daoGroupe.getAllGroupeNames();
-        daoRequest.saveRequestsForNewUser(user.getId(), groupes);
-        return (User) user;
+        daoRequest.saveRequestsForNewUser(user.getIdLector(), groupes);
+        return (Lector) user;
     }
 
     @Override
-    public User updateUserService(User user) {
-        return (User) daoUser.saveAndUpdateUser(user);
+    public Lector updateUserService(Lector user) {
+        return (Lector) daoUser.saveAndUpdateUser(user);
     }
 }

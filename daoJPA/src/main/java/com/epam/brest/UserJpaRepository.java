@@ -13,53 +13,53 @@ import java.util.stream.Collectors;
 // CRUD refers Create, Read, Update, Delete
 
 @Component
-public interface UserJpaRepository extends JpaRepository<User, Integer> {
+public interface UserJpaRepository extends JpaRepository<Lector, Integer> {
 
 
-    default List<User> findAllUsers() {
-        List <User> users = findAll();
+    default List<Lector> findAllUsers() {
+        List <Lector> users = findAll();
         if (users.size() == 0){
-            users.add(new User("Is Empty","","",""));
+            users.add(new Lector("Is Empty","","",""));
         }
         return findAll();
     }
 
 
-    default User findUserById(Integer id) {
-        return (User) findById(id).get();
+    default Lector findUserById(Integer id) {
+        return (Lector) findById(id).get();
     }
 
 
-    default User findUserByName(String name) {
-        List<User> users = findAll().stream()
-                .filter(us -> us.getName().equals(name))
+    default Lector findUserByName(String name) {
+        List<Lector> users = findAll().stream()
+                .filter(us -> us.getNameLector().equals(name))
                 .collect(Collectors.toList());
-        User user;
+        Lector user;
           if (users.size() > 0){
             user = users.get(0);
         } else {
-            user = new User(0,"Is Empty","","", "");
+            user = new Lector(0,"Is Empty","","", "");
         }
-        return (User) user;
+        return (Lector) user;
     }
 
 
-    default User findUserByEmail(String email) {
-        List<User> users = findAll().stream()
-                .filter(us -> us.getEmail().equals(email))
+    default Lector findUserByEmail(String email) {
+        List<Lector> users = findAll().stream()
+                .filter(us -> us.getEmailLector().equals(email))
                 .collect(Collectors.toList());
-        User user;
+        Lector user;
         if (users.size() > 0){
             user = users.get(0);
         } else {
-            user = new User(0,"Is Empty","","", "");
+            user = new Lector(0,"Is Empty","","", "");
         }
-        return (User) user;
+        return (Lector) user;
     }
 
 
-    default User saveAndFlushUser(User user) {
-        return (User) saveAndFlush(user);
+    default Lector saveAndFlushUser(Lector user) {
+        return (Lector) saveAndFlush(user);
     }
 
 
@@ -68,7 +68,7 @@ public interface UserJpaRepository extends JpaRepository<User, Integer> {
     }
 
 
-    default void deleteUser(@NotNull User user) {
-        deleteById(user.getId());
+    default void deleteUser(@NotNull Lector user) {
+        deleteById(user.getIdLector());
     }
 }

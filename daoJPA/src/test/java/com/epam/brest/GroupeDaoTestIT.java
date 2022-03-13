@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 @SpringBootApplication
-@SpringBootTest (classes= { UserDao.class, RequestDao.class, GroupeDao.class, LectorDao.class})
+@SpringBootTest (classes= { UserDao.class, RequestDao.class, GroupeDao.class})
 @ComponentScan("com.epam.brest")
 @EntityScan("com.epam.brest")
 @Transactional()
@@ -35,7 +35,7 @@ public class GroupeDaoTestIT {
     @BeforeEach
     public void setUp() {
         String[] groupes = new String[]{"e1", "e2", "e3", "e4", "e5", "e6"};
-        List<Groupe> grup = Arrays.stream(groupes)
+        List<Group> grup = Arrays.stream(groupes)
                 .map(gr -> groupeDao.insertNewGroupe(gr))
                 .collect(Collectors.toList());
     }
@@ -44,8 +44,8 @@ public class GroupeDaoTestIT {
     @Test
     public void testGetAllGroupes() {
         logger.info("GET ALL GROUPES {}");
-        List<Groupe> groupes = (List<Groupe>) groupeDao.getAllGroupes();
-        assertTrue(groupes.get(0).getGroupe() == "e1");
+        List<Group> groupes = (List<Group>) groupeDao.getAllGroupes();
+        assertTrue(groupes.get(0).getGroupName() == "e1");
     }
 
     @Test
@@ -66,9 +66,9 @@ public class GroupeDaoTestIT {
     @Test
     public void testUpdateGroupeName() {
         logger.info("UPDATE GROUPE NAME {}");
-        Groupe updatedGroupe = groupeDao.updateGroupeName("a1", "e1");
-        Groupe groupe = groupeDao.getGroupeByName("a1");
-        assertTrue(groupe.getGroupe().equals("a1") && updatedGroupe.getIdG() == groupe.getIdG());
+        Group updatedGroupe = groupeDao.updateGroupeName("a1", "e1");
+        Group groupe = groupeDao.getGroupeByName("a1");
+        assertTrue(groupe.getGroupName().equals("a1") && updatedGroupe.getIdGroup() == groupe.getIdGroup());
     }
 
 
@@ -79,8 +79,8 @@ public class GroupeDaoTestIT {
         assertTrue(deletedNameGroupe.equals("e1"));
         deletedNameGroupe = groupeDao.deleteGroupeByName("e1");
         assertTrue(deletedNameGroupe.equals("Is Empty"));
-        Groupe groupe = groupeDao.getGroupeByName("e1");
-        assertTrue(groupe.getGroupe().equals("") );
+        Group groupe = groupeDao.getGroupeByName("e1");
+        assertTrue(groupe.getGroupName().equals("") );
     }
 
 }

@@ -22,51 +22,51 @@ public class UserRestClass {
 
     @GetMapping("/user/all")
     @Transactional(readOnly = true)
-    public List<User> users()
+    public List<Lector> users()
     {
         logger.debug("getAllUsers({})");
-        return (List<User>) userService.getAllUsersService();
+        return (List<Lector>) userService.getAllUsersService();
     }
 
 
     @GetMapping("/user/name")
     @Transactional(readOnly = true)
-    public User userByName(@RequestParam String name)
+    public Lector userByName(@RequestParam String name)
     {
         logger.debug("getUserByName({})", name);
-        return (User) userService.getUserByNameService(name);
+        return (Lector) userService.getUserByNameService(name);
     }
 
     @GetMapping("/user/email")
     @Transactional(readOnly = true)
-    public User userByEmail(@RequestParam String email)
+    public Lector userByEmail(@RequestParam String email)
     {
         logger.debug("getUserByEmail({})", email);
-        return (User) userService.getUserByEmailService(email);
+        return (Lector) userService.getUserByEmailService(email);
     }
 
     @GetMapping("/user/id")
     @Transactional(readOnly = true)
-    public User userById(@RequestParam String id)
+    public Lector userById(@RequestParam String id)
     {
         logger.debug("getUserById({})", id);
-        return (User) userService.getUserByIdService(Integer.parseInt(id));
+        return (Lector) userService.getUserByIdService(Integer.parseInt(id));
     }
 
 
     @PostMapping(path = "/user/create", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Integer> createUser(@RequestBody User user) {
+    public ResponseEntity<Integer> createUser(@RequestBody Lector user) {
         logger.debug("createUser({})", user);
         user = userService.saveNewUserService(user);
-        return new ResponseEntity<>(user.getId(), HttpStatus.OK);
+        return new ResponseEntity<>(user.getIdLector(), HttpStatus.OK);
     }
 
 
     @PutMapping(path = "/user/update", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Integer> updateUser(@RequestBody User user) {
+    public ResponseEntity<Integer> updateUser(@RequestBody Lector user) {
         logger.debug("updateUser({})", user);
         user = userService.saveNewUserService(user);
-        return new ResponseEntity<>(user.getId(), HttpStatus.OK);
+        return new ResponseEntity<>(user.getIdLector(), HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/user/delete/{id}", produces = {"application/json"})
@@ -78,10 +78,10 @@ public class UserRestClass {
 
 
     @DeleteMapping(value = "/user/delete", consumes = "application/json", produces = "application/json")
-    public ResponseEntity <Integer> deleteUser(@RequestBody User user) {
+    public ResponseEntity <Integer> deleteUser(@RequestBody Lector user) {
         logger.debug("deleteUser({})", user);
         userService.deleteUserService(user);
-        return new ResponseEntity(user.getId(), HttpStatus.OK);
+        return new ResponseEntity(user.getIdLector(), HttpStatus.OK);
     }
 
 

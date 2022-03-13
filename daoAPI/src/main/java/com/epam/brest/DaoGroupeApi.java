@@ -12,13 +12,13 @@ public interface DaoGroupeApi {
 
     List<String> getAllGroupeNames();
 
-    List<Groupe> getAllGroupes();
+    List<Group> getAllGroupes();
 
     String deleteGroupeByName(String name);
 
-    Groupe insertNewGroupe(String newName);
+    Group insertNewGroupe(String newName);
 
-    Groupe getGroupeByName(String name);
+    Group getGroupeByName(String name);
 
-    Groupe updateGroupeName(String newName, String oldName);
+    Group updateGroupeName(String newName, String oldName);
 }

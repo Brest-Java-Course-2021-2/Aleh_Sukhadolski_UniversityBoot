@@ -9,28 +9,28 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Component
-public interface GroupeJpaRepository extends JpaRepository <Groupe, Integer> {
+public interface GroupeJpaRepository extends JpaRepository <Group, Integer> {
 
     default List<String> getAllGroupesByName (){
         return (List<String>) findAll().stream()
-                .flatMap(groupes -> Stream.of(groupes.getGroupe()))
+                .flatMap(groupes -> Stream.of(groupes.getGroupName()))
                 .collect(Collectors.toList());
     }
 
-    default List <Groupe> getAllGroupes(){
-          return (List<Groupe>) findAll();
+    default List <Group> getAllGroupes(){
+          return (List<Group>) findAll();
       }
 
 
     default String deleteGroupeByName(String nameGroupe){
-          Optional<Groupe> groupe = (Optional<Groupe>) findAll().stream()
-                    .filter(gr -> nameGroupe.equalsIgnoreCase(gr.getGroupe()))
+          Optional<Group> groupe = (Optional<Group>) findAll().stream()
+                    .filter(gr -> nameGroupe.equalsIgnoreCase(gr.getGroupName()))
                     .collect(Collectors.toList())
                     .stream()
                     .findFirst();
         if (groupe.isPresent()){
             delete(groupe.get());
-            return (String) groupe.get().getGroupe();
+            return (String) groupe.get().getGroupName();
         } else {
          return "Is Empty";
         }
@@ -38,28 +38,28 @@ public interface GroupeJpaRepository extends JpaRepository <Groupe, Integer> {
 
 
 
-    default Groupe insertNewGroupe(String nameGroupe){
-          Groupe groupe = (Groupe) save(new Groupe(nameGroupe));
-          return (Groupe) groupe;
+    default Group insertNewGroupe(String nameGroupe){
+          Group groupe = (Group) save(new Group(nameGroupe));
+          return (Group) groupe;
       }
 
-    default Groupe getGroupeByName(String name){
-        List<Groupe> groupes = (List<Groupe>) getAllGroupes();
+    default Group getGroupeByName(String name){
+        List<Group> groupes = (List<Group>) getAllGroupes();
         int  index= (int) groupes.stream()
-                                    .filter(gr -> name.equals(gr.getGroupe()))
+                                    .filter(gr -> name.equals(gr.getGroupName()))
                                     .collect(Collectors.toList()).stream().count();
           if (index > 0) {
               return groupes.get(index-1);
           } else {
-              return new Groupe();
+              return new Group();
           }
 
      }
 
 
-    default Groupe updateGroupeByName(String newName, String oldName){
-          Groupe groupe = (Groupe) getGroupeByName(oldName);
-          groupe.setGroupe(newName);
-          return (Groupe) save(groupe);
+    default Group updateGroupeByName(String newName, String oldName){
+          Group groupe = (Group) getGroupeByName(oldName);
+          groupe.setGroupName(newName);
+          return (Group) save(groupe);
       }
 }

@@ -7,53 +7,53 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "groupe")
-public class Groupe {
+public class Group {
     @Column(name = "idG", unique=true, nullable=false)
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private int idG;
+    private int idGroup;
 
     /** field groupe - groupe request*/
     @Column(name = "groupe", nullable = false, length = 10)
     @NotEmpty(message = "Groupe should be not empty")
     @Size(min = 1, max = 10, message = "Size of groupe should not be 1-10 characters")
-    private String groupe;
+    private String groupName;
 
 
-    public Groupe(int idG, String groupe) {
-        this.idG = idG;
-        this.groupe = groupe;
+    public Group(int idG, String groupe) {
+        this.idGroup = idG;
+        this.groupName = groupe;
     }
 
-    public Groupe(String groupe) {
-        this.groupe = groupe;
+    public Group(String groupe) {
+        this.groupName = groupe;
     }
 
-    public Groupe() {
-        this.groupe = "";
+    public Group() {
+        this.groupName = "";
     }
 
-    public int getIdG() {
-        return idG;
+    public int getIdGroup() {
+        return idGroup;
     }
 
-    public void setIdG(int idG) {
-        this.idG = idG;
+    public void setIdGroup(int idGroup) {
+        this.idGroup = idGroup;
     }
 
-    public String getGroupe() {
-        return groupe;
+    public String getGroupName() {
+        return groupName;
     }
 
-    public void setGroupe(String groupe) {
-        this.groupe = groupe;
+    public void setGroupName(String groupName) {
+        this.groupName = groupName;
     }
 
     @Override
     public String toString() {
         return "Groupe{" +
-                "idG=" + idG +
-                ", groupe='" + groupe + '\'' +
+                "idG=" + idGroup +
+                ", groupe='" + groupName + '\'' +
                 '}';
     }
 }

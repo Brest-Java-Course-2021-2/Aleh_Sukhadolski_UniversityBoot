@@ -42,10 +42,10 @@ public class GroupeServiceImplTest {
     @BeforeEach
     public void setUp() {
         String[] groupes = new String[]{"e1", "e2", "e3", "e4", "e5", "e6"};
-        List<Groupe> grup = Arrays.stream(groupes)
+        List<Group> grup = Arrays.stream(groupes)
                 .map(gr -> groupeService.insertNewGroupeService(gr))
                 .collect(Collectors.toList());
-        User user = userService.saveNewUserService(new User("TOMMY", "tom", "1111", "iuy@aa.com"));
+        Lector user = userService.saveNewUserService(new Lector("TOMMY", "tom", "1111", "iuy@aa.com"));
     }
 
     @Test
@@ -53,22 +53,22 @@ public class GroupeServiceImplTest {
         logger.info("GET ALL GROUPES {}");
         List<String> groupes = groupeService.getAllGroupeNamesService();
         Assertions.assertTrue(groupes.size() == 6);
-        List<Groupe> group = groupeService.getAllGroupesService();
+        List<Group> group = groupeService.getAllGroupesService();
         Assertions.assertTrue(group.size() == 6);
     }
 
     @Test
     public void isInsertNewGroupeTest() {
         logger.info("INSERT NEW GROUPE {}");
-        User user = userService.getUserByNameService("TOMMY");
-        List<Request> requests = requestService.getAllRequestsService(user.getId());
+        Lector user = userService.getUserByNameService("TOMMY");
+        List<Request> requests = requestService.getAllRequestsService(user.getIdLector());
         Assertions.assertTrue(requests.size() == 6);
-        Groupe groupe = groupeService.insertNewGroupeService("e7");
-        Assertions.assertTrue(groupe.getGroupe().equals("e7"));
-        List<Groupe> group = groupeService.getAllGroupesService();
+        Group groupe = groupeService.insertNewGroupeService("e7");
+        Assertions.assertTrue(groupe.getGroupName().equals("e7"));
+        List<Group> group = groupeService.getAllGroupesService();
         Assertions.assertTrue(group.size() == 7);
         user = userService.getUserByNameService("TOMMY");
-        requests = requestService.getAllRequestsService(user.getId());
+        requests = requestService.getAllRequestsService(user.getIdLector());
         Assertions.assertTrue(requests.size() == 7);
 
     }
@@ -78,14 +78,14 @@ public class GroupeServiceImplTest {
     public void isUpdateGroupeNameTest() {
         logger.info("UPDATE GROUPE {}");
         groupeService.updateGroupeNameService("w1", "e6");
-        Groupe groupe = groupeService.getGroupeByNameService("w1");
-        Assertions.assertTrue(groupe.getGroupe().equals("w1"));
+        Group groupe = groupeService.getGroupeByNameService("w1");
+        Assertions.assertTrue(groupe.getGroupName().equals("w1"));
         groupe = groupeService.getGroupeByNameService("e6");
-        Assertions.assertFalse(groupe.getGroupe().equals("e6"));
-        List<Groupe> group = groupeService.getAllGroupesService();
+        Assertions.assertFalse(groupe.getGroupName().equals("e6"));
+        List<Group> group = groupeService.getAllGroupesService();
         Assertions.assertTrue(group.size() == 6);
-        User user = userService.getUserByNameService("TOMMY");
-        List<Request> requests = requestService.getAllRequestsService(user.getId());
+        Lector user = userService.getUserByNameService("TOMMY");
+        List<Request> requests = requestService.getAllRequestsService(user.getIdLector());
         boolean ifExist = false;
         boolean ifNotExist = true;
         for (Request request : requests){
@@ -94,7 +94,7 @@ public class GroupeServiceImplTest {
         }
         Assertions.assertTrue(ifExist);
         Assertions.assertTrue(ifNotExist);
-        requests = requestService.getAllRequestsService(user.getId());
+        requests = requestService.getAllRequestsService(user.getIdLector());
         Assertions.assertTrue(requests.size() == 6);
     }
 
@@ -103,8 +103,8 @@ public class GroupeServiceImplTest {
         logger.info("DELETE GROUPE {}");
         String result = groupeService.deleteGroupeByNameService("e1");
         Assertions.assertTrue(result.equals("e1"));
-        Groupe groupe = groupeService.getGroupeByNameService("e1");
-        Assertions.assertTrue(groupe.getIdG() == 0);
+        Group groupe = groupeService.getGroupeByNameService("e1");
+        Assertions.assertTrue(groupe.getIdGroup() == 0);
 
     }
 }

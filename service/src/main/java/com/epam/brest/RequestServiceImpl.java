@@ -48,9 +48,9 @@ public class RequestServiceImpl implements RequestServiceApi {
 
     @Override
     public List<Request> saveRequestsWhenNewGroupeService(String groupe) {
-        List<User> users = daoUser.getAllUsers();
+        List<Lector> users = daoUser.getAllUsers();
         List<Integer> ids = new ArrayList<>();
-        for (User u : users) { ids.add(u.getId()); }
+        for (Lector u : users) { ids.add(u.getIdLector()); }
         daoGroupe.insertNewGroupe(groupe);
         return (List<Request>) daoRequest.saveRequestsWhenNewGroupe(groupe, ids);
     }

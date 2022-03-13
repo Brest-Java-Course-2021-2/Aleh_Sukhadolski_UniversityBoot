@@ -37,16 +37,16 @@ public class GroupeServiceImpl implements GroupeServiceApi {
     }
 
     @Override
-    public List<Groupe> getAllGroupesService() {
-        return (List<Groupe>) daoGroupe.getAllGroupes();
+    public List<Group> getAllGroupesService() {
+        return (List<Group>) daoGroupe.getAllGroupes();
     }
 
     @Override
     public String deleteGroupeByNameService(String name) {
-        List<User> users = daoUser.getAllUsers();
+        List<Lector> users = daoUser.getAllUsers();
         List <Request> requests;
-        for (User user : users){
-            requests = daoRequest.getAllRequests(user.getId());
+        for (Lector user : users){
+            requests = daoRequest.getAllRequests(user.getIdLector());
             for (Request request : requests){
                 if (request.getGroupe().equals(name)){
                     daoRequest.deleteRequest(request);
@@ -57,26 +57,26 @@ public class GroupeServiceImpl implements GroupeServiceApi {
     }
 
     @Override
-    public Groupe insertNewGroupeService(String newName) {
-        List<User> users = daoUser.getAllUsers();
+    public Group insertNewGroupeService(String newName) {
+        List<Lector> users = daoUser.getAllUsers();
         List<Integer> idUsers = new ArrayList<>();
-        for (User user : users){ idUsers.add(user.getId()); }
+        for (Lector user : users){ idUsers.add(user.getIdLector()); }
         daoRequest.saveRequestsWhenNewGroupe(newName, idUsers );
-        return (Groupe) daoGroupe.insertNewGroupe(newName);
+        return (Group) daoGroupe.insertNewGroupe(newName);
     }
 
     @Override
-    public Groupe getGroupeByNameService(String name) {
-        return (Groupe) daoGroupe.getGroupeByName(name);
+    public Group getGroupeByNameService(String name) {
+        return (Group) daoGroupe.getGroupeByName(name);
     }
 
     @Override
-    public Groupe updateGroupeNameService(String newName, String oldName) {
-        Groupe groupe = (Groupe) daoGroupe.updateGroupeName(newName, oldName);
-        List<User> users = daoUser.getAllUsers();
+    public Group updateGroupeNameService(String newName, String oldName) {
+        Group groupe = (Group) daoGroupe.updateGroupeName(newName, oldName);
+        List<Lector> users = daoUser.getAllUsers();
         List <Request> requests;
-        for (User user : users){
-            requests = daoRequest.getAllRequests(user.getId());
+        for (Lector user : users){
+            requests = daoRequest.getAllRequests(user.getIdLector());
             for (Request request : requests){
                 if (request.getGroupe().equals(oldName)){
                     request.setGroupe(newName);
@@ -85,6 +85,6 @@ public class GroupeServiceImpl implements GroupeServiceApi {
             }
 
         }
-        return (Groupe) groupe;
+        return (Group) groupe;
     }
 }

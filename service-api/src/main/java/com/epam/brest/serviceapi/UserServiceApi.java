@@ -1,6 +1,6 @@
 package com.epam.brest.serviceapi;
 
-import com.epam.brest.User;
+import com.epam.brest.Lector;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.stereotype.Component;
 
@@ -10,19 +10,19 @@ import java.util.List;
 @EntityScan("com.epam.brest.model")
 public interface UserServiceApi {
 
-    List<User> getAllUsersService();
+    List<Lector> getAllUsersService();
 
-    User getUserByNameService(String name);
+    Lector getUserByNameService(String name);
 
-    User getUserByEmailService(String email);
+    Lector getUserByEmailService(String email);
 
-    User getUserByIdService(Integer id);
+    Lector getUserByIdService(Integer id);
 
-    User saveNewUserService(User user);
+    Lector saveNewUserService(Lector user);
 
-    User updateUserService (User user);
+    Lector updateUserService (Lector user);
 
-    void deleteUserService(User user);
+    void deleteUserService(Lector user);
 
     void deleteUserByIdService(Integer id);
 

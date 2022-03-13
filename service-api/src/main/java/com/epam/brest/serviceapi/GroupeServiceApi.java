@@ -1,6 +1,6 @@
 package com.epam.brest.serviceapi;
 
-import com.epam.brest.Groupe;
+import com.epam.brest.Group;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.stereotype.Component;
 
@@ -12,13 +12,13 @@ public interface GroupeServiceApi {
 
     List<String> getAllGroupeNamesService();
 
-    List<Groupe> getAllGroupesService();
+    List<Group> getAllGroupesService();
 
     String deleteGroupeByNameService(String name);
 
-    Groupe insertNewGroupeService(String newName);
+    Group insertNewGroupeService(String newName);
 
-    Groupe getGroupeByNameService(String name);
+    Group getGroupeByNameService(String name);
 
-    Groupe updateGroupeNameService(String newName, String oldName);
+    Group updateGroupeNameService(String newName, String oldName);
 }

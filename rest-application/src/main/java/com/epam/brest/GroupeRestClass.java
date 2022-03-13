@@ -23,9 +23,9 @@ public class GroupeRestClass {
 
     @GetMapping("/groupe/all")
     @Transactional(readOnly = true)
-    public List<Groupe> allGroupes()
+    public List<Group> allGroupes()
     {
-        return (List<Groupe>) groupeService.getAllGroupesService();
+        return (List<Group>) groupeService.getAllGroupesService();
     }
 
     @GetMapping("/groupe/get/name/all")
@@ -38,22 +38,22 @@ public class GroupeRestClass {
 
     @GetMapping("/groupe/get/name")
     @Transactional(readOnly = true)
-    public Groupe getGroupeByName(@RequestParam String name) {
-        return (Groupe) groupeService.getGroupeByNameService(name);
+    public Group getGroupeByName(@RequestParam String name) {
+        return (Group) groupeService.getGroupeByNameService(name);
     }
 
     @PostMapping(path = "/groupe/create", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Groupe> createGroupe(@RequestBody String newName) {
+    public ResponseEntity<Group> createGroupe(@RequestBody String newName) {
         //logger.debug("createGroupe({})", newName);
-        Groupe groupe = groupeService.insertNewGroupeService(newName);
+        Group groupe = groupeService.insertNewGroupeService(newName);
         return new ResponseEntity<>(groupe, HttpStatus.OK);
     }
 
 
     @PutMapping(path = "/groupe/update", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Groupe> updateGroupe(@RequestBody List <String> names) {
+    public ResponseEntity<Group> updateGroupe(@RequestBody List <String> names) {
         //logger.debug("updateGroupe({})", newName);
-        Groupe groupe = groupeService.updateGroupeNameService(names.get(0), names.get(1));
+        Group groupe = groupeService.updateGroupeNameService(names.get(0), names.get(1));
         return new ResponseEntity<>(groupe, HttpStatus.OK);
     }
 
