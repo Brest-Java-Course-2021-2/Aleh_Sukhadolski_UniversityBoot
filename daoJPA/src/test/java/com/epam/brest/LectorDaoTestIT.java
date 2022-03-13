@@ -82,5 +82,24 @@ public class LectorDaoTestIT {
         assertTrue(lectors.size() == 3);
     }
 
+    @Test
+    public void isDeleteLectorByIdLector() {
+        logger.info("Delete lector by idLector{}");
+        Lector lector = daoLector.findLectorByNameLector("MikeTyson");
+        assertTrue(lector.getNameLector().equals("MikeTyson"));
+        daoLector.deleteLectorByIdLector(lector.getIdLector());
+        lector = daoLector.findLectorByNameLector("MikeTyson");
+        assertFalse(lector.getNameLector().equals("MikeTyson"));
+    }
+
+    @Test
+    public void isDeleteLectorByLector() {
+        logger.info("Delete lector by Lector{}");
+        Lector lector = daoLector.findLectorByNameLector("MikeTyson");
+        assertTrue(lector.getNameLector().equals("MikeTyson"));
+        daoLector.deleteLector(lector);
+        lector = daoLector.findLectorByNameLector("MikeTyson");
+        assertFalse(lector.getNameLector().equals("MikeTyson"));
+    }
 
 }
