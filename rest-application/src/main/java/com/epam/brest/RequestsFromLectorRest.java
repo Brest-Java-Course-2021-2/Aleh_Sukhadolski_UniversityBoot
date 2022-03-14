@@ -14,36 +14,36 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
-public class RequestRestClass {
+public class RequestsFromLectorRest {
 
-    private final Logger logger = LogManager.getLogger(RequestRestClass.class);
+    private final Logger logger = LogManager.getLogger(RequestsFromLectorRest.class);
 
     @Autowired
-    RequestFromLectorServiceApi requestService;
+    RequestFromLectorServiceApi requestFromLectorService;
 
     @GetMapping ("/request/all/{id}")
     @Transactional(readOnly = true)
     public List<RequestFromLector> getAllRequests(@PathVariable int id) {
-        return (List<RequestFromLector>) requestService.getAllRequestsFromLectorService(id);
+        return (List<RequestFromLector>) requestFromLectorService.getAllRequestsFromLectorService(id);
     }
 
     @GetMapping ("/request/{idr}")
     @Transactional(readOnly = true)
     public RequestFromLector getRequestByIdr(@PathVariable int idr) {
-        return (RequestFromLector) requestService.getRequestOfLectorByIdRequestService(idr);
+        return (RequestFromLector) requestFromLectorService.getRequestOfLectorByIdRequestService(idr);
     }
 
     @PutMapping(path = "/request/update", consumes = "application/json", produces = "application/json")
     public ResponseEntity<RequestFromLector> updateRequest(@RequestBody RequestFromLector request) {
         //logger.debug("updateGroupe({})", newName);
-        request= requestService.updateRequestFromLectorService(request);
+        request= requestFromLectorService.updateRequestFromLectorService(request);
         return new ResponseEntity<>(request, HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/request/delete", consumes = "application/json", produces = "application/json")
     public ResponseEntity <RequestFromLector> deleteGroupe(@PathVariable RequestFromLector request) {
         //logger.debug("deleteGroupe({})", name);
-        requestService.flushRequestFromLectorService(request);
+        requestFromLectorService.flushRequestFromLectorService(request);
         return new ResponseEntity(request, HttpStatus.OK);
     }
 

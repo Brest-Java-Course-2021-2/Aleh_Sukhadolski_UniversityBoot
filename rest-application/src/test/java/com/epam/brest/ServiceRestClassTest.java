@@ -10,7 +10,7 @@ import javax.transaction.Transactional;
 class ServiceRestClassTest {
 
     @Autowired
-    private ServiceRestClass serviceRestClass;
+    private ServiceUniversityInfoRest serviceRestClass;
 /*
     @Test
     public void isRestClass (){

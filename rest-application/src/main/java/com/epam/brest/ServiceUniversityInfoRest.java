@@ -6,25 +6,16 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin
-public class ServiceRestClass {
+public class ServiceUniversityInfoRest {
+/*
 
     @Autowired
-    private LectorServiceApi userService;
+    private LectorServiceApi lectorService;
 
-    public ServiceRestClass(LectorServiceApi userService) {
-        this.userService = userService;
-    }
-
-    @GetMapping("/hello")
-    public String home() {
-        return "HELLO!!!!!!!";
-    }
-
+*/
     @GetMapping("/version")
     public String appversion() {
         return "version-0.0.1-SNAPSHOT";
     }
-
-
 
 }

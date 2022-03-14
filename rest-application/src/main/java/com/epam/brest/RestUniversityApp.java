@@ -4,6 +4,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication(scanBasePackages = "com.epam.brest")
-public class Application {
-	public static void main(String[] args) {SpringApplication.run(Application.class, args);}
+public class RestUniversityApp {
+	public static void main(String[] args) {SpringApplication.run(RestUniversityApp.class, args);}
 }
