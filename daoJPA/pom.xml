@@ -23,7 +23,7 @@
 
 	<dependency>
         <groupId>com.epam.brest</groupId>
-        <artifactId>daoAPI</artifactId>
+        <artifactId>dao-api</artifactId>
         <version>${project.version}</version>
     </dependency>
 

@@ -22,65 +22,65 @@ public class GroupeServiceImpl implements GroupeServiceApi {
     private final Logger logger = LogManager.getLogger(GroupeServiceImpl.class);
 
     @Autowired
-    private DaoGroupeApi daoGroupe;
+    private DaoGroupApi daoGroupe;
 
     @Autowired
-    private DaoUserApi daoUser;
+    private DaoLectorApi daoUser;
 
     @Autowired
-    private DaoRequestApi daoRequest;
+    private DaoRequestFromLectorApi daoRequest;
 
 
     @Override
     public List<String> getAllGroupeNamesService() {
-        return (List<String>) daoGroupe.getAllGroupeNames();
+        return (List<String>) daoGroupe.getAllGroupsNames();
     }
 
     @Override
     public List<Group> getAllGroupesService() {
-        return (List<Group>) daoGroupe.getAllGroupes();
+        return (List<Group>) daoGroupe.getAllGroups();
     }
 
     @Override
     public String deleteGroupeByNameService(String name) {
-        List<Lector> users = daoUser.getAllUsers();
+        List<Lector> users = daoUser.getAllLectors();
         List <RequestFromLector> requests;
         for (Lector user : users){
-            requests = daoRequest.getAllRequests(user.getIdLector());
+            requests = daoRequest.getAllRequestsFromLectorByIdLector(user.getIdLector());
             for (RequestFromLector request : requests){
                 if (request.getGroup().equals(name)){
-                    daoRequest.deleteRequest(request);
+                    daoRequest.deleteRequestFromLector(request);
                 }
             }
         }
-        return (String) daoGroupe.deleteGroupeByName(name);
+        return (String) daoGroupe.deleteGroupByName(name);
     }
 
     @Override
     public Group insertNewGroupeService(String newName) {
-        List<Lector> users = daoUser.getAllUsers();
+        List<Lector> users = daoUser.getAllLectors();
         List<Integer> idUsers = new ArrayList<>();
         for (Lector user : users){ idUsers.add(user.getIdLector()); }
-        daoRequest.saveRequestsWhenNewGroupe(newName, idUsers );
-        return (Group) daoGroupe.insertNewGroupe(newName);
+        daoRequest.createRequestsForLectorsWhenCreateNewGroup(newName, idUsers );
+        return (Group) daoGroupe.insertNewGroup(newName);
     }
 
     @Override
     public Group getGroupeByNameService(String name) {
-        return (Group) daoGroupe.getGroupeByName(name);
+        return (Group) daoGroupe.getGroupByName(name);
     }
 
     @Override
     public Group updateGroupeNameService(String newName, String oldName) {
-        Group groupe = (Group) daoGroupe.updateGroupeName(newName, oldName);
-        List<Lector> users = daoUser.getAllUsers();
+        Group groupe = (Group) daoGroupe.updateGroup(newName, oldName);
+        List<Lector> users = daoUser.getAllLectors();
         List <RequestFromLector> requests;
         for (Lector user : users){
-            requests = daoRequest.getAllRequests(user.getIdLector());
+            requests = daoRequest.getAllRequestsFromLectorByIdLector(user.getIdLector());
             for (RequestFromLector request : requests){
                 if (request.getGroup().equals(oldName)){
                     request.setGroup(newName);
-                    daoRequest.updateRequest(request);
+                    daoRequest.updateRequestFromLector(request);
                 }
             }
 

@@ -24,7 +24,7 @@
 	    <module>service</module>
         <module>service-api</module>
         <module>daoJPA</module>
-        <module>daoAPI</module>
+        <module>dao-api</module>
         <module>db</module>
         <module>model</module>
 	</modules>

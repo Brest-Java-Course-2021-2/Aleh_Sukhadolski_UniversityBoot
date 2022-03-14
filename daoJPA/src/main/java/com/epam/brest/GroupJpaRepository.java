@@ -9,20 +9,20 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Component
-public interface GroupeJpaRepository extends JpaRepository <Group, Integer> {
+public interface GroupJpaRepository extends JpaRepository <Group, Integer> {
 
-    default List<String> getAllGroupesByName (){
+    default List<String> getAllGroupsNames(){
         return (List<String>) findAll().stream()
                 .flatMap(groupes -> Stream.of(groupes.getGroupName()))
                 .collect(Collectors.toList());
     }
 
-    default List <Group> getAllGroupes(){
+    default List <Group> getAllGroups(){
           return (List<Group>) findAll();
       }
 
 
-    default String deleteGroupeByName(String nameGroupe){
+    default String deleteGroupByGroupName(String nameGroupe){
           Optional<Group> groupe = (Optional<Group>) findAll().stream()
                     .filter(gr -> nameGroupe.equalsIgnoreCase(gr.getGroupName()))
                     .collect(Collectors.toList())
@@ -38,13 +38,13 @@ public interface GroupeJpaRepository extends JpaRepository <Group, Integer> {
 
 
 
-    default Group insertNewGroupe(String nameGroupe){
+    default Group insertNewGroup(String nameGroupe){
           Group groupe = (Group) save(new Group(nameGroupe));
           return (Group) groupe;
       }
 
-    default Group getGroupeByName(String name){
-        List<Group> groupes = (List<Group>) getAllGroupes();
+    default Group getGroupeByGroupName(String name){
+        List<Group> groupes = (List<Group>) getAllGroups();
         int  index= (int) groupes.stream()
                                     .filter(gr -> name.equals(gr.getGroupName()))
                                     .collect(Collectors.toList()).stream().count();
@@ -57,8 +57,8 @@ public interface GroupeJpaRepository extends JpaRepository <Group, Integer> {
      }
 
 
-    default Group updateGroupeByName(String newName, String oldName){
-          Group groupe = (Group) getGroupeByName(oldName);
+    default Group updateGroupByGroupName(String newName, String oldName){
+          Group groupe = (Group) getGroupeByGroupName(oldName);
           groupe.setGroupName(newName);
           return (Group) save(groupe);
       }

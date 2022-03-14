@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 
 @SpringBootApplication
 @SpringBootTest (classes= { UserServiceImpl.class, RequestServiceImpl.class, GroupeServiceImpl.class
-                          , UserDao.class, RequestDao.class, GroupeDao.class})
+                          , DaoLectorImpl.class, DaoRequestFromLectorImpl.class, DaoGroupImpl.class})
 @ComponentScan("com.epam.brest.*")
 @EntityScan("com.epam.brest")
 @Transactional()

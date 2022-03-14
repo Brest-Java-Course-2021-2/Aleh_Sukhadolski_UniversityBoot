@@ -20,32 +20,26 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 @SpringBootApplication
-@SpringBootTest (classes= { UserDao.class, RequestDao.class, GroupeDao.class})
+@SpringBootTest (classes= { DaoLectorImpl.class, DaoRequestFromLectorImpl.class, DaoGroupImpl.class})
 //@ContextConfiguration
 @ComponentScan("com.epam.brest")
 @EntityScan("com.epam.brest")
 @Transactional()
-public class UserDaoTestIT {
+public class DaoLectorImplTestIT {
 
-    private final Logger logger = LogManager.getLogger(UserDaoTestIT.class);
-/*
-
-    @Autowired
-    private UserJpaRepository userRepository;
-*/
-
+    private final Logger logger = LogManager.getLogger(DaoLectorImplTestIT.class);
 
     @Autowired
-    private DaoUserApi userDao;
+    private DaoLectorApi userDao;
 
     @Autowired
-    private DaoRequestApi requestDao;
+    private DaoRequestFromLectorApi requestDao;
 
     @Test
     public void testGetAll() {
         logger.info("GET ALL USERS {}");
-        userDao.saveAndUpdateUser(new Lector("Monya", "monya", "1111", "email@mail.com"));
-        List<Lector> users = (List<Lector>) userDao.getAllUsers();
+        userDao.saveOrUpdateLector(new Lector("Monya", "monya", "1111", "email@mail.com"));
+        List<Lector> users = (List<Lector>) userDao.getAllLectors();
         assertTrue(users.size() == 1);
         assertTrue(users.get(0).getNameLector().equals("Monya"));
     }
@@ -54,12 +48,12 @@ public class UserDaoTestIT {
     @Test
     public void testSaveAndGet() {
         logger.info("SAVE USER {}");
-        userDao.saveAndUpdateUser(new Lector("Monya", "monya", "1111", "email@mail.com"));
+        userDao.saveOrUpdateLector(new Lector("Monya", "monya", "1111", "email@mail.com"));
         logger.info("USER SAVED SUCCESS{}");
         logger.info("FIND USER BY NAME {}");
-        Lector user = (Lector) userDao.getUserByName("Monya");
+        Lector user = (Lector) userDao.getLectorByName("Monya");
         assertTrue(user.getNameLector().equals("Monya"));
-        user = (Lector) userDao.getUserByEmail("email@mail.com");
+        user = (Lector) userDao.getLectorByEmail("email@mail.com");
         assertTrue(user.getEmailLector().equals("email@mail.com"));
         logger.info("FOUND USER BY NAME SUCCESS{}");
     }
@@ -67,16 +61,16 @@ public class UserDaoTestIT {
     @Test
     public void testSaveAndUpdate() {
         logger.info("SAVE USER {}");
-        userDao.saveAndUpdateUser(new Lector("Monya", "monya", "1111", "email@mail.com"));
-        Lector user = (Lector) userDao.getUserByName("Monya");
+        userDao.saveOrUpdateLector(new Lector("Monya", "monya", "1111", "email@mail.com"));
+        Lector user = (Lector) userDao.getLectorByName("Monya");
         assertTrue(user.getNameLector().equals("Monya"));
         logger.info("USER SAVED AND READ BY NAME SUCCESS{}");
         Lector userUpdated = user;
         assertTrue(userUpdated.getNameLector().equals("Monya") && userUpdated.getLoginLector().equals("monya"));
         userUpdated.setNameLector("Tony");
         logger.info("USER UPDATE {}" + userUpdated);
-        userDao.saveAndUpdateUser(userUpdated);
-        Lector userNew = userDao.getUserById(userUpdated.getIdLector());
+        userDao.saveOrUpdateLector(userUpdated);
+        Lector userNew = userDao.getLectorById(userUpdated.getIdLector());
         assertTrue(userNew.getNameLector().equals("Tony") && userNew.getLoginLector().equals("monya"));
         logger.info("USER UPDATED AND READ SUCCESS{}");
     }
@@ -85,15 +79,15 @@ public class UserDaoTestIT {
     @Test
     public void testDeleteByUser() {
         logger.info("DELETE USER BY USER{}");
-        userDao.saveAndUpdateUser(new Lector("Monya", "monya", "1111", "email@mail.com"));
-        List<Lector> users = (List<Lector>) userDao.getAllUsers();
+        userDao.saveOrUpdateLector(new Lector("Monya", "monya", "1111", "email@mail.com"));
+        List<Lector> users = (List<Lector>) userDao.getAllLectors();
         assertTrue(users.size() == 1);
         Lector user = users.get(0);
-        requestDao.deleteAllRequestsOfUser(user.getIdLector());
-        userDao.deleteUser(user);
-        user = (Lector) userDao.getUserByName(user.getNameLector());
+        requestDao.deleteAllRequestsFromLector(user.getIdLector());
+        userDao.deleteLector(user);
+        user = (Lector) userDao.getLectorByName(user.getNameLector());
         assertTrue(user.getIdLector() == 0);
-        user = (Lector) userDao.getUserByEmail(user.getEmailLector());
+        user = (Lector) userDao.getLectorByEmail(user.getEmailLector());
         assertTrue(user.getIdLector() == 0);
         logger.info("DELETE USER BY USER SUCCESS {}");
     }
@@ -102,15 +96,15 @@ public class UserDaoTestIT {
     @Test
     public void testDeleteById() {
         logger.info("DELETE USER BY ID{}");
-        userDao.saveAndUpdateUser(new Lector("Monya", "monya", "1111", "email@mail.com"));
-        List<Lector> users = (List<Lector>) userDao.getAllUsers();
+        userDao.saveOrUpdateLector(new Lector("Monya", "monya", "1111", "email@mail.com"));
+        List<Lector> users = (List<Lector>) userDao.getAllLectors();
         assertTrue(users.size() == 1);
         Lector user = users.get(0);
-        requestDao.deleteAllRequestsOfUser(user.getIdLector());
-        userDao.deleteUserById(user.getIdLector());
-        user = (Lector) userDao.getUserByName(user.getNameLector());
+        requestDao.deleteAllRequestsFromLector(user.getIdLector());
+        userDao.deleteLectorById(user.getIdLector());
+        user = (Lector) userDao.getLectorByName(user.getNameLector());
         assertTrue(user.getIdLector() == 0);
-        user = (Lector) userDao.getUserByEmail(user.getEmailLector());
+        user = (Lector) userDao.getLectorByEmail(user.getEmailLector());
         assertTrue(user.getIdLector() == 0);
         logger.info("DELETE USER BY USER SUCCESS {}");
 

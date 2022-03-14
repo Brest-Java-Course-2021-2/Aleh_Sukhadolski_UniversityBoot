@@ -11,9 +11,9 @@
     </parent>
 
 	<groupId>com.epam.brest</groupId>
-	<artifactId>daoAPI</artifactId>
+	<artifactId>dao-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>daoAPI</name>
+	<name>dao-api</name>
 
 	<packaging>jar</packaging>
 

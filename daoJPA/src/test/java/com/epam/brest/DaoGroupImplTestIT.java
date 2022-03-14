@@ -21,22 +21,22 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 @SpringBootApplication
-@SpringBootTest (classes= { UserDao.class, RequestDao.class, GroupeDao.class})
+@SpringBootTest (classes= { DaoLectorImpl.class, DaoRequestFromLectorImpl.class, DaoGroupImpl.class})
 @ComponentScan("com.epam.brest")
 @EntityScan("com.epam.brest")
 @Transactional()
-public class GroupeDaoTestIT {
+public class DaoGroupImplTestIT {
 
-    private final Logger logger = LogManager.getLogger(GroupeDaoTestIT.class);
+    private final Logger logger = LogManager.getLogger(DaoGroupImplTestIT.class);
 
     @Autowired
-    private DaoGroupeApi groupeDao;
+    private DaoGroupApi groupeDao;
 
     @BeforeEach
     public void setUp() {
         String[] groupes = new String[]{"e1", "e2", "e3", "e4", "e5", "e6"};
         List<Group> grup = Arrays.stream(groupes)
-                .map(gr -> groupeDao.insertNewGroupe(gr))
+                .map(gr -> groupeDao.insertNewGroup(gr))
                 .collect(Collectors.toList());
     }
 
@@ -44,30 +44,30 @@ public class GroupeDaoTestIT {
     @Test
     public void testGetAllGroupes() {
         logger.info("GET ALL GROUPES {}");
-        List<Group> groupes = (List<Group>) groupeDao.getAllGroupes();
+        List<Group> groupes = (List<Group>) groupeDao.getAllGroups();
         assertTrue(groupes.get(0).getGroupName() == "e1");
     }
 
     @Test
     public void testGetAllGroupesByNames() {
         logger.info("GET ALL GROUPE NAMES{}");
-        List<String> groupes = (List<String>) groupeDao.getAllGroupeNames();
+        List<String> groupes = (List<String>) groupeDao.getAllGroupsNames();
         assertTrue(groupes.size() == 6);
     }
 
     @Test
     public void testAddGroupe() {
         logger.info("ADD NEW GROUPE {}");
-        groupeDao.insertNewGroupe("a1");
-        List<String> groupes = (List<String>) groupeDao.getAllGroupeNames();
+        groupeDao.insertNewGroup("a1");
+        List<String> groupes = (List<String>) groupeDao.getAllGroupsNames();
         assertTrue(groupes.size() == 7);
     }
 
     @Test
     public void testUpdateGroupeName() {
         logger.info("UPDATE GROUPE NAME {}");
-        Group updatedGroupe = groupeDao.updateGroupeName("a1", "e1");
-        Group groupe = groupeDao.getGroupeByName("a1");
+        Group updatedGroupe = groupeDao.updateGroup("a1", "e1");
+        Group groupe = groupeDao.getGroupByName("a1");
         assertTrue(groupe.getGroupName().equals("a1") && updatedGroupe.getIdGroup() == groupe.getIdGroup());
     }
 
@@ -75,11 +75,11 @@ public class GroupeDaoTestIT {
     @Test
     public void testDeleteGroupeByName() {
         logger.info("DELETE GROUPE BY NAME {}");
-        String deletedNameGroupe = groupeDao.deleteGroupeByName("e1");
+        String deletedNameGroupe = groupeDao.deleteGroupByName("e1");
         assertTrue(deletedNameGroupe.equals("e1"));
-        deletedNameGroupe = groupeDao.deleteGroupeByName("e1");
+        deletedNameGroupe = groupeDao.deleteGroupByName("e1");
         assertTrue(deletedNameGroupe.equals("Is Empty"));
-        Group groupe = groupeDao.getGroupeByName("e1");
+        Group groupe = groupeDao.getGroupByName("e1");
         assertTrue(groupe.getGroupName().equals("") );
     }
 

@@ -13,10 +13,10 @@ import java.util.stream.Collectors;
 // CRUD refers Create, Read, Update, Delete
 
 @Component
-public interface UserJpaRepository extends JpaRepository<Lector, Integer> {
+public interface LectorsJpaRepository extends JpaRepository<Lector, Integer> {
 
 
-    default List<Lector> findAllUsers() {
+    default List<Lector> findAllLectors() {
         List <Lector> users = findAll();
         if (users.size() == 0){
             users.add(new Lector("Is Empty","","",""));
@@ -25,12 +25,12 @@ public interface UserJpaRepository extends JpaRepository<Lector, Integer> {
     }
 
 
-    default Lector findUserById(Integer id) {
+    default Lector findLectorByLectorsId(Integer id) {
         return (Lector) findById(id).get();
     }
 
 
-    default Lector findUserByName(String name) {
+    default Lector findLectorByLectorsName(String name) {
         List<Lector> users = findAll().stream()
                 .filter(us -> us.getNameLector().equals(name))
                 .collect(Collectors.toList());
@@ -44,7 +44,7 @@ public interface UserJpaRepository extends JpaRepository<Lector, Integer> {
     }
 
 
-    default Lector findUserByEmail(String email) {
+    default Lector findLectorByEmail(String email) {
         List<Lector> users = findAll().stream()
                 .filter(us -> us.getEmailLector().equals(email))
                 .collect(Collectors.toList());
@@ -58,17 +58,17 @@ public interface UserJpaRepository extends JpaRepository<Lector, Integer> {
     }
 
 
-    default Lector saveAndFlushUser(Lector user) {
+    default Lector saveOrUpdateLector(Lector user) {
         return (Lector) saveAndFlush(user);
     }
 
 
-    default void deleteUserById(Integer id) {
+    default void deleteLectorByLectorsId(Integer id) {
         deleteById(id);
     }
 
 
-    default void deleteUser(@NotNull Lector user) {
+    default void deleteLector(@NotNull Lector user) {
         deleteById(user.getIdLector());
     }
 }

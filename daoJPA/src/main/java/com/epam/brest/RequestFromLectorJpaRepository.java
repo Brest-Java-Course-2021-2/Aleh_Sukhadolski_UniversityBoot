@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Component
-public interface RequestJpaRepository extends JpaRepository<RequestFromLector, Integer> {
+public interface RequestFromLectorJpaRepository extends JpaRepository<RequestFromLector, Integer> {
 
     default List<RequestFromLector> findAllByForeignKey(Integer id) {
         return (List<RequestFromLector>) findAll().stream()

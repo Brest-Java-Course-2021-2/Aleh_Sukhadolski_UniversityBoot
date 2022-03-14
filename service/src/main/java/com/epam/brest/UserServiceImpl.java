@@ -20,60 +20,60 @@ public class UserServiceImpl implements UserServiceApi {
     private final Logger logger = LogManager.getLogger(UserServiceImpl.class);
 
     @Autowired
-    private DaoUserApi daoUser;
+    private DaoLectorApi daoUser;
 
     @Autowired
-    private DaoRequestApi daoRequest;
+    private DaoRequestFromLectorApi daoRequest;
 
     @Autowired
-    private DaoGroupeApi daoGroupe;
+    private DaoGroupApi daoGroupe;
 
 
     @Override
     public List<Lector> getAllUsersService() {
-        return (List<Lector>) daoUser.getAllUsers();
+        return (List<Lector>) daoUser.getAllLectors();
     }
 
     @Override
     public Lector getUserByNameService(String name) {
-        return (Lector) daoUser.getUserByName(name);
+        return (Lector) daoUser.getLectorByName(name);
     }
 
     @Override
     public Lector getUserByEmailService(String email)
     {
-        return (Lector) daoUser.getUserByEmail(email);
+        return (Lector) daoUser.getLectorByEmail(email);
     }
 
     @Override
     public Lector getUserByIdService(Integer id)
     {
-        return (Lector) daoUser.getUserById(id);
+        return (Lector) daoUser.getLectorById(id);
     }
 
     @Override
     public void deleteUserByIdService(Integer id) {
-        daoRequest.deleteAllRequestsOfUser(id);
-        daoUser.deleteUserById(id);
+        daoRequest.deleteAllRequestsFromLector(id);
+        daoUser.deleteLectorById(id);
     }
 
     @Override
     public void deleteUserService(Lector user)
     {
-        daoRequest.deleteAllRequestsOfUser(user.getIdLector());
-        daoUser.deleteUserById(user.getIdLector());
+        daoRequest.deleteAllRequestsFromLector(user.getIdLector());
+        daoUser.deleteLectorById(user.getIdLector());
     }
 
     @Override
     public Lector saveNewUserService(Lector user) {
-        user = daoUser.saveAndUpdateUser(user);
-        List <String> groupes = daoGroupe.getAllGroupeNames();
-        daoRequest.saveRequestsForNewUser(user.getIdLector(), groupes);
+        user = daoUser.saveOrUpdateLector(user);
+        List <String> groupes = daoGroupe.getAllGroupsNames();
+        daoRequest.createEmptyRequestsForNewLector(user.getIdLector(), groupes);
         return (Lector) user;
     }
 
     @Override
     public Lector updateUserService(Lector user) {
-        return (Lector) daoUser.saveAndUpdateUser(user);
+        return (Lector) daoUser.saveOrUpdateLector(user);
     }
 }
