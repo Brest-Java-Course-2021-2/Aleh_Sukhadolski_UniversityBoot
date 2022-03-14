@@ -13,7 +13,7 @@ public interface RequestFromLectorJpaRepository extends JpaRepository<RequestFro
 
     default List<RequestFromLector> findAllByForeignKey(Integer id) {
         return (List<RequestFromLector>) findAll().stream()
-                                        .filter(req -> id == req.getId())
+                                        .filter(req -> id == req.getIdLector())
                                         .collect(Collectors.toList());
     }
 

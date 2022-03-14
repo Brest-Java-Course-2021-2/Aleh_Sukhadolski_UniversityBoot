@@ -48,7 +48,7 @@ public class RequestFromLector {
     @DateTimeFormat(pattern = "yyyy/MM/dd")
     private Date dateToChangeRequest;
 
-    private int id;
+    private int idLector;
 
     /**
      * Constructor - create new object
@@ -56,15 +56,15 @@ public class RequestFromLector {
      * @see RequestFromLector#RequestFromLector(int, String, String, String, Date)
      * @see RequestFromLector#RequestFromLector(int, String, String, String)
      * @param idR - identificator
-     * @param id- identificator of User -> one to many
+     * @param idLector- identificator of Lector -> one to many
      * @param groupe - groupe name
      * @param pairs - number pairs
      * @param subject - subject of user
      * @param date - date of request
      */
-    public RequestFromLector(int idR, int id, String groupe, String pairs, String subject, Date date) {
+    public RequestFromLector(int idR, int idLector, String groupe, String pairs, String subject, Date date) {
         this.idRequest = idR;
-        this.id = id;
+        this.idLector = idLector;
         this.group = groupe;
         this.numberOfPairs = pairs;
         this.subjectOfLector = subject;
@@ -76,14 +76,14 @@ public class RequestFromLector {
      * @see RequestFromLector#RequestFromLector()
      * @see RequestFromLector#RequestFromLector(int, String, String, String, Date)
      * @see RequestFromLector#RequestFromLector(int,int, String, String, String, Date)
-     * @param id - identificator of User -> one to many
+     * @param idLector - identificator of Lector -> one to many
      * @param groupe - groupe name
      * @param pairs - number pairs
      * @param subject - subject of user
      */
-    public RequestFromLector(int id, String groupe, String pairs, String subject) {
+    public RequestFromLector(int idLector, String groupe, String pairs, String subject) {
         //this.idR = idR;
-        this.id = id;
+        this.idLector = idLector;
         this.group = groupe;
         this.numberOfPairs = pairs;
         this.subjectOfLector = subject;
@@ -96,14 +96,14 @@ public class RequestFromLector {
      * @see RequestFromLector#RequestFromLector()
      * @see RequestFromLector#RequestFromLector(int, int, String, String, String, Date)
      * @see RequestFromLector#RequestFromLector(int, String, String, String)
-     * @param id - identificator of User -> one to many
+     * @param idLector - identificator of Lector -> one to many
      * @param groupe - groupe name
      * @param pairs - number pairs
      * @param subject - subject of user
      * @param date - date of request
      */
-    public RequestFromLector(int id, String groupe, String pairs, String subject, Date date) {
-        this.id = id;
+    public RequestFromLector(int idLector, String groupe, String pairs, String subject, Date date) {
+        this.idLector = idLector;
         this.group = groupe;
         this.numberOfPairs = pairs;
         this.subjectOfLector = subject;
@@ -207,12 +207,12 @@ public class RequestFromLector {
 
 
 
-    public int getId() {
-        return id;
+    public int getIdLector() {
+        return idLector;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdLector(int idLector) {
+        this.idLector = idLector;
     }
 
     @Override
@@ -223,7 +223,7 @@ public class RequestFromLector {
                 ", pairs='" + numberOfPairs + '\'' +
                 ", subject='" + subjectOfLector + '\'' +
                 ", date=" + dateToChangeRequest +
-                ", id=" + id +
+                ", id=" + idLector +
                 '}';
     }
 }

@@ -18,10 +18,10 @@ http://localhost:8080/lector/new
 body:
 
 {
-"name": "Mike",
-"login" : "mike",
-"password": "1111",
-"email" : "mike@tyson.com"
+"nameLector": "Mike",
+"loginLector" : "mike",
+"passwordLector": "1111",
+"emailLector" : "mike@tyson.com"
 }
 
 Response : 1  (id of the new user)
@@ -33,10 +33,10 @@ http://localhost:8080/lector/new
 
 body:
 {
-"name": "John",
-"login" : "john",
-"password": "2222",
-"email" : "john@bonjovy.com"
+"nameLector": "John",
+"loginLector" : "john",
+"passwordLector": "2222",
+"emailLector" : "john@bonjovy.com"
 }
 
 Response : 2  (id of the new user)
@@ -154,13 +154,13 @@ http://localhost:8080/request/update
 
 #### body:
 {
-"idR": 12,
-"groupe": "e4",
-"pairs": "2",
-"subject": "math",
-"date": "2022-03-08T12:39:41.581+00:00",
-"id": 1
-}
+        "idRequest": 21,
+        "group": "e1",
+        "numberOfPairs": "2",
+        "subjectOfLector": "math",
+        "idLector": 20,
+        "date": "2022-03-14T17:09:26.913+00:00"
+    }
 
 #### response :
 {
