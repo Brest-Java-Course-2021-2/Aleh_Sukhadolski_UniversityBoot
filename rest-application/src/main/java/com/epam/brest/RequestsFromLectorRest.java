@@ -24,25 +24,27 @@ public class RequestsFromLectorRest {
     @GetMapping ("/request/all/{id}")
     @Transactional(readOnly = true)
     public List<RequestFromLector> getAllRequests(@PathVariable int id) {
+        logger.debug("get all requests from lector where foreign key id = ", id);
         return (List<RequestFromLector>) requestFromLectorService.getAllRequestsFromLectorService(id);
     }
 
     @GetMapping ("/request/{idr}")
     @Transactional(readOnly = true)
     public RequestFromLector getRequestByIdr(@PathVariable int idr) {
+        logger.debug("get request from lector where id = ", idr);
         return (RequestFromLector) requestFromLectorService.getRequestOfLectorByIdRequestService(idr);
     }
 
     @PutMapping(path = "/request/update", consumes = "application/json", produces = "application/json")
     public ResponseEntity<RequestFromLector> updateRequest(@RequestBody RequestFromLector request) {
-        //logger.debug("updateGroupe({})", newName);
+        logger.debug("update request from lector ", request);
         request= requestFromLectorService.updateRequestFromLectorService(request);
         return new ResponseEntity<>(request, HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/request/delete", consumes = "application/json", produces = "application/json")
     public ResponseEntity <RequestFromLector> deleteGroupe(@PathVariable RequestFromLector request) {
-        //logger.debug("deleteGroupe({})", name);
+        logger.debug("delete request from lector = ", request);
         requestFromLectorService.flushRequestFromLectorService(request);
         return new ResponseEntity(request, HttpStatus.OK);
     }

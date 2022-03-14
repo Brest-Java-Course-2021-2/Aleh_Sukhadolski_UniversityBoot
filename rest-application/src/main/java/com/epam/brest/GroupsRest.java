@@ -21,38 +21,39 @@ public class GroupsRest {
     private GroupServiceApi groupService;
 
 
-    @GetMapping("/groupe/all")
+    @GetMapping("/group/all")
     @Transactional(readOnly = true)
-    public List<Group> allGroupes()
-    {
+    public List<Group> allGroupes() {
+        logger.debug("get all groups({})");
         return (List<Group>) groupService.getAllGroupsService();
     }
 
-    @GetMapping("/groupe/get/name/all")
+    @GetMapping("/group/name/all")
     @Transactional(readOnly = true)
-    public List<String> allGroupesByNames()
-    {
+    public List<String> allGroupesByNames() {
+        logger.debug("get ll groups names({})");
         return (List<String>) groupService.getAllGroupNamesService();
     }
 
 
-    @GetMapping("/groupe/get/name")
+    @GetMapping("/group/name")
     @Transactional(readOnly = true)
     public Group getGroupeByName(@RequestParam String name) {
+        logger.debug("get group by name group({})");
         return (Group) groupService.getGroupByGroupNameService(name);
     }
 
-    @PostMapping(path = "/groupe/create", consumes = "application/json", produces = "application/json")
+    @PostMapping(path = "/group/new", consumes = "application/json", produces = "application/json")
     public ResponseEntity<Group> createGroupe(@RequestBody String newName) {
-        //logger.debug("createGroupe({})", newName);
+        logger.debug("create new group({}) name = ", newName);
         Group groupe = groupService.createNewGroupService(newName);
         return new ResponseEntity<>(groupe, HttpStatus.OK);
     }
 
 
-    @PutMapping(path = "/groupe/update", consumes = "application/json", produces = "application/json")
+    @PutMapping(path = "/group/update", consumes = "application/json", produces = "application/json")
     public ResponseEntity<Group> updateGroupe(@RequestBody List <String> names) {
-        //logger.debug("updateGroupe({})", newName);
+        logger.debug("update group({})", names.toString());
         Group groupe = groupService.updateGroupNameService(names.get(0), names.get(1));
         return new ResponseEntity<>(groupe, HttpStatus.OK);
     }
@@ -60,7 +61,7 @@ public class GroupsRest {
 
     @DeleteMapping(value = "/groupe/delete/{name}", produces = {"application/json"})
     public ResponseEntity <String> deleteGroupe(@PathVariable String name) {
-        //logger.debug("deleteGroupe({})", name);
+        logger.debug("delete group by name groupe = ", name);
         name = groupService.deleteGroupByGroupNameService(name);
         return new ResponseEntity(name, HttpStatus.OK);
     }
