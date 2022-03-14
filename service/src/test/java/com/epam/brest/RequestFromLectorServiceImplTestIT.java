@@ -1,8 +1,8 @@
 package com.epam.brest;
 
-import com.epam.brest.serviceapi.GroupeServiceApi;
-import com.epam.brest.serviceapi.RequestServiceApi;
-import com.epam.brest.serviceapi.UserServiceApi;
+import com.epam.brest.serviceapi.GroupServiceApi;
+import com.epam.brest.serviceapi.RequestFromLectorServiceApi;
+import com.epam.brest.serviceapi.LectorServiceApi;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,64 +22,64 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 @SpringBootApplication
-@SpringBootTest (classes= { UserServiceImpl.class, RequestServiceImpl.class, GroupeServiceImpl.class
+@SpringBootTest (classes= { LectorServiceImpl.class, RequestFromLectorServiceImpl.class, GroupServiceImpl.class
                             , DaoLectorImpl.class, DaoRequestFromLectorImpl.class, DaoGroupImpl.class})
 @ComponentScan("com.epam.brest.*")
 @EntityScan("com.epam.brest")
 @Transactional()
-public class RequestServiceImplTest {
+public class RequestFromLectorServiceImplTestIT {
 
-    private final Logger logger = LogManager.getLogger(RequestServiceImplTest.class);
-
-    @Autowired
-    private UserServiceApi userService;
+    private final Logger logger = LogManager.getLogger(RequestFromLectorServiceImplTestIT.class);
 
     @Autowired
-    private RequestServiceApi requestService;
+    private LectorServiceApi lectorService;
 
     @Autowired
-    private GroupeServiceApi groupeService;
+    private RequestFromLectorServiceApi requestFromLectorService;
+
+    @Autowired
+    private GroupServiceApi groupService;
 
     @BeforeEach
     public void setUp() {
         String[] groupes = new String[]{"e1", "e2", "e3", "e4", "e5", "e6"};
         List<Group> grup = Arrays.stream(groupes)
-                .map(gr -> groupeService.insertNewGroupeService(gr))
+                .map(gr -> groupService.createNewGroupService(gr))
                 .collect(Collectors.toList());
-        userService.saveNewUserService(new Lector("TOMMY", "tom", "1111", "iuy@aa.com"));
+        lectorService.createNewLectorService(new Lector("TOMMY", "tom", "1111", "iuy@aa.com"));
     }
 
 
     @Test
     public void isGetAllRequests() {
         logger.info("GET ALL REQUESTS BY USER {}");
-        Lector user = userService.getUserByNameService("TOMMY");
-        List<RequestFromLector> requests = requestService.getAllRequestsService(user.getIdLector());
+        Lector user = lectorService.getLectorByLectorsNameService("TOMMY");
+        List<RequestFromLector> requests = requestFromLectorService.getAllRequestsFromLectorService(user.getIdLector());
         assertTrue(requests.size() == 6);
 
-        RequestFromLector request = requestService.getRequestByIdrService(requests.get(0).getIdRequest());
+        RequestFromLector request = requestFromLectorService.getRequestOfLectorByIdRequestService(requests.get(0).getIdRequest());
         assertTrue(request.getGroup().equals(requests.get(0).getGroup()));
     }
 
     @Test
     public void isSaveRequestsForNewUserAndNewGroupe() {
         logger.info("SAVE REQUESTS FOE NEW USER {}");
-        Lector user = userService.saveNewUserService(new Lector(
+        Lector user = lectorService.createNewLectorService(new Lector(
                 "MIKE", "mike", "2222", "mike@tyson.com"));
 
-        List<RequestFromLector> requests = requestService.getAllRequestsService(user.getIdLector());
+        List<RequestFromLector> requests = requestFromLectorService.getAllRequestsFromLectorService(user.getIdLector());
         assertTrue(requests.size() == 6);
         assertTrue(user.getNameLector().equals("MIKE"));
 
-        requestService.saveRequestsWhenNewGroupeService("q1");
-        requests = requestService.getAllRequestsService(user.getIdLector());
+        requestFromLectorService.saveRequestsForLectorsWhenCreateNewGroupeService("q1");
+        requests = requestFromLectorService.getAllRequestsFromLectorService(user.getIdLector());
         assertTrue(requests.size() == 7);
 
-        user = userService.getUserByNameService("TOMMY");
-        requests = requestService.getAllRequestsService(user.getIdLector());
+        user = lectorService.getLectorByLectorsNameService("TOMMY");
+        requests = requestFromLectorService.getAllRequestsFromLectorService(user.getIdLector());
         assertTrue(requests.size() == 7);
 
-        List<Group> groupes = groupeService.getAllGroupesService();
+        List<Group> groupes = groupService.getAllGroupsService();
         assertTrue(groupes.size() == 7);
     }
 
@@ -87,17 +87,17 @@ public class RequestServiceImplTest {
     @Test
     public void isFlushRequests() {
         logger.info("SAVE REQUESTS FOE NEW USER {}");
-        Lector user = userService.saveNewUserService(new Lector(
+        Lector user = lectorService.createNewLectorService(new Lector(
                 "MIKE", "mike", "2222", "mike@tyson.com"));
-        List<RequestFromLector> requests = requestService.getAllRequestsService(user.getIdLector());
+        List<RequestFromLector> requests = requestFromLectorService.getAllRequestsFromLectorService(user.getIdLector());
         assertTrue(requests.size() == 6);
         assertTrue(requests.get(0).getNumberOfPairs().equals("0"));
         assertTrue(user.getNameLector().equals("MIKE"));
         requests = requests.stream().peek(req -> req.setNumberOfPairs("2")).collect(Collectors.toList());
-        requests = requestService.updateAllRequestsForUserService(requests);
+        requests = requestFromLectorService.updateAllRequestsForLectorsService(requests);
         assertTrue(requests.get(0).getNumberOfPairs().equals("2"));
         assertTrue(requests.get(1).getNumberOfPairs().equals("2"));
-        RequestFromLector request = requestService.flushRequestInfoService(requests.get(0));
+        RequestFromLector request = requestFromLectorService.flushRequestFromLectorService(requests.get(0));
         assertTrue(request.getNumberOfPairs().equals("0"));
         assertTrue(requests.get(1).getNumberOfPairs().equals("2"));
     }
@@ -106,13 +106,13 @@ public class RequestServiceImplTest {
     @Test
     public void isDeleteRequests(){
         logger.info("DELETE REQUESTS FOR USER {}");
-        Lector user = userService.saveNewUserService(new Lector(
+        Lector user = lectorService.createNewLectorService(new Lector(
                 "MIKE", "mike", "2222", "mike@tyson.com"));
-        List<RequestFromLector> requests = requestService.getAllRequestsService(user.getIdLector());
+        List<RequestFromLector> requests = requestFromLectorService.getAllRequestsFromLectorService(user.getIdLector());
         assertTrue(requests.size() == 6);
         assertTrue(user.getNameLector().equals("MIKE"));
-        userService.deleteUserByIdService(user.getIdLector());
-        requests = requestService.getAllRequestsService(user.getIdLector());
+        lectorService.deleteLectorByIdLectorService(user.getIdLector());
+        requests = requestFromLectorService.getAllRequestsFromLectorService(user.getIdLector());
         assertTrue(requests.size() == 0);
     }
 }

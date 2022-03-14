@@ -15,41 +15,41 @@ public class DaoGroupImpl implements DaoGroupApi {
     private final Logger logger = LogManager.getLogger(DaoGroupImpl.class);
 
     @Autowired
-    private GroupJpaRepository groupeRepository;
+    private GroupJpaRepository groupRepository;
 
     @Override
     public List<String> getAllGroupsNames() {
         logger.info("GET ALL GROUPE NAMES {}");
-        return groupeRepository.getAllGroupsNames();
+        return groupRepository.getAllGroupsNames();
     }
 
     @Override
     public List<Group> getAllGroups() {
         logger.info("GET ALL GROUPES  {}");
-        return groupeRepository.getAllGroups();
+        return groupRepository.getAllGroups();
     }
 
     @Override
     public String deleteGroupByName(String groupeName) {
         logger.info("DELETE GROUPE BY the NAME {}");
-        return groupeRepository.deleteGroupByGroupName(groupeName);
+        return groupRepository.deleteGroupByGroupName(groupeName);
     }
 
     @Override
     public Group insertNewGroup(String newNameOfGroupe) {
         logger.info("CREATE NEW GROUPE {}");
-        return groupeRepository.insertNewGroup(newNameOfGroupe);
+        return groupRepository.insertNewGroup(newNameOfGroupe);
     }
 
     @Override
     public Group getGroupByName(String nameGroupe) {
         logger.info("GET GROUPE BY NAME {}");
-        return groupeRepository.getGroupeByGroupName(nameGroupe);
+        return groupRepository.getGroupeByGroupName(nameGroupe);
     }
 
     @Override
     public Group updateGroup(String newName, String oldName) {
         logger.info("UPDATE GROUPE.NAME BY NEW NAME {}");
-        return groupeRepository.updateGroupByGroupName(newName, oldName);
+        return groupRepository.updateGroupByGroupName(newName, oldName);
     }
 }

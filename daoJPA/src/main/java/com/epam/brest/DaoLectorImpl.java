@@ -16,42 +16,42 @@ public class DaoLectorImpl implements DaoLectorApi {
     private final Logger logger = LogManager.getLogger(DaoLectorImpl.class);
 
     @Autowired
-    private LectorsJpaRepository userRepository;
+    private LectorsJpaRepository lectorsRepository;
 
     public List<Lector> getAllLectors() {
         logger.info("GET ALL USERS {}");
-        return (List<Lector>) userRepository.findAllLectors();
+        return (List<Lector>) lectorsRepository.findAllLectors();
     }
 
 
     public Lector getLectorByName(String name) {
         logger.info("GET USER BY NAME{} " + name);
-        return userRepository.findLectorByLectorsName(name);
+        return lectorsRepository.findLectorByLectorsName(name);
     }
 
     public Lector getLectorByEmail(String email) {
         logger.info("GET USER BY EMAIL{} " + email);
-        return userRepository.findLectorByEmail(email);
+        return lectorsRepository.findLectorByEmail(email);
     }
 
     public Lector getLectorById(Integer id) {
         logger.info("GET USER BY ID{} " + id);
-        return (Lector) userRepository.findLectorByLectorsId(id);
+        return (Lector) lectorsRepository.findLectorByLectorsId(id);
     }
 
     public Lector saveOrUpdateLector(Lector user) {
         logger.info("SAVE USER {} " + user);
-        return (Lector) userRepository.saveOrUpdateLector(user);
+        return (Lector) lectorsRepository.saveOrUpdateLector(user);
     }
 
     public void deleteLector(Lector user) {
         logger.info("DELETE USER {}" + user);
-        userRepository.deleteLectorByLectorsId(user.getIdLector());
+        lectorsRepository.deleteLectorByLectorsId(user.getIdLector());
     }
 
     public void deleteLectorById(Integer id) {
         logger.info("DELETE USER id = " + id );
-        userRepository.deleteLectorByLectorsId(id);
+        lectorsRepository.deleteLectorByLectorsId(id);
     }
 
 

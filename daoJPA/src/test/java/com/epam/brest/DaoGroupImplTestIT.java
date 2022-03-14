@@ -30,13 +30,13 @@ public class DaoGroupImplTestIT {
     private final Logger logger = LogManager.getLogger(DaoGroupImplTestIT.class);
 
     @Autowired
-    private DaoGroupApi groupeDao;
+    private DaoGroupApi daoGroup;
 
     @BeforeEach
     public void setUp() {
         String[] groupes = new String[]{"e1", "e2", "e3", "e4", "e5", "e6"};
         List<Group> grup = Arrays.stream(groupes)
-                .map(gr -> groupeDao.insertNewGroup(gr))
+                .map(gr -> daoGroup.insertNewGroup(gr))
                 .collect(Collectors.toList());
     }
 
@@ -44,30 +44,30 @@ public class DaoGroupImplTestIT {
     @Test
     public void testGetAllGroupes() {
         logger.info("GET ALL GROUPES {}");
-        List<Group> groupes = (List<Group>) groupeDao.getAllGroups();
+        List<Group> groupes = (List<Group>) daoGroup.getAllGroups();
         assertTrue(groupes.get(0).getGroupName() == "e1");
     }
 
     @Test
     public void testGetAllGroupesByNames() {
         logger.info("GET ALL GROUPE NAMES{}");
-        List<String> groupes = (List<String>) groupeDao.getAllGroupsNames();
+        List<String> groupes = (List<String>) daoGroup.getAllGroupsNames();
         assertTrue(groupes.size() == 6);
     }
 
     @Test
     public void testAddGroupe() {
         logger.info("ADD NEW GROUPE {}");
-        groupeDao.insertNewGroup("a1");
-        List<String> groupes = (List<String>) groupeDao.getAllGroupsNames();
+        daoGroup.insertNewGroup("a1");
+        List<String> groupes = (List<String>) daoGroup.getAllGroupsNames();
         assertTrue(groupes.size() == 7);
     }
 
     @Test
     public void testUpdateGroupeName() {
         logger.info("UPDATE GROUPE NAME {}");
-        Group updatedGroupe = groupeDao.updateGroup("a1", "e1");
-        Group groupe = groupeDao.getGroupByName("a1");
+        Group updatedGroupe = daoGroup.updateGroup("a1", "e1");
+        Group groupe = daoGroup.getGroupByName("a1");
         assertTrue(groupe.getGroupName().equals("a1") && updatedGroupe.getIdGroup() == groupe.getIdGroup());
     }
 
@@ -75,11 +75,11 @@ public class DaoGroupImplTestIT {
     @Test
     public void testDeleteGroupeByName() {
         logger.info("DELETE GROUPE BY NAME {}");
-        String deletedNameGroupe = groupeDao.deleteGroupByName("e1");
+        String deletedNameGroupe = daoGroup.deleteGroupByName("e1");
         assertTrue(deletedNameGroupe.equals("e1"));
-        deletedNameGroupe = groupeDao.deleteGroupByName("e1");
+        deletedNameGroupe = daoGroup.deleteGroupByName("e1");
         assertTrue(deletedNameGroupe.equals("Is Empty"));
-        Group groupe = groupeDao.getGroupByName("e1");
+        Group groupe = daoGroup.getGroupByName("e1");
         assertTrue(groupe.getGroupName().equals("") );
     }
 

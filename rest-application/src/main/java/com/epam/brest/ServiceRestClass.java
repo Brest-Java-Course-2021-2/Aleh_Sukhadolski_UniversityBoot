@@ -1,6 +1,6 @@
 package com.epam.brest;
 
-import com.epam.brest.serviceapi.UserServiceApi;
+import com.epam.brest.serviceapi.LectorServiceApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.*;
 public class ServiceRestClass {
 
     @Autowired
-    private UserServiceApi userService;
+    private LectorServiceApi userService;
 
-    public ServiceRestClass(UserServiceApi userService) {
+    public ServiceRestClass(LectorServiceApi userService) {
         this.userService = userService;
     }
 

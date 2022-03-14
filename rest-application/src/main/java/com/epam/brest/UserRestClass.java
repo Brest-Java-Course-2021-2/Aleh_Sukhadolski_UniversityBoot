@@ -1,6 +1,6 @@
 package com.epam.brest;
 
-import com.epam.brest.serviceapi.UserServiceApi;
+import com.epam.brest.serviceapi.LectorServiceApi;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,14 +18,14 @@ public class UserRestClass {
     private final Logger logger = LogManager.getLogger(UserRestClass.class);
 
     @Autowired
-    private UserServiceApi userService;
+    private LectorServiceApi userService;
 
     @GetMapping("/user/all")
     @Transactional(readOnly = true)
     public List<Lector> users()
     {
         logger.debug("getAllUsers({})");
-        return (List<Lector>) userService.getAllUsersService();
+        return (List<Lector>) userService.getAllLectorsService();
     }
 
 
@@ -34,7 +34,7 @@ public class UserRestClass {
     public Lector userByName(@RequestParam String name)
     {
         logger.debug("getUserByName({})", name);
-        return (Lector) userService.getUserByNameService(name);
+        return (Lector) userService.getLectorByLectorsNameService(name);
     }
 
     @GetMapping("/user/email")
@@ -42,7 +42,7 @@ public class UserRestClass {
     public Lector userByEmail(@RequestParam String email)
     {
         logger.debug("getUserByEmail({})", email);
-        return (Lector) userService.getUserByEmailService(email);
+        return (Lector) userService.getLectorByEmailService(email);
     }
 
     @GetMapping("/user/id")
@@ -50,14 +50,14 @@ public class UserRestClass {
     public Lector userById(@RequestParam String id)
     {
         logger.debug("getUserById({})", id);
-        return (Lector) userService.getUserByIdService(Integer.parseInt(id));
+        return (Lector) userService.getLectorByIdLectorService(Integer.parseInt(id));
     }
 
 
     @PostMapping(path = "/user/create", consumes = "application/json", produces = "application/json")
     public ResponseEntity<Integer> createUser(@RequestBody Lector user) {
         logger.debug("createUser({})", user);
-        user = userService.saveNewUserService(user);
+        user = userService.createNewLectorService(user);
         return new ResponseEntity<>(user.getIdLector(), HttpStatus.OK);
     }
 
@@ -65,14 +65,14 @@ public class UserRestClass {
     @PutMapping(path = "/user/update", consumes = "application/json", produces = "application/json")
     public ResponseEntity<Integer> updateUser(@RequestBody Lector user) {
         logger.debug("updateUser({})", user);
-        user = userService.saveNewUserService(user);
+        user = userService.createNewLectorService(user);
         return new ResponseEntity<>(user.getIdLector(), HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/user/delete/{id}", produces = {"application/json"})
     public ResponseEntity <Integer> deleteUserById(@PathVariable Integer id) {
         logger.debug("deleteUser({})", id);
-        userService.deleteUserByIdService(id);
+        userService.deleteLectorByIdLectorService(id);
         return new ResponseEntity(id, HttpStatus.OK);
     }
 
@@ -80,7 +80,7 @@ public class UserRestClass {
     @DeleteMapping(value = "/user/delete", consumes = "application/json", produces = "application/json")
     public ResponseEntity <Integer> deleteUser(@RequestBody Lector user) {
         logger.debug("deleteUser({})", user);
-        userService.deleteUserService(user);
+        userService.deleteLectorService(user);
         return new ResponseEntity(user.getIdLector(), HttpStatus.OK);
     }
 
