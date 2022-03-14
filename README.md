@@ -13,7 +13,7 @@
 
 _method post_
 
-http://localhost:8080/user/create
+http://localhost:8080/lector/new
 
 body:
 
@@ -29,7 +29,7 @@ ____________________________________
 
 _method post_
 
-http://localhost:8080/user/create
+http://localhost:8080/lector/new
 
 body:
 {
@@ -53,7 +53,7 @@ ______________________________________
 
 _method post_
 
-http://localhost:8080/groupe/create
+http://localhost:8080/group/new
 
 #### body:
 e1
@@ -86,7 +86,7 @@ e4
 
 ### __Test all groupes__
 method GET
-http://localhost:8080/groupe/all
+http://localhost:8080/group/all
 Response :
 [
 {
@@ -187,90 +187,3 @@ http://localhost:8080/request/12
 }
 
 
-
-
-# Requests to test REST application at console:
-
-
-### Get all users  Get
-curl --request GET 'http://localhost:8080/user/all'
-
-### Get all groupes
-curl --request GET 'http://localhost:8080/groupe/all'
-
-
-
-### Insert new groupes
-
-curl --request POST 'http://localhost:8080/groupe/create' \--header 'Accept: application/json' \--header 'Content-Type: application/json' \--data-raw 'e1'
-
-curl --request POST 'http://localhost:8080/groupe/create' \--header 'Accept: application/json' \--header 'Content-Type: application/json' \--data-raw 'e2}'
-
-curl --request POST 'http://localhost:8080/groupe/create' \--header 'Accept: application/json' \--header 'Content-Type: application/json' \--data-raw 'e3'
-
-curl --request POST 'http://localhost:8080/groupe/create' \--header 'Accept: application/json' \--header 'Content-Type: application/json' \--data-raw 'e4'
-
-curl --request POST 'http://localhost:8080/groupe/create' \--header 'Accept: application/json' \--header 'Content-Type: application/json' \--data-raw 'e5'
-
-curl --request POST 'http://localhost:8080/groupe/create' \--header 'Accept: application/json' \--header 'Content-Type: application/json' \--data-raw 'e6'
-
-
-
-
-### Get groupe By name groupe
-curl --request GET 'http://localhost:8080/groupe/get/name?name=e1'
-
-
-### Get all groupes by Names
-curl --request GET 'http://localhost:8080/groupe/get/name/all'
-
-
-
-### Create new user  
-curl --request POST 'http://localhost:8080/user/create' \--header 'Accept: application/json' \--header 'Content-Type: application/json' \--data-raw '{"name": "MikeTyson","login": "mike","password": "1111","email": "mike@tyson.com"}'
-
-curl --request POST 'http://localhost:8080/user/create' \--header 'Accept: application/json' \--header 'Content-Type: application/json' \--data-raw '{"name": "GeorgeForeman","login": "george","password": "2222","email": "george@foreman.com"}'
-
-
-### Update user
-curl --request PUT 'http://localhost:8080/user/update' \
---header 'Accept: application/json' \
---header 'Content-Type: application/json' \
---data-raw '{
-"id": "1"
-"name": "DennyDeVito",
-"login": "denny",
-"password": "1111",
-"email": "mike@tyson.com"
-}'
-
-### Get user by name = Mohammad Ali   
-curl --request GET 'http://localhost:8080/user/name?name=MohammadAli'
-
-### Get user by email = mike@mail.net   
-curl --request GET 'http://localhost:8080/user/email?email=mike@mail.net'
-
-### Get user by id = 1 
-curl --request GET 'http://localhost:8080/user/id?id=1'
-
-
-### Delete user by id = 1 
-
-curl --request DELETE 'http://localhost:8080/user/delete/id?id=1'
-
-curl --request GET 'http://localhost:8080/user/all'
-
-### Delete user by user 
-
-curl --request DELETE 'http://localhost:8080/user/delete' \
---header 'Accept: application/json' \
---header 'Content-Type: application/json' \
---data-raw '{
-"id": "1"
-"name": "DennyDeVito",
-"login": "denny",
-"password": "1111",
-"email": "mike@tyson.com"
-}'
-
-curl --request GET 'http://localhost:8080/user/all'
