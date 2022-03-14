@@ -9,9 +9,9 @@
         </parent>
 
 	<groupId>com.epam.brest</groupId>
-	<artifactId>daoJPA</artifactId>
+	<artifactId>dao-jpa</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>daoJPA</name>
+	<name>dao-jpa</name>
 	<description>Demo project for Spring Boot</description>
 	<packaging>jar</packaging>
 

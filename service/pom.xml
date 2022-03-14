@@ -28,7 +28,7 @@
 
     <dependency>
          <groupId>com.epam.brest</groupId>
-         <artifactId>daoJPA</artifactId>
+         <artifactId>dao-jpa</artifactId>
          <version>${project.version}</version>
     </dependency>
 

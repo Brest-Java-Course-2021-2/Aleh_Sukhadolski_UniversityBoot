@@ -23,7 +23,7 @@
 	    <module>rest-application</module>
 	    <module>service</module>
         <module>service-api</module>
-        <module>daoJPA</module>
+        <module>dao-jpa</module>
         <module>dao-api</module>
         <module>db</module>
         <module>model</module>
