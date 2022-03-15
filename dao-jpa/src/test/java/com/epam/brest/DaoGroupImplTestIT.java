@@ -34,53 +34,54 @@ public class DaoGroupImplTestIT {
 
     @BeforeEach
     public void setUp() {
-        String[] groupes = new String[]{"e1", "e2", "e3", "e4", "e5", "e6"};
-        List<Group> grup = Arrays.stream(groupes)
+        String[] groups = new String[]{"e1", "e2", "e3", "e4", "e5", "e6"};
+        List<Group> grup = Arrays.stream(groups)
                 .map(gr -> daoGroup.insertNewGroup(gr))
                 .collect(Collectors.toList());
     }
 
 
     @Test
-    public void testGetAllGroupes() {
-        logger.info("GET ALL GROUPES {}");
-        List<Group> groupes = (List<Group>) daoGroup.getAllGroups();
-        assertTrue(groupes.get(0).getGroupName() == "e1");
+    public void testGetAllGroups() {
+        logger.info("GET ALL GROUPS {}");
+        List<Group> groups = (List<Group>) daoGroup.getAllGroups();
+        assertTrue(groups.get(0).getGroupName() == "e1");
     }
 
     @Test
-    public void testGetAllGroupesByNames() {
-        logger.info("GET ALL GROUPE NAMES{}");
-        List<String> groupes = (List<String>) daoGroup.getAllGroupsNames();
-        assertTrue(groupes.size() == 6);
+    public void testGetAllGroupsByNames() {
+        logger.info("GET ALL GROUP NAMES{}");
+        List<String> groups = (List<String>) daoGroup.getAllGroupsNames();
+        assertTrue(groups.size() == 6);
     }
 
     @Test
-    public void testAddGroupe() {
-        logger.info("ADD NEW GROUPE {}");
+    public void testAddGroup() {
+        logger.info("ADD NEW GROUP {}");
         daoGroup.insertNewGroup("a1");
-        List<String> groupes = (List<String>) daoGroup.getAllGroupsNames();
-        assertTrue(groupes.size() == 7);
+        List<String> groups = (List<String>) daoGroup.getAllGroupsNames();
+        assertTrue(groups.size() == 7);
     }
 
     @Test
-    public void testUpdateGroupeName() {
-        logger.info("UPDATE GROUPE NAME {}");
-        Group updatedGroupe = daoGroup.updateGroup("a1", "e1");
-        Group groupe = daoGroup.getGroupByName("a1");
-        assertTrue(groupe.getGroupName().equals("a1") && updatedGroupe.getIdGroup() == groupe.getIdGroup());
+    public void testUpdateGroupName() {
+        logger.info("UPDATE GROUP NAME {}");
+        Group updatedGroup = daoGroup.updateGroup("a1", "e1");
+        Group group = daoGroup.getGroupByName("a1");
+        assertTrue(group.getGroupName().equals("a1")
+                           && updatedGroup.getIdGroup() == group.getIdGroup());
     }
 
 
     @Test
-    public void testDeleteGroupeByName() {
-        logger.info("DELETE GROUPE BY NAME {}");
-        String deletedNameGroupe = daoGroup.deleteGroupByName("e1");
-        assertTrue(deletedNameGroupe.equals("e1"));
-        deletedNameGroupe = daoGroup.deleteGroupByName("e1");
-        assertTrue(deletedNameGroupe.equals("Is Empty"));
-        Group groupe = daoGroup.getGroupByName("e1");
-        assertTrue(groupe.getGroupName().equals("IsEmpty") );
+    public void testDeleteGroupByName() {
+        logger.info("DELETE GROUP BY NAME {}");
+        String deletedNameGroup = daoGroup.deleteGroupByName("e1");
+        assertTrue(deletedNameGroup.equals("e1"));
+        deletedNameGroup = daoGroup.deleteGroupByName("e1");
+        assertTrue(deletedNameGroup.equals("Is Empty"));
+        Group group = daoGroup.getGroupByName("e1");
+        assertTrue(group.getGroupName().equals("IsEmpty") );
     }
 
 }
