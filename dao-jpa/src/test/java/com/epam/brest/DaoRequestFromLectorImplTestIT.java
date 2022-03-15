@@ -44,12 +44,16 @@ public class DaoRequestFromLectorImplTestIT {
         logger.info("Requests for new Lector {}" + lector);
         List <String> groups = Arrays.asList(new String[]{"e1", "e2", "e3", "e4", "e5"});
         daoRequestFromLector.createEmptyRequestsForNewLector(lector.getIdLector(),groups);
-        List<RequestFromLector> requestsFromLector = daoRequestFromLector.getAllRequestsFromLectorByIdLector(lector.getIdLector());
+
+        List<RequestFromLector> requestsFromLector = daoRequestFromLector
+                                                     .getAllRequestsFromLectorByIdLector(lector.getIdLector());
+
         assertTrue(requestsFromLector.size() == 5);
         List<Integer> lectorsId = (List<Integer>) daoLector.getAllLectors()
                                                     .stream()
                                                     .flatMap(us -> Stream.of(us.getIdLector()))
                                                     .collect(Collectors.toList());
+
         daoRequestFromLector.createRequestsForLectorsWhenCreateNewGroup("e6", lectorsId);
         requestsFromLector = daoRequestFromLector.getAllRequestsFromLectorByIdLector(lector.getIdLector());
         assertTrue(requestsFromLector.size() == 6);
@@ -81,12 +85,14 @@ public class DaoRequestFromLectorImplTestIT {
         requestFromLector.setSubjectOfLector("fizo");
         daoRequestFromLector.updateRequestFromLector(requestFromLector);
         requestFromLector = daoRequestFromLector.getAllRequestsFromLectorByIdLector(lector.getIdLector()).get(0);
+
         assertTrue(requestFromLector.getNumberOfPairs().equals("2")
                            && requestFromLector.getSubjectOfLector().equals("fizo"));
 
         logger.info("Flush request {}" + requestFromLector);
         daoRequestFromLector.flushRequestForLector(requestFromLector);
         requestFromLector = daoRequestFromLector.getAllRequestsFromLectorByIdLector(lector.getIdLector()).get(0);
+
         assertTrue(requestFromLector.getNumberOfPairs().equals("0")
                             && requestFromLector.getSubjectOfLector().equals("0000"));
 
@@ -115,6 +121,7 @@ public class DaoRequestFromLectorImplTestIT {
         for (RequestFromLector req : requestsFromLector){
             ifChanged = ifChanged && (req.getNumberOfPairs().equals("3"));
         }
+
         logger.info("Created all requests for new Lector {}" + ifChanged);
         assertTrue(ifChanged);
 

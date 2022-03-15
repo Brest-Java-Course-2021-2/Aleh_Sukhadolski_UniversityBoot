@@ -20,7 +20,7 @@ public class LectorsRest {
     @Autowired
     private LectorServiceApi lectorService;
 
-    @GetMapping("/lector/all")
+    @GetMapping("/lectors/get-all")
     @Transactional(readOnly = true)
     public List<Lector> users()
     {
@@ -29,7 +29,7 @@ public class LectorsRest {
     }
 
 
-    @GetMapping("/lector/name")
+    @GetMapping("/lectors/lector/get-name")
     @Transactional(readOnly = true)
     public Lector userByName(@RequestParam String name)
     {
@@ -37,7 +37,7 @@ public class LectorsRest {
         return (Lector) lectorService.getLectorByLectorsNameService(name);
     }
 
-    @GetMapping("/lector/email")
+    @GetMapping("/lectors/lector/get-email")
     @Transactional(readOnly = true)
     public Lector userByEmail(@RequestParam String email)
     {
@@ -45,31 +45,31 @@ public class LectorsRest {
         return (Lector) lectorService.getLectorByEmailService(email);
     }
 
-    @GetMapping("/lector/id")
+    @GetMapping("/lectors/lector/{id}")
     @Transactional(readOnly = true)
-    public Lector userById(@RequestParam String id)
+    public Lector userById(@PathVariable Integer id)
     {
         logger.debug("getLectorById({})", id);
-        return (Lector) lectorService.getLectorByIdLectorService(Integer.parseInt(id));
+        return (Lector) lectorService.getLectorByIdLectorService(id);
     }
 
 
-    @PostMapping(path = "/lector/new", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Integer> createUser(@RequestBody Lector user) {
-        logger.debug("createLector({})", user);
-        user = lectorService.createNewLectorService(user);
-        return new ResponseEntity<>(user.getIdLector(), HttpStatus.OK);
+    @PostMapping(path = "/lectors/lector/new", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<Integer> createUser(@RequestBody Lector lector) {
+        logger.debug("createLector({})", lector);
+        lector = lectorService.createNewLectorService(lector);
+        return new ResponseEntity<>(lector.getIdLector(), HttpStatus.OK);
     }
 
 
-    @PutMapping(path = "/lector/update", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Integer> updateUser(@RequestBody Lector user) {
-        logger.debug("updateLector({})", user);
-        user = lectorService.createNewLectorService(user);
-        return new ResponseEntity<>(user.getIdLector(), HttpStatus.OK);
+    @PutMapping(path = "/lectors/lector/update", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<Integer> updateUser(@RequestBody Lector lector) {
+        logger.debug("updateLector({})", lector);
+        lector = lectorService.createNewLectorService(lector);
+        return new ResponseEntity<>(lector.getIdLector(), HttpStatus.OK);
     }
 
-    @DeleteMapping(value = "/lector/delete/{id}", produces = {"application/json"})
+    @DeleteMapping(value = "/lectors/lector/{id}/delete", produces = {"application/json"})
     public ResponseEntity <Integer> deleteUserById(@PathVariable Integer id) {
         logger.debug("deleteLector by id({})", id);
         lectorService.deleteLectorByIdLectorService(id);
@@ -77,11 +77,11 @@ public class LectorsRest {
     }
 
 
-    @DeleteMapping(value = "/lector/delete", consumes = "application/json", produces = "application/json")
-    public ResponseEntity <Integer> deleteUser(@RequestBody Lector user) {
-        logger.debug("deleteLector({})", user);
-        lectorService.deleteLectorService(user);
-        return new ResponseEntity(user.getIdLector(), HttpStatus.OK);
+    @DeleteMapping(value = "/lectors/lector/delete", consumes = "application/json", produces = "application/json")
+    public ResponseEntity <Integer> deleteUser(@RequestBody Lector lector) {
+        logger.debug("deleteLector({})", lector);
+        lectorService.deleteLectorService(lector);
+        return new ResponseEntity(lector.getIdLector(), HttpStatus.OK);
     }
 
 

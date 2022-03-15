@@ -21,28 +21,28 @@ public class RequestsFromLectorRest {
     @Autowired
     RequestFromLectorServiceApi requestFromLectorService;
 
-    @GetMapping ("/request/all/{id}")
+    @GetMapping ("/lectors/lector/{id}/requests/all")
     @Transactional(readOnly = true)
     public List<RequestFromLector> getAllRequests(@PathVariable int id) {
         logger.debug("get all requests from lector where foreign key id = ", id);
         return (List<RequestFromLector>) requestFromLectorService.getAllRequestsFromLectorService(id);
     }
 
-    @GetMapping ("/request/{idr}")
+    @GetMapping ("/lectors/lector/request/{id}")
     @Transactional(readOnly = true)
-    public RequestFromLector getRequestByIdr(@PathVariable int idr) {
-        logger.debug("get request from lector where id = ", idr);
-        return (RequestFromLector) requestFromLectorService.getRequestOfLectorByIdRequestService(idr);
+    public RequestFromLector getRequestByIdr(@PathVariable int id) {
+        logger.debug("get request from lector where id = ", id);
+        return (RequestFromLector) requestFromLectorService.getRequestOfLectorByIdRequestService(id);
     }
 
-    @PutMapping(path = "/request/update", consumes = "application/json", produces = "application/json")
+    @PutMapping(path = "/lectors/lector/request/update", consumes = "application/json", produces = "application/json")
     public ResponseEntity<RequestFromLector> updateRequest(@RequestBody RequestFromLector request) {
         logger.debug("update request from lector ", request);
         request= requestFromLectorService.updateRequestFromLectorService(request);
         return new ResponseEntity<>(request, HttpStatus.OK);
     }
 
-    @DeleteMapping(value = "/request/delete", consumes = "application/json", produces = "application/json")
+    @DeleteMapping(value = "/lectors/lector/request/delete", consumes = "application/json", produces = "application/json")
     public ResponseEntity <RequestFromLector> deleteGroupe(@PathVariable RequestFromLector request) {
         logger.debug("delete request from lector = ", request);
         requestFromLectorService.flushRequestFromLectorService(request);
