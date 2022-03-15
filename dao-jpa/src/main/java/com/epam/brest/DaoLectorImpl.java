@@ -19,39 +19,39 @@ public class DaoLectorImpl implements DaoLectorApi {
     private LectorsJpaRepository lectorsRepository;
 
     public List<Lector> getAllLectors() {
-        logger.info("GET ALL USERS {}");
+        logger.info("GET ALL LECTORS {}");
         return (List<Lector>) lectorsRepository.findAllLectors();
     }
 
 
     public Lector getLectorByName(String name) {
-        logger.info("GET USER BY NAME{} " + name);
+        logger.info("GET LECTOR BY NAME{} " + name);
         return lectorsRepository.findLectorByLectorsName(name);
     }
 
-    public Lector getLectorByEmail(String email) {
-        logger.info("GET USER BY EMAIL{} " + email);
-        return lectorsRepository.findLectorByEmail(email);
+    public Lector getLectorByEmail(String emailLector) {
+        logger.info("GET LECTOR BY EMAIL{} " + emailLector);
+        return lectorsRepository.findLectorByEmail(emailLector);
     }
 
-    public Lector getLectorById(Integer id) {
-        logger.info("GET USER BY ID{} " + id);
-        return (Lector) lectorsRepository.findLectorByLectorsId(id);
+    public Lector getLectorById(Integer idLector) {
+        logger.info("GET Lector BY ID{} " + idLector);
+        return (Lector) lectorsRepository.findLectorByLectorsId(idLector);
     }
 
-    public Lector saveOrUpdateLector(Lector user) {
-        logger.info("SAVE USER {} " + user);
-        return (Lector) lectorsRepository.saveOrUpdateLector(user);
+    public Lector saveOrUpdateLector(Lector lector) {
+        logger.info("SAVE Lector {} " + lector);
+        return (Lector) lectorsRepository.saveOrUpdateLector(lector);
     }
 
-    public void deleteLector(Lector user) {
-        logger.info("DELETE USER {}" + user);
-        lectorsRepository.deleteLectorByLectorsId(user.getIdLector());
+    public void deleteLector(Lector lector) {
+        logger.info("DELETE Lector {}" + lector);
+        lectorsRepository.deleteLectorByLectorsId(lector.getIdLector());
     }
 
-    public void deleteLectorById(Integer id) {
-        logger.info("DELETE USER id = " + id );
-        lectorsRepository.deleteLectorByLectorsId(id);
+    public void deleteLectorById(Integer idLector) {
+        logger.info("DELETE Lector id = " + idLector );
+        lectorsRepository.deleteLectorByLectorsId(idLector);
     }
 
 

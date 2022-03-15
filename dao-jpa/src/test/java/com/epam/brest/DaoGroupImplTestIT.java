@@ -80,7 +80,7 @@ public class DaoGroupImplTestIT {
         deletedNameGroupe = daoGroup.deleteGroupByName("e1");
         assertTrue(deletedNameGroupe.equals("Is Empty"));
         Group groupe = daoGroup.getGroupByName("e1");
-        assertTrue(groupe.getGroupName().equals("") );
+        assertTrue(groupe.getGroupName().equals("IsEmpty") );
     }
 
 }

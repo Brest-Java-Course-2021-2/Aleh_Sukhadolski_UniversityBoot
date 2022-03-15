@@ -1,8 +1,6 @@
 package com.epam.brest;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Component;
-
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -11,15 +9,12 @@ import java.util.stream.Collectors;
 
 // This will be AUTO IMPLEMENTED by Spring into a Bean called userRepository
 // CRUD refers Create, Read, Update, Delete
-
-@Component
 public interface LectorsJpaRepository extends JpaRepository<Lector, Integer> {
 
-
     default List<Lector> findAllLectors() {
-        List <Lector> users = findAll();
-        if (users.size() == 0){
-            users.add(new Lector("Is Empty","","",""));
+        List <Lector> lectors = findAll();
+        if (lectors.size() == 0){
+            lectors.add(new Lector("Is Empty","","",""));
         }
         return findAll();
     }
@@ -31,35 +26,35 @@ public interface LectorsJpaRepository extends JpaRepository<Lector, Integer> {
 
 
     default Lector findLectorByLectorsName(String name) {
-        List<Lector> users = findAll().stream()
+        List<Lector> lectors = findAll().stream()
                 .filter(us -> us.getNameLector().equals(name))
                 .collect(Collectors.toList());
-        Lector user;
-          if (users.size() > 0){
-            user = users.get(0);
+        Lector lector;
+          if (lectors.size() > 0){
+            lector = lectors.get(0);
         } else {
-            user = new Lector(0,"Is Empty","","", "");
+            lector = new Lector(0,"Is Empty","","", "");
         }
-        return (Lector) user;
+        return (Lector) lector;
     }
 
 
     default Lector findLectorByEmail(String email) {
-        List<Lector> users = findAll().stream()
+        List<Lector> lectors = findAll().stream()
                 .filter(us -> us.getEmailLector().equals(email))
                 .collect(Collectors.toList());
-        Lector user;
-        if (users.size() > 0){
-            user = users.get(0);
+        Lector lector;
+        if (lectors.size() > 0){
+            lector = lectors.get(0);
         } else {
-            user = new Lector(0,"Is Empty","","", "");
+            lector = new Lector(0,"Is Empty","","", "");
         }
-        return (Lector) user;
+        return (Lector) lector;
     }
 
 
-    default Lector saveOrUpdateLector(Lector user) {
-        return (Lector) saveAndFlush(user);
+    default Lector saveOrUpdateLector(Lector lector) {
+        return (Lector) saveAndFlush(lector);
     }
 
 
@@ -68,7 +63,7 @@ public interface LectorsJpaRepository extends JpaRepository<Lector, Integer> {
     }
 
 
-    default void deleteLector(@NotNull Lector user) {
-        deleteById(user.getIdLector());
+    default void deleteLector(@NotNull Lector lector) {
+        deleteById(lector.getIdLector());
     }
 }

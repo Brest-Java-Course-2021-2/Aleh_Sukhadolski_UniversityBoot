@@ -1,14 +1,12 @@
 package com.epam.brest;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Component;
 
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-@Component
 public interface RequestFromLectorJpaRepository extends JpaRepository<RequestFromLector, Integer> {
 
     default List<RequestFromLector> findAllByForeignKey(Integer id) {
@@ -17,28 +15,28 @@ public interface RequestFromLectorJpaRepository extends JpaRepository<RequestFro
                                         .collect(Collectors.toList());
     }
 
-    default RequestFromLector updateRequest(RequestFromLector request){
-       return saveAndFlush(request);
+    default RequestFromLector updateRequest(RequestFromLector requestFromLector){
+       return saveAndFlush(requestFromLector);
     }
 
-    default List<RequestFromLector> createRequestsforUser(List<String> groupes, Integer id){
-        List<RequestFromLector> requests = groupes.stream()
-            .flatMap(groupe -> Stream.of(new RequestFromLector(id, groupe, "0", "0000", new Date())))
+    default List<RequestFromLector> createRequestsforNewUser(List<String> groups, Integer id){
+        List<RequestFromLector> requestsFromLector = groups.stream()
+            .flatMap(group -> Stream.of(new RequestFromLector(id, group, "0", "0000", new Date())))
             .collect(Collectors.toList());
-        return saveAllAndFlush(requests);
+        return saveAllAndFlush(requestsFromLector);
     }
 
-    default  List<RequestFromLector> addGroupeInRequests(List <Integer> idUsers, String groupe){
-        List<RequestFromLector> requests = idUsers.stream()
-            .flatMap(id -> Stream.of(new RequestFromLector(id, groupe, "0", "0000", new Date())))
+    default  List<RequestFromLector> addNewGroupeInAllLectorRequests(List <Integer> idLectors, String group){
+        List<RequestFromLector> requestsFromLector = idLectors.stream()
+            .flatMap(idLector -> Stream.of(new RequestFromLector(idLector, group, "0", "0000", new Date())))
             .collect(Collectors.toList());
-       return saveAllAndFlush((List<RequestFromLector>)requests);
+       return saveAllAndFlush((List<RequestFromLector>)requestsFromLector);
     }
 
-    default RequestFromLector deleteRequest(RequestFromLector request)
+    default RequestFromLector deleteRequest(RequestFromLector requestFromLector)
     {
-        deleteById(request.getIdRequest());
-        return request;
+        deleteById(requestFromLector.getIdRequest());
+        return requestFromLector;
     }
 
 }

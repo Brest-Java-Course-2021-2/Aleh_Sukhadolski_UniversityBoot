@@ -30,21 +30,21 @@ public class DaoGroupImpl implements DaoGroupApi {
     }
 
     @Override
-    public String deleteGroupByName(String groupeName) {
+    public String deleteGroupByName(String groupName) {
         logger.info("DELETE GROUPE BY the NAME {}");
-        return groupRepository.deleteGroupByGroupName(groupeName);
+        return groupRepository.deleteGroupByGroupName(groupName);
     }
 
     @Override
-    public Group insertNewGroup(String newNameOfGroupe) {
+    public Group insertNewGroup(String newNameOfGroup) {
         logger.info("CREATE NEW GROUPE {}");
-        return groupRepository.insertNewGroup(newNameOfGroupe);
+        return groupRepository.insertNewGroup(newNameOfGroup);
     }
 
     @Override
-    public Group getGroupByName(String nameGroupe) {
+    public Group getGroupByName(String nameGroup) {
         logger.info("GET GROUPE BY NAME {}");
-        return groupRepository.getGroupeByGroupName(nameGroupe);
+        return groupRepository.getGroupeByGroupName(nameGroup);
     }
 
     @Override
