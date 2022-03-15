@@ -24,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @SpringBootApplication
 @SpringBootTest (classes= { LectorServiceImpl.class, RequestFromLectorServiceImpl.class, GroupServiceImpl.class
                             , DaoLectorImpl.class, DaoRequestFromLectorImpl.class, DaoGroupImpl.class})
-@ComponentScan("com.epam.brest.*")
+@ComponentScan("com.epam.brest")
 @EntityScan("com.epam.brest")
 @Transactional()
 public class RequestFromLectorServiceImplTestIT {
@@ -42,77 +42,76 @@ public class RequestFromLectorServiceImplTestIT {
 
     @BeforeEach
     public void setUp() {
-        String[] groupes = new String[]{"e1", "e2", "e3", "e4", "e5", "e6"};
-        List<Group> grup = Arrays.stream(groupes)
+        String[] groups = new String[]{"e1", "e2", "e3", "e4", "e5", "e6"};
+        List<Group> grup = Arrays.stream(groups)
                 .map(gr -> groupService.createNewGroupService(gr))
                 .collect(Collectors.toList());
         lectorService.createNewLectorService(new Lector("TOMMY", "tom", "1111", "iuy@aa.com"));
     }
 
-
     @Test
     public void isGetAllRequests() {
         logger.info("GET ALL REQUESTS BY USER {}");
-        Lector user = lectorService.getLectorByLectorsNameService("TOMMY");
-        List<RequestFromLector> requests = requestFromLectorService.getAllRequestsFromLectorService(user.getIdLector());
-        assertTrue(requests.size() == 6);
+        Lector lector = lectorService.getLectorByLectorsNameService("TOMMY");
+        List<RequestFromLector> requestsFromLectorService = requestFromLectorService.getAllRequestsFromLectorService(lector.getIdLector());
+        assertTrue(requestsFromLectorService.size() == 6);
 
-        RequestFromLector request = requestFromLectorService.getRequestOfLectorByIdRequestService(requests.get(0).getIdRequest());
-        assertTrue(request.getGroup().equals(requests.get(0).getGroup()));
+        RequestFromLector request = requestFromLectorService.getRequestOfLectorByIdRequestService(requestsFromLectorService.get(0).getIdRequest());
+        assertTrue(request.getGroup().equals(requestsFromLectorService.get(0).getGroup()));
     }
 
     @Test
-    public void isSaveRequestsForNewUserAndNewGroupe() {
-        logger.info("SAVE REQUESTS FOE NEW USER {}");
-        Lector user = lectorService.createNewLectorService(new Lector(
+    public void isSaveRequestsForNewLectorAndNewGroupe() {
+        logger.info("SAVE REQUESTS FOR NEW Lector {}");
+        Lector lector = lectorService.createNewLectorService(new Lector(
                 "MIKE", "mike", "2222", "mike@tyson.com"));
 
-        List<RequestFromLector> requests = requestFromLectorService.getAllRequestsFromLectorService(user.getIdLector());
-        assertTrue(requests.size() == 6);
-        assertTrue(user.getNameLector().equals("MIKE"));
+        List<RequestFromLector> requestsFromLectorService = requestFromLectorService.getAllRequestsFromLectorService(lector.getIdLector());
+        assertTrue(requestsFromLectorService.size() == 6);
+        assertTrue(lector.getNameLector().equals("MIKE"));
 
         requestFromLectorService.saveRequestsForLectorsWhenCreateNewGroupeService("q1");
-        requests = requestFromLectorService.getAllRequestsFromLectorService(user.getIdLector());
-        assertTrue(requests.size() == 7);
+        requestsFromLectorService = requestFromLectorService.getAllRequestsFromLectorService(lector.getIdLector());
+        assertTrue(requestsFromLectorService.size() == 7);
 
-        user = lectorService.getLectorByLectorsNameService("TOMMY");
-        requests = requestFromLectorService.getAllRequestsFromLectorService(user.getIdLector());
-        assertTrue(requests.size() == 7);
+        lector = lectorService.getLectorByLectorsNameService("TOMMY");
+        requestsFromLectorService = requestFromLectorService.getAllRequestsFromLectorService(lector.getIdLector());
+        assertTrue(requestsFromLectorService.size() == 7);
 
-        List<Group> groupes = groupService.getAllGroupsService();
-        assertTrue(groupes.size() == 7);
+        List<Group> groups = groupService.getAllGroupsService();
+        assertTrue(groups.size() == 7);
     }
-
 
     @Test
     public void isFlushRequests() {
-        logger.info("SAVE REQUESTS FOE NEW USER {}");
-        Lector user = lectorService.createNewLectorService(new Lector(
+        logger.info("SAVE REQUESTS FOE NEW Lector {}");
+        Lector lector = lectorService.createNewLectorService(new Lector(
                 "MIKE", "mike", "2222", "mike@tyson.com"));
-        List<RequestFromLector> requests = requestFromLectorService.getAllRequestsFromLectorService(user.getIdLector());
-        assertTrue(requests.size() == 6);
-        assertTrue(requests.get(0).getNumberOfPairs().equals("0"));
-        assertTrue(user.getNameLector().equals("MIKE"));
-        requests = requests.stream().peek(req -> req.setNumberOfPairs("2")).collect(Collectors.toList());
-        requests = requestFromLectorService.updateAllRequestsForLectorsService(requests);
-        assertTrue(requests.get(0).getNumberOfPairs().equals("2"));
-        assertTrue(requests.get(1).getNumberOfPairs().equals("2"));
-        RequestFromLector request = requestFromLectorService.flushRequestFromLectorService(requests.get(0));
-        assertTrue(request.getNumberOfPairs().equals("0"));
-        assertTrue(requests.get(1).getNumberOfPairs().equals("2"));
+        List<RequestFromLector> requestsFromLectorService = requestFromLectorService.getAllRequestsFromLectorService(lector.getIdLector());
+        assertTrue(requestsFromLectorService.size() == 6);
+        assertTrue(requestsFromLectorService.get(0).getNumberOfPairs().equals("0"));
+        assertTrue(lector.getNameLector().equals("MIKE"));
+        requestsFromLectorService = requestsFromLectorService.stream()
+                                                             .peek(req -> req.setNumberOfPairs("2"))
+                                                             .collect(Collectors.toList());
+        requestsFromLectorService = requestFromLectorService.updateAllRequestsForLectorsService(requestsFromLectorService);
+        assertTrue(requestsFromLectorService.get(0).getNumberOfPairs().equals("2"));
+        assertTrue(requestsFromLectorService.get(1).getNumberOfPairs().equals("2"));
+        RequestFromLector requestFromLector = requestFromLectorService.flushRequestFromLectorService(requestsFromLectorService.get(0));
+        assertTrue(requestFromLector.getNumberOfPairs().equals("0"));
+        assertTrue(requestsFromLectorService.get(1).getNumberOfPairs().equals("2"));
     }
-
 
     @Test
     public void isDeleteRequests(){
-        logger.info("DELETE REQUESTS FOR USER {}");
-        Lector user = lectorService.createNewLectorService(new Lector(
+        logger.info("DELETE REQUESTS FOR Lector {}");
+        Lector lector = lectorService.createNewLectorService(new Lector(
                 "MIKE", "mike", "2222", "mike@tyson.com"));
-        List<RequestFromLector> requests = requestFromLectorService.getAllRequestsFromLectorService(user.getIdLector());
-        assertTrue(requests.size() == 6);
-        assertTrue(user.getNameLector().equals("MIKE"));
-        lectorService.deleteLectorByIdLectorService(user.getIdLector());
-        requests = requestFromLectorService.getAllRequestsFromLectorService(user.getIdLector());
-        assertTrue(requests.size() == 0);
+        List<RequestFromLector> requestsFromLectorService = requestFromLectorService.getAllRequestsFromLectorService(lector.getIdLector());
+        assertTrue(requestsFromLectorService.size() == 6);
+        assertTrue(lector.getNameLector().equals("MIKE"));
+        lectorService.deleteLectorByIdLectorService(lector.getIdLector());
+        requestsFromLectorService = requestFromLectorService.getAllRequestsFromLectorService(lector.getIdLector());
+        assertTrue(requestsFromLectorService.size() == 0);
     }
 }

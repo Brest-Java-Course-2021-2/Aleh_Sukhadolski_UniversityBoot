@@ -43,11 +43,11 @@ public class GroupServiceImpl implements GroupServiceApi {
 
     @Override
     public String deleteGroupByGroupNameService(String name) {
-        List<Lector> users = daoLector.getAllLectors();
-        List <RequestFromLector> requests;
-        for (Lector user : users){
-            requests = daoRequestFromLector.getAllRequestsFromLectorByIdLector(user.getIdLector());
-            for (RequestFromLector request : requests){
+        List<Lector> lectors = daoLector.getAllLectors();
+        List <RequestFromLector> requestsFromlector;
+        for (Lector user : lectors){
+            requestsFromlector = daoRequestFromLector.getAllRequestsFromLectorByIdLector(user.getIdLector());
+            for (RequestFromLector request : requestsFromlector){
                 if (request.getGroup().equals(name)){
                     daoRequestFromLector.deleteRequestFromLector(request);
                 }
@@ -58,10 +58,10 @@ public class GroupServiceImpl implements GroupServiceApi {
 
     @Override
     public Group createNewGroupService(String newName) {
-        List<Lector> users = daoLector.getAllLectors();
-        List<Integer> idUsers = new ArrayList<>();
-        for (Lector user : users){ idUsers.add(user.getIdLector()); }
-        daoRequestFromLector.createRequestsForLectorsWhenCreateNewGroup(newName, idUsers );
+        List<Lector> lectors = daoLector.getAllLectors();
+        List<Integer> idLectors = new ArrayList<>();
+        for (Lector lector : lectors){ idLectors.add(lector.getIdLector()); }
+        daoRequestFromLector.createRequestsForLectorsWhenCreateNewGroup(newName, idLectors);
         return (Group) daoGroup.insertNewGroup(newName);
     }
 
@@ -72,19 +72,18 @@ public class GroupServiceImpl implements GroupServiceApi {
 
     @Override
     public Group updateGroupNameService(String newName, String oldName) {
-        Group groupe = (Group) daoGroup.updateGroup(newName, oldName);
-        List<Lector> users = daoLector.getAllLectors();
-        List <RequestFromLector> requests;
-        for (Lector user : users){
-            requests = daoRequestFromLector.getAllRequestsFromLectorByIdLector(user.getIdLector());
-            for (RequestFromLector request : requests){
+        Group group = (Group) daoGroup.updateGroup(newName, oldName);
+        List<Lector> lectors = daoLector.getAllLectors();
+        List <RequestFromLector> requestsFromLector;
+        for (Lector lector : lectors){
+            requestsFromLector = daoRequestFromLector.getAllRequestsFromLectorByIdLector(lector.getIdLector());
+            for (RequestFromLector request : requestsFromLector){
                 if (request.getGroup().equals(oldName)){
                     request.setGroup(newName);
                     daoRequestFromLector.updateRequestFromLector(request);
                 }
             }
-
         }
-        return (Group) groupe;
+        return (Group) group;
     }
 }

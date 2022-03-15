@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 @SpringBootApplication
 @SpringBootTest (classes= { LectorServiceImpl.class, RequestFromLectorServiceImpl.class, GroupServiceImpl.class
                           , DaoLectorImpl.class, DaoRequestFromLectorImpl.class, DaoGroupImpl.class})
-@ComponentScan("com.epam.brest.*")
+@ComponentScan("com.epam.brest")
 @EntityScan("com.epam.brest")
 @Transactional()
 public class GroupServiceImplTestIT {
@@ -41,70 +41,70 @@ public class GroupServiceImplTestIT {
 
     @BeforeEach
     public void setUp() {
-        String[] groupes = new String[]{"e1", "e2", "e3", "e4", "e5", "e6"};
-        List<Group> grup = Arrays.stream(groupes)
+        String[] groups = new String[]{"e1", "e2", "e3", "e4", "e5", "e6"};
+        List<Group> grup = Arrays.stream(groups)
                 .map(gr -> groupService.createNewGroupService(gr))
                 .collect(Collectors.toList());
-        Lector user = lectorService.createNewLectorService(new Lector("TOMMY", "tom", "1111", "iuy@aa.com"));
+        Lector lector = lectorService.createNewLectorService(new Lector("TOMMY", "tom", "1111", "iuy@aa.com"));
     }
 
     @Test
-    public void isGroupesTest() {
-        logger.info("GET ALL GROUPES {}");
-        List<String> groupes = groupService.getAllGroupNamesService();
-        Assertions.assertTrue(groupes.size() == 6);
+    public void isGroupsTest() {
+        logger.info("GET ALL GROUPS {}");
+        List<String> groups = groupService.getAllGroupNamesService();
+        Assertions.assertTrue(groups.size() == 6);
         List<Group> group = groupService.getAllGroupsService();
         Assertions.assertTrue(group.size() == 6);
     }
 
     @Test
-    public void isInsertNewGroupeTest() {
-        logger.info("INSERT NEW GROUPE {}");
-        Lector user = lectorService.getLectorByLectorsNameService("TOMMY");
-        List<RequestFromLector> requests = requestFromLectorService.getAllRequestsFromLectorService(user.getIdLector());
-        Assertions.assertTrue(requests.size() == 6);
-        Group groupe = groupService.createNewGroupService("e7");
-        Assertions.assertTrue(groupe.getGroupName().equals("e7"));
-        List<Group> group = groupService.getAllGroupsService();
-        Assertions.assertTrue(group.size() == 7);
-        user = lectorService.getLectorByLectorsNameService("TOMMY");
-        requests = requestFromLectorService.getAllRequestsFromLectorService(user.getIdLector());
-        Assertions.assertTrue(requests.size() == 7);
+    public void isInsertNewGroupTest() {
+        logger.info("INSERT NEW GROUP {}");
+        Lector lector = lectorService.getLectorByLectorsNameService("TOMMY");
+        List<RequestFromLector> requestsFromLectorService = requestFromLectorService.getAllRequestsFromLectorService(lector.getIdLector());
+        Assertions.assertTrue(requestsFromLectorService.size() == 6);
+        Group group = groupService.createNewGroupService("e7");
+        Assertions.assertTrue(group.getGroupName().equals("e7"));
+        List<Group> groups = groupService.getAllGroupsService();
+        Assertions.assertTrue(groups.size() == 7);
+        lector = lectorService.getLectorByLectorsNameService("TOMMY");
+        requestsFromLectorService = requestFromLectorService.getAllRequestsFromLectorService(lector.getIdLector());
+        Assertions.assertTrue(requestsFromLectorService.size() == 7);
 
     }
 
 
     @Test
-    public void isUpdateGroupeNameTest() {
-        logger.info("UPDATE GROUPE {}");
+    public void isUpdateGroupNameTest() {
+        logger.info("UPDATE GROUP {}");
         groupService.updateGroupNameService("w1", "e6");
-        Group groupe = groupService.getGroupByGroupNameService("w1");
-        Assertions.assertTrue(groupe.getGroupName().equals("w1"));
-        groupe = groupService.getGroupByGroupNameService("e6");
-        Assertions.assertFalse(groupe.getGroupName().equals("e6"));
-        List<Group> group = groupService.getAllGroupsService();
-        Assertions.assertTrue(group.size() == 6);
-        Lector user = lectorService.getLectorByLectorsNameService("TOMMY");
-        List<RequestFromLector> requests = requestFromLectorService.getAllRequestsFromLectorService(user.getIdLector());
+        Group group = groupService.getGroupByGroupNameService("w1");
+        Assertions.assertTrue(group.getGroupName().equals("w1"));
+        group = groupService.getGroupByGroupNameService("e6");
+        Assertions.assertFalse(group.getGroupName().equals("e6"));
+        List<Group> groups = groupService.getAllGroupsService();
+        Assertions.assertTrue(groups.size() == 6);
+        Lector lector = lectorService.getLectorByLectorsNameService("TOMMY");
+        List<RequestFromLector> requestsFromLectorService = requestFromLectorService.getAllRequestsFromLectorService(lector.getIdLector());
         boolean ifExist = false;
         boolean ifNotExist = true;
-        for (RequestFromLector request : requests){
+        for (RequestFromLector request : requestsFromLectorService){
             if (request.getGroup().equals("w1")){ ifExist = true; }
             if (request.getGroup().equals("e6")){ ifNotExist = false; }
         }
         Assertions.assertTrue(ifExist);
         Assertions.assertTrue(ifNotExist);
-        requests = requestFromLectorService.getAllRequestsFromLectorService(user.getIdLector());
-        Assertions.assertTrue(requests.size() == 6);
+        requestsFromLectorService = requestFromLectorService.getAllRequestsFromLectorService(lector.getIdLector());
+        Assertions.assertTrue(requestsFromLectorService.size() == 6);
     }
 
     @Test
-    public void isDeleteGroupeTest() {
-        logger.info("DELETE GROUPE {}");
+    public void isDeleteGroupTest() {
+        logger.info("DELETE GROUP {}");
         String result = groupService.deleteGroupByGroupNameService("e1");
         Assertions.assertTrue(result.equals("e1"));
-        Group groupe = groupService.getGroupByGroupNameService("e1");
-        Assertions.assertTrue(groupe.getIdGroup() == 0);
+        Group group = groupService.getGroupByGroupNameService("e1");
+        Assertions.assertTrue(group.getIdGroup() == 0);
 
     }
 }

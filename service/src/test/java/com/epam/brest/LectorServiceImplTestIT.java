@@ -27,7 +27,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @SpringBootApplication
 @SpringBootTest (classes= { LectorServiceImpl.class, RequestFromLectorServiceImpl.class, GroupServiceImpl.class
                           , DaoLectorImpl.class, DaoRequestFromLectorImpl.class, DaoGroupImpl.class})
-@ComponentScan("com.epam.brest.*")
+@ComponentScan("com.epam.brest")
 @EntityScan("com.epam.brest")
 @Transactional()
 public class LectorServiceImplTestIT {
@@ -48,104 +48,103 @@ public class LectorServiceImplTestIT {
 
     @BeforeEach
     public void setUp() {
-        String[] groupes = new String[]{"e1", "e2", "e3", "e4", "e5", "e6"};
-        List<Group> grup = Arrays.stream(groupes)
+        String[] groups = new String[]{"e1", "e2", "e3", "e4", "e5", "e6"};
+        List<Group> grup = Arrays.stream(groups)
                 .map(gr -> groupService.createNewGroupService(gr))
                 .collect(Collectors.toList());
-        Lector user = lectorService.createNewLectorService(new Lector("TOMMY", "tom", "1111", "iuy@aa.com"));
+        Lector lector = lectorService.createNewLectorService(new Lector("TOMMY", "tom", "1111", "iuy@aa.com"));
     }
 
 
     @Test
-    public void isNewUserServiceImpl() {
-        logger.info("GET ALL USERS {}");
-        //User user = userService.saveNewUserService(new User ("TOMMY", "tom", "1111", "iuy@aa.com"));
-        List<Lector> users = (List<Lector>) lectorService.getAllLectorsService();
-        logger.info("GET ALL USERS {} SIZE = " + users.size());
-        assertTrue(users.size() == 1);
-        assertTrue(users.get(users.size() - 1).getNameLector().equals("TOMMY"));
-        Lector user = users.get(users.size() - 1);
-        List<RequestFromLector> requests = requestFromLectorService.getAllRequestsFromLectorService(user.getIdLector());
-        assertTrue(requests.size() == 6);
+    public void isNewLectorServiceImpl() {
+        logger.info("GET ALL Lectors {}");
+        List<Lector> lectors = (List<Lector>) lectorService.getAllLectorsService();
+        logger.info("GET ALL Lectors {} SIZE = " + lectors.size());
+        assertTrue(lectors.size() == 1);
+        assertTrue(lectors.get(lectors.size() - 1).getNameLector().equals("TOMMY"));
+        Lector lector = lectors.get(lectors.size() - 1);
+        List<RequestFromLector> requestsFromLectorService = requestFromLectorService.getAllRequestsFromLectorService(lector.getIdLector());
+        assertTrue(requestsFromLectorService.size() == 6);
 
     }
 
     @Test
-    public void isGetUserByNameServiceImpl() {
-        logger.info("GET USER BY Name {}");
-        Lector user = (Lector) lectorService.getLectorByLectorsNameService("TOMMY");
-        assertTrue(user.getNameLector().equals("TOMMY"));
-        List<RequestFromLector> requests = requestFromLectorService.getAllRequestsFromLectorService(user.getIdLector());
-        assertTrue(requests.size() == 6);
+    public void isGetLectorByNameServiceImpl() {
+        logger.info("GET Lector BY Name {}");
+        Lector lector = (Lector) lectorService.getLectorByLectorsNameService("TOMMY");
+        assertTrue(lector.getNameLector().equals("TOMMY"));
+        List<RequestFromLector> requestsFromLectorService = requestFromLectorService.getAllRequestsFromLectorService(lector.getIdLector());
+        assertTrue(requestsFromLectorService.size() == 6);
 
     }
 
     @Test
-    public void isGetUserByEmailServiceAndIdImpl() {
-        logger.info("GET USER BY Email {}");
-        Lector user = (Lector) lectorService.getLectorByEmailService("iuy@aa.com");
-        assertTrue(user.getEmailLector().equals("iuy@aa.com"));
-        List<RequestFromLector> requests = requestFromLectorService.getAllRequestsFromLectorService(user.getIdLector());
-        assertTrue(requests.size() == 6);
-        user = (Lector) lectorService.getLectorByEmailService("qqiuy@aa.com");
-        assertFalse(user.getEmailLector().equals("qqiuy@aa.com"));
-        Lector user2 = lectorService.getLectorByLectorsNameService("TOMMY");
-        Lector users3 = (Lector) lectorService.getLectorByIdLectorService(user2.getIdLector());
-        assertTrue(users3.getNameLector().equals("TOMMY"));
+    public void isGetLectorByEmailServiceAndIdImpl() {
+        logger.info("GET Lector BY Email {}");
+        Lector lector = (Lector) lectorService.getLectorByEmailService("iuy@aa.com");
+        assertTrue(lector.getEmailLector().equals("iuy@aa.com"));
+        List<RequestFromLector> requestsFromLectorService = requestFromLectorService.getAllRequestsFromLectorService(lector.getIdLector());
+        assertTrue(requestsFromLectorService.size() == 6);
+        lector = (Lector) lectorService.getLectorByEmailService("qqiuy@aa.com");
+        assertFalse(lector.getEmailLector().equals("qqiuy@aa.com"));
+        Lector lector1 = lectorService.getLectorByLectorsNameService("TOMMY");
+        Lector lector2 = (Lector) lectorService.getLectorByIdLectorService(lector1.getIdLector());
+        assertTrue(lector2.getNameLector().equals("TOMMY"));
     }
 
     @Test
-    public void isCreateUserService() {
-       logger.info("CREATE NEW USER {}");
-       Lector user = lectorService.createNewLectorService(new Lector("Mike", "mike", "1111", "isocrol@aa.com"));
-       assertTrue(user.getEmailLector().equals("isocrol@aa.com"));
-       assertTrue(user.getNameLector().equals("Mike"));
-       Lector user1 = lectorService.getLectorByLectorsNameService("Mike");
-       assertTrue(user1.getNameLector().equals("Mike") && user1.getIdLector() == user.getIdLector());
-       List<RequestFromLector> requests = requestFromLectorService.getAllRequestsFromLectorService(user.getIdLector());
-       assertTrue(requests.size() == 6);
+    public void isCreateLectorService() {
+       logger.info("CREATE NEW Lector {}");
+       Lector lector = lectorService.createNewLectorService(new Lector("Mike", "mike", "1111", "isocrol@aa.com"));
+       assertTrue(lector.getEmailLector().equals("isocrol@aa.com"));
+       assertTrue(lector.getNameLector().equals("Mike"));
+       Lector lector1 = lectorService.getLectorByLectorsNameService("Mike");
+       assertTrue(lector1.getNameLector().equals("Mike") && lector1.getIdLector() == lector.getIdLector());
+       List<RequestFromLector> requestsFromLectorService = requestFromLectorService.getAllRequestsFromLectorService(lector.getIdLector());
+       assertTrue(requestsFromLectorService.size() == 6);
     }
 
 
     @Test
-    public void isUpdateUserService() {
-        logger.info("UPDATE USER {}");
-        Lector user = lectorService.createNewLectorService(new Lector("Mike", "mike", "1111", "isocrol@aa.com"));
-        assertTrue(user.getEmailLector().equals("isocrol@aa.com"));
-        assertTrue(user.getNameLector().equals("Mike"));
-        Lector user1 = lectorService.getLectorByLectorsNameService("Mike");
-        assertTrue(user1.getNameLector().equals("Mike") && user1.getIdLector() == user.getIdLector());
-        user.setNameLector("Kim");
-        user =  lectorService.updateLectorService(user);
-        assertTrue(user.getNameLector().equals("Kim"));
-        user1 = lectorService.getLectorByLectorsNameService("Kim");
-        assertTrue(user1.getNameLector().equals("Kim") && user1.getIdLector() == user.getIdLector());
+    public void isUpdateLectorService() {
+        logger.info("UPDATE Lector {}");
+        Lector lector = lectorService.createNewLectorService(new Lector("Mike", "mike", "1111", "isocrol@aa.com"));
+        assertTrue(lector.getEmailLector().equals("isocrol@aa.com"));
+        assertTrue(lector.getNameLector().equals("Mike"));
+        Lector lector1 = lectorService.getLectorByLectorsNameService("Mike");
+        assertTrue(lector1.getNameLector().equals("Mike") && lector1.getIdLector() == lector.getIdLector());
+        lector.setNameLector("Kim");
+        lector =  lectorService.updateLectorService(lector);
+        assertTrue(lector.getNameLector().equals("Kim"));
+        lector1 = lectorService.getLectorByLectorsNameService("Kim");
+        assertTrue(lector1.getNameLector().equals("Kim") && lector1.getIdLector() == lector.getIdLector());
     }
 
     @Test
-    public void isDeleteUserService() {
-        logger.info("DELETE USER {}");
-        Lector user = lectorService.createNewLectorService(new Lector("Mike", "mike", "1111", "isocrol@aa.com"));
-        assertTrue(user.getNameLector().equals("Mike"));
+    public void isDeleteLectorService() {
+        logger.info("DELETE Lector {}");
+        Lector lector = lectorService.createNewLectorService(new Lector("Mike", "mike", "1111", "isocrol@aa.com"));
+        assertTrue(lector.getNameLector().equals("Mike"));
         assertTrue(lectorService.getAllLectorsService().size() == 2);
-        lectorService.deleteLectorService(user);
+        lectorService.deleteLectorService(lector);
         assertTrue(lectorService.getAllLectorsService().size() == 1);
 
-        user = lectorService.createNewLectorService(new Lector("Mike", "mike", "1111", "isocrol@aa.com"));
+        lector = lectorService.createNewLectorService(new Lector("Mike", "mike", "1111", "isocrol@aa.com"));
         assertTrue(lectorService.getAllLectorsService().size() == 2);
-        lectorService.deleteLectorByIdLectorService(user.getIdLector());
+        lectorService.deleteLectorByIdLectorService(lector.getIdLector());
         assertTrue(lectorService.getAllLectorsService().size() == 1);
     }
 
     @Test
-    public void isGetUserByIdService() {
-        logger.info("GET USER BY ID{}");
-        Lector user = lectorService.createNewLectorService(new Lector("Mike", "mike", "1111", "isocrol@aa.com"));
-        assertTrue(user.getNameLector().equals("Mike"));
+    public void isGetLectorByIdService() {
+        logger.info("GET Lector BY ID{}");
+        Lector lector = lectorService.createNewLectorService(new Lector("Mike", "mike", "1111", "isocrol@aa.com"));
+        assertTrue(lector.getNameLector().equals("Mike"));
         assertTrue(lectorService.getAllLectorsService().size() == 2);
-        Lector user1 = lectorService.getLectorByIdLectorService(user.getIdLector());
+        Lector user1 = lectorService.getLectorByIdLectorService(lector.getIdLector());
         assertTrue(user1.getNameLector().equals("Mike"));
-        assertTrue(user1.getNameLector().equals(user.getNameLector()));
+        assertTrue(user1.getNameLector().equals(lector.getNameLector()));
     }
 
 }

@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Component
-@ComponentScan("com.epam.brest.*")
+@ComponentScan("com.epam.brest")
 @EntityScan("com.epam.brest")
 @Service
 public class LectorServiceImpl implements LectorServiceApi {
@@ -40,14 +40,13 @@ public class LectorServiceImpl implements LectorServiceApi {
     }
 
     @Override
-    public Lector getLectorByEmailService(String email)
-    {
+    public Lector getLectorByEmailService(String email) {
         return (Lector) daoLector.getLectorByEmail(email);
     }
 
     @Override
-    public Lector getLectorByIdLectorService(Integer id)
-    {
+    public Lector getLectorByIdLectorService(Integer id) {
+
         return (Lector) daoLector.getLectorById(id);
     }
 
@@ -58,22 +57,22 @@ public class LectorServiceImpl implements LectorServiceApi {
     }
 
     @Override
-    public void deleteLectorService(Lector user)
+    public void deleteLectorService(Lector lector)
     {
-        daoRequestFromLector.deleteAllRequestsFromLector(user.getIdLector());
-        daoLector.deleteLectorById(user.getIdLector());
+        daoRequestFromLector.deleteAllRequestsFromLector(lector.getIdLector());
+        daoLector.deleteLectorById(lector.getIdLector());
     }
 
     @Override
-    public Lector createNewLectorService(Lector user) {
-        user = daoLector.saveOrUpdateLector(user);
-        List <String> groupes = daoGroup.getAllGroupsNames();
-        daoRequestFromLector.createEmptyRequestsForNewLector(user.getIdLector(), groupes);
-        return (Lector) user;
+    public Lector createNewLectorService(Lector lector) {
+        lector = daoLector.saveOrUpdateLector(lector);
+        List <String> groups = daoGroup.getAllGroupsNames();
+        daoRequestFromLector.createEmptyRequestsForNewLector(lector.getIdLector(), groups);
+        return (Lector) lector;
     }
 
     @Override
-    public Lector updateLectorService(Lector user) {
-        return (Lector) daoLector.saveOrUpdateLector(user);
+    public Lector updateLectorService(Lector lector) {
+        return (Lector) daoLector.saveOrUpdateLector(lector);
     }
 }

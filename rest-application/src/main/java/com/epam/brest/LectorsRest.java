@@ -84,5 +84,4 @@ public class LectorsRest {
         return new ResponseEntity(lector.getIdLector(), HttpStatus.OK);
     }
 
-
 }
