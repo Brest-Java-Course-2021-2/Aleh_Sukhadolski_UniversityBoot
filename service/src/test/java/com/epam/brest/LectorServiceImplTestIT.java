@@ -37,14 +37,11 @@ public class LectorServiceImplTestIT {
     @Autowired
     private LectorServiceApi lectorService;
 
-
     @Autowired
     private RequestFromLectorServiceApi requestFromLectorService;
 
-
     @Autowired
     private GroupServiceApi groupService;
-
 
     @BeforeEach
     public void setUp() {
@@ -66,7 +63,6 @@ public class LectorServiceImplTestIT {
         Lector lector = lectors.get(lectors.size() - 1);
         List<RequestFromLector> requestsFromLectorService = requestFromLectorService.getAllRequestsFromLectorService(lector.getIdLector());
         assertTrue(requestsFromLectorService.size() == 6);
-
     }
 
     @Test
@@ -76,7 +72,6 @@ public class LectorServiceImplTestIT {
         assertTrue(lector.getNameLector().equals("TOMMY"));
         List<RequestFromLector> requestsFromLectorService = requestFromLectorService.getAllRequestsFromLectorService(lector.getIdLector());
         assertTrue(requestsFromLectorService.size() == 6);
-
     }
 
     @Test
@@ -104,7 +99,6 @@ public class LectorServiceImplTestIT {
        List<RequestFromLector> requestsFromLectorService = requestFromLectorService.getAllRequestsFromLectorService(lector.getIdLector());
        assertTrue(requestsFromLectorService.size() == 6);
     }
-
 
     @Test
     public void isUpdateLectorService() {

@@ -70,9 +70,7 @@ public class GroupServiceImplTestIT {
         lector = lectorService.getLectorByLectorsNameService("TOMMY");
         requestsFromLectorService = requestFromLectorService.getAllRequestsFromLectorService(lector.getIdLector());
         Assertions.assertTrue(requestsFromLectorService.size() == 7);
-
     }
-
 
     @Test
     public void isUpdateGroupNameTest() {
@@ -105,6 +103,6 @@ public class GroupServiceImplTestIT {
         Assertions.assertTrue(result.equals("e1"));
         Group group = groupService.getGroupByGroupNameService("e1");
         Assertions.assertTrue(group.getIdGroup() == 0);
-
     }
+
 }
