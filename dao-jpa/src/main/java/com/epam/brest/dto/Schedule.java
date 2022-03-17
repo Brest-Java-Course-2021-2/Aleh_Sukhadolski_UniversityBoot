@@ -1,13 +1,14 @@
 package com.epam.brest.dto;
 
-import com.epam.brest.Group;
-import com.epam.brest.Lector;
+import com.epam.brest.*;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
+@ComponentScan ("com.epam.brest")
 public class Schedule {
 
     List<DaySchedule> scheduleObjects = null;

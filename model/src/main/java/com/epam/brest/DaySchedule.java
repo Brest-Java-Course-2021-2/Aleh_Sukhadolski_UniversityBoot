@@ -1,4 +1,4 @@
-package com.epam.brest.dto;
+package com.epam.brest;
 
 import org.springframework.stereotype.Component;
 

@@ -1,11 +1,11 @@
-package com.epam.brest.dto;
+package com.epam.brest;
 
 import org.springframework.stereotype.Component;
 
 @Component
-public class StudentsSchedule {
-    private int idSS;
-    private String groupe;
+public class LectorsSchedule {
+    private int idLS;
+    private String lector;
     private int pair;
     private String monday;
     private String tuesday;
@@ -13,7 +13,8 @@ public class StudentsSchedule {
     private String thursday;
     private String friday;
     private String saturday;
-    public StudentsSchedule() {
+
+    public LectorsSchedule() {
         this.monday = "";
         this.tuesday = "";
         this.wednesday = "";
@@ -22,17 +23,17 @@ public class StudentsSchedule {
         this.saturday = "";
     }
 
-    public StudentsSchedule(int idSS
-            , String groupe
-            , int pair
-            , String monday
-            , String tuesday
-            , String wednesday
-            , String thursday
-            , String friday
-            , String saturday) {
-        this.idSS = idSS;
-        this.groupe = groupe;
+    public LectorsSchedule(int idLS
+                           , String lector
+                           , int pair
+                           , String monday
+                           , String tuesday
+                           , String wednesday
+                           , String thursday
+                           , String friday
+                           , String saturday) {
+        this.idLS = idLS;
+        this.lector = lector;
         this.pair = pair;
         this.monday = monday;
         this.tuesday = tuesday;
@@ -42,21 +43,20 @@ public class StudentsSchedule {
         this.saturday = saturday;
     }
 
-
-    public int getIdSS() {
-        return idSS;
+    public int getIdLS() {
+        return idLS;
     }
 
-    public void setIdSS(int idSS) {
-        this.idSS = idSS;
+    public void setIdLS(int idLS) {
+        this.idLS = idLS;
     }
 
-    public String getGroupe() {
-        return groupe;
+    public String getLector() {
+        return lector;
     }
 
-    public void setGroupe(String groupe) {
-        this.groupe = groupe;
+    public void setLector(String lector) {
+        this.lector = lector;
     }
 
     public int getPair() {
@@ -110,5 +110,4 @@ public class StudentsSchedule {
     public String getSaturday() {return saturday;}
 
     public void setSaturday(String saturday) {this.saturday = saturday;}
-
 }
