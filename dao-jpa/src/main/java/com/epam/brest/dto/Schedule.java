@@ -11,9 +11,9 @@ import java.util.List;
 @ComponentScan ("com.epam.brest")
 public class Schedule {
 
-    List<DaySchedule> daySchedule = new ArrayList<>();
-    List<LectorsSchedule> lectorsSchedule = new ArrayList<>();
-    List<StudentsSchedule> studentsSchedule = new ArrayList<>();
+    public List<DaySchedule> dayScheduleForAll;
+    public List<LectorsSchedule> lectorsScheduleForAll;
+    public List<StudentsSchedule> studentsScheduleForAll;
 
     private int[][] daysForSchedule = {
             {1, 3, 5, 2, 4, 6},
@@ -28,7 +28,11 @@ public class Schedule {
             {5, 1, 2, 3, 4}};
 
     public Schedule() {
+    this.dayScheduleForAll = new ArrayList<>();
+    this.lectorsScheduleForAll = new ArrayList<>();
+    this.studentsScheduleForAll = new ArrayList<>();
     }
+
 
     /*
     create Schedule
@@ -38,7 +42,7 @@ public class Schedule {
             , List<String> lectors
             , List<RequestsForGroupe> requestsForGroupes) {
 
-        daySchedule = new ArrayList<>();
+        dayScheduleForAll = new ArrayList<>();
         List<List<RequestsForGroupe>> listOfSortedGroupesRequests = new ArrayList<>();
 
         boolean ifConsistInRequest = false;
@@ -86,7 +90,7 @@ public class Schedule {
             createDaySchedule(blockOfSortedGroupesRequests, daysForSchedule[i], pairsForSchedule);
         }
 
-        return daySchedule;
+        return dayScheduleForAll;
     }
 
 
@@ -104,7 +108,7 @@ public class Schedule {
                     for (int pair = 0; pair < pairsForSchedule[i].length; pair++) {
                         RequestsForGroupe requests = requestsForGroupes.get(pair);
                         if (requests.getPairs() > 0) {
-                            daySchedule.add(new DaySchedule(requests.getLector()
+                            dayScheduleForAll.add(new DaySchedule(requests.getLector()
                                     , requests.getGroupe()
                                     , pairsForSchedule[i][pair]
                                     , requests.getSubject()
@@ -206,17 +210,9 @@ End create
         return namesLectors;
     }
 
-    public List<String> getGroupeNameList(List<Group> listGroup) {
-        List<String> groupesNames = new ArrayList<>();
-        for (Group g : listGroup) {
-            groupesNames.add(g.getGroupName());
-        }
-        return groupesNames;
-    }
-
     // Create schedule for lectors
-    public List<LectorsSchedule> createScheduleForLectors(List<String> lectors, List<DaySchedule> scheduleList) {
-        List<LectorsSchedule> lectorsSchedules = new ArrayList<>();
+    public List<LectorsSchedule> createScheduleForLectors(List<String> lectors) {
+        lectorsScheduleForAll = new ArrayList<>();
 
         for (String lector : lectors) {
             for (int para = 1; para < 6; para++) {
@@ -225,7 +221,7 @@ End create
                 lectorsSchedule.setPair(para);
                 for (int dayWeek = 1; dayWeek < 7; dayWeek++) {
 
-                    for (DaySchedule daySchedule : scheduleList) {
+                    for (DaySchedule daySchedule : dayScheduleForAll) {
                         if ((lector == daySchedule.getLectorName()) && (para == daySchedule.getNumberPair())
                                 && (dayWeek == daySchedule.getDay())) {
                             if (dayWeek == 1) {
@@ -255,17 +251,16 @@ End create
                         }
                     }
                 }
-                lectorsSchedules.add(lectorsSchedule);
+                lectorsScheduleForAll.add(lectorsSchedule);
             }
         }
 
-        return lectorsSchedules;
+        return lectorsScheduleForAll;
     }
 
     // Create schedule for students
-    public List<StudentsSchedule> createScheduleForGroupe(List<String> groups, List<DaySchedule> scheduleList) {
-        List<StudentsSchedule> studentsSchedules = new ArrayList<>();
-        //scheduleObj.clear();
+    public List<StudentsSchedule> createScheduleForGroupe(List<String> groups) {
+        studentsScheduleForAll = new ArrayList<>();
         for (String gruppa : groups) {
             for (int para = 1; para < 6; para++) {
                 StudentsSchedule studentsSchedule = new StudentsSchedule();
@@ -273,26 +268,26 @@ End create
                 studentsSchedule.setPair(para);
                 for (int dayWeek = 1; dayWeek < 7; dayWeek++) {
 
-                    for (DaySchedule daySchedule : scheduleList) {
-                        if ((gruppa == daySchedule.getGroupeName()) && (para == daySchedule.getNumberPair())
-                                && (dayWeek == daySchedule.getDay())) {
+                    for (DaySchedule dayschedule : dayScheduleForAll) {
+                        if ((gruppa == dayschedule.getGroupeName()) && (para == dayschedule.getNumberPair())
+                                && (dayWeek == dayschedule.getDay())) {
                             if (dayWeek == 1) {
-                                studentsSchedule.setMonday(daySchedule.getSubject() + " - " + daySchedule.getLectorName());
+                                studentsSchedule.setMonday(dayschedule.getSubject() + " - " + dayschedule.getLectorName());
                             } else {
                                 if (dayWeek == 2) {
-                                    studentsSchedule.setTuesday(daySchedule.getSubject() + " - " + daySchedule.getLectorName());
+                                    studentsSchedule.setTuesday(dayschedule.getSubject() + " - " + dayschedule.getLectorName());
                                 } else {
                                     if (dayWeek == 3) {
-                                        studentsSchedule.setWednesday(daySchedule.getSubject() + " - " + daySchedule.getLectorName());
+                                        studentsSchedule.setWednesday(dayschedule.getSubject() + " - " + dayschedule.getLectorName());
                                     } else {
                                         if (dayWeek == 4) {
-                                            studentsSchedule.setThursday(daySchedule.getSubject() + " - " + daySchedule.getLectorName());
+                                            studentsSchedule.setThursday(dayschedule.getSubject() + " - " + dayschedule.getLectorName());
                                         } else {
                                             if (dayWeek == 5) {
-                                                studentsSchedule.setFriday(daySchedule.getSubject() + " - " + daySchedule.getLectorName());
+                                                studentsSchedule.setFriday(dayschedule.getSubject() + " - " + dayschedule.getLectorName());
                                             } else {
                                                 if (dayWeek == 6) {
-                                                    studentsSchedule.setSaturday(daySchedule.getSubject() + " - " + daySchedule.getLectorName());
+                                                    studentsSchedule.setSaturday(dayschedule.getSubject() + " - " + dayschedule.getLectorName());
                                                 }
                                             }
                                         }
@@ -302,11 +297,11 @@ End create
                         }
                     }
                 }
-                studentsSchedules.add(studentsSchedule);
+                studentsScheduleForAll.add(studentsSchedule);
             }
         }
 
-        return studentsSchedules;
+        return studentsScheduleForAll;
     }
 
 } // END CLASS Schedule
