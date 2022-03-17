@@ -11,7 +11,9 @@ import java.util.List;
 @ComponentScan ("com.epam.brest")
 public class Schedule {
 
-    List<DaySchedule> scheduleObjects = null;
+    List<DaySchedule> daySchedule = new ArrayList<>();
+    List<LectorsSchedule> lectorsSchedule = new ArrayList<>();
+    List<StudentsSchedule> studentsSchedule = new ArrayList<>();
 
     private int[][] daysForSchedule = {
             {1, 3, 5, 2, 4, 6},
@@ -36,7 +38,7 @@ public class Schedule {
             , List<String> lectors
             , List<RequestsForGroupe> requestsForGroupes) {
 
-        scheduleObjects = new ArrayList<>();
+        daySchedule = new ArrayList<>();
         List<List<RequestsForGroupe>> listOfSortedGroupesRequests = new ArrayList<>();
 
         boolean ifConsistInRequest = false;
@@ -84,7 +86,7 @@ public class Schedule {
             createDaySchedule(blockOfSortedGroupesRequests, daysForSchedule[i], pairsForSchedule);
         }
 
-        return scheduleObjects;
+        return daySchedule;
     }
 
 
@@ -102,7 +104,7 @@ public class Schedule {
                     for (int pair = 0; pair < pairsForSchedule[i].length; pair++) {
                         RequestsForGroupe requests = requestsForGroupes.get(pair);
                         if (requests.getPairs() > 0) {
-                            scheduleObjects.add(new DaySchedule(requests.getLector()
+                            daySchedule.add(new DaySchedule(requests.getLector()
                                     , requests.getGroupe()
                                     , pairsForSchedule[i][pair]
                                     , requests.getSubject()
@@ -196,7 +198,7 @@ End create
 */
 
 
-    public List<String> getUserNameList(List<Lector> lectorList) {
+    public List<String> getLectorsNamesList(List<Lector> lectorList) {
         List<String> namesLectors = new ArrayList<>();
         for (Lector lector : lectorList) {
             namesLectors.add(lector.getNameLector());

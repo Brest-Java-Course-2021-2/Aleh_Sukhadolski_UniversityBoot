@@ -89,7 +89,7 @@ public class RequestFromLectorServiceImplTestIT {
                 "MIKE", "mike", "2222", "mike@tyson.com"));
         List<RequestFromLector> requestsFromLectorService = requestFromLectorService.getAllRequestsFromLectorService(lector.getIdLector());
         assertTrue(requestsFromLectorService.size() == 6);
-        assertTrue(requestsFromLectorService.get(0).getNumberOfPairs().equals("0"));
+        assertTrue(requestsFromLectorService.get(0).getNumberOfPairs().equals(" "));
         assertTrue(lector.getNameLector().equals("MIKE"));
         requestsFromLectorService = requestsFromLectorService.stream()
                                                              .peek(req -> req.setNumberOfPairs("2"))
@@ -98,7 +98,7 @@ public class RequestFromLectorServiceImplTestIT {
         assertTrue(requestsFromLectorService.get(0).getNumberOfPairs().equals("2"));
         assertTrue(requestsFromLectorService.get(1).getNumberOfPairs().equals("2"));
         RequestFromLector requestFromLector = requestFromLectorService.flushRequestFromLectorService(requestsFromLectorService.get(0));
-        assertTrue(requestFromLector.getNumberOfPairs().equals("0"));
+        assertTrue(requestFromLector.getNumberOfPairs().equals(" "));
         assertTrue(requestsFromLectorService.get(1).getNumberOfPairs().equals("2"));
     }
 
