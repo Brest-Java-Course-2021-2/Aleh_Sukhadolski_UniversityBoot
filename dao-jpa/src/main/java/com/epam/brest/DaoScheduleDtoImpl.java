@@ -25,8 +25,13 @@ public class DaoScheduleDtoImpl implements DaoScheduleDtoApi {
     @Autowired
     private Schedule schedule;
 
+    public List<DaySchedule> scheduleForAll;
+    public List<LectorsSchedule> lectorsSchedule;
+    public List<StudentsSchedule> studentsSchedule;
+
+
     @Override
-    public void createSchedule() {
+    public List<DaySchedule> createSchedule() {
         List<String> groups = daoGroup.getAllGroupsNames();
         List<Lector> lectors = daoLector.getAllLectors();
         List<String> lectorNames = schedule.getLectorsNamesList(daoLector.getAllLectors());
@@ -40,10 +45,11 @@ public class DaoScheduleDtoImpl implements DaoScheduleDtoApi {
             }
         }
 
-        schedule.createSchedule(groups, lectorNames, requestsForGroupes);
-        schedule.createScheduleForGroupe(groups);
-        schedule.createScheduleForLectors(lectorNames);
+        scheduleForAll = schedule.createSchedule(groups, lectorNames, requestsForGroupes);
+        studentsSchedule = schedule.createScheduleForGroupe(groups);
+        lectorsSchedule = schedule.createScheduleForLectors(lectorNames);
 
+        return scheduleForAll;
     }
 
     @Override
@@ -53,9 +59,9 @@ public class DaoScheduleDtoImpl implements DaoScheduleDtoApi {
 
     @Override
     public List<LectorsSchedule> getScheduleForLector(String lectorName) {
-               return schedule.lectorsScheduleForAll.stream()
-                                .filter(lectorsSchedule -> lectorsSchedule.getLector().equals(lectorName))
-                                .collect(Collectors.toList());
+               return lectorsSchedule.stream()
+                                     .filter(lectorsSchedule -> lectorsSchedule.getLector().equals(lectorName))
+                                     .collect(Collectors.toList());
     }
 
     @Override
@@ -65,8 +71,8 @@ public class DaoScheduleDtoImpl implements DaoScheduleDtoApi {
 
     @Override
     public List<StudentsSchedule> getScheduleForGroup(String groupName) {
-        return schedule.studentsScheduleForAll.stream()
-                .filter(studentsSchedule -> studentsSchedule.getGroupe().equals(groupName))
-                .collect(Collectors.toList());
+        return studentsSchedule.stream()
+                               .filter(studentsSchedule -> studentsSchedule.getGroupe().equals(groupName))
+                               .collect(Collectors.toList());
     }
 }
