@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 @Component
 @ComponentScan ("com.epam.brest.*")
-public class DaoScheduleDto implements DaoScheduleDtoApi {
+public class DaoScheduleDtoImpl implements DaoScheduleDtoApi {
 
     @Autowired
     private DaoGroupApi daoGroup;
