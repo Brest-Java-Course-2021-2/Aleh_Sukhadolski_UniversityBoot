@@ -53,7 +53,7 @@ public class DaoRequestFromLectorImpl implements DaoRequestFromLectorApi {
 
     public RequestFromLector flushRequestForLector(RequestFromLector requestFromLector){
         logger.info("Flush Request to null position {} " + requestFromLector);
-        requestFromLector.setNumberOfPairs(" ");
+        requestFromLector.setNumberOfPairs("0");
         requestFromLector.setSubjectOfLector("    ");
         requestFromLector.setDate(new Date());
         return requestFromLectorRepository.saveAndFlush(requestFromLector);

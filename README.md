@@ -37,183 +37,53 @@
 
 
 
+## Groups
+### Get all groups:
+#### GET: http://localhost:8080/groups/get-all
 
-## __TEST APPLICATION IN THE POSTMAN__
+### Get all names of the groups:
+#### GET: http://localhost:8080/groups/get-all-names
 
-### get all lectors
-GET
-http://localhost:8080/lectors/get-all
+### Get group by the name:
+#### GET: http://localhost:8080/groups/group/get-name
+#### @RequestParam String name 
+#### for example :  http://localhost:8080/groups/group/get-name?name=e1
 
+### Create new group:
+#### POST: http://localhost:8080/groups/group/new
+#### @RequestBody String newName
+#### for example :  e2
 
-### create lector
-POST
-http://localhost:8080/lectors/lector/new
-body:
+### Update group:
+#### PUT: http://localhost:8080/groups/group/update
+#### @RequestBody List <String> names [{"newName": "?"}, {"oldName": "?""}] 
+#### for example :  [{"newName": "q1"}, {"oldName": "e1""}]
 
-{
-"nameLector": "Mike",
-"loginLector": "mike",
-"passwordLector": "1111",
-"emailLector": "mike@tyson.com"
-}
-
-Response : 1  (id of the new lector)
-____________________________________
-POST
-http://localhost:8080/lectors/lector/new
-body:
-
-{
-"nameLector": "John",
-"loginLector" : "john",
-"passwordLector": "2222",
-"emailLector" : "john@bonjovy.com"
-}
-
-Response : 2  (id of the new lector)
-______________________________________
-
-###  Test requests for lector by id lector 
-GET
-http://localhost:8080/lectors/lector/{idLector}/requests/all
-
-Response : []    __(The requests don't exists)__
-______________________________________
-
-### Create groupes
-
-POST
-http://localhost:8080/groups/group/new
-
-#### body:
-e1
-#### Response :
-{
-"idG": 5,
-"groupe": "e1"
-}
-#### body:
-e2
-#### Response :
-{
-"idG": 8,
-"groupe": "e2"
-}
-#### body:
-e3
-#### Response :
-{
-"idG": 11,
-"groupe": "e3"
-}
-#### body:
-e4
-#### Response :
-{
-"idG": 14,
-"groupe": "e4"
-}
-
-### __Test all groupes__
-GET
-http://localhost:8080/groups/get-all
-Response :
-[
-{
-"idG": 5,
-"groupe": "e1"
-},
-{
-"idG": 8,
-"groupe": "e2"
-},
-{
-"idG": 11,
-"groupe": "e3"
-},
-{
-"idG": 14,
-"groupe": "e4"
-}
-]
-
-### __Test requests for lector =  id lector __
-GET
-http://localhost:8080/lectors/lector/{id}/requests/all
-Response :
-[
-{
-"idR": 3,
-"groupe": "e1",
-"pairs": "0",
-"subject": "    ",
-"date": "2022-03-08T12:36:42.569+00:00",
-"id": 1
-},
-{
-"idR": 6,
-"groupe": "e2",
-"pairs": "0",
-"subject": "    ",
-"date": "2022-03-08T12:38:49.242+00:00",
-"id": 1
-},
-{
-"idR": 9,
-"groupe": "e3",
-"pairs": "0",
-"subject": "    ",
-"date": "2022-03-08T12:39:17.339+00:00",
-"id": 1
-},
-{
-"idR": 12,
-"groupe": "e4",
-"pairs": "0",
-"subject": "    ",
-"date": "2022-03-08T12:39:41.581+00:00",
-"id": 1
-}
-]
+### Delete group:
+#### DELETE: http://localhost:8080/groups/group/delete
+#### @RequestBody String name
+#### for example : e1
 
 
-### Update request
-#### method PUT
+## ReuestsFromLector
+### Get all requests from lector:
+#### GET: http://localhost:8080/lectors/lector/{id}/requests/all
+#### {id} : idLector
+#### for example : http://localhost:8080/lectors/lector/1/requests/all
 
-http://localhost:8080/lectors/lector/request/update
+### Get request from lector:
+#### GET: http://localhost:8080/lectors/lector/request/{id}
+#### {id} : idRequest
+#### for example : http://localhost:8080/lectors/lector/request/12
 
-#### body:
-{
-        "idRequest": 12,
-        "group": "e1",
-        "numberOfPairs": "2",
-        "subjectOfLector": "math",
-        "idLector": 20,
-        "date": "2022-03-14T17:09:26.913+00:00"
-    }
+### Update request from lector:
+#### PUT: http://localhost:8080/lectors/lector/request/update
+#### @RequestBody:
+#### {"idRequest": 6, "group": "e1", "numberOfPairs": "2", "subjectOfLector": "fizo", "idLector": 1, "date": "2022-03-14T17:28:49.263+00:00"}
 
-#### response :
-{
-"idR": 12,
-"groupe": "e4",
-"pairs": "2",
-"subject": "math",
-"date": "2022-03-08T12:39:41.581+00:00",
-"id": 1
-}
-
-#### test :
-method GET
-http://localhost:8080/request/12
-
-#### response :
-{
-"idR": 12,
-"groupe": "e4",
-"pairs": "2",
-"subject": "math",
-"date": "2022-03-08T12:39:41.581+00:00",
-"id": 1
-}
+### Delete request from lector:
+#### DELETE: http://localhost:8080/lectors/lector/request/delete
+#### @RequestBody:
+#### {"idRequest": 6, "group": "e1", "numberOfPairs": "2", "subjectOfLector": "fizo", "idLector": 1, "date": "2022-03-14T17:28:49.263+00:00"}
 
 

@@ -42,8 +42,8 @@ public class RequestsFromLectorRest {
         return new ResponseEntity<>(request, HttpStatus.OK);
     }
 
-    @DeleteMapping(value = "/lectors/lector/request/delete", consumes = "application/json", produces = "application/json")
-    public ResponseEntity <RequestFromLector> deleteGroupe(@PathVariable RequestFromLector request) {
+    @PutMapping(path = "/lectors/lector/request/delete", consumes = "application/json", produces = "application/json")
+    public ResponseEntity <RequestFromLector> deleteRequest(@RequestBody RequestFromLector request) {
         logger.debug("delete request from lector = ", request);
         requestFromLectorService.flushRequestFromLectorService(request);
         return new ResponseEntity(request, HttpStatus.OK);
