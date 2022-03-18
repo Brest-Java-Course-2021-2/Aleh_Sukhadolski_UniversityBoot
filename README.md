@@ -5,33 +5,64 @@
 #### _./mvnw spring-boot::run_
 
 
+# __Endpoints__
+## lectors
+### Get all lectors:
+#### GET: http://localhost:8080/lectors/get-all
+
+### Get lector by the nameLector:
+#### GET: http://localhost:8080/lectors/lector/get-name
+
+### Get lector by the emailLector:
+#### GET: http://localhost:8080/lectors/lector/get-email
+
+### Get lector by the idLector:
+#### GET: http://localhost:8080/lectors/lector/{idLector}
+
+### Create new lector :
+#### POST: http://localhost:8080/lectors/lector/new
+#### for example: @RequestBody {"nameLector": "Mike","loginLector": "mike","passwordLector": "1111","emailLector": "mike@tyson.com"}
+
+### Update lector :
+#### PUT: http://localhost:8080/lectors/lector/update
+#### for example: @RequestBody {"idLector": "1",""nameLector": "Mike","loginLector": "mike","passwordLector": "1111","emailLector": "mike@tyson.com"}
+
+### Delete lector by idLector :
+#### DELETE: http://localhost:8080/lectors/lector/{id}/delete
+#### for emample:  http://localhost:8080/lectors/lector/1/delete
+
+### Delete lector by Lector :
+#### DELETE: http://localhost:8080/lectors/lector/delete
+#### for emample: @RequestBody {"idLector": "1",""nameLector": "Mike","loginLector": "mike","passwordLector": "1111","emailLector": "mike@tyson.com"} 
+
+
+
 
 ## __TEST APPLICATION IN THE POSTMAN__
 
+### get all lectors
+GET
+http://localhost:8080/lectors/get-all
 
-### create user
 
-_method post_
-
-http://localhost:8080/lector/new
-
+### create lector
+POST
+http://localhost:8080/lectors/lector/new
 body:
 
 {
 "nameLector": "Mike",
-"loginLector" : "mike",
+"loginLector": "mike",
 "passwordLector": "1111",
-"emailLector" : "mike@tyson.com"
+"emailLector": "mike@tyson.com"
 }
 
-Response : 1  (id of the new user)
+Response : 1  (id of the new lector)
 ____________________________________
-
-_method post_
-
-http://localhost:8080/lector/new
-
+POST
+http://localhost:8080/lectors/lector/new
 body:
+
 {
 "nameLector": "John",
 "loginLector" : "john",
@@ -39,21 +70,20 @@ body:
 "emailLector" : "john@bonjovy.com"
 }
 
-Response : 2  (id of the new user)
+Response : 2  (id of the new lector)
 ______________________________________
 
-###  Test requests for user id = 1
-__method GET__
-http://localhost:8080/request/all/1
+###  Test requests for lector by id lector 
+GET
+http://localhost:8080/lectors/lector/{idLector}/requests/all
 
 Response : []    __(The requests don't exists)__
 ______________________________________
 
 ### Create groupes
 
-_method post_
-
-http://localhost:8080/group/new
+POST
+http://localhost:8080/groups/group/new
 
 #### body:
 e1
@@ -85,8 +115,8 @@ e4
 }
 
 ### __Test all groupes__
-method GET
-http://localhost:8080/group/all
+GET
+http://localhost:8080/groups/get-all
 Response :
 [
 {
@@ -107,16 +137,16 @@ Response :
 }
 ]
 
-### __Test requests for user id = 1__
-__method GET__
-http://localhost:8080/request/all/1
+### __Test requests for lector =  id lector __
+GET
+http://localhost:8080/lectors/lector/{id}/requests/all
 Response :
 [
 {
 "idR": 3,
 "groupe": "e1",
 "pairs": "0",
-"subject": "0000",
+"subject": "    ",
 "date": "2022-03-08T12:36:42.569+00:00",
 "id": 1
 },
@@ -124,7 +154,7 @@ Response :
 "idR": 6,
 "groupe": "e2",
 "pairs": "0",
-"subject": "0000",
+"subject": "    ",
 "date": "2022-03-08T12:38:49.242+00:00",
 "id": 1
 },
@@ -132,7 +162,7 @@ Response :
 "idR": 9,
 "groupe": "e3",
 "pairs": "0",
-"subject": "0000",
+"subject": "    ",
 "date": "2022-03-08T12:39:17.339+00:00",
 "id": 1
 },
@@ -140,7 +170,7 @@ Response :
 "idR": 12,
 "groupe": "e4",
 "pairs": "0",
-"subject": "0000",
+"subject": "    ",
 "date": "2022-03-08T12:39:41.581+00:00",
 "id": 1
 }
@@ -150,11 +180,11 @@ Response :
 ### Update request
 #### method PUT
 
-http://localhost:8080/request/update
+http://localhost:8080/lectors/lector/request/update
 
 #### body:
 {
-        "idRequest": 21,
+        "idRequest": 12,
         "group": "e1",
         "numberOfPairs": "2",
         "subjectOfLector": "math",
