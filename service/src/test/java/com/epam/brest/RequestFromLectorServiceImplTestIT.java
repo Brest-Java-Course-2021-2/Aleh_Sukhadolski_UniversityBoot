@@ -89,7 +89,7 @@ public class RequestFromLectorServiceImplTestIT {
                 "MIKE", "mike", "2222", "mike@tyson.com"));
         List<RequestFromLector> requestsFromLectorService = requestFromLectorService.getAllRequestsFromLectorService(lector.getIdLector());
         assertTrue(requestsFromLectorService.size() == 6);
-        assertTrue(requestsFromLectorService.get(0).getNumberOfPairs().equals(" "));
+        assertTrue(requestsFromLectorService.get(0).getNumberOfPairs().equals("0"));
         assertTrue(lector.getNameLector().equals("MIKE"));
         requestsFromLectorService = requestsFromLectorService.stream()
                                                              .peek(req -> req.setNumberOfPairs("2"))
