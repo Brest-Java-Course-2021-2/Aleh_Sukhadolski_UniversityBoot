@@ -23,41 +23,37 @@ public class ScheduleRest {
 
     @GetMapping("/schedule/create")
     @Transactional(readOnly = true)
-    public Integer createSchedule()
-    {
+    public Integer createSchedule() {
         logger.debug("Create schedule({})");
         return (Integer) scheduleDtoService.createScheduleService();
     }
 
     @GetMapping("/schedule/alllectors")
     @Transactional(readOnly = true)
-    public List<LectorsSchedule> getScheduleForAllLectors()
-    {
+    public List<LectorsSchedule> getScheduleForAllLectors() {
         logger.debug("Get schedule for all lectors({})");
         return (List<LectorsSchedule>) scheduleDtoService.getScheduleForAllLectorsService();
     }
 
     @GetMapping("/schedule/allgroups")
     @Transactional(readOnly = true)
-    public List<StudentsSchedule> getScheduleForAllGroups()
-    {
+    public List<StudentsSchedule> getScheduleForAllGroups() {
         logger.debug("Get schedule for all groups({})");
         return (List<StudentsSchedule>) scheduleDtoService.getScheduleForAllGroupsService();
     }
 
     @GetMapping("/schedule/lector")
     @Transactional(readOnly = true)
-    public List<LectorsSchedule> getScheduleForLector(@RequestParam String lectorName)
-    {
+    public List<LectorsSchedule> getScheduleForLector(@RequestParam String lectorName) {
         logger.debug("Get schedule for lector({})" + lectorName);
         return (List<LectorsSchedule>) scheduleDtoService.getScheduleForLectorService(lectorName);
     }
 
     @GetMapping("/schedule/group")
     @Transactional(readOnly = true)
-    public List<StudentsSchedule> getScheduleForGroup(@RequestParam String groupName)
-    {
+    public List<StudentsSchedule> getScheduleForGroup(@RequestParam String groupName) {
         logger.debug("Get schedule for group({})" + groupName);
         return (List<StudentsSchedule>) scheduleDtoService.getScheduleForGroupService(groupName);
     }
+
 }

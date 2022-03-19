@@ -20,52 +20,46 @@ public class GroupsRest {
     @Autowired
     private GroupServiceApi groupService;
 
-
     @GetMapping("/groups/get-all")
     @Transactional(readOnly = true)
-    public List<Group> allGroupes() {
+    public List<Group> allGroups() {
         logger.debug("get all groups({})");
         return (List<Group>) groupService.getAllGroupsService();
     }
 
     @GetMapping("/groups/get-all-names")
     @Transactional(readOnly = true)
-    public List<String> allGroupesByNames() {
+    public List<String> allGroupsByNames() {
         logger.debug("get ll groups names({})");
         return (List<String>) groupService.getAllGroupNamesService();
     }
 
-
     @GetMapping("/groups/group/get-name")
     @Transactional(readOnly = true)
-    public Group getGroupeByName(@RequestParam String name) {
+    public Group getGroupByName(@RequestParam String name) {
         logger.debug("get group by name group({})");
         return (Group) groupService.getGroupByGroupNameService(name);
     }
 
     @PostMapping(path = "/groups/group/new", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Group> createGroupe(@RequestBody String newName) {
+    public ResponseEntity<Group> createGroup(@RequestBody String newName) {
         logger.debug("create new group({}) name = ", newName);
         Group groupe = groupService.createNewGroupService(newName);
         return new ResponseEntity<>(groupe, HttpStatus.OK);
     }
 
-
     @PutMapping(path = "/groups/group/update", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Group> updateGroupe(@RequestBody List <String> names) {
+    public ResponseEntity<Group> updateGroup(@RequestBody List <String> names) {
         logger.debug("update group({})", names.toString());
         Group groupe = groupService.updateGroupNameService(names.get(0), names.get(1));
         return new ResponseEntity<>(groupe, HttpStatus.OK);
     }
 
-
     @DeleteMapping(value = "/groups/group/delete", produces = {"application/json"})
-    public ResponseEntity <String> deleteGroupe(@RequestBody String name) {
+    public ResponseEntity <String> deleteGroup(@RequestBody String name) {
         logger.debug("delete group by name groupe = ", name);
         name = groupService.deleteGroupByGroupNameService(name);
         return new ResponseEntity(name, HttpStatus.OK);
     }
-
-
 
 }

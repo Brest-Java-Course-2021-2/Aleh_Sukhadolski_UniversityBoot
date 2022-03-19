@@ -6,8 +6,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Component
-@EntityScan("com.epam.brest.model")
 public interface GroupServiceApi {
 
     List<String> getAllGroupNamesService();
@@ -21,4 +19,5 @@ public interface GroupServiceApi {
     Group getGroupByGroupNameService(String name);
 
     Group updateGroupNameService(String newName, String oldName);
+
 }

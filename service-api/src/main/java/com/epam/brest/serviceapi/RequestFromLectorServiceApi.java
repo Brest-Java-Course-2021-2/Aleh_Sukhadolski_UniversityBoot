@@ -7,8 +7,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Component
-@EntityScan("com.epam.brest.model")
 public interface RequestFromLectorServiceApi {
 
     List<RequestFromLector> getAllRequestsFromLectorService(Integer id);
@@ -28,4 +26,5 @@ public interface RequestFromLectorServiceApi {
     void deleteAllRequestsFromLectorService(Integer id);
 
     public RequestFromLector deleteRequestFromLectorService(RequestFromLector request);
+
 }

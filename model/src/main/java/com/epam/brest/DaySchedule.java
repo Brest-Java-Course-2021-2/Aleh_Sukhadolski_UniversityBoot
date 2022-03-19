@@ -42,8 +42,7 @@ public class DaySchedule {
      * @see DaySchedule#DaySchedule(String, String ,int, String, int)
      * @see DaySchedule#DaySchedule(int, String, String ,int, String, int)
      */
-    public DaySchedule() {
-    }
+    public DaySchedule() {}
 
     /**
      * Constructor - create new object

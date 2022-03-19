@@ -6,8 +6,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Component
-@EntityScan("com.epam.brest.model")
 public interface LectorServiceApi {
 
     List<Lector> getAllLectorsService();

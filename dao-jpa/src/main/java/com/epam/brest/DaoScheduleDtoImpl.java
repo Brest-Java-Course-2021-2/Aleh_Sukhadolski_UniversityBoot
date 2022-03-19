@@ -1,6 +1,8 @@
 package com.epam.brest;
 
 import com.epam.brest.dto.Schedule;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
@@ -12,6 +14,8 @@ import java.util.stream.Collectors;
 @Component
 @ComponentScan ("com.epam.brest.*")
 public class DaoScheduleDtoImpl implements DaoScheduleDtoApi {
+
+    private final Logger logger = LogManager.getLogger(DaoScheduleDtoImpl.class);
 
     @Autowired
     private DaoGroupApi daoGroup;
@@ -25,13 +29,14 @@ public class DaoScheduleDtoImpl implements DaoScheduleDtoApi {
     @Autowired
     private Schedule schedule;
 
-    public List<DaySchedule> scheduleForAll;
-    public List<LectorsSchedule> lectorsSchedule;
-    public List<StudentsSchedule> studentsSchedule;
-
+    public List<DaySchedule> scheduleForAll = new ArrayList<>();
+    public List<LectorsSchedule> lectorsSchedule = new ArrayList<>();
+    public List<StudentsSchedule> studentsSchedule = new ArrayList<>();
 
     @Override
     public List<DaySchedule> createSchedule() {
+        logger.info("Create schedule from the Lectors requests {}");
+
         List<String> groups = daoGroup.getAllGroupsNames();
         List<Lector> lectors = daoLector.getAllLectors();
         List<String> lectorNames = schedule.getLectorsNamesList(daoLector.getAllLectors());
@@ -54,23 +59,27 @@ public class DaoScheduleDtoImpl implements DaoScheduleDtoApi {
 
     @Override
     public List<LectorsSchedule> getScheduleForAllLectors() {
+                logger.info("Get schedule to the all Lectors {}");
                 return (List<LectorsSchedule>) schedule.lectorsScheduleForAll;
     }
 
     @Override
     public List<LectorsSchedule> getScheduleForLector(String lectorName) {
-               return lectorsSchedule.stream()
-                                     .filter(lectorsSchedule -> lectorsSchedule.getLector().equals(lectorName))
-                                     .collect(Collectors.toList());
+        logger.info("Get schedule for the Lector {}" + lectorName);
+        return lectorsSchedule.stream()
+                              .filter(lectorsSchedule -> lectorsSchedule.getLector().equals(lectorName))
+                              .collect(Collectors.toList());
     }
 
     @Override
     public List<StudentsSchedule> getScheduleForAllStudents() {
+        logger.info("Get schedule to the all groups {}");
         return (List<StudentsSchedule>) schedule.studentsScheduleForAll;
     }
 
     @Override
     public List<StudentsSchedule> getScheduleForGroup(String groupName) {
+        logger.info("Get schedule for the group {}" + groupName);
         return studentsSchedule.stream()
                                .filter(studentsSchedule -> studentsSchedule.getGroupe().equals(groupName))
                                .collect(Collectors.toList());

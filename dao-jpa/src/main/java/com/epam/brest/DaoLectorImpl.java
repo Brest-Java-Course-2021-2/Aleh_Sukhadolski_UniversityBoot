@@ -23,15 +23,14 @@ public class DaoLectorImpl implements DaoLectorApi {
         return (List<Lector>) lectorsRepository.findAllLectors();
     }
 
-
     public Lector getLectorByName(String name) {
-        logger.info("GET LECTOR BY NAME{} " + name);
-        return lectorsRepository.findLectorByLectorsName(name);
+        logger.info("GET LECTOR BY the NAME{} " + name);
+        return (Lector) lectorsRepository.findLectorByLectorsName(name);
     }
 
     public Lector getLectorByEmail(String emailLector) {
-        logger.info("GET LECTOR BY EMAIL{} " + emailLector);
-        return lectorsRepository.findLectorByEmail(emailLector);
+        logger.info("GET LECTOR BY the EMAIL{} " + emailLector);
+        return (Lector) lectorsRepository.findLectorByEmail(emailLector);
     }
 
     public Lector getLectorById(Integer idLector) {
@@ -53,6 +52,5 @@ public class DaoLectorImpl implements DaoLectorApi {
         logger.info("DELETE Lector id = " + idLector );
         lectorsRepository.deleteLectorByLectorsId(idLector);
     }
-
 
 }

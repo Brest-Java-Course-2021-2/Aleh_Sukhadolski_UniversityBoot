@@ -18,10 +18,8 @@ public class DaoRequestFromLectorImpl implements DaoRequestFromLectorApi {
     @Autowired
     private RequestFromLectorJpaRepository requestFromLectorRepository;
 
-
-
     public List<RequestFromLector> getAllRequestsFromLectorByIdLector(Integer idLector) {
-        logger.info("GET ALL REQUESTS OF Lector {}" + idLector);
+        logger.info("GET ALL REQUESTS OF the Lector {}" + idLector);
         return (List<RequestFromLector>) requestFromLectorRepository.findAllByForeignKey(idLector);
     }
 
@@ -56,7 +54,7 @@ public class DaoRequestFromLectorImpl implements DaoRequestFromLectorApi {
         requestFromLector.setNumberOfPairs("0");
         requestFromLector.setSubjectOfLector("    ");
         requestFromLector.setDate(new Date());
-        return requestFromLectorRepository.saveAndFlush(requestFromLector);
+        return (RequestFromLector) requestFromLectorRepository.saveAndFlush(requestFromLector);
     }
 
     public void deleteAllRequestsFromLector(Integer idLector){

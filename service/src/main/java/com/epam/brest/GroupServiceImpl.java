@@ -30,19 +30,21 @@ public class GroupServiceImpl implements GroupServiceApi {
     @Autowired
     private DaoRequestFromLectorApi daoRequestFromLector;
 
-
     @Override
     public List<String> getAllGroupNamesService() {
+        logger.info("Get all groups by the nameGroup service");
         return (List<String>) daoGroup.getAllGroupsNames();
     }
 
     @Override
     public List<Group> getAllGroupsService() {
+        logger.info("Get all groups service");
         return (List<Group>) daoGroup.getAllGroups();
     }
 
     @Override
     public String deleteGroupByGroupNameService(String name) {
+        logger.info("Delete group by the nameGroup service");
         List<Lector> lectors = daoLector.getAllLectors();
         List <RequestFromLector> requestsFromlector;
         for (Lector user : lectors){
@@ -58,6 +60,7 @@ public class GroupServiceImpl implements GroupServiceApi {
 
     @Override
     public Group createNewGroupService(String newName) {
+        logger.info("Create new group service");
         List<Lector> lectors = daoLector.getAllLectors();
         List<Integer> idLectors = new ArrayList<>();
         for (Lector lector : lectors){ idLectors.add(lector.getIdLector()); }
@@ -67,11 +70,13 @@ public class GroupServiceImpl implements GroupServiceApi {
 
     @Override
     public Group getGroupByGroupNameService(String name) {
+        logger.info("Get group by the nameGroup service " + name);
         return (Group) daoGroup.getGroupByName(name);
     }
 
     @Override
     public Group updateGroupNameService(String newName, String oldName) {
+        logger.info("Update group service " + newName + " to " + oldName);
         Group group = (Group) daoGroup.updateGroup(newName, oldName);
         List<Lector> lectors = daoLector.getAllLectors();
         List <RequestFromLector> requestsFromLector;
@@ -86,4 +91,5 @@ public class GroupServiceImpl implements GroupServiceApi {
         }
         return (Group) group;
     }
+
 }
