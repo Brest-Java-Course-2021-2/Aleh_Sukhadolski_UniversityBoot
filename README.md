@@ -82,8 +82,26 @@
 #### {"idRequest": 6, "group": "e1", "numberOfPairs": "2", "subjectOfLector": "fizo", "idLector": 1, "date": "2022-03-14T17:28:49.263+00:00"}
 
 ### Delete request from lector:
-#### DELETE: http://localhost:8080/lectors/lector/request/delete
+#### PUT: http://localhost:8080/lectors/lector/request/delete
 #### @RequestBody:
 #### {"idRequest": 6, "group": "e1", "numberOfPairs": "2", "subjectOfLector": "fizo", "idLector": 1, "date": "2022-03-14T17:28:49.263+00:00"}
 
+## Schedule  
+### Create schedule from the lectors requests
+#### GET: http://localhost:8080/schedule/create
 
+### Get schedule for all lectors 
+#### GET: http://localhost:8080/schedule/alllectors
+
+### Get schedule for all groups
+#### GET: http://localhost:8080/schedule/allgroups
+
+### Get schedule for lector
+#### GET: http://localhost:8080/schedule/alllectors
+#### @RequestParam String lectorName
+#### for example: http://localhost:8080/schedule/alllectors?lectorName=Mike
+
+### Get schedule for group
+#### GET: http://localhost:8080/schedule/group
+#### @RequestParam String groupName
+#### for example: http://localhost:8080/schedule/group?groupName=e1
