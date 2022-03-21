@@ -1,7 +1,6 @@
 package com.epam.brest;
 
 import com.epam.brest.serviceapi.RequestFromLectorRestServiceApi;
-import com.epam.brest.serviceapi.RequestFromLectorServiceApi;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpEntity;
