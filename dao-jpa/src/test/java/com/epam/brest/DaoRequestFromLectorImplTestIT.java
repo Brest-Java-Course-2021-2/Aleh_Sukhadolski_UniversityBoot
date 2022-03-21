@@ -93,7 +93,7 @@ public class DaoRequestFromLectorImplTestIT {
         daoRequestFromLector.flushRequestForLector(requestFromLector);
         requestFromLector = daoRequestFromLector.getAllRequestsFromLectorByIdLector(lector.getIdLector()).get(0);
 
-        assertTrue(requestFromLector.getNumberOfPairs().equals(" ")
+        assertTrue(requestFromLector.getNumberOfPairs().equals("0")
                             && requestFromLector.getSubjectOfLector().equals("    "));
 
     }

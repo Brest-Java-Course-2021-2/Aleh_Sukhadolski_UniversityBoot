@@ -81,7 +81,7 @@ public class DaoLectorImplTestIT {
         assertTrue(lectors.size() == 1);
         Lector lector = lectors.get(0);
         daoRequestFromLector.deleteAllRequestsFromLector(lector.getIdLector());
-        daoLector.deleteLector(lector);
+        daoLector.deleteLectorById(lector.getIdLector());
         lector = (Lector) daoLector.getLectorByName(lector.getNameLector());
         assertTrue(lector.getIdLector() == 0);
         lector = (Lector) daoLector.getLectorByEmail(lector.getEmailLector());

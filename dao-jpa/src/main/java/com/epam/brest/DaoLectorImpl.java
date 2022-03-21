@@ -43,11 +43,6 @@ public class DaoLectorImpl implements DaoLectorApi {
         return (Lector) lectorsRepository.saveOrUpdateLector(lector);
     }
 
-    public void deleteLector(Lector lector) {
-        logger.info("DELETE Lector {}" + lector);
-        lectorsRepository.deleteLectorByLectorsId(lector.getIdLector());
-    }
-
     public void deleteLectorById(Integer idLector) {
         logger.info("DELETE Lector id = " + idLector );
         lectorsRepository.deleteLectorByLectorsId(idLector);

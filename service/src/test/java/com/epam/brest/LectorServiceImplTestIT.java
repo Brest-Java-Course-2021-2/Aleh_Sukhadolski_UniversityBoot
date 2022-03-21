@@ -121,7 +121,7 @@ public class LectorServiceImplTestIT {
         Lector lector = lectorService.createNewLectorService(new Lector("Mike", "mike", "1111", "isocrol@aa.com"));
         assertTrue(lector.getNameLector().equals("Mike"));
         assertTrue(lectorService.getAllLectorsService().size() == 2);
-        lectorService.deleteLectorService(lector);
+        lectorService.deleteLectorByIdLectorService(lector.getIdLector());
         assertTrue(lectorService.getAllLectorsService().size() == 1);
 
         lector = lectorService.createNewLectorService(new Lector("Mike", "mike", "1111", "isocrol@aa.com"));

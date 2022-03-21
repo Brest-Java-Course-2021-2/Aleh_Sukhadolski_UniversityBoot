@@ -20,8 +20,6 @@ public interface DaoLectorApi {
 
     public Lector saveOrUpdateLector(Lector user);
 
-    public void deleteLector(Lector user);
-
     public void deleteLectorById(Integer id);
 
 }

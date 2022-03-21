@@ -4,6 +4,8 @@ import com.epam.brest.serviceapi.LectorServiceApi;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -67,13 +69,6 @@ public class LectorsRest {
         logger.debug("deleteLector by id({})", id);
         lectorService.deleteLectorByIdLectorService(id);
         return new ResponseEntity(id, HttpStatus.OK);
-    }
-
-    @DeleteMapping(value = "/lectors/lector/delete", consumes = "application/json", produces = "application/json")
-    public ResponseEntity <Integer> deleteLector(@RequestBody Lector lector) {
-        logger.debug("deleteLector({})", lector);
-        lectorService.deleteLectorService(lector);
-        return new ResponseEntity(lector.getIdLector(), HttpStatus.OK);
     }
 
 }

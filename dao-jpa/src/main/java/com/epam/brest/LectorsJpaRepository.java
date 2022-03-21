@@ -57,7 +57,4 @@ public interface LectorsJpaRepository extends JpaRepository<Lector, Integer> {
         deleteById(id);
     }
 
-    default void deleteLector(@NotNull Lector lector) {
-        deleteById(lector.getIdLector());
     }
-}

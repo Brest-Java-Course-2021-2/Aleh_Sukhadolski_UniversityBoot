@@ -20,8 +20,6 @@ public interface LectorServiceApi {
 
     Lector updateLectorService(Lector user);
 
-    void deleteLectorService(Lector user);
-
-    void deleteLectorByIdLectorService(Integer id);
+    Integer deleteLectorByIdLectorService(Integer id);
 
 }
