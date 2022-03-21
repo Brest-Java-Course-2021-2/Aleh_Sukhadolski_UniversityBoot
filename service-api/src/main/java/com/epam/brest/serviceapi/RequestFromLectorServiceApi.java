@@ -7,24 +7,16 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-public interface RequestFromLectorServiceApi {
+public interface RequestFromLectorServiceApi extends RequestFromLectorRestServiceApi{
 
-    List<RequestFromLector> getAllRequestsFromLectorService(Integer id);
+    void deleteAllRequestsFromLectorService(Integer id);
 
-    RequestFromLector getRequestOfLectorByIdRequestService(Integer idR);
+    public RequestFromLector deleteRequestFromLectorService(RequestFromLector request);
 
     List<RequestFromLector> saveEmptyRequestsForNewLectorService(Integer id);
 
     List<RequestFromLector> saveRequestsForLectorsWhenCreateNewGroupeService(String groupe);
 
-    RequestFromLector updateRequestFromLectorService(RequestFromLector request);
-
     List<RequestFromLector> updateAllRequestsForLectorsService(List<RequestFromLector> requests);
-
-    RequestFromLector flushRequestFromLectorService(RequestFromLector request);
-
-    void deleteAllRequestsFromLectorService(Integer id);
-
-    public RequestFromLector deleteRequestFromLectorService(RequestFromLector request);
 
 }
