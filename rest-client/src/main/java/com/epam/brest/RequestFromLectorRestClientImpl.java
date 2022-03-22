@@ -5,10 +5,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
+@Component
 public class RequestFromLectorRestClientImpl implements RequestFromLectorRestServiceApi {
 
     private final Logger logger = LoggerFactory.getLogger(LectorRestClientImpl.class);
