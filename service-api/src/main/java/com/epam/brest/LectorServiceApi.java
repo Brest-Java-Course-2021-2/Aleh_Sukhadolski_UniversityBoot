@@ -1,4 +1,4 @@
-package com.epam.brest.serviceapi;
+package com.epam.brest;
 
 import com.epam.brest.Lector;
 import org.springframework.boot.autoconfigure.domain.EntityScan;

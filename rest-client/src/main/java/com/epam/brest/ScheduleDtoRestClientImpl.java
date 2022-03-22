@@ -1,12 +1,12 @@
 package com.epam.brest;
 
-import com.epam.brest.serviceapi.ScheduleDtoServiceApi;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
+
 
 public class ScheduleDtoRestClientImpl implements ScheduleDtoServiceApi {
 

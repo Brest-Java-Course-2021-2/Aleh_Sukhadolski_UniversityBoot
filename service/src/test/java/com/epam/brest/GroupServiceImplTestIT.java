@@ -1,8 +1,5 @@
 package com.epam.brest;
 
-import com.epam.brest.serviceapi.GroupServiceApi;
-import com.epam.brest.serviceapi.RequestFromLectorServiceApi;
-import com.epam.brest.serviceapi.LectorServiceApi;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Assertions;

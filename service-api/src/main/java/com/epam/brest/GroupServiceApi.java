@@ -1,8 +1,6 @@
-package com.epam.brest.serviceapi;
+package com.epam.brest;
 
 import com.epam.brest.Group;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 

@@ -28,11 +28,12 @@
         <module>db</module>
         <module>model</module>
         <module>rest-client</module>
+        <module>web-application</module>
 	</modules>
 
 	<properties>
 		<java.version>11</java.version>
-		        <spring-boot.version>2.6.3</spring-boot.version>
+		        <spring-boot.version>2.6.4</spring-boot.version>
 		        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
                 <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
                 <maven-failsafe-plugin.version>3.0.0-M5</maven-failsafe-plugin.version>

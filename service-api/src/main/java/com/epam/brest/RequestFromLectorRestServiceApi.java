@@ -1,4 +1,4 @@
-package com.epam.brest.serviceapi;
+package com.epam.brest;
 
 import com.epam.brest.RequestFromLector;
 

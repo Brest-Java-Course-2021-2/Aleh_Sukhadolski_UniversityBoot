@@ -1,9 +1,5 @@
 package com.epam.brest;
 
-import com.epam.brest.serviceapi.GroupServiceApi;
-import com.epam.brest.serviceapi.RequestFromLectorServiceApi;
-import com.epam.brest.serviceapi.LectorServiceApi;
-
 
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;

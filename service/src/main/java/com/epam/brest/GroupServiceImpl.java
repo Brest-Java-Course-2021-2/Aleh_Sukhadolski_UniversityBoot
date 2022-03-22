@@ -1,6 +1,5 @@
 package com.epam.brest;
 
-import com.epam.brest.serviceapi.GroupServiceApi;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +36,7 @@ public class GroupServiceImpl implements GroupServiceApi {
     }
 
     @Override
-    public List<Group> getAllGroupsService() {
+    public List<com.epam.brest.Group> getAllGroupsService() {
         logger.info("Get all groups service");
         return (List<Group>) daoGroup.getAllGroups();
     }
