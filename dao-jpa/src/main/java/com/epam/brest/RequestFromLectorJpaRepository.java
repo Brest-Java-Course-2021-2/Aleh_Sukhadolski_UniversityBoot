@@ -30,7 +30,8 @@ public interface RequestFromLectorJpaRepository extends JpaRepository<RequestFro
     default  List<RequestFromLector> addNewGroupeInAllLectorRequests(List <Integer> idLectors, String group) {
         List<RequestFromLector> requestsFromLector = idLectors
             .stream()
-            .flatMap(idLector -> Stream.of(new RequestFromLector(idLector, group, "0", "    ", new Date())))
+            .flatMap(idLector -> Stream.of(new RequestFromLector(idLector, group,
+                    "0", "    ", new Date())))
             .collect(Collectors.toList());
        return saveAllAndFlush((List<RequestFromLector>)requestsFromLector);
     }

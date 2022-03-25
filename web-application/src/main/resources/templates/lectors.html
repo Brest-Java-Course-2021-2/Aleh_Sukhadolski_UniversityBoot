@@ -47,24 +47,16 @@
         <td th:text="${lector.loginLector}" ></td>
         <td th:text="${lector.passwordLector}" ></td>
         <td th:text="${lector.emailLector}" ></td>
-        <td> <a th:href="@{/lectors/lector/{id}(id=${lector.idLector})}" th:text="CHANGE">lector</a></td>
+        <td> <a th:href="@{/lector/requests/{id}(id=${lector.idLector})}" th:text="Requests">lector</a></td>
     </tr>
       </tbody>
   </table>
 
-    <form th:method="GET" th:action="@{/user/new}">
-        <input type="submit" value="New user"/>
+    <form th:method="GET" th:action="@{/lector/new}">
+        <input type="submit" value="Insert new lector"/>
     </form>
     <br/>
 
-    <form th:method="GET" th:action="@{/serializator/save}">
-        <input type="submit" value="SAVE DATABASE"/>
-    </form>
-
-    <br/>
-    <form th:method="GET" th:action="@{/serializator/load}">
-        <input type="submit" value="LOAD DATABASE"/>
-    </form>
 
     <br/>
     <form th:method="GET" th:action="@{/create}">

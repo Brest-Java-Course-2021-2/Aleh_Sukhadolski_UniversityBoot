@@ -6,31 +6,32 @@ import javax.validation.constraints.Size;
 
 
 @Entity
-@Table(name = "groupe")
+@Table(name = "groups")
 public class Group {
-    @Column(name = "idG", unique=true, nullable=false)
+
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
+    @Column(name = "idG", unique=true, nullable=false)
     private int idGroup;
 
     /** field groupe - groupe request*/
-    @Column(name = "groupe", nullable = false, length = 10)
+    @Column(name = "group_name", nullable=false, length = 10)
     @NotEmpty(message = "Groupe should be not empty")
     @Size(min = 1, max = 10, message = "Size of groupe should not be 1-10 characters")
     private String groupName;
 
 
-    public Group(int idG, String groupe) {
+    public Group(int idG, String groupName) {
         this.idGroup = idG;
-        this.groupName = groupe;
+        this.groupName = groupName;
     }
 
-    public Group(String groupe) {
-        this.groupName = groupe;
+    public Group(String groupName) {
+        this.groupName = groupName;
     }
 
     public Group() {
-        this.groupName = "";
+        this.groupName = "    ";
     }
 
     public int getIdGroup() {

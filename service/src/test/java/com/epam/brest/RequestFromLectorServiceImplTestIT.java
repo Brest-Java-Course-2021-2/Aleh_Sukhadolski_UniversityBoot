@@ -95,7 +95,7 @@ public class RequestFromLectorServiceImplTestIT {
         assertTrue(requestsFromLectorService.get(0).getNumberOfPairs().equals("2"));
         assertTrue(requestsFromLectorService.get(1).getNumberOfPairs().equals("2"));
         RequestFromLector requestFromLector = requestFromLectorService.flushRequestFromLectorService(requestsFromLectorService.get(0));
-        assertTrue(requestFromLector.getNumberOfPairs().equals(" "));
+        assertTrue(requestFromLector.getNumberOfPairs().equals("0"));
         assertTrue(requestsFromLectorService.get(1).getNumberOfPairs().equals("2"));
     }
 

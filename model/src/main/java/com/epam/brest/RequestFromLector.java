@@ -12,11 +12,12 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(name = "requests_from_lector")
-public class RequestFromLector {
+public class RequestFromLector implements Serializable {
 
     /** field idR - request identificator in database*/
 
@@ -44,10 +45,11 @@ public class RequestFromLector {
     private String subjectOfLector;
 
     /** field date - date when request was create or update*/
-    @Column(name="date_of_request")
+    @Column(name="date")
     @DateTimeFormat(pattern = "yyyy/MM/dd")
-    private Date dateToChangeRequest;
+    private Date date;
 
+    @Column(name = "idLector",  nullable=false)
     private int idLector;
 
     /**
@@ -55,20 +57,21 @@ public class RequestFromLector {
      * @see RequestFromLector#RequestFromLector()
      * @see RequestFromLector#RequestFromLector(int, String, String, String, Date)
      * @see RequestFromLector#RequestFromLector(int, String, String, String)
-     * @param idR - identificator
+     * @param idRequest - identificator
      * @param idLector- identificator of Lector -> one to many
-     * @param groupe - groupe name
-     * @param pairs - number pairs
-     * @param subject - subject of user
-     * @param date - date of request
+     * @param group - groupe name
+     * @param numberOfPairs - number pairs
+     * @param subjectOfLector - subject of user
+     * @param dateToChangeRequest - date of request
      */
-    public RequestFromLector(int idR, int idLector, String groupe, String pairs, String subject, Date date) {
-        this.idRequest = idR;
+    public RequestFromLector(int idRequest, int idLector, String group,
+                             String numberOfPairs, String subjectOfLector, Date dateToChangeRequest) {
+        this.idRequest = idRequest;
         this.idLector = idLector;
-        this.group = groupe;
-        this.numberOfPairs = pairs;
-        this.subjectOfLector = subject;
-        this.dateToChangeRequest = date;
+        this.group = group;
+        this.numberOfPairs = numberOfPairs;
+        this.subjectOfLector = subjectOfLector;
+        this.date = dateToChangeRequest;
     }
 
     /**
@@ -87,7 +90,7 @@ public class RequestFromLector {
         this.group = groupe;
         this.numberOfPairs = pairs;
         this.subjectOfLector = subject;
-        this.dateToChangeRequest = new Date();
+        this.date = new Date();
     }
 
 
@@ -97,17 +100,17 @@ public class RequestFromLector {
      * @see RequestFromLector#RequestFromLector(int, int, String, String, String, Date)
      * @see RequestFromLector#RequestFromLector(int, String, String, String)
      * @param idLector - identificator of Lector -> one to many
-     * @param groupe - groupe name
-     * @param pairs - number pairs
-     * @param subject - subject of user
-     * @param date - date of request
+     * @param group - groupe name
+     * @param numberOfPairs - number pairs
+     * @param subjectOfLector - subject of user
+     * @param dateToChangeRequest - date of request
      */
-    public RequestFromLector(int idLector, String groupe, String pairs, String subject, Date date) {
+    public RequestFromLector(int idLector, String group, String numberOfPairs, String subjectOfLector, Date dateToChangeRequest) {
         this.idLector = idLector;
-        this.group = groupe;
-        this.numberOfPairs = pairs;
-        this.subjectOfLector = subject;
-        this.dateToChangeRequest = date;
+        this.group = group;
+        this.numberOfPairs = numberOfPairs;
+        this.subjectOfLector = subjectOfLector;
+        this.date = dateToChangeRequest;
     }
 
     /**
@@ -122,19 +125,19 @@ public class RequestFromLector {
 
 
     /**
-     * Getter - get field date {@link RequestFromLector#dateToChangeRequest}
+     * Getter - get field date {@link RequestFromLector#date}
      * @return - return date of request
      */
     public Date getDate() {
-        return dateToChangeRequest;
+        return date;
     }
 
     /**
-     * Setter - set date field to Request {@link RequestFromLector#dateToChangeRequest}
+     * Setter - set date field to Request {@link RequestFromLector#date}
      * @param date - date of request
      */
     public void setDate(Date date) {
-        this.dateToChangeRequest = date;
+        this.date = date;
     }
 
     /**
@@ -222,7 +225,7 @@ public class RequestFromLector {
                 ", groupe='" + group + '\'' +
                 ", pairs='" + numberOfPairs + '\'' +
                 ", subject='" + subjectOfLector + '\'' +
-                ", date=" + dateToChangeRequest +
+                ", date=" + date +
                 ", id=" + idLector +
                 '}';
     }

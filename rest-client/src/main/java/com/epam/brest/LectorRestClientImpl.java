@@ -78,7 +78,7 @@ public class LectorRestClientImpl implements LectorServiceApi {
     @Override
     public Lector createNewLectorService(Lector lector) {
         logger.debug("Create Lector  () " + lector);
-        ResponseEntity responseEntity = restTemplate.postForEntity("/departments", lector, Lector.class);
+        ResponseEntity responseEntity = restTemplate.postForEntity("/lectors/lector/new", lector, Lector.class);
         return (Lector) responseEntity.getBody();
     }
 

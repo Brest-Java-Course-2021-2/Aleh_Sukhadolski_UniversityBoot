@@ -5,7 +5,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.sql.SQLException;
 
 @Controller
 public class LectorsController {
@@ -22,4 +26,50 @@ public class LectorsController {
         model.addAttribute("lectors", lectorService.getAllLectorsService());
         return "lectors";
     }
+
+    @GetMapping(value = "/lector/{id}")
+    public String showLector(@PathVariable("id") int id, Model model) {
+        model.addAttribute("lector", lectorService.getLectorByIdLectorService(id));
+        return "showlector";
+    }
+
+
+    @GetMapping(value = "/lector/new")
+    public String newUser(@ModelAttribute("lector") Lector lector) throws SQLException
+    {
+        return "newlector";
+    }
+
+    @PostMapping(value = "/newlector")
+    public String create(@ModelAttribute("lector") @Valid Lector lector,
+                         BindingResult result, Model model) throws SQLException {
+
+        if (result.hasErrors()) {
+            return "newlector";
+        }
+        lector = lectorService.createNewLectorService(lector);
+        model.addAttribute("lector", lector);
+        return "redirect:/lectors";
+    }
+
+    @GetMapping(value = "/lector/update/{id}")
+    public String update(Model model, @PathVariable("id") int id) {
+        model.addAttribute("lector", lectorService.getLectorByIdLectorService(id));
+        return "editlector";
+    }
+
+    @PutMapping(value = "/lector/{id}")
+    public String update(@ModelAttribute("lector")@Valid Lector lector,
+                         BindingResult result,@PathVariable("id") int id) {
+
+        if (result.hasErrors()) {
+            return "editlector";
+        }
+
+        lector.setIdLector(id);
+        lectorService.updateLectorService(lector);
+        return "redirect:/lectors";
+    }
+
+
 }

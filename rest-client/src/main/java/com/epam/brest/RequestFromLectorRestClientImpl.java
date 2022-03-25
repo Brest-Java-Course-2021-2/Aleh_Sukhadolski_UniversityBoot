@@ -2,6 +2,7 @@ package com.epam.brest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -11,11 +12,16 @@ import org.springframework.web.client.RestTemplate;
 import java.util.List;
 
 @Component
-public class RequestFromLectorRestClientImpl implements RequestFromLectorRestServiceApi {
+public class RequestFromLectorRestClientImpl implements RequestFromLectorServiceApi {
 
     private final Logger logger = LoggerFactory.getLogger(LectorRestClientImpl.class);
 
     private RestTemplate restTemplate;
+
+    public RequestFromLectorRestClientImpl (final RestTemplateBuilder restTemplateBuilder) {
+        this.restTemplate = restTemplateBuilder.build();
+    }
+
 
     @Override
     public List<RequestFromLector> getAllRequestsFromLectorService(Integer id) {
@@ -50,4 +56,28 @@ public class RequestFromLectorRestClientImpl implements RequestFromLectorRestSer
         return result.getBody();
     }
 
+    @Override
+    public void deleteAllRequestsFromLectorService(Integer id) {
+
+    }
+
+    @Override
+    public RequestFromLector deleteRequestFromLectorService(RequestFromLector request) {
+        return null;
+    }
+
+    @Override
+    public List<RequestFromLector> saveEmptyRequestsForNewLectorService(Integer id) {
+        return null;
+    }
+
+    @Override
+    public List<RequestFromLector> saveRequestsForLectorsWhenCreateNewGroupeService(String groupe) {
+        return null;
+    }
+
+    @Override
+    public List<RequestFromLector> updateAllRequestsForLectorsService(List<RequestFromLector> requests) {
+        return null;
+    }
 }

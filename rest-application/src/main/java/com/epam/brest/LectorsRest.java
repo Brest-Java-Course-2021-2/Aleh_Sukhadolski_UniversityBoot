@@ -48,17 +48,17 @@ public class LectorsRest {
     }
 
     @PostMapping(path = "/lectors/lector/new", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Integer> createNewLector(@RequestBody Lector lector) {
+    public ResponseEntity<Lector> createNewLector(@RequestBody Lector lector) {
         logger.debug("createLector({})", lector);
         lector = lectorService.createNewLectorService(lector);
-        return new ResponseEntity<>(lector.getIdLector(), HttpStatus.OK);
+        return new ResponseEntity<Lector>(lector, HttpStatus.OK);
     }
 
     @PutMapping(path = "/lectors/lector/update", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Integer> updateLector(@RequestBody Lector lector) {
+    public ResponseEntity<Lector> updateLector(@RequestBody Lector lector) {
         logger.debug("updateLector({})", lector);
         lector = lectorService.createNewLectorService(lector);
-        return new ResponseEntity<>(lector.getIdLector(), HttpStatus.OK);
+        return new ResponseEntity<Lector>(lector, HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/lectors/lector/{id}/delete", produces = {"application/json"})
