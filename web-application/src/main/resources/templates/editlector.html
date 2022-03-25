@@ -9,7 +9,13 @@
 <body>
 <center><h3>Edit lector account</h3></center>
 <center>
-<form th:method="PUT" th:action="@{/lector/{id} (id=${lector.getIdLector()})}" th:object="${lector}">
+<form th:method="POST" th:action="@{/updatelector}" th:object="${lector}">
+
+    <label for="idLector">Edit name: </label>
+    <input type="hidden" th:field="*{idLector}" id="idLector"/>
+    <div style="color:red" th:if="${#fields.hasErrors('idLector')}" th:errors="*{idLector}">Name Error</div>
+    <br/>
+
     <label for="nameLector">Edit name: </label>
     <input type="text" th:field="*{nameLector}" id="nameLector"/>
     <div style="color:red" th:if="${#fields.hasErrors('nameLector')}" th:errors="*{nameLector}">Name Error</div>

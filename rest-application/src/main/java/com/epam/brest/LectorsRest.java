@@ -57,7 +57,7 @@ public class LectorsRest {
     @PutMapping(path = "/lectors/lector/update", consumes = "application/json", produces = "application/json")
     public ResponseEntity<Lector> updateLector(@RequestBody Lector lector) {
         logger.debug("updateLector({})", lector);
-        lector = lectorService.createNewLectorService(lector);
+        lector = lectorService.updateLectorService(lector);
         return new ResponseEntity<Lector>(lector, HttpStatus.OK);
     }
 

@@ -16,9 +16,9 @@ public interface LectorServiceApi {
 
     Lector getLectorByIdLectorService(Integer id);
 
-    Lector createNewLectorService(Lector user);
+    Lector createNewLectorService(Lector lector);
 
-    Lector updateLectorService(Lector user);
+    Lector updateLectorService(Lector lector);
 
     Integer deleteLectorByIdLectorService(Integer id);
 

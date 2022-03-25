@@ -63,31 +63,26 @@
         </thead>
         <tbody>
         <td>
-            <form th:method="GET" th:action="@{/lector/update/{id} (id=${lector.getIdLector()})}">
+            <form th:method="GET" th:action="@{/lector/update/{id} (id=${lector.idLector})}">
                 <input type="submit" value="press"/>
             </form>
         </td>
         <td>
-            <form th:method="GET" th:action="@{/lector/requests/{id}(id=${lector.getIdLector()})}">
+            <form th:method="GET" th:action="@{/lector/requests/{id}(id=${lector.idLector})}">
                 <input type="submit" value="press"/>
             </form>
         </td>
         <td>
-            <form th:method="POST" th:action="@{/user/{id}/delete (id=${user.getId()})}">
+            <form th:method="GET" th:action="@{/lector/{id}/delete (id=${lector.idLector})}">
                 <input type="submit" value="press"/>
             </form>
         </td>
         <td>
-            <form th:method="GET" th:action="@{/user}">
+            <form th:method="GET" th:action="@{/lectors}">
                 <input type="submit" value="back"/>
             </form>
         </td>
-        <td>
-            <form th:method="GET" th:action="@{/schedule/lector/{lector} (lector=${user.getName()})}">
-                <input type="submit" value="press"/>
-            </form>
-        </td>
-        </tbody>
+          </tbody>
     </table>
 
 </div>

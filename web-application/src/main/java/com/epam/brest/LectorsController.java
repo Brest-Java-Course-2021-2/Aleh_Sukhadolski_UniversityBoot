@@ -27,7 +27,7 @@ public class LectorsController {
         return "lectors";
     }
 
-    @GetMapping(value = "/lector/{id}")
+    @GetMapping(value = "/lector/show/{id}")
     public String showLector(@PathVariable("id") int id, Model model) {
         model.addAttribute("lector", lectorService.getLectorByIdLectorService(id));
         return "showlector";
@@ -58,18 +58,22 @@ public class LectorsController {
         return "editlector";
     }
 
-    @PutMapping(value = "/lector/{id}")
-    public String update(@ModelAttribute("lector")@Valid Lector lector,
-                         BindingResult result,@PathVariable("id") int id) {
+    @PostMapping(value = "/updatelector")
+    public String update(@ModelAttribute("lector") @Valid Lector lector,
+                         BindingResult result) {
 
         if (result.hasErrors()) {
             return "editlector";
         }
 
-        lector.setIdLector(id);
-        lectorService.updateLectorService(lector);
+        lector = lectorService.updateLectorService(lector);
         return "redirect:/lectors";
     }
 
 
+    @GetMapping(value = "/lector/{id}/delete")
+    public String delete(@PathVariable("id") int id) {
+        lectorService.deleteLectorByIdLectorService(id);
+        return "redirect:/lectors";
+    }
 }

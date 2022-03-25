@@ -35,7 +35,8 @@
         <th>   Login   </th><!-- comment -->
         <th>   Password   </th>
         <th>   Email       </th>
-        <th>   Click       </th>
+        <th>   Check requests  </th>
+        <th>   Show lector  </th>
     </tr>
     </thead>
     <tbody>
@@ -48,6 +49,7 @@
         <td th:text="${lector.passwordLector}" ></td>
         <td th:text="${lector.emailLector}" ></td>
         <td> <a th:href="@{/lector/requests/{id}(id=${lector.idLector})}" th:text="Requests">lector</a></td>
+        <td> <a th:href="@{/lector/show/{id} (id=${lector.idLector})}" th:text="Edit">lector</a></td>
     </tr>
       </tbody>
   </table>

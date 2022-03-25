@@ -62,7 +62,8 @@ public class LectorRestClientImpl implements LectorServiceApi {
         HttpHeaders headers = new HttpHeaders();
         HttpEntity<Lector> entity = new HttpEntity<>(headers);
         ResponseEntity<Integer> result =
-                restTemplate.exchange(String.format("/lectors/lector/%d/delete", id), HttpMethod.DELETE, entity, Integer.class);
+                restTemplate.exchange(String.format("/lectors/lector/%d/delete", id),
+                                      HttpMethod.DELETE, entity, Integer.class);
         return result.getBody();
     }
 
@@ -78,7 +79,8 @@ public class LectorRestClientImpl implements LectorServiceApi {
     @Override
     public Lector createNewLectorService(Lector lector) {
         logger.debug("Create Lector  () " + lector);
-        ResponseEntity responseEntity = restTemplate.postForEntity("/lectors/lector/new", lector, Lector.class);
+        ResponseEntity responseEntity = restTemplate.postForEntity("/lectors/lector/new",
+                                                                    lector, Lector.class);
         return (Lector) responseEntity.getBody();
     }
 
