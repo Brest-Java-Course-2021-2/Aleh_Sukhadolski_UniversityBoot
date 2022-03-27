@@ -31,5 +31,5 @@ public interface DaoRequestFromLectorApi {
 
     public boolean deleteFromAllLectorsRequestsWhenDeletedGroup(String nameGroup);
 
-    public boolean updateAllLectorsRequestsWhenChangedGroup(String nameGroup);
+    public boolean updateAllLectorsRequestsWhenChangedGroup(String newGroup, String oldGroup);
 }

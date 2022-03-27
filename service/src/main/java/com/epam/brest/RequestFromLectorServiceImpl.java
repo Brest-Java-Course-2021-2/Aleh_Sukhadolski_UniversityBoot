@@ -94,4 +94,10 @@ public class RequestFromLectorServiceImpl implements RequestFromLectorServiceApi
         return daoRequestFromLector.deleteFromAllLectorsRequestsWhenDeletedGroup(nameGroup);
     }
 
+    @Override
+    public boolean updateRequestsFromLectorWhenChangedNameGroup(String newName, String oldName) {
+        logger.info("Update requests from the lector when changed group service groupname =  " + oldName + " to " + newName);
+        return daoRequestFromLector.updateAllLectorsRequestsWhenChangedGroup(newName, oldName);
+    }
+
 }

@@ -21,4 +21,6 @@ public interface RequestFromLectorServiceApi extends RequestFromLectorRestServic
 
     boolean deleteRequestsFromLectorWhenDeletedGroupService(String nameGroup);
 
+    boolean updateRequestsFromLectorWhenChangedNameGroup (String newName, String oldName);
+
 }

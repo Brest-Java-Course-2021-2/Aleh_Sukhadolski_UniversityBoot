@@ -53,10 +53,10 @@ public interface RequestFromLectorJpaRepository extends JpaRepository<RequestFro
         }
     }
 
-    default boolean updateRequestsWhenChangedNameGroup(String nameGroup){
+    default boolean updateRequestsWhenChangedNameGroup(String newGroup, String oldGroup){
         List<RequestFromLector> requestsFromLector = (List<RequestFromLector>) findAll().stream()
-                .filter(requestFromLector -> requestFromLector.getGroup().equals(nameGroup))
-                .peek(requestFromLector -> requestFromLector.setGroup(nameGroup))
+                .filter(requestFromLector -> requestFromLector.getGroup().equals(oldGroup))
+                .peek(requestFromLector -> requestFromLector.setGroup(newGroup))
                 .collect(Collectors.toList());
         if (!requestsFromLector.isEmpty()) {
             saveAllAndFlush((Iterable<RequestFromLector>) requestsFromLector);

@@ -74,7 +74,7 @@ public class DaoRequestFromLectorImpl implements DaoRequestFromLectorApi {
     }
 
     @Override
-    public boolean updateAllLectorsRequestsWhenChangedGroup(String nameGroup) {
-        return requestFromLectorRepository.updateRequestsWhenChangedNameGroup(nameGroup);
+    public boolean updateAllLectorsRequestsWhenChangedGroup(String newGroup, String oldGroup) {
+        return requestFromLectorRepository.updateRequestsWhenChangedNameGroup(newGroup, oldGroup);
     }
 }
