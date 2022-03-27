@@ -30,9 +30,9 @@ public class DaoGroupImpl implements DaoGroupApi {
     }
 
     @Override
-    public String deleteGroupByName(String groupName) {
-        logger.info("DELETE GROUP BY the NAME {}");
-        return groupRepository.deleteGroupByGroupName(groupName);
+    public Integer deleteGroupById(Integer idGroup) {
+        logger.info("DELETE GROUP BY IdGroup {}");
+        return groupRepository.deleteGroupByIdGroup(idGroup);
     }
 
     @Override
@@ -45,6 +45,11 @@ public class DaoGroupImpl implements DaoGroupApi {
     public Group getGroupByName(String nameGroup) {
         logger.info("GET GROUP BY the NAME {}");
         return groupRepository.getGroupeByGroupName(nameGroup);
+    }
+
+    @Override
+    public Group getGroupByid(Integer idGroup) {
+        return (Group) groupRepository.getGroupById(idGroup);
     }
 
     @Override

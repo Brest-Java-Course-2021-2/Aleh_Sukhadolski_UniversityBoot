@@ -20,18 +20,9 @@ public interface GroupJpaRepository extends JpaRepository <Group, Integer> {
       }
 
 
-    default String deleteGroupByGroupName(String nameGroupe) {
-          Optional<Group> group = (Optional<Group>) findAll().stream()
-                                                    .filter(gr -> nameGroupe.equalsIgnoreCase(gr.getGroupName()))
-                                                    .collect(Collectors.toList())
-                                                    .stream()
-                                                    .findFirst();
-        if (group.isPresent()) {
-            delete(group.get());
-            return (String) group.get().getGroupName();
-        } else {
-         return "Is Empty";
-        }
+    default Integer deleteGroupByIdGroup(Integer idGroup){
+        deleteById(idGroup);
+        return idGroup;
     }
 
 
@@ -58,4 +49,16 @@ public interface GroupJpaRepository extends JpaRepository <Group, Integer> {
           group.setGroupName(newName);
           return (Group) save(group);
     }
+
+    default Group getGroupById (Integer idGroup){
+        Optional groupOptional = findById(idGroup);
+        Group group;
+        if (groupOptional.isPresent()) {
+            group = (Group) groupOptional.get();
+        } else {
+            group = new Group();
+        }
+        return group;
+    }
+
 }

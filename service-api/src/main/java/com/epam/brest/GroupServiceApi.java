@@ -10,12 +10,14 @@ public interface GroupServiceApi {
 
     List<Group> getAllGroupsService();
 
-    String deleteGroupByGroupNameService(String name);
+    Integer deletegroupByIdService(Integer idGroup);
 
     Group createNewGroupService(String newName);
 
     Group getGroupByGroupNameService(String name);
 
     Group updateGroupNameService(String newName, String oldName);
+
+    Group getGroupById (Integer idGroup);
 
 }

@@ -4,14 +4,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
-@Component
+@Service
 public class ScheduleDtoRestClientImpl implements ScheduleDtoServiceApi {
 
-    private final Logger logger = LoggerFactory.getLogger(LectorRestClientImpl.class);
+    private final Logger logger = LoggerFactory.getLogger(ScheduleDtoRestClientImpl.class);
 
     private RestTemplate restTemplate;
 

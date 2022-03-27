@@ -56,6 +56,14 @@ public class DaoGroupImplTestIT {
     }
 
     @Test
+    public void testGetGroupById() {
+        logger.info("GET  GROUP BY ID{}");
+        Group group = daoGroup.getGroupByName("e1");
+        group = (Group) daoGroup.getGroupByid(group.getIdGroup());
+        assertTrue(group.getGroupName().equals("e1"));
+    }
+
+    @Test
     public void testAddGroup() {
         logger.info("ADD NEW GROUP {}");
         daoGroup.insertNewGroup("a1");
@@ -74,14 +82,14 @@ public class DaoGroupImplTestIT {
 
 
     @Test
-    public void testDeleteGroupByName() {
-        logger.info("DELETE GROUP BY NAME {}");
-        String deletedNameGroup = daoGroup.deleteGroupByName("e1");
-        assertTrue(deletedNameGroup.equals("e1"));
-        deletedNameGroup = daoGroup.deleteGroupByName("e1");
-        assertTrue(deletedNameGroup.equals("Is Empty"));
-        Group group = daoGroup.getGroupByName("e1");
-        assertTrue(group.getGroupName().equals("IsEmpty") );
+    public void testDeleteGroupById() {
+        logger.info("DELETE GROUP BY ID {}");
+        List<Group> groups = (List<Group>) daoGroup.getAllGroups();
+        Group group = groups.get(0);
+        Integer deletedGroup = daoGroup.deleteGroupById(group.getIdGroup());
+        assertTrue(deletedGroup == group.getIdGroup());
+        List <Group> groups1 = daoGroup.getAllGroups();
+        assertTrue(groups.size() > groups1.size());
     }
 
 }

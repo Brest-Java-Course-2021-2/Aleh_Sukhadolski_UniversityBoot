@@ -7,12 +7,13 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
-@Component
-public class RequestFromLectorRestClientImpl implements RequestFromLectorServiceApi {
+@Service
+public class RequestFromLectorRestClientImpl implements RequestFromLectorRestServiceApi {
 
     private final Logger logger = LoggerFactory.getLogger(LectorRestClientImpl.class);
 
@@ -56,28 +57,4 @@ public class RequestFromLectorRestClientImpl implements RequestFromLectorService
         return result.getBody();
     }
 
-    @Override
-    public void deleteAllRequestsFromLectorService(Integer id) {
-
-    }
-
-    @Override
-    public RequestFromLector deleteRequestFromLectorService(RequestFromLector request) {
-        return null;
-    }
-
-    @Override
-    public List<RequestFromLector> saveEmptyRequestsForNewLectorService(Integer id) {
-        return null;
-    }
-
-    @Override
-    public List<RequestFromLector> saveRequestsForLectorsWhenCreateNewGroupeService(String groupe) {
-        return null;
-    }
-
-    @Override
-    public List<RequestFromLector> updateAllRequestsForLectorsService(List<RequestFromLector> requests) {
-        return null;
-    }
 }

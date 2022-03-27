@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+     <meta charset="utf-8"/>
+    <title>Lectors</title>
+<style type="text/css">
+   TABLE {
+    width: 5`00px;
+   }
+   TH {
+    background: #4b0082; 
+    color: #fffff0;
+   }
+   TD, TH {
+    padding: 3px; 
+   }
+  </style>    
+
+</head>
+    
+        
+ 
+<body>
+    <center><h3> GROUPS </h3></center>
+   
+    <table  summary="Table of groups" border="1" cellspacing="2" align="center" >
+         <caption>Groups table</caption>
+         
+    <thead>
+    <tr>
+
+        <th>   Name   </th>
+        <th>   Update  </th>
+        <th>   Delete  </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="group : ${groups}"
+
+        th:style="${group}? 'font-weight: 30;'">
+        <td th:text="${group.nameGroup}"></td>
+        <td>
+            <!--<a th:href="@{/group/update/{id} (id=${group.idGroup})}" th:text="update">lector</a>-->
+            <form th:method="GET" th:action="@{/group/update/{id} (id=${group.idGroup})}">
+                <input type="submit" value="update"/>
+            </form>
+        </td>
+        <td>
+            <form th:method="GET" th:action="@{/group/delete/{id} (id=${group.idGroup})}">
+                <input type="submit" value="delete"/>
+            </form>
+            <!--<a th:href="@{/lector/show/{id} (id=${group.idGroup})}" th:text="Edit">lector</a>-->
+        </td>
+    </tr>
+      </tbody>
+  </table>
+
+    <form th:method="GET" th:action="@{/lector/new}">
+        <input type="submit" value="Insert new lector"/>
+    </form>
+    <br/>
+
+
+    <br/>
+    <form th:method="GET" th:action="@{/create}">
+        <input type="submit" value="CREATE SCHEDULE"/>
+    </form>
+
+    <br/>
+    <form th:method="GET" th:action="@{/schedule/allstudents}">
+        <input type="submit" value="SCHEDULE for ALL students"/>
+    </form>
+</body>
+     
+</html>
+
+

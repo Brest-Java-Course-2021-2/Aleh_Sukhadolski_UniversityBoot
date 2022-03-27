@@ -41,6 +41,13 @@ public class GroupsRest {
         return (Group) groupService.getGroupByGroupNameService(name);
     }
 
+    @GetMapping("/groups/group/{id}")
+    @Transactional(readOnly = true)
+    public Group getGroupById(@PathVariable Integer id) {
+        logger.debug("get group by ID group({})");
+        return (Group) groupService.getGroupById(id);
+    }
+
     @PostMapping(path = "/groups/group/new", consumes = "application/json", produces = "application/json")
     public ResponseEntity<Group> createGroup(@RequestBody String newName) {
         logger.debug("create new group({}) name = ", newName);
@@ -55,11 +62,11 @@ public class GroupsRest {
         return new ResponseEntity<>(groupe, HttpStatus.OK);
     }
 
-    @DeleteMapping(value = "/groups/group/delete", produces = {"application/json"})
-    public ResponseEntity <String> deleteGroup(@RequestBody String name) {
-        logger.debug("delete group by name groupe = ", name);
-        name = groupService.deleteGroupByGroupNameService(name);
-        return new ResponseEntity(name, HttpStatus.OK);
+    @DeleteMapping(value = "/groups/group/delete/{id}", produces = {"application/json"})
+    public ResponseEntity <Integer> deleteGroup(@PathVariable Integer id) {
+        logger.debug("delete group by ID group = ", id);
+        id = groupService.deletegroupByIdService(id);
+        return new ResponseEntity(id, HttpStatus.OK);
     }
 
 }

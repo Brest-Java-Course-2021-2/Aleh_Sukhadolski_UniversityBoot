@@ -2,20 +2,27 @@ package com.epam.brest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
-
+@Service
 public class GroupRestClientImpl implements GroupServiceApi {
 
     private final Logger logger = LoggerFactory.getLogger(GroupRestClientImpl.class);
 
     private RestTemplate restTemplate;
+
+    public GroupRestClientImpl (final RestTemplateBuilder restTemplateBuilder) {
+        this.restTemplate = restTemplateBuilder.build();
+    }
 
     @Override
     public List<String> getAllGroupNamesService() {
@@ -31,15 +38,26 @@ public class GroupRestClientImpl implements GroupServiceApi {
         return (List<Group>) responseEntity.getBody();
     }
 
+
+
     @Override
-    public String deleteGroupByGroupNameService(String name) {
-        logger.debug("Delete group by name () " + name);
+    public Group getGroupById(Integer idGroup) {
+        logger.debug("Get Group by ID ()");
+        ResponseEntity responseEntity = restTemplate.getForEntity("/groups/group/" + idGroup, Group.class);
+        return (Group) responseEntity.getBody();
+    }
+
+
+    @Override
+    public Integer deletegroupByIdService(Integer idGroup) {
+        logger.debug("Delete group by ID () " + idGroup);
         HttpHeaders headers = new HttpHeaders();
-        HttpEntity<String> entity = new HttpEntity<>(headers);
-        ResponseEntity<String> result =
-                restTemplate.exchange("/groups/group/delete", HttpMethod.DELETE, entity, String.class);
+        HttpEntity<Integer> entity = new HttpEntity<>(headers);
+        ResponseEntity<Integer> result =
+                restTemplate.exchange("/groups/group/delete/" + idGroup, HttpMethod.DELETE, entity, Integer.class);
         return result.getBody();
     }
+
 
     @Override
     public Group createNewGroupService(String newName) {
@@ -64,4 +82,6 @@ public class GroupRestClientImpl implements GroupServiceApi {
                 HttpMethod.PUT, entity, Group.class);
         return result.getBody();
     }
+
+
 }

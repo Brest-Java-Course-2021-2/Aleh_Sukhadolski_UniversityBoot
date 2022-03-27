@@ -55,6 +55,15 @@ public class GroupServiceImplTestIT {
     }
 
     @Test
+    public void isGroupByIdTest() {
+        logger.info("GET  GROUP BY ID {}");
+        Group group = groupService.getGroupByGroupNameService("e1");
+        group = groupService.getGroupById(group.getIdGroup());
+        Assertions.assertTrue(group.getGroupName().equals("e1"));
+    }
+
+
+    @Test
     public void isInsertNewGroupTest() {
         logger.info("INSERT NEW GROUP {}");
         Lector lector = lectorService.getLectorByLectorsNameService("TOMMY");
@@ -96,10 +105,11 @@ public class GroupServiceImplTestIT {
     @Test
     public void isDeleteGroupTest() {
         logger.info("DELETE GROUP {}");
-        String result = groupService.deleteGroupByGroupNameService("e1");
-        Assertions.assertTrue(result.equals("e1"));
-        Group group = groupService.getGroupByGroupNameService("e1");
-        Assertions.assertTrue(group.getIdGroup() == 0);
+        List<Group> groups = groupService.getAllGroupsService();
+        Integer idGroup = groupService.deletegroupByIdService(groups.get(0).getIdGroup());
+        Assertions.assertTrue(idGroup == groups.get(0).getIdGroup());
+        List<Group> groups1 = groupService.getAllGroupsService();
+        Assertions.assertTrue(groups.size() - groups1.size() == 1);
     }
 
 }

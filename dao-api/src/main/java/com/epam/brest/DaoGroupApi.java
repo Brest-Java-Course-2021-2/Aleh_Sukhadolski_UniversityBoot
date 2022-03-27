@@ -14,11 +14,13 @@ public interface DaoGroupApi {
 
     List<Group> getAllGroups();
 
-    String deleteGroupByName(String name);
+    Integer deleteGroupById(Integer idGroup);
 
     Group insertNewGroup(String newName);
 
     Group getGroupByName(String name);
+
+    Group getGroupByid (Integer idGroup);
 
     Group updateGroup(String newName, String oldName);
 }

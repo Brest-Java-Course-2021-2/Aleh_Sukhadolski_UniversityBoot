@@ -42,6 +42,13 @@ public class GroupServiceImpl implements GroupServiceApi {
     }
 
     @Override
+    public Integer deletegroupByIdService(Integer idGroup) {
+        logger.info("Delete group by Id service");
+        return daoGroup.deleteGroupById(idGroup);
+    }
+/*
+
+    @Override
     public String deleteGroupByGroupNameService(String name) {
         logger.info("Delete group by the nameGroup service");
         List<Lector> lectors = daoLector.getAllLectors();
@@ -56,6 +63,7 @@ public class GroupServiceImpl implements GroupServiceApi {
         }
         return (String) daoGroup.deleteGroupByName(name);
     }
+*/
 
     @Override
     public Group createNewGroupService(String newName) {
@@ -89,6 +97,11 @@ public class GroupServiceImpl implements GroupServiceApi {
             }
         }
         return (Group) group;
+    }
+
+    @Override
+    public Group getGroupById(Integer idGroup) {
+        return (Group) daoGroup.getGroupByid(idGroup);
     }
 
 }
