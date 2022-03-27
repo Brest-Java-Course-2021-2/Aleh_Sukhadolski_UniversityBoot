@@ -41,4 +41,30 @@ public interface RequestFromLectorJpaRepository extends JpaRepository<RequestFro
         return requestFromLector;
     }
 
+    default boolean deleteRequestsWhenDeletedGroup(String nameGroup) {
+        List<RequestFromLector> requestsFromLector = (List<RequestFromLector>) findAll().stream()
+                                                            .filter(requestFromLector -> requestFromLector.getGroup().equals(nameGroup))
+                                                            .collect(Collectors.toList());
+        if (!requestsFromLector.isEmpty()) {
+            deleteAllInBatch((Iterable<RequestFromLector>) requestsFromLector);
+            return true;
+        } else {
+        return false;
+        }
+    }
+
+    default boolean updateRequestsWhenChangedNameGroup(String nameGroup){
+        List<RequestFromLector> requestsFromLector = (List<RequestFromLector>) findAll().stream()
+                .filter(requestFromLector -> requestFromLector.getGroup().equals(nameGroup))
+                .peek(requestFromLector -> requestFromLector.setGroup(nameGroup))
+                .collect(Collectors.toList());
+        if (!requestsFromLector.isEmpty()) {
+            saveAllAndFlush((Iterable<RequestFromLector>) requestsFromLector);
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
 }

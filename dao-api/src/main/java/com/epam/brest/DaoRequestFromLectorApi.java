@@ -28,4 +28,8 @@ public interface DaoRequestFromLectorApi {
     public void deleteAllRequestsFromLector(Integer id);
 
     public RequestFromLector deleteRequestFromLector(RequestFromLector request);
+
+    public boolean deleteFromAllLectorsRequestsWhenDeletedGroup(String nameGroup);
+
+    public boolean updateAllLectorsRequestsWhenChangedGroup(String nameGroup);
 }

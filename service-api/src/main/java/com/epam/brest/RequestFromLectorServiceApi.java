@@ -11,12 +11,14 @@ public interface RequestFromLectorServiceApi extends RequestFromLectorRestServic
 
     void deleteAllRequestsFromLectorService(Integer id);
 
-    public RequestFromLector deleteRequestFromLectorService(RequestFromLector request);
+    RequestFromLector deleteRequestFromLectorService(RequestFromLector request);
 
     List<RequestFromLector> saveEmptyRequestsForNewLectorService(Integer id);
 
     List<RequestFromLector> saveRequestsForLectorsWhenCreateNewGroupeService(String groupe);
 
     List<RequestFromLector> updateAllRequestsForLectorsService(List<RequestFromLector> requests);
+
+    boolean deleteRequestsFromLectorWhenDeletedGroupService(String nameGroup);
 
 }

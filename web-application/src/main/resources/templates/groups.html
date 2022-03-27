@@ -1,3 +1,6 @@
+
+
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
@@ -40,13 +43,16 @@
     <tr th:each="group : ${groups}"
 
         th:style="${group}? 'font-weight: 30;'">
-        <td th:text="${group.nameGroup}"></td>
+        <td th:text="${group.groupName}">
+        </td>
+
         <td>
             <!--<a th:href="@{/group/update/{id} (id=${group.idGroup})}" th:text="update">lector</a>-->
             <form th:method="GET" th:action="@{/group/update/{id} (id=${group.idGroup})}">
                 <input type="submit" value="update"/>
             </form>
         </td>
+
         <td>
             <form th:method="GET" th:action="@{/group/delete/{id} (id=${group.idGroup})}">
                 <input type="submit" value="delete"/>

@@ -71,6 +71,12 @@ public class RequestFromLectorServiceImpl implements RequestFromLectorServiceApi
     }
 
     @Override
+    public boolean deleteRequestsFromLectorWhenDeletedGroupService(String nameGroup) {
+        logger.info("Delete requests from the lector when deleted group service groupname =  " + nameGroup);
+        return daoRequestFromLector.deleteFromAllLectorsRequestsWhenDeletedGroup(nameGroup);
+    }
+
+    @Override
     public RequestFromLector flushRequestFromLectorService(RequestFromLector requestFromLector) {
         logger.info("Flush request to the empty request for the lector service " + requestFromLector);
         return (RequestFromLector) daoRequestFromLector.flushRequestForLector(requestFromLector);
