@@ -41,6 +41,30 @@ public class DaoLectorImplTestIT {
         assertTrue(lectors.get(0).getNameLector().equals("Monya"));
     }
 
+    @Test
+    public void testGetLectorByName() {
+        logger.info("GET Lector by name {}");
+        daoLector.saveOrUpdateLector(new Lector("Monya", "monya", "1111", "email@mail.com"));
+        Lector lector = (Lector) daoLector.getLectorByName("Monya");
+        assertTrue(lector.getNameLector().equals("Monya"));
+    }
+
+    @Test
+    public void testGetLectorByEmail() {
+        logger.info("GET Lector by email {}");
+        daoLector.saveOrUpdateLector(new Lector("Monya", "monya", "1111", "email@mail.com"));
+        Lector lector = (Lector) daoLector.getLectorByEmail("email@mail.com");
+        assertTrue(lector.getEmailLector().equals("email@mail.com"));
+    }
+
+    @Test
+    public void testGetLectorById() {
+        logger.info("GET Lector by email {}");
+        daoLector.saveOrUpdateLector(new Lector("Monya", "monya", "1111", "email@mail.com"));
+        Lector lector = (Lector) daoLector.getLectorByEmail("email@mail.com");
+        lector = (Lector) daoLector.getLectorById(lector.getIdLector());
+        assertTrue(lector.getEmailLector().equals("email@mail.com"));
+    }
 
     @Test
     public void testSaveAndGet() {

@@ -30,7 +30,7 @@ public class DaoRequestFromLectorImpl implements DaoRequestFromLectorApi {
 
     public List<RequestFromLector> createEmptyRequestsForNewLector(Integer idLector, List<String> groupe) {
         logger.info("SAVE Requests for new Lector {} " + idLector);
-        return (List<RequestFromLector>) requestFromLectorRepository.createRequestsforNewUser(groupe, idLector);
+        return (List<RequestFromLector>) requestFromLectorRepository.createRequestsforNewLector(groupe, idLector);
     }
 
     public List<RequestFromLector> createRequestsForLectorsWhenCreateNewGroup(String group, List<Integer> lectorsId ){

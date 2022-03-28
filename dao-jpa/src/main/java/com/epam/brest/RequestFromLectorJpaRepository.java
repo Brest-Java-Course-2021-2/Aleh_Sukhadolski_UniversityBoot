@@ -19,7 +19,7 @@ public interface RequestFromLectorJpaRepository extends JpaRepository<RequestFro
        return saveAndFlush(requestFromLector);
     }
 
-    default List<RequestFromLector> createRequestsforNewUser(List<String> groups, Integer id) {
+    default List<RequestFromLector> createRequestsforNewLector(List<String> groups, Integer id) {
         List<RequestFromLector> requestsFromLector = groups
             .stream()
             .flatMap(group -> Stream.of(new RequestFromLector(id, group, "0", "    ", new Date())))
