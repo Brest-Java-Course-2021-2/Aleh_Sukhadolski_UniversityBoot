@@ -11,8 +11,6 @@ public interface RequestFromLectorServiceApi extends RequestFromLectorRestServic
 
     void deleteAllRequestsFromLectorService(Integer id);
 
-    RequestFromLector deleteRequestFromLectorService(RequestFromLector request);
-
     List<RequestFromLector> saveEmptyRequestsForNewLectorService(Integer id);
 
     List<RequestFromLector> saveRequestsForLectorsWhenCreateNewGroupeService(String groupe);

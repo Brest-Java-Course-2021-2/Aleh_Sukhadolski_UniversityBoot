@@ -116,4 +116,34 @@ public class DaoRequestFromLectorImplTestIT {
         assertTrue(request.getNumberOfPairs().equals("0"));
     }
 
+    @Test
+    public void deleteAllRequestsFromLector(){
+        logger.info("Delete all requests ");
+        Lector lector = (Lector) daoLector.getLectorByName("MikeTyson");
+        daoRequestFromLector.deleteAllRequestsFromLector(lector.getIdLector());
+        List<RequestFromLector> requestsFromLector = daoRequestFromLector.getAllRequestsFromLectorByIdLector(lector.getIdLector());
+        assertTrue(requestsFromLector.size() == 0);
+    }
+
+    @Test
+    public void deleteRequestsFromLectorsWhenDeletedGroup(){
+        logger.info("Delete requests when deleted group");
+        Lector lector = (Lector) daoLector.getLectorByName("MikeTyson");
+        daoRequestFromLector.deleteFromAllLectorsRequestsWhenDeletedGroup("e1");
+        List<RequestFromLector> requestsFromLector = daoRequestFromLector.getAllRequestsFromLectorByIdLector(lector.getIdLector());
+        assertTrue(requestsFromLector.size() == 4);
+    }
+
+    @Test
+    public void updateRequestsFromLectorsWhenChangedGroup(){
+        logger.info("Update requests when changed group");
+        daoRequestFromLector.updateAllLectorsRequestsWhenChangedGroup("w1", "e1");
+        Lector lector = (Lector) daoLector.getLectorByName("MikeTyson");
+        List<RequestFromLector> requestFromLectors = daoRequestFromLector.getAllRequestsFromLectorByIdLector(lector.getIdLector());
+        assertTrue(requestFromLectors.size() == 5);
+        requestFromLectors = requestFromLectors.stream().filter(request -> request.getGroup().equals("w1")).collect(Collectors.toList());
+        logger.info("Update requests when changed group ===> " + requestFromLectors );
+        assertTrue(requestFromLectors.size() == 1);
+    }
+
 }

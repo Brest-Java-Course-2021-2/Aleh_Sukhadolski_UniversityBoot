@@ -82,11 +82,6 @@ public class RequestFromLectorServiceImpl implements RequestFromLectorServiceApi
         daoRequestFromLector.deleteAllRequestsFromLector(idLector);
     }
 
-    @Override
-    public RequestFromLector deleteRequestFromLectorService(RequestFromLector requestFromLector) {
-        logger.info("Delete request for the lector service " + requestFromLector);
-        return daoRequestFromLector.deleteRequestFromLector(requestFromLector);
-    }
 
     @Override
     public boolean deleteRequestsFromLectorWhenDeletedGroupService(String nameGroup) {
