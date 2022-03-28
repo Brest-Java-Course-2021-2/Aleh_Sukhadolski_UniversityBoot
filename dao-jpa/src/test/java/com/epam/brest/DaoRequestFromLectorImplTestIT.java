@@ -11,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.ComponentScan;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -66,6 +67,53 @@ public class DaoRequestFromLectorImplTestIT {
         assertTrue(requestsFromLector.size() == 5);
     }
 
+    @Test
+    public void getRequestsByIdRequest(){
+        logger.info("Get request from lector by Idrequest");
+        Lector lector = daoLector.getLectorByName("MikeTyson");
+        List<RequestFromLector> requestsFromLector = daoRequestFromLector.getAllRequestsFromLectorByIdLector(lector.getIdLector());
+        RequestFromLector requestFromLector = daoRequestFromLector.getRequestFromLectorByRequestId(requestsFromLector.get(0).getIdRequest());
+        logger.info("Get request from lector by IdRequest -> " + requestFromLector);
+        assertTrue(requestFromLector.getNumberOfPairs().equals("0"));
+    }
 
+    @Test
+    public void createRequestsByLectorsWhenCreateNewGroup(){
+        logger.info("Create request when new group");
+        List<Lector> lectors = (List<Lector>) daoLector.getAllLectors();
+        List<Integer> idLectors = new ArrayList<>();
+        for(Lector lector : lectors){idLectors.add(lector.getIdLector());}
+        daoRequestFromLector.createRequestsForLectorsWhenCreateNewGroup("e11", idLectors );
+        Lector lector = daoLector.getLectorByName("MikeTyson");
+        List<RequestFromLector> requestsFromLector = daoRequestFromLector.getAllRequestsFromLectorByIdLector(lector.getIdLector());
+        assertTrue(requestsFromLector.size() == 6);
+        lector = daoLector.getLectorByName("JoeFrasier");
+        requestsFromLector = daoRequestFromLector.getAllRequestsFromLectorByIdLector(lector.getIdLector());
+        assertTrue(requestsFromLector.size() == 6);
+    }
+
+    @Test
+    public void updateRequestsByLectorsWhenCreateNewGroup(){
+        logger.info("Update request ");
+        Lector lector = (Lector) daoLector.getLectorByName("MikeTyson");
+        RequestFromLector request = daoRequestFromLector.getAllRequestsFromLectorByIdLector(lector.getIdLector()).get(0);
+        request.setNumberOfPairs("2");
+        daoRequestFromLector.updateRequestFromLector(request);
+        request = daoRequestFromLector.getRequestFromLectorByRequestId(request.getIdRequest());
+        assertTrue(request.getNumberOfPairs().equals("2"));
+    }
+
+    @Test
+    public void flushRequestByLector(){
+        logger.info("Flush request ");
+        Lector lector = (Lector) daoLector.getLectorByName("MikeTyson");
+        RequestFromLector request = daoRequestFromLector.getAllRequestsFromLectorByIdLector(lector.getIdLector()).get(0);
+        request.setNumberOfPairs("2");
+        daoRequestFromLector.updateRequestFromLector(request);
+        request = daoRequestFromLector.getRequestFromLectorByRequestId(request.getIdRequest());
+        assertTrue(request.getNumberOfPairs().equals("2"));
+        request = daoRequestFromLector.flushRequestForLector(request);
+        assertTrue(request.getNumberOfPairs().equals("0"));
+    }
 
 }

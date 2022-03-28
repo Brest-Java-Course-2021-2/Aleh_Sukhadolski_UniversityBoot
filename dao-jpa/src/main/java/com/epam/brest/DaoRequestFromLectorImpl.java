@@ -63,10 +63,6 @@ public class DaoRequestFromLectorImpl implements DaoRequestFromLectorApi {
         requestFromLectorRepository.deleteAll((Iterable<? extends RequestFromLector>) requestsFromLector);
     }
 
-    @Override
-    public RequestFromLector deleteRequestFromLector(RequestFromLector requestFromLector) {
-        return requestFromLectorRepository.deleteRequest(requestFromLector);
-    }
 
     @Override
     public boolean deleteFromAllLectorsRequestsWhenDeletedGroup(String nameGroup) {
