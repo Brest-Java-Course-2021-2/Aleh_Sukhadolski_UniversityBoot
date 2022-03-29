@@ -67,16 +67,13 @@ public class RequestFromLectorServiceImplTestIT {
         assertTrue(requestsFromLectorService.size() == 6);
         assertTrue(lector.getNameLector().equals("MIKE"));
 
-        requestFromLectorService.saveRequestsForLectorsWhenCreateNewGroupeService("q1");
-        requestsFromLectorService = requestFromLectorService.getAllRequestsFromLectorService(lector.getIdLector());
-        assertTrue(requestsFromLectorService.size() == 7);
 
         lector = lectorService.getLectorByLectorsNameService("TOMMY");
         requestsFromLectorService = requestFromLectorService.getAllRequestsFromLectorService(lector.getIdLector());
-        assertTrue(requestsFromLectorService.size() == 7);
+        assertTrue(requestsFromLectorService.size() == 6);
 
         List<Group> groups = groupService.getAllGroupsService();
-        assertTrue(groups.size() == 7);
+        assertTrue(groups.size() == 6);
     }
 
     @Test
@@ -88,15 +85,14 @@ public class RequestFromLectorServiceImplTestIT {
         assertTrue(requestsFromLectorService.size() == 6);
         assertTrue(requestsFromLectorService.get(0).getNumberOfPairs().equals("0"));
         assertTrue(lector.getNameLector().equals("MIKE"));
-        requestsFromLectorService = requestsFromLectorService.stream()
-                                                             .peek(req -> req.setNumberOfPairs("2"))
-                                                             .collect(Collectors.toList());
-        requestsFromLectorService = requestFromLectorService.updateAllRequestsForLectorsService(requestsFromLectorService);
-        assertTrue(requestsFromLectorService.get(0).getNumberOfPairs().equals("2"));
-        assertTrue(requestsFromLectorService.get(1).getNumberOfPairs().equals("2"));
-        RequestFromLector requestFromLector = requestFromLectorService.flushRequestFromLectorService(requestsFromLectorService.get(0));
+        Integer id = requestsFromLectorService.get(0).getIdRequest();
+        RequestFromLector requestFromLector = requestFromLectorService.getRequestOfLectorByIdRequestService(id);
+        requestFromLector.setNumberOfPairs("2");
+        requestFromLector = requestFromLectorService.updateRequestFromLectorService(requestFromLector);
+        requestFromLector = requestFromLectorService.getRequestOfLectorByIdRequestService(requestFromLector.getIdRequest());
+        assertTrue(requestFromLector.getNumberOfPairs().equals("2"));
+        requestFromLector = requestFromLectorService.flushRequestFromLectorService(requestFromLector);
         assertTrue(requestFromLector.getNumberOfPairs().equals("0"));
-        assertTrue(requestsFromLectorService.get(1).getNumberOfPairs().equals("2"));
     }
 
     @Test

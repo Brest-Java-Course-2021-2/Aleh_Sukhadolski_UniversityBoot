@@ -4,6 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 // This will be AUTO IMPLEMENTED by Spring into a Bean called lectorRepository
@@ -19,7 +20,12 @@ public interface LectorsJpaRepository extends JpaRepository<Lector, Integer> {
     }
 
     default Lector findLectorByLectorsId(Integer id) {
-        return (Lector) findById(id).get();
+        Optional <Lector> lector = findById(id);
+        if (lector.isPresent()){
+            return lector.get();
+        } else {
+        return (Lector) new Lector();
+        }
     }
 
 

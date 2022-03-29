@@ -36,7 +36,7 @@ public class GroupServiceImpl implements GroupServiceApi {
     }
 
     @Override
-    public List<com.epam.brest.Group> getAllGroupsService() {
+    public List<Group> getAllGroupsService() {
         logger.info("Get all groups service");
         return (List<Group>) daoGroup.getAllGroups();
     }

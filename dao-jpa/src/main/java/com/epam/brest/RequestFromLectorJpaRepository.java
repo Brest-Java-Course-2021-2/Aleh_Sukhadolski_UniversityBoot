@@ -58,13 +58,13 @@ public interface RequestFromLectorJpaRepository extends JpaRepository<RequestFro
                 .filter(requestFromLector -> requestFromLector.getGroup().equals(oldGroup))
                 .peek(requestFromLector -> requestFromLector.setGroup(newGroup))
                 .collect(Collectors.toList());
+
         if (!requestsFromLector.isEmpty()) {
             saveAllAndFlush((Iterable<RequestFromLector>) requestsFromLector);
             return true;
         } else {
             return false;
         }
-
     }
 
 }

@@ -16,6 +16,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+
 @SpringBootApplication
 @SpringBootTest (classes= { LectorServiceImpl.class, RequestFromLectorServiceImpl.class, GroupServiceImpl.class
                           , DaoLectorImpl.class, DaoRequestFromLectorImpl.class, DaoGroupImpl.class})
@@ -81,25 +82,25 @@ public class GroupServiceImplTestIT {
     @Test
     public void isUpdateGroupNameTest() {
         logger.info("UPDATE GROUP {}");
-        groupService.updateGroupNameService("w1", "e6");
-        Group group = groupService.getGroupByGroupNameService("w1");
+
+        Lector lector = lectorService.getLectorByLectorsNameService("TOMMY");
+        List<RequestFromLector> requestFromLectors = requestFromLectorService.getAllRequestsFromLectorService(lector.getIdLector());
+        logger.info("Number requests {}" + requestFromLectors.size());
+        Assertions.assertTrue(requestFromLectors.size() == 6);
+
+        Group group = groupService.updateGroupNameService("w1", "e6");
+        Assertions.assertTrue(group.getGroupName().equals("w1"));
+        lector = lectorService.getLectorByLectorsNameService("TOMMY");
+        requestFromLectors = requestFromLectorService.getAllRequestsFromLectorService(lector.getIdLector());
+        logger.info("Number requests {}" + requestFromLectors.size());
+        Assertions.assertTrue(requestFromLectors.size() == 6);
+        group = groupService.getGroupByGroupNameService("w1");
         Assertions.assertTrue(group.getGroupName().equals("w1"));
         group = groupService.getGroupByGroupNameService("e6");
         Assertions.assertFalse(group.getGroupName().equals("e6"));
         List<Group> groups = groupService.getAllGroupsService();
         Assertions.assertTrue(groups.size() == 6);
-        Lector lector = lectorService.getLectorByLectorsNameService("TOMMY");
-        List<RequestFromLector> requestsFromLectorService = requestFromLectorService.getAllRequestsFromLectorService(lector.getIdLector());
-        boolean ifExist = false;
-        boolean ifNotExist = true;
-        for (RequestFromLector request : requestsFromLectorService){
-            if (request.getGroup().equals("w1")){ ifExist = true; }
-            if (request.getGroup().equals("e6")){ ifNotExist = false; }
-        }
-        Assertions.assertTrue(ifExist);
-        Assertions.assertTrue(ifNotExist);
-        requestsFromLectorService = requestFromLectorService.getAllRequestsFromLectorService(lector.getIdLector());
-        Assertions.assertTrue(requestsFromLectorService.size() == 6);
+
     }
 
     @Test

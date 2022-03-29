@@ -109,6 +109,8 @@ public class LectorServiceImplTestIT {
         assertTrue(lector.getNameLector().equals("Kim"));
         lector1 = lectorService.getLectorByLectorsNameService("Kim");
         assertTrue(lector1.getNameLector().equals("Kim") && lector1.getIdLector() == lector.getIdLector());
+        List<RequestFromLector> requestsFromLector = requestFromLectorService.getAllRequestsFromLectorService(lector1.getIdLector());
+        assertTrue(requestsFromLector.size() == 6);
     }
 
     @Test
@@ -124,6 +126,8 @@ public class LectorServiceImplTestIT {
         assertTrue(lectorService.getAllLectorsService().size() == 2);
         lectorService.deleteLectorByIdLectorService(lector.getIdLector());
         assertTrue(lectorService.getAllLectorsService().size() == 1);
+        lector = lectorService.getLectorByIdLectorService(lector.getIdLector());
+        assertTrue(lector.getNameLector() == null);
     }
 
     @Test

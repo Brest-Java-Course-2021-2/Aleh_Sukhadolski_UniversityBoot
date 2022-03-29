@@ -42,57 +42,14 @@ public class RequestFromLectorServiceImpl implements RequestFromLectorServiceApi
     }
 
     @Override
-    public List<RequestFromLector> saveEmptyRequestsForNewLectorService(Integer idLector) {
-        logger.info("Create empty requests for the new lector service " + idLector);
-        List<String> groups = daoGroup.getAllGroupsNames();
-        return (List<RequestFromLector>) daoRequestFromLector.createEmptyRequestsForNewLector(idLector, groups);
-    }
-
-    @Override
-    public List<RequestFromLector> saveRequestsForLectorsWhenCreateNewGroupeService(String group) {
-        logger.info("Create empty requests for all lectors when created new group service " + group);
-        List<Lector> lectors = daoLector.getAllLectors();
-        List<Integer> idLectors = new ArrayList<>();
-        for (Lector lector : lectors) { idLectors.add(lector.getIdLector()); }
-        daoGroup.insertNewGroup(group);
-        return (List<RequestFromLector>) daoRequestFromLector.createRequestsForLectorsWhenCreateNewGroup(group, idLectors);
-    }
-
-    @Override
     public RequestFromLector updateRequestFromLectorService(RequestFromLector requestFromLector) {
         logger.info("Update request from lector service " + requestFromLector);
         return (RequestFromLector) daoRequestFromLector.updateRequestFromLector(requestFromLector);
     }
 
     @Override
-    public List<RequestFromLector> updateAllRequestsForLectorsService(List<RequestFromLector> requestsFromLector) {
-        logger.info("Update all requests from the lector service " + requestsFromLector);
-        return (List<RequestFromLector>) daoRequestFromLector.updateAllRequestsForLector(requestsFromLector);
-    }
-
-    @Override
-    public RequestFromLector flushRequestFromLectorService(RequestFromLector requestFromLector) {
-        logger.info("Flush request to the empty request for the lector service " + requestFromLector);
-        return (RequestFromLector) daoRequestFromLector.flushRequestForLector(requestFromLector);
-    }
-
-    @Override
-    public void deleteAllRequestsFromLectorService(Integer idLector) {
-        logger.info("Delete all requests for the lector service " + idLector);
-        daoRequestFromLector.deleteAllRequestsFromLector(idLector);
-    }
-
-
-    @Override
-    public boolean deleteRequestsFromLectorWhenDeletedGroupService(String nameGroup) {
-        logger.info("Delete requests from the lector when deleted group service groupname =  " + nameGroup);
-        return daoRequestFromLector.deleteFromAllLectorsRequestsWhenDeletedGroup(nameGroup);
-    }
-
-    @Override
-    public boolean updateRequestsFromLectorWhenChangedNameGroup(String newName, String oldName) {
-        logger.info("Update requests from the lector when changed group service groupname =  " + oldName + " to " + newName);
-        return daoRequestFromLector.updateAllLectorsRequestsWhenChangedGroup(newName, oldName);
+    public RequestFromLector flushRequestFromLectorService(RequestFromLector request) {
+        return daoRequestFromLector.flushRequestForLector(request);
     }
 
 }

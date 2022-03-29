@@ -18,7 +18,7 @@ public class RequestsController {
     private static final Logger logger = LoggerFactory.getLogger(RequestsController.class);
 
     @Autowired
-    private RequestFromLectorRestServiceApi requestFromLectorService;
+    private RequestFromLectorServiceApi requestFromLectorService;
 
     @GetMapping(value = "/lector/requests/{id}")
     public final String lectorsRequests (@PathVariable Integer id, Model model) {

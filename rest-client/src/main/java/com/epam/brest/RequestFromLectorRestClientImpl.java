@@ -13,7 +13,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.List;
 
 @Service
-public class RequestFromLectorRestClientImpl implements RequestFromLectorRestServiceApi {
+public class RequestFromLectorRestClientImpl implements RequestFromLectorServiceApi {
 
     private final Logger logger = LoggerFactory.getLogger(LectorRestClientImpl.class);
 
