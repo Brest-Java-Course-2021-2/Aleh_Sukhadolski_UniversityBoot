@@ -22,5 +22,5 @@ public interface DaoGroupApi {
 
     Group getGroupByid (Integer idGroup);
 
-    Group updateGroup(String newName, String oldName);
+    Group updateGroup(Group group);
 }

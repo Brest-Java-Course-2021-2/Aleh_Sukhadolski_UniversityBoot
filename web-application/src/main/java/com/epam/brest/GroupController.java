@@ -49,18 +49,17 @@ public class GroupController {
     public String update(Model model, @ModelAttribute("id") Integer id) {
         Group group = groupService.getGroupById(id);
         model.addAttribute("group", group);
-        model.addAttribute("oldGroup", group.getGroupName());
         return "updategroup";
     }
 
     @PostMapping(value = "/updategroup")
     public String update(@ModelAttribute("group") @Valid Group group,
-                         BindingResult result, @ModelAttribute ("oldGroup") String oldgroup) {
+                         BindingResult result) {
 
         if (result.hasErrors()) {
             return "editgroup";
         }
-        group = groupService.updateGroupNameService(group.getGroupName(), oldgroup);
+        group = groupService.updateGroupNameService(group);
         return "redirect:/lectors";
     }
 

@@ -74,10 +74,15 @@ public class DaoGroupImplTestIT {
     @Test
     public void testUpdateGroupName() {
         logger.info("UPDATE GROUP NAME {}");
-        Group updatedGroup = daoGroup.updateGroup("a1", "e1");
-        Group group = daoGroup.getGroupByName("a1");
+        Group group = daoGroup.getAllGroups().get(0);
+        String oldGroup = group.getGroupName();
+        group.setGroupName("a1");
+        Group updatedGroup = daoGroup.updateGroup(group);
+        group = daoGroup.getGroupByName("a1");
         assertTrue(group.getGroupName().equals("a1")
                            && updatedGroup.getIdGroup() == group.getIdGroup());
+        group = daoGroup.getGroupByName(oldGroup);
+        assertTrue(group.getGroupName() == "IsEmpty");
     }
 
 

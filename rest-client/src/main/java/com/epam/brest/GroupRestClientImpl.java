@@ -74,10 +74,9 @@ public class GroupRestClientImpl implements GroupServiceApi {
         return (Group) responseEntity.getBody();    }
 
     @Override
-    public Group updateGroupNameService(String newName, String oldName) {
-        logger.debug("Update group  () " + newName + " to " + oldName);
-        String [] names = new String[] {newName, oldName};
-        HttpEntity<String[]> entity = new HttpEntity<>(names);
+    public Group updateGroupNameService(Group group) {
+        logger.debug("Update group  () " + group);
+        HttpEntity<Group> entity = new HttpEntity<>(group);
         ResponseEntity<Group> result = restTemplate.exchange("/groups/group/update",
                 HttpMethod.PUT, entity, Group.class);
         return result.getBody();

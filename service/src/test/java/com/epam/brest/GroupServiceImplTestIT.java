@@ -87,8 +87,9 @@ public class GroupServiceImplTestIT {
         List<RequestFromLector> requestFromLectors = requestFromLectorService.getAllRequestsFromLectorService(lector.getIdLector());
         logger.info("Number requests {}" + requestFromLectors.size());
         Assertions.assertTrue(requestFromLectors.size() == 6);
-
-        Group group = groupService.updateGroupNameService("w1", "e6");
+        Group group = groupService.getAllGroupsService().get(0);
+        group.setGroupName("w1");
+        group = groupService.updateGroupNameService(group);
         Assertions.assertTrue(group.getGroupName().equals("w1"));
         lector = lectorService.getLectorByLectorsNameService("TOMMY");
         requestFromLectors = requestFromLectorService.getAllRequestsFromLectorService(lector.getIdLector());
@@ -96,8 +97,6 @@ public class GroupServiceImplTestIT {
         Assertions.assertTrue(requestFromLectors.size() == 6);
         group = groupService.getGroupByGroupNameService("w1");
         Assertions.assertTrue(group.getGroupName().equals("w1"));
-        group = groupService.getGroupByGroupNameService("e6");
-        Assertions.assertFalse(group.getGroupName().equals("e6"));
         List<Group> groups = groupService.getAllGroupsService();
         Assertions.assertTrue(groups.size() == 6);
 

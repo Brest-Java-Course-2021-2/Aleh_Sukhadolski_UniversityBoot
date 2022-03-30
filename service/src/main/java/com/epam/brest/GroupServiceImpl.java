@@ -67,9 +67,11 @@ public class GroupServiceImpl implements GroupServiceApi {
     }
 
     @Override
-    public Group updateGroupNameService(String newName, String oldName) {
-        logger.info("Update group service " + newName + " to " + oldName);
-        Group group = daoGroup.updateGroup(newName, oldName);
+    public Group updateGroupNameService(Group group) {
+        logger.info("Update group service " + group);
+        String oldName = daoGroup.getGroupByid(group.getIdGroup()).getGroupName();
+        String newName = group.getGroupName();
+        group = daoGroup.updateGroup(group);
         daoRequestFromLector.updateAllLectorsRequestsWhenChangedGroup(newName, oldName);
         return group;
     }

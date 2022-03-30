@@ -12,7 +12,7 @@
 <form th:method="POST" th:action="@{/updategroup}" th:object="${group}">
 
     <label for="idGroup">Edit name: </label>
-    <input type="hidden" th:field="*{idGroup}" id="idGroup"/>
+    <input type="text" th:field="*{idGroup}" id="idGroup"/>
     <div style="color:red" th:if="${#fields.hasErrors('idGroup')}" th:errors="*{idGroup}">Name Error</div>
     <br/>
 

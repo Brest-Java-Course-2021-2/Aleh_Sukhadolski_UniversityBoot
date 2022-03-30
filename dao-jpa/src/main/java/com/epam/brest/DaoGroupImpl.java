@@ -53,8 +53,8 @@ public class DaoGroupImpl implements DaoGroupApi {
     }
 
     @Override
-    public Group updateGroup(String newName, String oldName) {
+    public Group updateGroup(Group group) {
         logger.info("UPDATE GROUPE.NAME BY NEW NAME {}");
-        return groupRepository.updateGroupByGroupName(newName, oldName);
+        return groupRepository.updateGroupByGroupName(group);
     }
 }

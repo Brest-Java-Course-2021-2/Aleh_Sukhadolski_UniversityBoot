@@ -16,7 +16,7 @@ public interface GroupServiceApi {
 
     Group getGroupByGroupNameService(String name);
 
-    Group updateGroupNameService(String newName, String oldName);
+    Group updateGroupNameService(Group group);
 
     Group getGroupById (Integer idGroup);
 

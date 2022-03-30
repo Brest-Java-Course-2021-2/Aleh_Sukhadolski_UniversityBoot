@@ -44,9 +44,7 @@ public interface GroupJpaRepository extends JpaRepository <Group, Integer> {
           }
     }
 
-    default Group updateGroupByGroupName(String newName, String oldName) {
-          Group group = (Group) getGroupeByGroupName(oldName);
-          group.setGroupName(newName);
+    default Group updateGroupByGroupName(Group group) {
           return (Group) save(group);
     }
 

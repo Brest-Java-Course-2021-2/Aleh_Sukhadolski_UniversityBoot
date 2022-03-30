@@ -56,10 +56,10 @@ public class GroupsRest {
     }
 
     @PutMapping(path = "/groups/group/update", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Group> updateGroup(@RequestBody List <String> names) {
-        logger.debug("update group({})", names.toString());
-        Group groupe = groupService.updateGroupNameService(names.get(0), names.get(1));
-        return new ResponseEntity<>(groupe, HttpStatus.OK);
+    public ResponseEntity<Group> updateGroup(@RequestBody Group group) {
+        logger.debug("update group({})", group);
+        group = groupService.updateGroupNameService(group);
+        return new ResponseEntity<>(group, HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/groups/group/delete/{id}", produces = {"application/json"})
