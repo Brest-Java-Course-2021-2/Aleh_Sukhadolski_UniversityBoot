@@ -57,27 +57,22 @@
             <form th:method="GET" th:action="@{/group/delete/{id} (id=${group.idGroup})}">
                 <input type="submit" value="delete"/>
             </form>
-            <!--<a th:href="@{/lector/show/{id} (id=${group.idGroup})}" th:text="Edit">lector</a>-->
         </td>
     </tr>
       </tbody>
   </table>
 
-    <form th:method="GET" th:action="@{/lector/new}">
-        <input type="submit" value="Insert new lector"/>
+    <form th:method="GET" th:action="@{/group/new}">
+        <input type="submit" value="create new group"/>
     </form>
     <br/>
 
 
     <br/>
-    <form th:method="GET" th:action="@{/create}">
-        <input type="submit" value="CREATE SCHEDULE"/>
+    <form th:method="GET" th:action="@{/lectors}">
+        <input type="submit" value="BACK TO LECTORS"/>
     </form>
 
-    <br/>
-    <form th:method="GET" th:action="@{/schedule/allstudents}">
-        <input type="submit" value="SCHEDULE for ALL students"/>
-    </form>
 </body>
      
 </html>

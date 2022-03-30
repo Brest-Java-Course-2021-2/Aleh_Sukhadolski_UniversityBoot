@@ -35,13 +35,13 @@ public class GroupController {
     }
 
     @PostMapping(value = "/newgroup")
-    public String create(@ModelAttribute("group") @Valid String newGroup,
+    public String create(@ModelAttribute("group") @Valid Group group,
                          BindingResult result, Model model) throws SQLException {
 
         if (result.hasErrors()) {
             return "newgroup";
         }
-        Group group = groupService.createNewGroupService(newGroup);
+        group = groupService.createNewGroupService(group.getGroupName());
         return "redirect:/groups";
     }
 
@@ -60,7 +60,7 @@ public class GroupController {
             return "editgroup";
         }
         group = groupService.updateGroupNameService(group);
-        return "redirect:/lectors";
+        return "redirect:/groups";
     }
 
     @GetMapping(value = "/group/delete/{id}")
