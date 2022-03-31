@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -28,6 +29,27 @@ public class ScheduleController {
     public final String schedule () {
         scheduleDtoService.createScheduleService();
         return "redirect:/lectors";
+    }
+
+    @GetMapping(value = "/alllectorsschedule")
+    public final String scheduleAllLectors (Model model) {
+        List<List<LectorsSchedule>> lectorsSchedule =  scheduleDtoService.getScheduleForAllLectorsService();
+        model.addAttribute("lectorsSchedule", lectorsSchedule);
+        return "alllectorsschedule";
+    }
+
+    @GetMapping(value = "/lectorschedule/{id}")
+    public final String scheduleLector (@PathVariable Integer id, Model model) {
+        List<LectorsSchedule> lectorSchedule = scheduleDtoService.getScheduleForLectorService(id);
+        model.addAttribute("lectorsSchedule", lectorSchedule);
+        return "lectorschedule";
+    }
+
+    @GetMapping(value = "/studentschedule/{id}")
+    public final String scheduleGroup (@PathVariable Integer id, Model model) {
+        List<StudentsSchedule> studentSchedule = scheduleDtoService.getScheduleForGroupService(id);
+        model.addAttribute("studentsSchedule", studentSchedule);
+        return "studentschedule";
     }
 
 }

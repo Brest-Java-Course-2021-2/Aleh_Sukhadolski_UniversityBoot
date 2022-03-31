@@ -10,7 +10,7 @@
     <title>Lectors</title>
 <style type="text/css">
    TABLE {
-    width: 5`00px;
+    width: 800px;
    }
    TH {
     background: #4b0082; 
@@ -33,22 +33,23 @@
          
     <thead>
     <tr>
-
         <th>   Name   </th>
         <th>   Update  </th>
         <th>   Delete  </th>
+        <th>   Schedule  </th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="group : ${groups}"
 
         th:style="${group}? 'font-weight: 30;'">
+
+
         <td th:text="${group.groupName}">
         </td>
 
         <td>
-            <!--<a th:href="@{/group/update/{id} (id=${group.idGroup})}" th:text="update">lector</a>-->
-            <form th:method="GET" th:action="@{/group/update/{id} (id=${group.idGroup})}">
+                <form th:method="GET" th:action="@{/group/update/{id} (id=${group.idGroup})}">
                 <input type="submit" value="update"/>
             </form>
         </td>
@@ -58,6 +59,13 @@
                 <input type="submit" value="delete"/>
             </form>
         </td>
+
+        <td>
+        <form th:method="GET" th:action="@{/studentschedule/{id} (id=${group.idGroup})}">
+            <input type="submit" value="Schedule"/>
+        </form>
+        </td>
+
     </tr>
       </tbody>
   </table>

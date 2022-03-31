@@ -31,8 +31,8 @@ public class DaoScheduleDtoImpl implements DaoScheduleDtoApi {
     private Schedule schedule;
 
     public List<DaySchedule> scheduleForAll = new ArrayList<>();
-    public List<LectorsSchedule> lectorsSchedule = new ArrayList<>();
-    public List<StudentsSchedule> studentsSchedule = new ArrayList<>();
+    public List<LectorsSchedule> lectorSchedule = new ArrayList<>();
+    public List<StudentsSchedule> studentSchedule = new ArrayList<>();
 
     @Override
     public List<DaySchedule> createSchedule() {
@@ -52,8 +52,8 @@ public class DaoScheduleDtoImpl implements DaoScheduleDtoApi {
         }
 
         scheduleForAll = schedule.createSchedule(groups, lectorNames, requestsForGroupes);
-        studentsSchedule = schedule.createScheduleForGroupe(groups);
-        lectorsSchedule = schedule.createScheduleForLectors(lectorNames);
+        studentSchedule = schedule.createScheduleForGroupe(groups);
+        lectorSchedule = schedule.createScheduleForLectors(lectorNames);
 
         return scheduleForAll;
     }
@@ -66,7 +66,7 @@ public class DaoScheduleDtoImpl implements DaoScheduleDtoApi {
         List<String> lectorNames = new ArrayList<>();
         for (Lector lector : lectors){lectorNames.add(lector.getNameLector());}
         for (String lectorName : lectorNames){
-            List<LectorsSchedule> lectorsScheduleList = lectorsSchedule.stream()
+            List<LectorsSchedule> lectorsScheduleList = lectorSchedule.stream()
                     .filter(lectorsSchedule1 -> lectorsSchedule1.getLector().equals(lectorName))
                     .collect(Collectors.toList());
             lectorsScheduleAll.add(lectorsScheduleList);
@@ -78,7 +78,7 @@ public class DaoScheduleDtoImpl implements DaoScheduleDtoApi {
     public List<LectorsSchedule> getScheduleForLector(Integer idLector) {
         logger.info("Get schedule for the Lector {}" + idLector);
         String lectorName = daoLector.getLectorById(idLector).getNameLector();
-        return lectorsSchedule.stream()
+        return lectorSchedule.stream()
                               .filter(lectorsSchedule -> lectorsSchedule.getLector().equals(lectorName))
                               .collect(Collectors.toList());
     }
@@ -89,7 +89,7 @@ public class DaoScheduleDtoImpl implements DaoScheduleDtoApi {
         List<List<StudentsSchedule>> studentsScheduleAll = new ArrayList<>();
         List <String> groups = daoGroup.getAllGroupsNames();
         for (String group : groups){
-            List<StudentsSchedule> studentsScheduleList = studentsSchedule.stream()
+            List<StudentsSchedule> studentsScheduleList = studentSchedule.stream()
                     .filter(studentsSchedule1 -> studentsSchedule1.getGroupe().equals(group))
                     .collect(Collectors.toList());
             studentsScheduleAll.add(studentsScheduleList);
@@ -101,7 +101,7 @@ public class DaoScheduleDtoImpl implements DaoScheduleDtoApi {
     public List<StudentsSchedule> getScheduleForGroup(Integer idGroup) {
         logger.info("Get schedule for the group {}" + idGroup);
         String groupName = daoGroup.getGroupByid(idGroup).getGroupName();
-        return studentsSchedule.stream()
+        return studentSchedule.stream()
                                .filter(studentsSchedule -> studentsSchedule.getGroupe().equals(groupName))
                                .collect(Collectors.toList());
     }

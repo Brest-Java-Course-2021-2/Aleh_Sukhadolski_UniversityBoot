@@ -7,7 +7,7 @@
     <title>Lectors</title>
 <style type="text/css">
    TABLE {
-    width: 1200px;
+    width: 1500px;
    }
    TH {
     background: #4b0082; 
@@ -37,6 +37,7 @@
         <th>   Email       </th>
         <th>   Check requests  </th>
         <th>   Show lector  </th>
+        <th>   Schedule  </th>
     </tr>
     </thead>
     <tbody>
@@ -50,6 +51,10 @@
         <td th:text="${lector.emailLector}" ></td>
         <td> <a th:href="@{/lector/requests/{id}(id=${lector.idLector})}" th:text="Requests">lector</a></td>
         <td> <a th:href="@{/lector/show/{id} (id=${lector.idLector})}" th:text="Edit">lector</a></td>
+        <td>
+              <form th:method="GET" th:action="@{/lectorschedule/{id} (id=${lector.idLector})}">
+              <input type="submit" value="your schedule"/>
+        </form></td>
     </tr>
       </tbody>
   </table>

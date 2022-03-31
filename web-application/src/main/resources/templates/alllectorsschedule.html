@@ -20,13 +20,13 @@
 </head>
 
 <body>
-<center><h2>Schedule to week for all groupes</h2></center>
+<center><h2>Schedule to week for all lectors</h2></center>
 <form th:method="GET" th:action="@{/lectors}">
     <input type="submit" value="Back to lectors page"/>
 </form>
-<div th:each="studentSchedule : ${studentsSchedule}">
+<div th:each="lectorSchedule : ${lectorsSchedule}">
 
-        <table summary="Schedule for students" border="1" cellspacing="1" align="center">
+        <table summary="Schedule for teachers" border="1" cellspacing="1" align="center">
                <thead>
         <tr>
             <th> Groupe </th>
@@ -40,16 +40,16 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="students : ${studentSchedule}"
+        <tr th:each="lectors : ${lectorSchedule}"
             th:style="${students}?  'font-weight: 30;' ">
-            <td th:text="${students.groupe}"></td>
-            <td th:text="${students.pair}"></td>
-            <td th:text="${students.monday}"></td>
-            <td th:text="${students.tuesday}"></td>
-            <td th:text="${students.wednesday}"></td>
-            <td th:text="${students.thursday}"></td>
-            <td th:text="${students.friday}"></td>
-            <td th:text="${students.saturday}"></td>
+            <td th:text="${lectors.lector}"></td>
+            <td th:text="${lectors.pair}"></td>
+            <td th:text="${lectors.monday}"></td>
+            <td th:text="${lectors.tuesday}"></td>
+            <td th:text="${lectors.wednesday}"></td>
+            <td th:text="${lectors.thursday}"></td>
+            <td th:text="${lectors.friday}"></td>
+            <td th:text="${lectors.saturday}"></td>
         </tr>
         </tbody>
     </table>
