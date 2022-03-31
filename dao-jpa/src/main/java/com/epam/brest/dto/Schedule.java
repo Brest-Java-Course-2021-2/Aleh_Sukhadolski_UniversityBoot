@@ -58,7 +58,7 @@ public class Schedule {
                     }
                 }
                 if (!ifConsistInRequest) {
-                    sortedRequests.add(new RequestsForGroupe(lector, groupe, "", 0));
+                    sortedRequests.add(new RequestsForGroupe(lector, groupe, "    ", 0));
                 }
                 ifConsistInRequest = false;
 
@@ -68,7 +68,7 @@ public class Schedule {
 
         if (listOfSortedGroupesRequests.size() > 0) {
             if (listOfSortedGroupesRequests.get(0).size() < pairsForSchedule[0].length) {
-                return null;
+                return dayScheduleForAll;
             }
         }
         List<List<RequestsForGroupe>> blockOfSortedGroupesRequests = new ArrayList<>();

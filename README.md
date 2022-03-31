@@ -1,10 +1,20 @@
 # UniversityBoot
 
+## RUN application:
+
 #### _mvn clean install_
+
+### Run rest application
 #### _cd rest-application_
 #### _./mvnw spring-boot::run_
 
+### Run web application
+#### _cd web-application_
+#### _./mvnw spring-boot::run_
+### 
+#### http://localhost:8088/lectors
 
+_____________________________________________
 # __Endpoints__
 ## lectors
 ### Get all lectors:

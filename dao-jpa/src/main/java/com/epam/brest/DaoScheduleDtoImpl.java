@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Component
 @ComponentScan ("com.epam.brest.*")
@@ -58,9 +59,19 @@ public class DaoScheduleDtoImpl implements DaoScheduleDtoApi {
     }
 
     @Override
-    public List<LectorsSchedule> getScheduleForAllLectors() {
+    public List<List<LectorsSchedule>> getScheduleForAllLectors() {
                 logger.info("Get schedule to the all Lectors {}");
-                return (List<LectorsSchedule>) schedule.lectorsScheduleForAll;
+        List<List<LectorsSchedule>> lectorsScheduleAll = new ArrayList<>();
+        List <Lector> lectors = daoLector.getAllLectors();
+        List<String> lectorNames = new ArrayList<>();
+        for (Lector lector : lectors){lectorNames.add(lector.getNameLector());}
+        for (String lectorName : lectorNames){
+            List<LectorsSchedule> lectorsScheduleList = lectorsSchedule.stream()
+                    .filter(lectorsSchedule1 -> lectorsSchedule1.getLector().equals(lectorName))
+                    .collect(Collectors.toList());
+            lectorsScheduleAll.add(lectorsScheduleList);
+        }
+                return (List<List<LectorsSchedule>>) lectorsScheduleAll;
     }
 
     @Override
@@ -72,9 +83,17 @@ public class DaoScheduleDtoImpl implements DaoScheduleDtoApi {
     }
 
     @Override
-    public List<StudentsSchedule> getScheduleForAllStudents() {
+    public List<List<StudentsSchedule>> getScheduleForAllStudents() {
         logger.info("Get schedule to the all groups {}");
-        return (List<StudentsSchedule>) schedule.studentsScheduleForAll;
+        List<List<StudentsSchedule>> studentsScheduleAll = new ArrayList<>();
+        List <String> groups = daoGroup.getAllGroupsNames();
+        for (String group : groups){
+            List<StudentsSchedule> studentsScheduleList = studentsSchedule.stream()
+                    .filter(studentsSchedule1 -> studentsSchedule1.getGroupe().equals(group))
+                    .collect(Collectors.toList());
+            studentsScheduleAll.add(studentsScheduleList);
+        }
+        return (List<List<StudentsSchedule>>) studentsScheduleAll ;
     }
 
     @Override

@@ -29,16 +29,16 @@ public class ScheduleRest {
 
     @GetMapping("/schedule/alllectors")
     @Transactional(readOnly = true)
-    public List<LectorsSchedule> getScheduleForAllLectors() {
+    public List<List<LectorsSchedule>> getScheduleForAllLectors() {
         logger.debug("Get schedule for all lectors({})");
-        return (List<LectorsSchedule>) scheduleDtoService.getScheduleForAllLectorsService();
+        return (List<List<LectorsSchedule>>) scheduleDtoService.getScheduleForAllLectorsService();
     }
 
     @GetMapping("/schedule/allgroups")
     @Transactional(readOnly = true)
-    public List<StudentsSchedule> getScheduleForAllGroups() {
+    public List<List<StudentsSchedule>> getScheduleForAllGroups() {
         logger.debug("Get schedule for all groups({})");
-        return (List<StudentsSchedule>) scheduleDtoService.getScheduleForAllGroupsService();
+        return (List<List<StudentsSchedule>>) scheduleDtoService.getScheduleForAllGroupsService();
     }
 
     @GetMapping("/schedule/lector")
