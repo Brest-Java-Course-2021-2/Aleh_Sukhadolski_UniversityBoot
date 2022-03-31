@@ -8,10 +8,10 @@ public interface DaoScheduleDtoApi {
 
     public List<List<LectorsSchedule>> getScheduleForAllLectors();
 
-    public List<LectorsSchedule> getScheduleForLector(String lectorName);
+    public List<LectorsSchedule> getScheduleForLector(Integer idLector);
 
     public List<List<StudentsSchedule>> getScheduleForAllStudents();
 
-    public List<StudentsSchedule> getScheduleForGroup(String groupName);
+    public List<StudentsSchedule> getScheduleForGroup(Integer idGroup);
 
 }

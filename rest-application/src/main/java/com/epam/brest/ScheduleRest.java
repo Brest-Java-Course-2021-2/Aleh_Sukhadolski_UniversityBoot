@@ -41,18 +41,18 @@ public class ScheduleRest {
         return (List<List<StudentsSchedule>>) scheduleDtoService.getScheduleForAllGroupsService();
     }
 
-    @GetMapping("/schedule/lector")
+    @GetMapping("/schedule/{id}")
     @Transactional(readOnly = true)
-    public List<LectorsSchedule> getScheduleForLector(@RequestParam String lectorName) {
-        logger.debug("Get schedule for lector({})" + lectorName);
-        return (List<LectorsSchedule>) scheduleDtoService.getScheduleForLectorService(lectorName);
+    public List<LectorsSchedule> getScheduleForLector(@RequestParam Integer id) {
+        logger.debug("Get schedule for lector({})" + id);
+        return (List<LectorsSchedule>) scheduleDtoService.getScheduleForLectorService(id);
     }
 
-    @GetMapping("/schedule/group")
+    @GetMapping("/schedule/{id}")
     @Transactional(readOnly = true)
-    public List<StudentsSchedule> getScheduleForGroup(@RequestParam String groupName) {
-        logger.debug("Get schedule for group({})" + groupName);
-        return (List<StudentsSchedule>) scheduleDtoService.getScheduleForGroupService(groupName);
+    public List<StudentsSchedule> getScheduleForGroup(@RequestParam Integer id) {
+        logger.debug("Get schedule for group({})" + id);
+        return (List<StudentsSchedule>) scheduleDtoService.getScheduleForGroupService(id);
     }
 
 }

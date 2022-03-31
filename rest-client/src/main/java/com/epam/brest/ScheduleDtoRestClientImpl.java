@@ -36,9 +36,9 @@ public class ScheduleDtoRestClientImpl implements ScheduleDtoServiceApi {
     }
 
     @Override
-    public List<LectorsSchedule> getScheduleForLectorService(String lectorName) {
-        logger.debug("Get schedule for the Lector by the name () " + lectorName);
-        ResponseEntity responseEntity = restTemplate.getForEntity(String.format("/schedule/lector?lectorName=%s", lectorName),
+    public List<LectorsSchedule> getScheduleForLectorService(Integer idlector) {
+        logger.debug("Get schedule for the Lector by the name () " + idlector);
+        ResponseEntity responseEntity = restTemplate.getForEntity(String.format("/schedule/lector/" + idlector, idlector),
                 List.class);
         return (List<LectorsSchedule>) responseEntity.getBody();
     }
@@ -51,9 +51,9 @@ public class ScheduleDtoRestClientImpl implements ScheduleDtoServiceApi {
     }
 
     @Override
-    public List<StudentsSchedule> getScheduleForGroupService(String groupName) {
-        logger.debug("Get schedule for the group by the name () " + groupName);
-        ResponseEntity responseEntity = restTemplate.getForEntity(String.format("/schedule/group?groupName=%s", groupName),
+    public List<StudentsSchedule> getScheduleForGroupService(Integer idGroup) {
+        logger.debug("Get schedule for the group by the name () " + idGroup);
+        ResponseEntity responseEntity = restTemplate.getForEntity(String.format("/schedule/group/" + idGroup, idGroup),
                 List.class);
         return (List<StudentsSchedule>) responseEntity.getBody();
     }

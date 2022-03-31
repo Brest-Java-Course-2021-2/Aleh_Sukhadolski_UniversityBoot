@@ -11,10 +11,10 @@ public interface ScheduleDtoServiceApi {
 
     public List<List<LectorsSchedule>> getScheduleForAllLectorsService();
 
-    public List<LectorsSchedule> getScheduleForLectorService(String lectorName);
+    public List<LectorsSchedule> getScheduleForLectorService(Integer idLector);
 
     public List<List<StudentsSchedule>> getScheduleForAllGroupsService();
 
-    public List<StudentsSchedule> getScheduleForGroupService(String groupName);
+    public List<StudentsSchedule> getScheduleForGroupService(Integer idGroup);
 
 }

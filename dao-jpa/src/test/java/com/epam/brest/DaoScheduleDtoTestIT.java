@@ -120,8 +120,10 @@ public class DaoScheduleDtoTestIT {
 
         List<DaySchedule> schedule = daoScheduleDto.createSchedule();
         assertTrue(schedule.size() == 84);
-        assertTrue(daoScheduleDto.getScheduleForLector("Tom").size() == 5);
-        assertTrue(daoScheduleDto.getScheduleForGroup("e1").size() == 5);
+        Integer idLector = daoLector.getLectorByName("Tom").getIdLector();
+        Integer idGroup = daoGroup.getGroupByName("e1").getIdGroup();
+        assertTrue(daoScheduleDto.getScheduleForLector(idLector).size() == 5);
+        assertTrue(daoScheduleDto.getScheduleForGroup(idGroup).size() == 5);
     }
 
 }

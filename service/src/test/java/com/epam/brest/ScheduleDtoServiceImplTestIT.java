@@ -114,8 +114,10 @@ public class ScheduleDtoServiceImplTestIT {
     public void isSchedule(){
         Integer scheduleSize = scheduleDtoService.createScheduleService();
         assertTrue(scheduleSize == 84);
-        assertTrue(scheduleDtoService.getScheduleForLectorService("Tom").size() == 5);
-        assertTrue(scheduleDtoService.getScheduleForGroupService("e2").size() == 5);
+        Integer idLector = daoLector.getLectorByName("Tom").getIdLector();
+        Integer idGroup = daoGroup.getGroupByName("e2").getIdGroup();
+        assertTrue(scheduleDtoService.getScheduleForLectorService(idLector).size() == 5);
+        assertTrue(scheduleDtoService.getScheduleForGroupService(idGroup).size() == 5);
     }
 
 }

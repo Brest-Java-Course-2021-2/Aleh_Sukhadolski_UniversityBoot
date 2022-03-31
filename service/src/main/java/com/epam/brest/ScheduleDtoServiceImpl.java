@@ -33,9 +33,9 @@ public class ScheduleDtoServiceImpl implements ScheduleDtoServiceApi {
     }
 
     @Override
-    public List<LectorsSchedule> getScheduleForLectorService(String lectorName) {
-        logger.info("Get schedule for Lector {} " + lectorName);
-        return (List<LectorsSchedule>) daoScheduleDto.getScheduleForLector(lectorName);
+    public List<LectorsSchedule> getScheduleForLectorService(Integer idLector) {
+        logger.info("Get schedule for Lector {} " + idLector);
+        return (List<LectorsSchedule>) daoScheduleDto.getScheduleForLector(idLector);
     }
 
     @Override
@@ -45,9 +45,9 @@ public class ScheduleDtoServiceImpl implements ScheduleDtoServiceApi {
     }
 
     @Override
-    public List<StudentsSchedule> getScheduleForGroupService(String groupName) {
-        logger.info("Get schedule for the group {} " + groupName);
-        return (List<StudentsSchedule>) daoScheduleDto.getScheduleForGroup(groupName);
+    public List<StudentsSchedule> getScheduleForGroupService(Integer idGroup) {
+        logger.info("Get schedule for the group {} " + idGroup);
+        return (List<StudentsSchedule>) daoScheduleDto.getScheduleForGroup(idGroup);
     }
 
 }
