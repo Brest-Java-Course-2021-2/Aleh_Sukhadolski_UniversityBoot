@@ -4,10 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -41,16 +38,16 @@ public class ScheduleRest {
         return (List<List<StudentsSchedule>>) scheduleDtoService.getScheduleForAllGroupsService();
     }
 
-    @GetMapping("/schedule/{id}")
+    @GetMapping("/schedule/lector/{id}")
     @Transactional(readOnly = true)
-    public List<LectorsSchedule> getScheduleForLector(@RequestParam Integer id) {
+    public List<LectorsSchedule> getScheduleForLector(@PathVariable Integer id) {
         logger.debug("Get schedule for lector({})" + id);
         return (List<LectorsSchedule>) scheduleDtoService.getScheduleForLectorService(id);
     }
 
-    @GetMapping("/schedule/{id}")
+    @GetMapping("/schedule/group/{id}")
     @Transactional(readOnly = true)
-    public List<StudentsSchedule> getScheduleForGroup(@RequestParam Integer id) {
+    public List<StudentsSchedule> getScheduleForGroup(@PathVariable Integer id) {
         logger.debug("Get schedule for group({})" + id);
         return (List<StudentsSchedule>) scheduleDtoService.getScheduleForGroupService(id);
     }

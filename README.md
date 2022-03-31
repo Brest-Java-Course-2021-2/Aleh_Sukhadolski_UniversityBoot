@@ -14,6 +14,11 @@
 ### 
 #### http://localhost:8088/lectors
 
+
+Click button : __Create Schedule__
+After you can to update data, insert or delete
+After all changes you must to create schedule anymore
+
 _____________________________________________
 # __Endpoints__
 ## lectors
