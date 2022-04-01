@@ -10,7 +10,6 @@ import java.util.List;
 @EntityScan("com.epam.brest")
 public interface DaoRequestFromLectorApi {
 
-
     public List<RequestFromLector> getAllRequestsFromLectorByIdLector(Integer id);
 
     public RequestFromLector getRequestFromLectorByRequestId(Integer idR);

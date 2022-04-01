@@ -9,7 +9,6 @@ import java.util.List;
 @EntityScan("com.epam.brest")
 public interface DaoLectorApi {
 
-
     public List<Lector> getAllLectors();
 
     public Lector getLectorByName(String name);

@@ -20,6 +20,7 @@ public class RequestsFromLectorRest {
     @Autowired
     RequestFromLectorServiceApi requestFromLectorService;
 
+
     @GetMapping ("/lectors/lector/{id}/requests/all")
     @Transactional(readOnly = true)
     public List<RequestFromLector> getAllRequests(@PathVariable int id) {
@@ -47,6 +48,5 @@ public class RequestsFromLectorRest {
         requestFromLectorService.flushRequestFromLectorService(request);
         return new ResponseEntity(request, HttpStatus.OK);
     }
-
 
 }

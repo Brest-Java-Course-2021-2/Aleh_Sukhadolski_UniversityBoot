@@ -24,6 +24,7 @@ public class GroupRestClientImpl implements GroupServiceApi {
         this.restTemplate = restTemplateBuilder.build();
     }
 
+
     @Override
     public List<String> getAllGroupNamesService() {
         logger.debug("GetAll Groups names ()");
@@ -38,15 +39,12 @@ public class GroupRestClientImpl implements GroupServiceApi {
         return (List<Group>) responseEntity.getBody();
     }
 
-
-
     @Override
     public Group getGroupById(Integer idGroup) {
         logger.debug("Get Group by ID ()");
         ResponseEntity responseEntity = restTemplate.getForEntity("/groups/group/" + idGroup, Group.class);
         return (Group) responseEntity.getBody();
     }
-
 
     @Override
     public Integer deletegroupByIdService(Integer idGroup) {
@@ -57,7 +55,6 @@ public class GroupRestClientImpl implements GroupServiceApi {
                 restTemplate.exchange("/groups/group/delete/" + idGroup, HttpMethod.DELETE, entity, Integer.class);
         return result.getBody();
     }
-
 
     @Override
     public Group createNewGroupService(String newName) {

@@ -18,6 +18,7 @@ public class ScheduleController {
     @Autowired
     private ScheduleDtoServiceApi scheduleDtoService;
 
+
     @GetMapping(value = "/schedule")
     public final String groups (Model model) {
         List<List<StudentsSchedule>> studentsSchedule = scheduleDtoService.getScheduleForAllGroupsService();

@@ -14,6 +14,7 @@ public class ScheduleRest {
 
     private final Logger logger = LogManager.getLogger(ScheduleRest.class);
 
+
     @Autowired
     ScheduleDtoServiceApi scheduleDtoService;
 

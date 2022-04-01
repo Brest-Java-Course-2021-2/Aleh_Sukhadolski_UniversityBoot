@@ -27,6 +27,7 @@ public class LectorServiceImpl implements LectorServiceApi {
     @Autowired
     private DaoGroupApi daoGroup;
 
+
     @Override
     public List<Lector> getAllLectorsService() {
         logger.info("Get all lectors service");
@@ -56,7 +57,7 @@ public class LectorServiceImpl implements LectorServiceApi {
         logger.info("Delete lector by idLector service " + id);
         daoRequestFromLector.deleteAllRequestsFromLector(id);
         daoLector.deleteLectorById(id);
-        return  id;
+        return (Integer) id;
     }
 
     @Override

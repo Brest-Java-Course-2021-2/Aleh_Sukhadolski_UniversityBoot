@@ -18,6 +18,7 @@ public class DaoRequestFromLectorImpl implements DaoRequestFromLectorApi {
     @Autowired
     private RequestFromLectorJpaRepository requestFromLectorRepository;
 
+
     public List<RequestFromLector> getAllRequestsFromLectorByIdLector(Integer idLector) {
         logger.info("GET ALL REQUESTS OF the Lector {}" + idLector);
         return (List<RequestFromLector>) requestFromLectorRepository.findAllByForeignKey(idLector);
@@ -35,14 +36,13 @@ public class DaoRequestFromLectorImpl implements DaoRequestFromLectorApi {
 
     public List<RequestFromLector> createRequestsForLectorsWhenCreateNewGroup(String group, List<Integer> lectorsId ){
         logger.info("SAVE Request for new Group {} " + group);
-        return requestFromLectorRepository.addNewGroupeInAllLectorRequests(lectorsId, group);
+        return (List<RequestFromLector>) requestFromLectorRepository.addNewGroupeInAllLectorRequests(lectorsId, group);
     }
 
     public RequestFromLector updateRequestFromLector(RequestFromLector requestFromLector){
         logger.info("Update Request after change {} " + requestFromLector);
         return (RequestFromLector) requestFromLectorRepository.saveAndFlush(requestFromLector);
     }
-
 
     public List<RequestFromLector> updateAllRequestsForLector(List<RequestFromLector> requestsFromLector){
         logger.info("Update All Requests for Lector after change {} ");
@@ -63,14 +63,14 @@ public class DaoRequestFromLectorImpl implements DaoRequestFromLectorApi {
         requestFromLectorRepository.deleteAll((Iterable<? extends RequestFromLector>) requestsFromLector);
     }
 
-
     @Override
     public boolean deleteFromAllLectorsRequestsWhenDeletedGroup(String nameGroup) {
-        return requestFromLectorRepository.deleteRequestsWhenDeletedGroup(nameGroup);
+        return (boolean) requestFromLectorRepository.deleteRequestsWhenDeletedGroup(nameGroup);
     }
 
     @Override
     public boolean updateAllLectorsRequestsWhenChangedGroup(String newGroup, String oldGroup) {
-        return requestFromLectorRepository.updateRequestsWhenChangedNameGroup(newGroup, oldGroup);
+        return (boolean) requestFromLectorRepository.updateRequestsWhenChangedNameGroup(newGroup, oldGroup);
     }
+
 }

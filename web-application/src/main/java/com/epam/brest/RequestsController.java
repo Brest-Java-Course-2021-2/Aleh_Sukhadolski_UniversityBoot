@@ -20,13 +20,13 @@ public class RequestsController {
     @Autowired
     private RequestFromLectorServiceApi requestFromLectorService;
 
+
     @GetMapping(value = "/lector/requests/{id}")
     public final String lectorsRequests (@PathVariable Integer id, Model model) {
         model.addAttribute("requests",
                             requestFromLectorService.getAllRequestsFromLectorService(id));
         return "lectorsrequest";
     }
-
 
     @GetMapping(value = "/lector/request/{id}/delete")
     public String deleteRequest(@PathVariable("id") int id) {
@@ -41,7 +41,6 @@ public class RequestsController {
         return "editrequest";
     }
 
-
     @PostMapping(value = "/updateRequest")
     public String update(@ModelAttribute("request") @Valid RequestFromLector requestFromLector,
                          BindingResult result) {
@@ -53,6 +52,5 @@ public class RequestsController {
         requestFromLector = requestFromLectorService.updateRequestFromLectorService(requestFromLector);
         return "redirect:/lector/requests/" + requestFromLector.getIdLector();
     }
-
 
 }

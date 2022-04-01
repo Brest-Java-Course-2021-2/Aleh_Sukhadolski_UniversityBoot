@@ -22,6 +22,7 @@ public class GroupController {
     @Autowired
     private GroupServiceApi groupService;
 
+
     @GetMapping(value = "/groups")
     public final String groups (Model model) {
         model.addAttribute("groups", groupService.getAllGroupsService());

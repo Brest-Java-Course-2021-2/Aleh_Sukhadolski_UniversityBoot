@@ -33,7 +33,6 @@ public class LectorsController {
         return "showlector";
     }
 
-
     @GetMapping(value = "/lector/new")
     public String newUser(@ModelAttribute("lector") Lector lector) throws SQLException
     {
@@ -70,10 +69,10 @@ public class LectorsController {
         return "redirect:/lectors";
     }
 
-
     @GetMapping(value = "/lector/{id}/delete")
     public String delete(@PathVariable("id") int id) {
         lectorService.deleteLectorByIdLectorService(id);
         return "redirect:/lectors";
     }
+
 }

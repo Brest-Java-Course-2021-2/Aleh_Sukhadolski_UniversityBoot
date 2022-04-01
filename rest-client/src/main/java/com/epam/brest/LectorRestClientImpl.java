@@ -19,12 +19,12 @@ public class LectorRestClientImpl implements LectorServiceApi {
 
     private final Logger logger = LoggerFactory.getLogger(LectorRestClientImpl.class);
 
-
     private RestTemplate restTemplate;
 
     public LectorRestClientImpl (final RestTemplateBuilder restTemplateBuilder) {
         this.restTemplate = restTemplateBuilder.build();
     }
+
 
     @Override
     public List<Lector> getAllLectorsService() {

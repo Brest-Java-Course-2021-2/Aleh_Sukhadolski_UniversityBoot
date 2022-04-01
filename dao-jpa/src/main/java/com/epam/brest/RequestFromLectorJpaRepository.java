@@ -15,17 +15,23 @@ public interface RequestFromLectorJpaRepository extends JpaRepository<RequestFro
                                                   .collect(Collectors.toList());
     }
 
+
+
     default RequestFromLector updateRequest(RequestFromLector requestFromLector) {
-       return saveAndFlush(requestFromLector);
+       return (RequestFromLector) saveAndFlush(requestFromLector);
     }
+
+
 
     default List<RequestFromLector> createRequestsforNewLector(List<String> groups, Integer id) {
         List<RequestFromLector> requestsFromLector = groups
             .stream()
             .flatMap(group -> Stream.of(new RequestFromLector(id, group, "0", "    ", new Date())))
             .collect(Collectors.toList());
-        return saveAllAndFlush(requestsFromLector);
+        return (List<RequestFromLector>)saveAllAndFlush(requestsFromLector);
     }
+
+
 
     default  List<RequestFromLector> addNewGroupeInAllLectorRequests(List <Integer> idLectors, String group) {
         List<RequestFromLector> requestsFromLector = idLectors
@@ -33,13 +39,17 @@ public interface RequestFromLectorJpaRepository extends JpaRepository<RequestFro
             .flatMap(idLector -> Stream.of(new RequestFromLector(idLector, group,
                     "0", "    ", new Date())))
             .collect(Collectors.toList());
-       return saveAllAndFlush((List<RequestFromLector>)requestsFromLector);
+       return (List<RequestFromLector>) saveAllAndFlush((List<RequestFromLector>)requestsFromLector);
     }
+
+
 
     default RequestFromLector deleteRequest(RequestFromLector requestFromLector) {
         deleteById(requestFromLector.getIdRequest());
-        return requestFromLector;
+        return (RequestFromLector) requestFromLector;
     }
+
+
 
     default boolean deleteRequestsWhenDeletedGroup(String nameGroup) {
         List<RequestFromLector> requestsFromLector = (List<RequestFromLector>) findAll().stream()
@@ -52,6 +62,8 @@ public interface RequestFromLectorJpaRepository extends JpaRepository<RequestFro
         return false;
         }
     }
+
+
 
     default boolean updateRequestsWhenChangedNameGroup(String newGroup, String oldGroup){
         List<RequestFromLector> requestsFromLector = (List<RequestFromLector>) findAll().stream()
@@ -66,5 +78,6 @@ public interface RequestFromLectorJpaRepository extends JpaRepository<RequestFro
             return false;
         }
     }
+
 
 }

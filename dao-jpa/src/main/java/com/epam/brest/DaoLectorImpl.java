@@ -18,6 +18,7 @@ public class DaoLectorImpl implements DaoLectorApi {
     @Autowired
     private LectorsJpaRepository lectorsRepository;
 
+
     public List<Lector> getAllLectors() {
         logger.info("GET ALL LECTORS {}");
         return (List<Lector>) lectorsRepository.findAllLectors();

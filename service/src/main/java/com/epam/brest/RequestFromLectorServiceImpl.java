@@ -29,6 +29,7 @@ public class RequestFromLectorServiceImpl implements RequestFromLectorServiceApi
     @Autowired
     private DaoLectorApi daoLector;
 
+
     @Override
     public List<RequestFromLector> getAllRequestsFromLectorService(Integer idLector) {
         logger.info("Get all requests from lector service " + idLector);
@@ -49,7 +50,8 @@ public class RequestFromLectorServiceImpl implements RequestFromLectorServiceApi
 
     @Override
     public RequestFromLector flushRequestFromLectorService(RequestFromLector request) {
-        return daoRequestFromLector.flushRequestForLector(request);
+        logger.info("Flush request from lector service Flushed :  " + request);
+        return (RequestFromLector) daoRequestFromLector.flushRequestForLector(request);
     }
 
 }

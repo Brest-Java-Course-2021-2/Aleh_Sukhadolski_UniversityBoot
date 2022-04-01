@@ -20,31 +20,31 @@ public class DaoGroupImpl implements DaoGroupApi {
     @Override
     public List<String> getAllGroupsNames() {
         logger.info("GET ALL GROUP NAMES {}");
-        return groupRepository.getAllGroupsNames();
+        return (List<String>) groupRepository.getAllGroupsNames();
     }
 
     @Override
     public List<Group> getAllGroups() {
         logger.info("GET ALL GROUPS  {}");
-        return groupRepository.getAllGroups();
+        return (List<Group>) groupRepository.getAllGroups();
     }
 
     @Override
     public Integer deleteGroupById(Integer idGroup) {
         logger.info("DELETE GROUP BY IdGroup {}");
-        return groupRepository.deleteGroupByIdGroup(idGroup);
+        return (Integer) groupRepository.deleteGroupByIdGroup(idGroup);
     }
 
     @Override
     public Group insertNewGroup(String newNameOfGroup) {
         logger.info("CREATE NEW GROUP {}");
-        return groupRepository.insertNewGroup(newNameOfGroup);
+        return (Group) groupRepository.insertNewGroup(newNameOfGroup);
     }
 
     @Override
     public Group getGroupByName(String nameGroup) {
         logger.info("GET GROUP BY the NAME {}");
-        return groupRepository.getGroupeByGroupName(nameGroup);
+        return (Group) groupRepository.getGroupeByGroupName(nameGroup);
     }
 
     @Override
@@ -55,6 +55,6 @@ public class DaoGroupImpl implements DaoGroupApi {
     @Override
     public Group updateGroup(Group group) {
         logger.info("UPDATE GROUPE.NAME BY NEW NAME {}");
-        return groupRepository.updateGroupByGroupName(group);
+        return (Group) groupRepository.updateGroupByGroupName(group);
     }
 }

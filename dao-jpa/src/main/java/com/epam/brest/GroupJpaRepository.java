@@ -15,14 +15,16 @@ public interface GroupJpaRepository extends JpaRepository <Group, Integer> {
                                        .collect(Collectors.toList());
     }
 
+
     default List <Group> getAllGroups(){
           return (List<Group>) findAll();
       }
 
 
+
     default Integer deleteGroupByIdGroup(Integer idGroup){
         deleteById(idGroup);
-        return idGroup;
+        return (Integer) idGroup;
     }
 
 
@@ -32,21 +34,24 @@ public interface GroupJpaRepository extends JpaRepository <Group, Integer> {
           return (Group) group;
     }
 
+
     default Group getGroupeByGroupName(String name) {
         List<Group> groups = (List<Group>) getAllGroups();
         int  index= (int) groups.stream()
                                 .filter(gr -> name.equals(gr.getGroupName()))
                                 .collect(Collectors.toList()).stream().count();
           if (index > 0) {
-              return groups.get(index-1);
+              return (Group) groups.get(index-1);
           } else {
-              return new Group("IsEmpty");
+              return (Group) new Group("IsEmpty");
           }
     }
+
 
     default Group updateGroupByGroupName(Group group) {
           return (Group) save(group);
     }
+
 
     default Group getGroupById (Integer idGroup){
         Optional groupOptional = findById(idGroup);
@@ -56,7 +61,7 @@ public interface GroupJpaRepository extends JpaRepository <Group, Integer> {
         } else {
             group = new Group();
         }
-        return group;
+        return (Group) group;
     }
 
 }

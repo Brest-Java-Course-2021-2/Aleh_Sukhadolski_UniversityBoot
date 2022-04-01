@@ -21,6 +21,7 @@ public class ScheduleDtoRestClientImpl implements ScheduleDtoServiceApi {
         this.restTemplate = restTemplateBuilder.build();
     }
 
+
     @Override
     public Integer createScheduleService() {
         logger.debug("Create schedule ()");
@@ -57,4 +58,5 @@ public class ScheduleDtoRestClientImpl implements ScheduleDtoServiceApi {
                 List.class);
         return (List<StudentsSchedule>) responseEntity.getBody();
     }
+
 }

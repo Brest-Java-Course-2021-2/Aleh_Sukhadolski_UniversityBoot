@@ -16,8 +16,9 @@ public interface LectorsJpaRepository extends JpaRepository<Lector, Integer> {
         if (lectors.size() == 0){
             lectors.add(new Lector("Is Empty","","",""));
         }
-        return findAll();
+        return (List<Lector>) findAll();
     }
+
 
     default Lector findLectorByLectorsId(Integer id) {
         Optional <Lector> lector = findById(id);
@@ -42,6 +43,7 @@ public interface LectorsJpaRepository extends JpaRepository<Lector, Integer> {
         return (Lector) lector;
     }
 
+
     default Lector findLectorByEmail(String email) {
         List <Lector> lectors = findAll().stream()
                                          .filter(us -> us.getEmailLector().equals(email))
@@ -55,9 +57,11 @@ public interface LectorsJpaRepository extends JpaRepository<Lector, Integer> {
         return (Lector) lector;
     }
 
+
     default Lector saveOrUpdateLector(Lector lector) {
         return (Lector) saveAndFlush(lector);
     }
+
 
     default void deleteLectorByLectorsId(Integer id) {
         deleteById(id);

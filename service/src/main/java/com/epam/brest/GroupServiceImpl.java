@@ -29,6 +29,7 @@ public class GroupServiceImpl implements GroupServiceApi {
     @Autowired
     private DaoRequestFromLectorApi daoRequestFromLector;
 
+
     @Override
     public List<String> getAllGroupNamesService() {
         logger.info("Get all groups by the nameGroup service");
@@ -46,7 +47,7 @@ public class GroupServiceImpl implements GroupServiceApi {
         logger.info("Delete group by Id service");
         Group group = daoGroup.getGroupByid(idGroup);
         daoRequestFromLector.deleteFromAllLectorsRequestsWhenDeletedGroup(group.getGroupName());
-        return daoGroup.deleteGroupById(idGroup);
+        return (Integer) daoGroup.deleteGroupById(idGroup);
     }
 
     @Override
@@ -73,7 +74,7 @@ public class GroupServiceImpl implements GroupServiceApi {
         String newName = group.getGroupName();
         group = daoGroup.updateGroup(group);
         daoRequestFromLector.updateAllLectorsRequestsWhenChangedGroup(newName, oldName);
-        return group;
+        return (Group) group;
     }
 
     @Override
