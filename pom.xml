@@ -75,6 +75,15 @@
 			<version>${spring-boot.version}</version>
 	    </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-failsafe-plugin -->
+        <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-failsafe-plugin</artifactId>
+            <version>${maven-failsafe-plugin.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+
     </dependencies>
 </dependencyManagement>
 
