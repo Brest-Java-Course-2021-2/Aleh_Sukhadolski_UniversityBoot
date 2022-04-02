@@ -83,7 +83,7 @@
             </form>
         </td>
         <td>
-            <form th:method="GET" th:action="@{/lectors}">
+            <form th:method="GET" th:action="@{/lectorschedule/{id} (id=${lector.idLector})}">
                 <input type="submit" value="show schedule"/>
             </form>
         </td>

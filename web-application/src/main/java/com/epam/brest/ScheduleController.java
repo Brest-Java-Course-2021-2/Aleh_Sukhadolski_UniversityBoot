@@ -18,6 +18,14 @@ public class ScheduleController {
     @Autowired
     private ScheduleDtoServiceApi scheduleDtoService;
 
+    @Autowired
+    private LectorServiceApi lectorService;
+
+    @Autowired
+    private GroupServiceApi groupService;
+
+
+
 
     @GetMapping(value = "/schedule")
     public final String groups (Model model) {
@@ -43,6 +51,7 @@ public class ScheduleController {
     public final String scheduleLector (@PathVariable Integer id, Model model) {
         List<LectorsSchedule> lectorSchedule = scheduleDtoService.getScheduleForLectorService(id);
         model.addAttribute("lectorsSchedule", lectorSchedule);
+        model.addAttribute("lector", lectorService.getLectorByIdLectorService(id));
         return "lectorschedule";
     }
 
@@ -50,6 +59,7 @@ public class ScheduleController {
     public final String scheduleGroup (@PathVariable Integer id, Model model) {
         List<StudentsSchedule> studentSchedule = scheduleDtoService.getScheduleForGroupService(id);
         model.addAttribute("studentsSchedule", studentSchedule);
+        model.addAttribute("group", groupService.getGroupById(id));
         return "studentschedule";
     }
 

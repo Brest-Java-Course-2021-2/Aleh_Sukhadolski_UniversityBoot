@@ -7,7 +7,7 @@
         <title>Requests</title>
         <style type="text/css">
             TABLE {
-                width: 1400px;
+                width: 1200px;
             }
             TH {
                 background: #4b0082; 
@@ -22,7 +22,9 @@
 
     <body>
     <div>
-        <h3>  Table of requests :</h3>
+        <h3>  Table of requests :
+              <td th:text="${lector.nameLector}"></td>
+        </h3>
     </div>
 
       
@@ -31,9 +33,7 @@
             <caption>Lessons requests table</caption>
             <thead>
                 <tr>
-                    <th>   IDR     </th>
-                    <th>   ID      </th>
-                    <th>   GROUP  </th><!-- comment -->
+                    <th>   GROUP  </th>
                     <th>   PAIRS   </th>
                     <th>   SUBJECT </th>
                     <th>   Date of request </th>
@@ -44,8 +44,6 @@
             <tbody>
                 <tr th:each="request : ${requests}"
                     th:style="${request}? 'font-weight: 30;'">
-                    <td th:text="${request.idRequest}"></td>
-                    <td th:text="${request.idLector}" ></td>
                     <td th:text="${request.group}" ></td>
                     <td th:text="${request.numberOfPairs}" ></td>
                     <td th:text="${request.subjectOfLector}" ></td>

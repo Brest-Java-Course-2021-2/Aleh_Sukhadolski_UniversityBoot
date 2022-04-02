@@ -20,9 +20,13 @@ public class RequestsController {
     @Autowired
     private RequestFromLectorServiceApi requestFromLectorService;
 
+    @Autowired
+    private LectorServiceApi lectorService;
+
 
     @GetMapping(value = "/lector/requests/{id}")
     public final String lectorsRequests (@PathVariable Integer id, Model model) {
+        model.addAttribute("lector", lectorService.getLectorByIdLectorService(id));
         model.addAttribute("requests",
                             requestFromLectorService.getAllRequestsFromLectorService(id));
         return "lectorsrequest";
