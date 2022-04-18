@@ -17,7 +17,7 @@ public class RestClientConfig {
 
     @Bean
     public RestTemplateCustomizer restTemplateCustomizer(
-            @Value("${rest.server:#{'http://localhost:8090'}}") final String restServerEndpoint) {
+            @Value("${rest.server:#{'http://172.17.0.2:8090'}}") final String restServerEndpoint) {
         return restTemplate -> {
             restTemplate.setUriTemplateHandler(new DefaultUriBuilderFactory(restServerEndpoint));
             restTemplate.getInterceptors()
