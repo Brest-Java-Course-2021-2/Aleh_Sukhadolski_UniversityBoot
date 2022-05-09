@@ -29,6 +29,7 @@
     <module>model</module>
 	</modules>
 
+
 	<properties>
 		<java.version>11</java.version>
 		        <spring-boot.version>2.6.3</spring-boot.version>
