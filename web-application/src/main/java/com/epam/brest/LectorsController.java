@@ -19,8 +19,6 @@ public class LectorsController {
     @Autowired
     private LectorServiceApi lectorService;
 
-
-
     @GetMapping(value = "/lectors")
     public final String lectors (Model model) {
         model.addAttribute("lectors", lectorService.getAllLectorsService());

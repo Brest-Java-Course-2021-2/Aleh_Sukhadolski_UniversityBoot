@@ -29,6 +29,8 @@
         <module>model</module>
         <module>rest-client</module>
         <module>web-application</module>
+        <module>kafka-web</module>
+        <module>kafka-rest</module>
 	</modules>
 
 	<properties>
