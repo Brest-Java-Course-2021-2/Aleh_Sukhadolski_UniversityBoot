@@ -4,28 +4,3 @@ DROP TABLE IF EXISTS request;
 
 DROP TABLE IF EXISTS groupe;
 
-CREATE TABLE request
-(
-    idR INT PRIMARY KEY AUTO_INCREMENT,
-    id INT,
-    groupe  VARCHAR(10) NOT NULL,
-    pairs  VARCHAR(2) NOT NULL,
-    subject  VARCHAR(100) NOT NULL,
-    date Date,
-    CONSTRAINT request_user_fk
-    FOREIGN KEY (id)  REFERENCES user (id) ON DELETE CASCADE
-);
-
-CREATE TABLE user
-(
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    name  VARCHAR(55) NOT NULL UNIQUE,
-    login  VARCHAR(55) NOT NULL,
-    password  VARCHAR(55) NOT NULL,
-    email  VARCHAR(55) NOT NULL
-);
-
-
-CREATE TABLE groupe
-(idG INT PRIMARY KEY AUTO_INCREMENT,
- groupe  VARCHAR(10) NOT NULL UNIQUE);

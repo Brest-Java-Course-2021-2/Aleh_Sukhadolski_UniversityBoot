@@ -8,6 +8,8 @@
 package com.epam.brest;
 
 
+import org.springframework.stereotype.Component;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -21,6 +23,7 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "lector")
+@Component
 public class Lector {
     /** field id - user's identificator in database*/
     @Column(name = "idLector", unique = true, nullable = false)

@@ -1,5 +1,7 @@
 package com.epam.brest;
 
+import org.springframework.stereotype.Component;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
@@ -7,6 +9,7 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "groups")
+@Component
 public class Group {
 
     @Id

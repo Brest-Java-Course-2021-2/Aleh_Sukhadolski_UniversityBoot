@@ -8,6 +8,7 @@ package com.epam.brest;
 
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -17,6 +18,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "requests_from_lector")
+@Component
 public class RequestFromLector implements Serializable {
 
     /** field idR - request identificator in database*/
