@@ -25,23 +25,42 @@ public class KafkaTopicConfig {
 
     @Bean
     public NewTopic topic1() {
-        return new NewTopic("getallgroups", 1, (short) 1);
+        return new NewTopic("giveallgroups", 1, (short) 1);
     }
 
     @Bean
     public NewTopic topic2() {
-        return new NewTopic("newgroup", 1, (short) 1);
+        return new NewTopic("newgroupcreated", 1, (short) 1);
     }
 
     @Bean
     public NewTopic topic3() {
-        return new NewTopic("updategroup", 1, (short) 1);
+        return new NewTopic("updatedgroup", 1, (short) 1);
+    }
+    @Bean
+    public NewTopic topic4() {
+        return new NewTopic("deletedgroup", 1, (short) 1);
     }
 
     @Bean
-    public NewTopic topic4() {
+    public NewTopic topic11() {
+        return new NewTopic("giveallgroups", 1, (short) 1);
+    }
+
+    @Bean
+    public NewTopic topic22() {
+        return new NewTopic("newgroup", 1, (short) 1);
+    }
+
+    @Bean
+    public NewTopic topic33() {
+        return new NewTopic("updategroup", 1, (short) 1);
+    }
+    @Bean
+    public NewTopic topic44() {
         return new NewTopic("deletegroup", 1, (short) 1);
     }
+
 
 }
 

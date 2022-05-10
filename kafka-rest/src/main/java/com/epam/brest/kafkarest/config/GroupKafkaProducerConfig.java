@@ -62,4 +62,6 @@ public class GroupKafkaProducerConfig {
     public KafkaTemplate<String, List<Group>> listGroupKafkaTemplate() {
         return new KafkaTemplate<>(listGroupProducerFactory());
     }
+
+
 }
