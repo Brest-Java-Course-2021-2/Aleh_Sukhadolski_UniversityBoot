@@ -14,20 +14,19 @@ public class GroupProducerService {
     @Autowired
     private KafkaTemplate<String, List<Group>> listGroupKafkaTemplate;
 
+
     private String givallgroups = "giveallgroups";
     private String newgroupcreated = "newgroupcreated";
     private String updatedgroup = "updatedgroup";
     private String deletedgroup = "deletedgroup";
 
 
-    public void sendGiveAllGroups(String msg) {
-        stringGroupKafkaTemplate.send(givallgroups, msg);
+    public void sendGiveAllGroups(List<Group> groups) { listGroupKafkaTemplate.send(givallgroups, groups); }
+    public void sendCreateNewGroup(Group group) {
+        groupKafkaTemplate.send(newgroupcreated, group);
     }
-    public void sendCreateNewGroup(Group msg) {
-        groupKafkaTemplate.send(newgroupcreated, msg);
-    }
-    public void sendUpdateGroup(List <Group> list) {
-      listGroupKafkaTemplate.send(updatedgroup, list);
+    public void sendUpdateGroup(Group group) {
+      groupKafkaTemplate.send(updatedgroup, group);
     }
     public void sendDeleteGroup(String id) {
         stringGroupKafkaTemplate.send(deletedgroup, id);
