@@ -1,14 +1,16 @@
 package com.epam.brest;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 // This will be AUTO IMPLEMENTED by Spring into a Bean called lectorRepository
 // CRUD refers Create, Read, Update, Delete
+
+@Repository
 public interface LectorsJpaRepository extends JpaRepository<Lector, Integer> {
 
     default List<Lector> findAllLectors() {

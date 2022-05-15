@@ -1,9 +1,10 @@
 package com.epam.brest;
 
-import com.epam.brest.Group;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public interface GroupServiceApi {
 
     List<String> getAllGroupNamesService();

@@ -1,10 +1,10 @@
 package com.epam.brest;
 
-import com.epam.brest.LectorsSchedule;
-import com.epam.brest.StudentsSchedule;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public interface ScheduleDtoServiceApi {
 
     public Integer createScheduleService ();

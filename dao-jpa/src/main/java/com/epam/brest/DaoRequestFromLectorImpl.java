@@ -11,6 +11,7 @@ import java.util.List;
 
 @Component
 @ComponentScan("com.epam.brest")
+//@EnableJpaRepositories(basePackages = "com.epam.brest")
 public class DaoRequestFromLectorImpl implements DaoRequestFromLectorApi {
 
     private final Logger logger = LogManager.getLogger(DaoRequestFromLectorImpl.class);

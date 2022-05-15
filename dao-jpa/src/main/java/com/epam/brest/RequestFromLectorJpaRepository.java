@@ -1,12 +1,15 @@
 package com.epam.brest;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+
+@Repository
 public interface RequestFromLectorJpaRepository extends JpaRepository<RequestFromLector, Integer> {
 
     default List<RequestFromLector> findAllByForeignKey(Integer id) {

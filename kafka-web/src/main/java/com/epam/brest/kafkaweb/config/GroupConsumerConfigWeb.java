@@ -1,4 +1,4 @@
-package com.epam.brest.kafkarest.config;
+package com.epam.brest.kafkaweb.config;
 
 import com.epam.brest.Group;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
@@ -19,7 +19,7 @@ import java.util.Map;
 
 @EnableKafka
 @Configuration
-public class GroupConsumerConfig {
+public class GroupConsumerConfigWeb {
 
     @Value(value = "${kafka.bootstrapAddress}")
     private String bootstrapAddress;

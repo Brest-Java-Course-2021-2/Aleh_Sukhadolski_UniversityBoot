@@ -1,13 +1,19 @@
 package com.epam.brest;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+
+//@Component
+@Repository
 public interface GroupJpaRepository extends JpaRepository <Group, Integer> {
+
 
     default List<String> getAllGroupsNames() {
         return (List<String>) findAll().stream()
@@ -17,7 +23,9 @@ public interface GroupJpaRepository extends JpaRepository <Group, Integer> {
 
 
     default List <Group> getAllGroups(){
-          return (List<Group>) findAll();
+        List<Group> groups = new ArrayList<>();
+                groups = (List<Group>) findAll();
+         return groups;
       }
 
 

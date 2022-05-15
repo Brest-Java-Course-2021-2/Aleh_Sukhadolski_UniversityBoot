@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 @Configuration
-public class GroupKafkaProducerConfig {
+public class GroupKafkaProducerConfigWeb {
     @Value(value = "${kafka.bootstrapAddress}")
     private String bootstrapAddress;
 

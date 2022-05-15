@@ -10,12 +10,14 @@ import java.util.List;
 
 @Component
 @ComponentScan("com.epam.brest")
+//@EnableJpaRepositories(basePackages = "com.epam.brest")
 public class DaoGroupImpl implements DaoGroupApi {
 
     private final Logger logger = LogManager.getLogger(DaoGroupImpl.class);
 
     @Autowired
-    private GroupJpaRepository groupRepository;
+    private  GroupJpaRepository groupRepository;
+
 
     @Override
     public List<String> getAllGroupsNames() {
@@ -25,8 +27,9 @@ public class DaoGroupImpl implements DaoGroupApi {
 
     @Override
     public List<Group> getAllGroups() {
-        logger.info("GET ALL GROUPS  {}");
-        return (List<Group>) groupRepository.getAllGroups();
+        List<Group> groups = (List<Group>) groupRepository.getAllGroups();
+        logger.info("GET ALL GROUPS  {} " + groups.toString());
+        return groups;
     }
 
     @Override

@@ -3,10 +3,12 @@ package com.epam.brest.kafkarest.producer;
 import com.epam.brest.Group;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-public class GroupProducerService {
+@Service
+public class GroupProducerServiceRest {
     @Autowired
     private KafkaTemplate<String, String> stringGroupKafkaTemplate;
     @Autowired
@@ -15,13 +17,13 @@ public class GroupProducerService {
     private KafkaTemplate<String, List<Group>> listGroupKafkaTemplate;
 
 
-    private String givallgroups = "giveallgroups";
+    private String sendallgroups = "sendallgroups";
     private String newgroupcreated = "newgroupcreated";
     private String updatedgroup = "updatedgroup";
     private String deletedgroup = "deletedgroup";
 
 
-    public void sendGiveAllGroups(List<Group> groups) { listGroupKafkaTemplate.send(givallgroups, groups); }
+    public void sendGiveAllGroups(List<Group> groups) { listGroupKafkaTemplate.send(sendallgroups, groups); }
     public void sendCreateNewGroup(Group group) {
         groupKafkaTemplate.send(newgroupcreated, group);
     }

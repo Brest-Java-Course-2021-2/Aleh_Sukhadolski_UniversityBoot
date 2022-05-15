@@ -25,7 +25,7 @@ public class KafkaTopicConfig {
 
     @Bean
     public NewTopic topic1() {
-        return new NewTopic("giveallgroups", 1, (short) 1);
+        return new NewTopic("sendallgroups", 1, (short) 1);
     }
 
     @Bean

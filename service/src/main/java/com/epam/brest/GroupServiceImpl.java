@@ -38,8 +38,9 @@ public class GroupServiceImpl implements GroupServiceApi {
 
     @Override
     public List<Group> getAllGroupsService() {
-        logger.info("Get all groups service");
-        return (List<Group>) daoGroup.getAllGroups();
+        List <Group> groups = (List<Group>) daoGroup.getAllGroups();
+        logger.info("Get all groups service = " + groups.toString());
+        return groups;
     }
 
     @Override
