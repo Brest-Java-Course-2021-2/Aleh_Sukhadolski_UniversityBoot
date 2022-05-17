@@ -14,40 +14,41 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@SpringBootTest  (classes= {GroupServiceImpl.class, DaoLectorImpl.class, DaoRequestFromLectorImpl.class
-		                  , DaoGroupImpl.class, LectorServiceImpl.class, RequestFromLectorServiceImpl.class
-						  , GroupKafkaProducerConfigRest.class})
+@SpringBootTest(classes = {GroupServiceImpl.class, DaoLectorImpl.class, DaoRequestFromLectorImpl.class
+        , DaoGroupImpl.class, LectorServiceImpl.class, RequestFromLectorServiceImpl.class
+        , GroupKafkaProducerConfigRest.class})
 
 @Transactional()
 @DirtiesContext
 public class KafkaRestApplicationTests {
 
-	@Autowired
-	GroupServiceApi groupService;
+    @Autowired
+    GroupServiceApi groupService;
 
-	@Autowired
-	LectorServiceApi lectorService;
+    @Autowired
+    LectorServiceApi lectorService;
 
-	@Autowired
-	RequestFromLectorServiceApi requestFromLectorService;
+    @Autowired
+    RequestFromLectorServiceApi requestFromLectorService;
 
-	@Autowired
-	GroupConsumerServiceRest groupConsumerServiceRest;
+    @Autowired
+    GroupConsumerServiceRest groupConsumerServiceRest;
 
-	@Autowired
-	GroupProducerServiceRest groupProducerServiceRest;
-	@Test
-	void contextLoads() {
-	}
-	@Test
-	void isGroups(){
-		Group group = groupService.createNewGroupService("eeee");
-		assertTrue(group.getGroupName().equals("eeee"));
-		List<Group> groups = groupService.getAllGroupsService();
-		assertTrue(groups.size()>0);
+    @Autowired
+    GroupProducerServiceRest groupProducerServiceRest;
 
-	}
+    @Test
+    void contextLoads() {
+    }
 
+    @Test
+    void isGroups() {
+        Group group = groupService.createNewGroupService("eeee");
+        assertTrue(group.getGroupName().equals("eeee"));
+        List<Group> groups = groupService.getAllGroupsService();
+        assertTrue(groups.size() > 0);
+
+    }
 
 
 }

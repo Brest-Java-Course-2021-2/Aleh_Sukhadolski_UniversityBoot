@@ -5,6 +5,8 @@ import com.epam.brest.GroupServiceApi;
 import com.epam.brest.LectorServiceApi;
 import com.epam.brest.RequestFromLectorServiceApi;
 import com.epam.brest.kafkarest.producer.GroupProducerServiceRest;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.kafka.common.errors.SerializationException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-/*@Component
-@ComponentScan("com.epam.brest")
-@EntityScan("com.epam.brest")*/
+
 @Service
 @EnableJpaRepositories(basePackages = "com.epam.brest")
 public class GroupConsumerServiceRest {
@@ -25,33 +25,24 @@ public class GroupConsumerServiceRest {
     private final Logger logger = LogManager.getLogger(GroupConsumerServiceRest.class);
     @Autowired
     private final ConsumerFactory<String, String> stringKafkaTemplate;
-
-   @Autowired
-    private final ConsumerFactory <String, Group> groupKafkaTemplate;
-
     @Autowired
-    private final ConsumerFactory <String, List<Group>> listGroupKafkaTemplate;
-
+    private final ConsumerFactory<String, Group> groupKafkaTemplate;
+    @Autowired
+    private final ConsumerFactory<String, List<Group>> listGroupKafkaTemplate;
     @Autowired
     private final GroupServiceApi groupService;
-
-
     @Autowired
     private final LectorServiceApi lectorService;
-
     @Autowired
     private final RequestFromLectorServiceApi requestFromLectorService;
-
-
     @Autowired
     private final GroupProducerServiceRest groupProducerService;
 
     public GroupConsumerServiceRest(ConsumerFactory<String, String> stringKafkaTemplate
-                              , ConsumerFactory<String, Group> groupKafkaTemplate
-                              , ConsumerFactory<String, List<Group>> listGroupKafkaTemplate,
-            /*, GroupServiceImpl groupService*/
-                              /*, GroupProducerServiceRest groupProducerService*/GroupServiceApi groupService
-           , LectorServiceApi lectorService
+            , ConsumerFactory<String, Group> groupKafkaTemplate
+            , ConsumerFactory<String, List<Group>> listGroupKafkaTemplate
+            , GroupServiceApi groupService
+            , LectorServiceApi lectorService
             , RequestFromLectorServiceApi requestFromLectorService
             , GroupProducerServiceRest groupProducerService) {
         this.stringKafkaTemplate = stringKafkaTemplate;
@@ -60,55 +51,58 @@ public class GroupConsumerServiceRest {
         this.groupService = groupService;
         this.lectorService = lectorService;
         this.requestFromLectorService = requestFromLectorService;
-        /*this.groupService = groupService;*/
-        /*this.groupProducerService = groupProducerService;*/
         this.groupProducerService = groupProducerService;
     }
-
 
     @KafkaListener(topics = "giveallgroups", groupId = "string")
     public void listenGroupFoo(String message) {
         logger.info("Received Message in string : " + message);
-       /* List<Group> groups = new ArrayList<>();
-        Group group = new Group(111,"q1");
-        groups.add(group);
-        group = new Group(122,"qw");
-        groups.add(group);*/
         List<Group> groups = groupService.getAllGroupsService();
-        if (groups == null){ groups = new ArrayList<>();
+        if (groups == null) {
+            groups = new ArrayList<>();
         }
         logger.info("Groups in consumer" + groups.toString());
         groupProducerService.sendGiveAllGroups(groups);
     }
 
-/*
-
-    @KafkaListener(topics = "greeting"*//*, groupId = "greeting",
-                             containerFactory = "greetingKafkaListenerContainerFactory"*//*)
-    public void greetingListener(String greeting) throws Exception {
-
-        try{
-            ObjectMapper mapper = new ObjectMapper();
-            Group getting = mapper.readValue(greeting, Group.class);
-            System.out.println("Received Message in greeting : " + getting.toString());
-        }catch (Exception ex){
-
+    @KafkaListener(topics = "newgroup", groupId = "string")
+    public void newGroupListener(String newNameGroup) throws Exception {
+        try {
+            logger.info("Received message in string newGroup: " + newNameGroup);
+            Group group = new Group(newNameGroup);
+            System.out.println("Received Message in newNameGroup : " + newNameGroup);
+            group = groupService.createNewGroupService(newNameGroup);
+            logger.info("Created new Group " + group.toString());
+            groupProducerService.sendCreateNewGroup(group);
+        } catch (Exception ex) {
             throw new SerializationException(ex);
         }
     }
 
-
-    @KafkaListener(topics = "listgreeting"*//*, groupId = "greeting",
-                             containerFactory = "greetingKafkaListenerContainerFactory"*//*)
-    public void greetingListListener(String greeting) throws Exception {
-
-        try{
+    @KafkaListener(topics = "updategroup", groupId = "string")
+    public void groupUpdateListener(String groupToUpdate) throws Exception {
+        try {
             ObjectMapper mapper = new ObjectMapper();
-            List<Group> getting = mapper.readValue(greeting, List.class);
-            System.out.println("Received Message in greeting : " + getting.toString());
-        }catch (Exception ex){
-
+            Group group = mapper.readValue(groupToUpdate, Group.class);
+            System.out.println("Received Message in greeting : " + group.toString());
+            group = groupService.updateGroupNameService(group);
+            groupProducerService.sendUpdateGroup(group);
+        } catch (Exception ex) {
             throw new SerializationException(ex);
         }
-    }*/
+    }
+
+    @KafkaListener(topics = "deletegroup", groupId = "string")
+    public void deleteGroupListener(String idGroup) throws Exception {
+        try {
+            logger.info("Received message for delete Group id = : " + idGroup);
+            Integer id = Integer.parseInt(idGroup);
+            id = groupService.deletegroupByIdService(id);
+            logger.info("Deleted Group where id =  " + id);
+            groupProducerService.sendDeleteGroup("" + id);
+        } catch (Exception ex) {
+            throw new SerializationException(ex);
+        }
+    }
+
 }
