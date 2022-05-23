@@ -92,5 +92,35 @@ public class GroupConsumerConfigWeb {
         factory.setConsumerFactory(listGroupConsumerFactory());
         return factory;
     }
+/*
+    @Bean
+    public KafkaListenerContainerFactory<?> groupFactory() {
+        ConcurrentKafkaListenerContainerFactory<String, Group> factory =
+                new ConcurrentKafkaListenerContainerFactory<>();
+        factory.setConsumerFactory(groupConsumerFactory());
+        factory.setBatchListener(true);
+        //factory.setMessageConverter(new BatchMessagingMessageConverter());
+        return factory;
+    }*/
+
+   /* @Bean
+    public KafkaListenerContainerFactory<?> listGroupFactory() {
+        ConcurrentKafkaListenerContainerFactory<String, List<Group>> factory =
+                new ConcurrentKafkaListenerContainerFactory<>();
+        factory.setConsumerFactory(listGroupConsumerFactory());
+        factory.setBatchListener(true);
+        //factory.setMessageConverter(new BatchMessagingMessageConverter());
+        return factory;
+    }
+*/
+    /*@Bean
+    public KafkaListenerContainerFactory<?> stringFactory() {
+        ConcurrentKafkaListenerContainerFactory<String, String>> factory =
+                new ConcurrentKafkaListenerContainerFactory<>();
+        factory.setConsumerFactory(listGroupConsumerFactory());
+        factory.setBatchListener(true);
+        //factory.setMessageConverter(new BatchMessagingMessageConverter());
+        return factory;
+    }*/
 
 }

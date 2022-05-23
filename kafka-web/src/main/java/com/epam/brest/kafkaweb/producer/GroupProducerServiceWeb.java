@@ -1,11 +1,14 @@
 package com.epam.brest.kafkaweb.producer;
 
 import com.epam.brest.Group;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class GroupProducerServiceWeb {
 
     @Autowired
@@ -17,20 +20,20 @@ public class GroupProducerServiceWeb {
 
 
     private String givallgroups = "giveallgroups";
-    private String newgroupcreated = "newgroup";
-    private String updatedgroup = "updategroup";
-    private String deletedgroup = "deletegroup";
+    private String newgroup = "newgroup";
+    private String updategroup = "updategroup";
+    private String deletegroup = "deletegroup";
 
 
-    public void sendGiveAllGroups(List<Group> groups) { listGroupKafkaTemplate.send(givallgroups, groups); }
-    public void sendCreateNewGroup(Group group) {
-        groupKafkaTemplate.send(newgroupcreated, group);
+    public void sendGiveAllGroups(String message) { stringGroupKafkaTemplate.send(givallgroups, message); }
+    public void sendCreateNewGroup(Group group) throws JsonProcessingException {
+        groupKafkaTemplate.send(newgroup, group);
     }
-    public void sendUpdateGroup(Group group) {
-        groupKafkaTemplate.send(updatedgroup, group);
+    public void sendUpdateGroup(Group group) throws JsonProcessingException {
+        groupKafkaTemplate.send(updategroup, group);
     }
     public void sendDeleteGroup(String id) {
-        stringGroupKafkaTemplate.send(deletedgroup, id);
+        stringGroupKafkaTemplate.send(deletegroup, id);
     }
 
 }

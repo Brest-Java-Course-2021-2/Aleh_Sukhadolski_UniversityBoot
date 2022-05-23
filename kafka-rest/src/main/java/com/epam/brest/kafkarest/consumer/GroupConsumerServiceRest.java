@@ -69,9 +69,10 @@ public class GroupConsumerServiceRest {
     public void newGroupListener(String newNameGroup) throws Exception {
         try {
             logger.info("Received message in string newGroup: " + newNameGroup);
-            Group group = new Group(newNameGroup);
+            ObjectMapper mapper = new ObjectMapper();
+            Group group = mapper.readValue(newNameGroup, Group.class);
             System.out.println("Received Message in newNameGroup : " + newNameGroup);
-            group = groupService.createNewGroupService(newNameGroup);
+            group = groupService.createNewGroupService(group.getGroupName());
             logger.info("Created new Group " + group.toString());
             groupProducerService.sendCreateNewGroup(group);
         } catch (Exception ex) {
