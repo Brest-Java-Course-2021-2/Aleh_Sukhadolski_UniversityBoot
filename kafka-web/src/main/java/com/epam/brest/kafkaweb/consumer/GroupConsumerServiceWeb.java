@@ -16,7 +16,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-
 @Service
 @Component
 @EnableJpaRepositories(basePackages = "com.epam.brest")
@@ -26,69 +25,76 @@ public class GroupConsumerServiceWeb {
     @Autowired
     private final ConsumerFactory<String, String> stringKafkaTemplate;
     @Autowired
-    private final ConsumerFactory <String, Group> groupKafkaTemplate;
+    private final ConsumerFactory<String, Group> groupKafkaTemplate;
     @Autowired
     private final ConsumerFactory<String, List<Group>> listGroupKafkaTemplate;
 
     public List<Group> groups = new ArrayList<>();
 
-    public Boolean isListChanged = false;
+    public Boolean isListGroupChanged = false;
+    public Boolean isGroupCreated = false;
+    public Boolean isGroupUpdated = false;
+    public Boolean isGroupDeleted = false;
+
     public GroupConsumerServiceWeb(
-              ConsumerFactory<String, String> stringKafkaTemplate
+            ConsumerFactory<String, String> stringKafkaTemplate
             , ConsumerFactory<String, Group> groupKafkaTemplate
             , ConsumerFactory<String, List<Group>> listGroupKafkaTemplate) {
 
         this.stringKafkaTemplate = stringKafkaTemplate;
         this.groupKafkaTemplate = groupKafkaTemplate;
         this.listGroupKafkaTemplate = listGroupKafkaTemplate;
-        }
+    }
 
     @KafkaListener(topics = "sendallgroups", groupId = "listgroup")
     public void listenGroupFoo(String message) {
-        logger.info("Received Message in string : " + message);
-        try{
-            /*ObjectMapper mapper = new ObjectMapper();
-            List <Group> groupsJson = (List<Group>) mapper.readValue(message, List.class);*/
+        logger.info("Received Message from senallgroups : " + message);
+        try {
             ObjectMapper mapper = new ObjectMapper();
             groups = mapper.readValue(message, new TypeReference<List<Group>>() {
             });
-
-
-            /*Gson gson = new Gson();
-            groups = (List<Group>) gson.fromJson(message, List.class);*/
-            isListChanged = true;
-            logger.info("Received Message in ALL Groups : " + groups.toString());
-        }catch (Exception ex){
+            isListGroupChanged = true;
+            logger.info("Parsed message from sendallgroups : " + groups.toString());
+        } catch (Exception ex) {
             throw new SerializationException(ex);
         }
-
     }
 
     @KafkaListener(topics = "newgroupcreated", groupId = "group")
     public void newGroupFoo(String group) {
-        System.out.println("Received Message in string : " + group);
-        try{
+        logger.info("Received Message from newgroupcreated : " + group);
+        try {
             ObjectMapper mapper = new ObjectMapper();
             Group updatedGroup = mapper.readValue(group, Group.class);
-            System.out.println("Received Message in greeting : " + updatedGroup.toString());
-        }catch (Exception ex){
-
+            logger.info("Parsed message from newgroupcreated : " + updatedGroup.toString());
+            isGroupCreated = true;
+        } catch (Exception ex) {
             throw new SerializationException(ex);
         }
     }
 
     @KafkaListener(topics = "updatedgroup", groupId = "group")
     public void updateGroupFoo(String group) {
-        System.out.println("Received Message  tu Update Group in string : " + group);
-        try{
+        logger.info("Received Message from updatedgroup : " + group);
+        try {
             ObjectMapper mapper = new ObjectMapper();
             Group updatedGroup = mapper.readValue(group, Group.class);
-            System.out.println("Received Message in greeting : " + updatedGroup.toString());
-        }catch (Exception ex){
-
+            logger.info("Parsed message from updatedgroup : " + updatedGroup.toString());
+            isGroupUpdated = true;
+        } catch (Exception ex) {
             throw new SerializationException(ex);
         }
     }
 
+    @KafkaListener(topics = "deletedgroup", groupId = "group")
+    public void deleteGroupFoo(String id) {
+        logger.info("Received Message from deletedgroup : " + id);
+        try {
+            logger.info("Parsed message from deletedgroup : " + id);
+            isGroupDeleted = true;
+        } catch (Exception ex) {
+            throw new SerializationException(ex);
+        }
+    }
 
 }
