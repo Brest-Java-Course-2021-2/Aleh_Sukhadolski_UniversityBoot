@@ -1,9 +1,10 @@
 package com.epam.brest.kafkarest;
 
 import com.epam.brest.*;
-import com.epam.brest.kafkarest.config.GroupKafkaProducerConfigRest;
-import com.epam.brest.kafkarest.consumer.GroupConsumerServiceRest;
-import com.epam.brest.kafkarest.producer.GroupProducerServiceRest;
+import com.epam.brest.kafkarest.config.producer.GroupKafkaProducerConfigRest;
+import com.epam.brest.kafkarest.config.producer.LectorKafkaProducerConfigRest;
+import com.epam.brest.kafkarest.producer.GroupKafkaProducerServiceRest;
+import com.epam.brest.kafkarest.producer.LectorKafkaProducerServiceRest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,9 +15,9 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@SpringBootTest(classes = {GroupServiceImpl.class, DaoLectorImpl.class, DaoRequestFromLectorImpl.class
-        , DaoGroupImpl.class, LectorServiceImpl.class, RequestFromLectorServiceImpl.class
-        , GroupKafkaProducerConfigRest.class})
+@SpringBootTest(classes = {GroupServiceImpl.class, DaoLectorImpl.class
+        , DaoGroupImpl.class, LectorServiceImpl.class
+        , GroupKafkaProducerConfigRest.class, LectorKafkaProducerConfigRest.class})
 
 @Transactional()
 @DirtiesContext
@@ -29,13 +30,12 @@ public class KafkaRestApplicationTests {
     LectorServiceApi lectorService;
 
     @Autowired
-    RequestFromLectorServiceApi requestFromLectorService;
+    GroupKafkaProducerServiceRest groupKafkaProducerServiceRest;
 
     @Autowired
-    GroupConsumerServiceRest groupConsumerServiceRest;
+    LectorKafkaProducerServiceRest lectorKafkaProducerServiceRest;
 
-    @Autowired
-    GroupProducerServiceRest groupProducerServiceRest;
+
 
     @Test
     void contextLoads() {

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class GroupProducerServiceRest {
+public class GroupKafkaProducerServiceRest {
     @Autowired
     private KafkaTemplate<String, String> stringGroupKafkaTemplate;
     @Autowired
