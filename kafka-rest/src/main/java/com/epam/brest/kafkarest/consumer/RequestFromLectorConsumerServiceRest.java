@@ -90,7 +90,18 @@ public class RequestFromLectorConsumerServiceRest {
         }
     }
 
-
+    @KafkaListener(topics = "giverequestfromlectorbyid", groupId = "string")
+    public void getLectorByIdListener(String idLector) throws Exception {
+        try {
+            logger.info("Received message for give RequestFromLector by id = : " + idLector);
+            Integer id = Integer.parseInt(idLector);
+            RequestFromLector requestFromLector = requestFromLectorService.getRequestOfLectorByIdRequestService(id);
+            logger.info("Get RequestFromLector where id =  " + id);
+            requestFromLectorKafkaProducerService.sendRequestFromLectorById(requestFromLector);
+        } catch (Exception ex) {
+            throw new SerializationException(ex);
+        }
+    }
 
 
 }
