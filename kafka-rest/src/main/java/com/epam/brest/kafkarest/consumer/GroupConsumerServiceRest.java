@@ -2,7 +2,9 @@ package com.epam.brest.kafkarest.consumer;
 
 import com.epam.brest.Group;
 import com.epam.brest.GroupServiceApi;
-import com.epam.brest.kafkarest.producer.GroupKafkaProducerServiceRest;
+import com.epam.brest.LectorServiceApi;
+import com.epam.brest.RequestFromLectorServiceApi;
+import com.epam.brest.kafkarest.producer.GroupProducerServiceRest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.kafka.common.errors.SerializationException;
 import org.apache.logging.log4j.LogManager;
@@ -18,9 +20,9 @@ import java.util.List;
 
 @Service
 @EnableJpaRepositories(basePackages = "com.epam.brest")
-public class GroupKafkaConsumerServiceRest {
+public class GroupConsumerServiceRest {
 
-    private final Logger logger = LogManager.getLogger(GroupKafkaConsumerServiceRest.class);
+    private final Logger logger = LogManager.getLogger(GroupConsumerServiceRest.class);
     @Autowired
     private final ConsumerFactory<String, String> stringKafkaTemplate;
     @Autowired
@@ -29,19 +31,26 @@ public class GroupKafkaConsumerServiceRest {
     private final ConsumerFactory<String, List<Group>> listGroupKafkaTemplate;
     @Autowired
     private final GroupServiceApi groupService;
-
     @Autowired
-    private final GroupKafkaProducerServiceRest groupProducerService;
+    private final LectorServiceApi lectorService;
+    @Autowired
+    private final RequestFromLectorServiceApi requestFromLectorService;
+    @Autowired
+    private final GroupProducerServiceRest groupProducerService;
 
-    public GroupKafkaConsumerServiceRest(ConsumerFactory<String, String> stringKafkaTemplate
+    public GroupConsumerServiceRest(ConsumerFactory<String, String> stringKafkaTemplate
             , ConsumerFactory<String, Group> groupKafkaTemplate
             , ConsumerFactory<String, List<Group>> listGroupKafkaTemplate
             , GroupServiceApi groupService
-            , GroupKafkaProducerServiceRest groupProducerService) {
+            , LectorServiceApi lectorService
+            , RequestFromLectorServiceApi requestFromLectorService
+            , GroupProducerServiceRest groupProducerService) {
         this.stringKafkaTemplate = stringKafkaTemplate;
         this.groupKafkaTemplate = groupKafkaTemplate;
         this.listGroupKafkaTemplate = listGroupKafkaTemplate;
         this.groupService = groupService;
+        this.lectorService = lectorService;
+        this.requestFromLectorService = requestFromLectorService;
         this.groupProducerService = groupProducerService;
     }
 

@@ -1,4 +1,4 @@
-package com.epam.brest.kafkarest.config.topic;
+package com.epam.brest.kafkarest.config;
 
 import org.apache.kafka.clients.admin.AdminClientConfig;
 import org.apache.kafka.clients.admin.NewTopic;
@@ -11,13 +11,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
-public class GroupKafkaTopicConfig {
+public class KafkaTopicConfig {
 
     @Value(value = "${kafka.bootstrapAddress}")
     private String bootstrapAddress;
 
     @Bean
-    public KafkaAdmin kafkaAdminGroup() {
+    public KafkaAdmin kafkaAdmin() {
         Map<String, Object> configs = new HashMap<>();
         configs.put(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);
         return new KafkaAdmin(configs);

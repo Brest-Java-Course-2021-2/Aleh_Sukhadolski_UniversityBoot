@@ -1,4 +1,4 @@
-package com.epam.brest.kafkarest.config.consumer;
+package com.epam.brest.kafkarest.config;
 
 import com.epam.brest.Group;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
@@ -19,18 +19,18 @@ import java.util.Map;
 
 @EnableKafka
 @Configuration
-public class GroupKafkaConsumerConfigRest {
+public class GroupConsumerConfigRest {
 
     @Value(value = "${kafka.bootstrapAddress}")
     private String bootstrapAddress;
 
 
-    /*private String string = "string";*/
+    private String string = "string";
     private String group = "group";
 
     private String listgroup = "listgroup";
-  /*  @Bean
-    public ConsumerFactory<String, String> stringGroupConsumerFactory() {
+    @Bean
+    public ConsumerFactory<String, String> stringConsumerFactory() {
         Map<String, Object> props = new HashMap<>();
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, ErrorHandlingDeserializer.class);
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, ErrorHandlingDeserializer.class);
@@ -39,14 +39,14 @@ public class GroupKafkaConsumerConfigRest {
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         return new DefaultKafkaConsumerFactory<>(props);
-    }*/
-/*
+    }
+
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, String> stringGroupKafkaListenerContainerFactory() {
+    public ConcurrentKafkaListenerContainerFactory<String, String> stringKafkaListenerContainerFactory() {
         ConcurrentKafkaListenerContainerFactory<String, String> factory = new ConcurrentKafkaListenerContainerFactory<>();
-        factory.setConsumerFactory(stringGroupConsumerFactory());
+        factory.setConsumerFactory(stringConsumerFactory());
         return factory;
-    }*/
+    }
 
     @Bean
     public ConsumerFactory<String, Group> groupConsumerFactory() {

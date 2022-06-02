@@ -1,6 +1,6 @@
-package com.epam.brest.kafkarest.config.producer;
+package com.epam.brest.kafkarest.config;
 
-import com.epam.brest.Lector;
+import com.epam.brest.Group;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,13 +16,26 @@ import java.util.List;
 import java.util.Map;
 
 @Configuration
-public class LectorKafkaProducerConfigRest {
-
+public class GroupKafkaProducerConfigRest {
     @Value(value = "${kafka.bootstrapAddress}")
     private String bootstrapAddress;
 
     @Bean
-    public ProducerFactory<String, Lector> lectorProducerFactory() {
+    public ProducerFactory<String, String> stringGroupProducerFactory() {
+        Map<String, Object> configProps = new HashMap<>();
+        configProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);
+        configProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
+        configProps.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
+        return new DefaultKafkaProducerFactory<>(configProps);
+    }
+
+    @Bean
+    public KafkaTemplate<String, String> stringGroupKafkaTemplate() {
+        return new KafkaTemplate<>(stringGroupProducerFactory());
+    }
+
+    @Bean
+    public ProducerFactory<String, Group> groupProducerFactory() {
         Map<String, Object> configProps = new HashMap<>();
         configProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);
         configProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
@@ -31,13 +44,13 @@ public class LectorKafkaProducerConfigRest {
     }
 
     @Bean
-    public KafkaTemplate<String, Lector> lectorKafkaTemplate() {
-        return new KafkaTemplate<>(lectorProducerFactory());
+    public KafkaTemplate<String, Group> groupKafkaTemplate() {
+        return new KafkaTemplate<>(groupProducerFactory());
     }
 
 
     @Bean
-    public ProducerFactory<String, List<Lector>> listLectorProducerFactory() {
+    public ProducerFactory<String, List<Group>> listGroupProducerFactory() {
         Map<String, Object> configProps = new HashMap<>();
         configProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);
         configProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
@@ -46,8 +59,9 @@ public class LectorKafkaProducerConfigRest {
     }
 
     @Bean
-    public KafkaTemplate<String, List<Lector>> listLectorKafkaTemplate() {
-        return new KafkaTemplate<>(listLectorProducerFactory());
+    public KafkaTemplate<String, List<Group>> listGroupKafkaTemplate() {
+        return new KafkaTemplate<>(listGroupProducerFactory());
     }
+
 
 }
