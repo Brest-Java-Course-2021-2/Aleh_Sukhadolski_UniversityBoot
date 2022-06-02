@@ -1,4 +1,4 @@
-# UniversityBoot
+# UniversityBoot kafka
 
 ## RUN application:
 
