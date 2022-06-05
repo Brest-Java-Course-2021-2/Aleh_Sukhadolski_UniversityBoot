@@ -1,6 +1,5 @@
 package com.epam.brest.kafkarest.producer;
 
-import com.epam.brest.Group;
 import com.epam.brest.LectorsSchedule;
 import com.epam.brest.StudentsSchedule;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class SchedulekafkaproducerServiceRest {
+public class ScheduleKafkaProducerServiceRest {
 
     @Autowired
     private KafkaTemplate<String, String> stringGroupKafkaTemplate;

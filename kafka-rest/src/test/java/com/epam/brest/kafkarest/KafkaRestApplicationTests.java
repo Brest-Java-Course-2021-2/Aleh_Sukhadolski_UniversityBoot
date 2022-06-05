@@ -30,6 +30,12 @@ public class KafkaRestApplicationTests {
     LectorServiceApi lectorService;
 
     @Autowired
+    RequestFromLectorServiceApi requestFromLectorService;
+
+    @Autowired
+    ScheduleDtoServiceApi scheduleDtoService;
+
+    @Autowired
     GroupKafkaProducerServiceRest groupKafkaProducerServiceRest;
 
     @Autowired

@@ -1,4 +1,4 @@
-package com.epam.brest.kafkaweb.config;
+package com.epam.brest.kafkaweb.config.producer;
 
 import com.epam.brest.Group;
 import org.apache.kafka.clients.producer.ProducerConfig;
