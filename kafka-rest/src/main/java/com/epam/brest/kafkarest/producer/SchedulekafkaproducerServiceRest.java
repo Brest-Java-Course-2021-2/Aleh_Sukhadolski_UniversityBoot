@@ -1,5 +1,6 @@
 package com.epam.brest.kafkarest.producer;
 
+import com.epam.brest.Group;
 import com.epam.brest.LectorsSchedule;
 import com.epam.brest.StudentsSchedule;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,5 +36,18 @@ public class SchedulekafkaproducerServiceRest {
 
     private String sendscheduleforgroup = "sendscheduleforgroup";
 
+
+    public void sendGiveAllScheduleForAllStudents (List<List<StudentsSchedule>> allStudentsSchedule) {
+        listAllStudentsScheduleKafkaTemplate.send(sendscheduleforallstudents, allStudentsSchedule);
+    }
+    public void sendGiveAllScheduleForAllLectors(List<List<LectorsSchedule>> allLectorsSchedule) {
+        listAllLectorsScheduleKafkaTemplate.send(sendscheduleforalllectors, allLectorsSchedule);
+    }
+    public void sendScheduleForGroup(List<StudentsSchedule> studentSchedule) {
+        listStudentsScheduleKafkaTemplate.send(sendscheduleforgroup, studentSchedule);
+    }
+    public void sendScheduleForLector(List<LectorsSchedule> lectorSchedule) {
+        listLectorsScheduleKafkaTemplate.send(sendscheduleforlector, lectorSchedule);
+    }
 
 }
