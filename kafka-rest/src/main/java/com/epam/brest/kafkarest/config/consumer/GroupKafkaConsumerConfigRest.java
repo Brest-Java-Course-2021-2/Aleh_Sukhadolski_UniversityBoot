@@ -24,29 +24,10 @@ public class GroupKafkaConsumerConfigRest {
     @Value(value = "${kafka.bootstrapAddress}")
     private String bootstrapAddress;
 
-
-    /*private String string = "string";*/
     private String group = "group";
 
     private String listgroup = "listgroup";
-  /*  @Bean
-    public ConsumerFactory<String, String> stringGroupConsumerFactory() {
-        Map<String, Object> props = new HashMap<>();
-        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, ErrorHandlingDeserializer.class);
-        props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, ErrorHandlingDeserializer.class);
-        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);
-        props.put(ConsumerConfig.GROUP_ID_CONFIG, string);
-        props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
-        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
-        return new DefaultKafkaConsumerFactory<>(props);
-    }*/
-/*
-    @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, String> stringGroupKafkaListenerContainerFactory() {
-        ConcurrentKafkaListenerContainerFactory<String, String> factory = new ConcurrentKafkaListenerContainerFactory<>();
-        factory.setConsumerFactory(stringGroupConsumerFactory());
-        return factory;
-    }*/
+
 
     @Bean
     public ConsumerFactory<String, Group> groupConsumerFactory() {

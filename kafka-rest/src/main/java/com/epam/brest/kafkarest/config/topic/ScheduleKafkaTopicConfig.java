@@ -25,12 +25,22 @@ public class ScheduleKafkaTopicConfig {
 
     @Bean
     public NewTopic topicschedule1() {
-        return new NewTopic("givescheduleforall", 1, (short) 1);
+        return new NewTopic("givescheduleforallstudents", 1, (short) 1);
+    }
+
+    @Bean
+    public NewTopic topicschedule11() {
+        return new NewTopic("givescheduleforalllectors", 1, (short) 1);
     }
 
     @Bean
     public NewTopic topicschedule2() {
-        return new NewTopic("sendscheduleforall", 1, (short) 1);
+        return new NewTopic("sendscheduleforallstudents", 1, (short) 1);
+    }
+
+    @Bean
+    public NewTopic topicschedule22() {
+        return new NewTopic("sendscheduleforalllectors", 1, (short) 1);
     }
 
     @Bean
