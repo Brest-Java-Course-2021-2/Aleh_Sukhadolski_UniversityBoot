@@ -15,8 +15,8 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@SpringBootTest(classes = {GroupServiceImpl.class, DaoLectorImpl.class
-        , DaoGroupImpl.class, LectorServiceImpl.class
+@SpringBootTest(classes = {GroupServiceImpl.class, DaoLectorImpl.class, DaoScheduleDtoImpl.class
+        , DaoGroupImpl.class, LectorServiceImpl.class, ScheduleDtoServiceImpl.class
         , GroupKafkaProducerConfigRest.class, LectorKafkaProducerConfigRest.class})
 
 @Transactional()
