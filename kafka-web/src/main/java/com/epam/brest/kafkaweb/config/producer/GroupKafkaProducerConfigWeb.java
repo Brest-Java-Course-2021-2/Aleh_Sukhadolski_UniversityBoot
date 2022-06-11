@@ -19,7 +19,7 @@ import java.util.Map;
 public class GroupKafkaProducerConfigWeb {
     @Value(value = "${kafka.bootstrapAddress}")
     private String bootstrapAddress;
-
+/*
     @Bean
     public ProducerFactory<String, String> stringGroupProducerFactory() {
         Map<String, Object> configProps = new HashMap<>();
@@ -32,7 +32,7 @@ public class GroupKafkaProducerConfigWeb {
     @Bean
     public KafkaTemplate<String, String> stringGroupKafkaTemplate() {
         return new KafkaTemplate<>(stringGroupProducerFactory());
-    }
+    }*/
 
     @Bean
     public ProducerFactory<String, Group> groupProducerFactory() {
