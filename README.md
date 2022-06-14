@@ -1,3 +1,16 @@
+### Создать статическую сеть
+docker network create --subnet=192.168.5.7/16 oleg_university
+
+### Из корневой директории
+mvn clean install
+docker-compose build
+docker-compose up
+
+### Браузер
+192.168.5.11:8899/lectors
+
+### =================================================
+
 # UniversityBoot kafka
 
 ## RUN application:
