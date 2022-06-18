@@ -112,4 +112,13 @@ public class LectorsController {
     }
 
 
+    @GetMapping(value = "/lector/{id}/delete")
+    public String delete(@PathVariable("id") int id) throws InterruptedException {
+        lectorProducerService.sendDeleteLectorById(id);
+        while (lectorConsumerService.isLectorDeleted == false) {
+            Thread.sleep(1000);
+        }
+        lectorConsumerService.isLectorDeleted = false;
+        return "redirect:/lectors";
+    }
 }

@@ -72,7 +72,7 @@ public class LectorConsumerServiceWeb {
             ObjectMapper mapper = new ObjectMapper();
             lector = mapper.readValue(message, new TypeReference <Lector>() {
             });
-            isListLectorChanged = true;
+            isLectorChanged = true;
             logger.info("Parsed message from sendlectorbyid : " + lector.toString());
         } catch (Exception ex) {
             throw new SerializationException(ex);
