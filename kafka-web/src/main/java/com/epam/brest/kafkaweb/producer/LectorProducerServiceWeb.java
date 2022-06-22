@@ -53,7 +53,7 @@ public class LectorProducerServiceWeb {
 
     public void sendDeleteLectorById(Integer id) {
         logger.info("LectorProducerServiceWeb send deletelector " + id);
-        stringKafkaTemplate.send(givelectorbyid, ("" + id));
+        stringKafkaTemplate.send(deletelector, ("" + id));
     }
 
 }
