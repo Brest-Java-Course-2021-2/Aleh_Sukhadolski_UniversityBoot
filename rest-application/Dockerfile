@@ -8,4 +8,5 @@ ARG JAR_FILE=target/rest-application-0.0.1-SNAPSHOT.jar
 COPY ${JAR_FILE} restapp.jar
 ARG DB_FILE=university.mv.db
 COPY ${DB_FILE} university.mv.db
+EXPOSE 8890
 ENTRYPOINT ["java","-jar","restapp.jar"]
