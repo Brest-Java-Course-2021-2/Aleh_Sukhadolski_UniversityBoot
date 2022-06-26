@@ -95,7 +95,7 @@ public class ScheduleConsumerServiceWeb {
             ObjectMapper mapper = new ObjectMapper();
             allLectorsSchedule = mapper.readValue(lectorsScheduleALL, new TypeReference<List<List<LectorsSchedule>>>() {
             });
-            isAllStudentsScheduleChanged  = true;
+            isAllLectorsScheduleChanged  = true;
             logger.info("Parsed message from sendscheduleforalllectors: " + allLectorsSchedule.toString());
         } catch (Exception ex) {
             throw new SerializationException(ex);
@@ -109,7 +109,7 @@ public class ScheduleConsumerServiceWeb {
             ObjectMapper mapper = new ObjectMapper();
             lectorSchedule = mapper.readValue(lectorsSchedule, new TypeReference<List<LectorsSchedule>>() {
             });
-            isAllStudentsScheduleChanged  = true;
+            isListLectorScheduleChanged  = true;
             logger.info("Parsed message from sendscheduleforlector: " + lectorSchedule.toString());
         } catch (Exception ex) {
             throw new SerializationException(ex);

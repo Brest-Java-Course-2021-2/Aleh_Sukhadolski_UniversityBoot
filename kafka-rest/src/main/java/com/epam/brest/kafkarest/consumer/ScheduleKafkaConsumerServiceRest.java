@@ -62,7 +62,7 @@ public class ScheduleKafkaConsumerServiceRest {
     public void giveScheduleForAllStudents(String message) {
         logger.info("Received Message in string : " + message);
         List<List<StudentsSchedule>> allStudentsSchedule = scheduleDtoService.getScheduleForAllGroupsService();
-        if (allStudentsSchedule == null) {
+        if (allStudentsSchedule.isEmpty()) {
             allStudentsSchedule = new ArrayList<>();
         }
         logger.info("Give schedule for all students in consumer" + allStudentsSchedule.toString());
@@ -80,7 +80,7 @@ public class ScheduleKafkaConsumerServiceRest {
     public void giveScheduleForAllLectors(String message) {
         logger.info("Received Message in string : " + message);
         List<List<LectorsSchedule>> allLectorsSchedule = scheduleDtoService.getScheduleForAllLectorsService();
-        if (allLectorsSchedule == null) {
+        if (allLectorsSchedule.isEmpty() ) {
             allLectorsSchedule = new ArrayList<>();
         }
         logger.info("Give schedule for all lectors in consumer" + allLectorsSchedule.toString());

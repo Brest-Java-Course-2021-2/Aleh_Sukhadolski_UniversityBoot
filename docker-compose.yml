@@ -13,7 +13,7 @@ services:
   rest:
     build: ./rest-application
     ports:
-      - 8890:8890
+      - 8898:8898
     networks:
       oleg_university:
         ipv4_address: 192.168.5.10
