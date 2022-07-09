@@ -1,23 +1,21 @@
-version: '3.1'
-
+version: '3'
 services:
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.0.1
+    container_name: zookeeper
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
 
-  web:
-    build: ./web-application
+  broker:
+    image: confluentinc/cp-kafka:7.0.1
+    container_name: broker
     ports:
-      - 8899:8899
-    networks:
-      oleg_university:
-        ipv4_address: 192.168.5.11
+      # To learn about configuring Kafka for access across networks see
+      # https://www.confluent.io/blog/kafka-client-cannot-connect-to-broker-on-aws-on-docker-etc/
+      - "9092:9092"
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_BROKER_ID: 1
 
-  rest:
-    build: ./rest-application
-    ports:
-      - 8898:8898
-    networks:
-      oleg_university:
-        ipv4_address: 192.168.5.10
-
-networks:
-  oleg_university:
-    external: true
