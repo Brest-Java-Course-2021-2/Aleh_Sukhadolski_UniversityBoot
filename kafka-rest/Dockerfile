@@ -3,7 +3,7 @@ WORKDIR /app
 
 COPY pom.xml ./
 COPY src/ ./src/
-RUN mvn package
+#RUN mvn package
 
 
 EXPOSE 8080
