@@ -21,9 +21,9 @@
 ### RUN KAFKA APP
 ####  sudo docker-compose up -d
 #### cd kafka-rest
-#### java -jar target/kafka-rest-0.0.1.SNAPSHOT.jar
+#### java -jar target/kafka-rest-0.0.1-SNAPSHOT.jar
 #### cd ..
 #### cd kafka-web
-#### java -jar target/kafka-web-0.0.1.SNAPSHOT.jar
+#### java -jar target/kafka-web-0.0.1-SNAPSHOT.jar
 ## endpoint in the browser
 #### localhost:8887/lectors
