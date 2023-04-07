@@ -3,6 +3,7 @@
 ## Clone and run project
 #### git clone https://github.com/Brest-Java-Course-2021-2/Aleh_Sukhadolski_UniversityBoot -b kafka-webapp
 #### cd Aleh_Sukhadolski_UniversityBoot
+#### sudo docker-compose up -d
 #### sh runapp.sh
 
 ## endpoint in the browser
@@ -19,7 +20,6 @@
 ### =================================================
 
 ### RUN KAFKA APP
-####  sudo docker-compose up -d
 #### cd kafka-rest
 #### java -jar target/kafka-rest-0.0.1-SNAPSHOT.jar
 #### cd ..
